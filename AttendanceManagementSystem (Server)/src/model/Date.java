@@ -10,13 +10,14 @@ public class Date
     this.month = month;
     this.year = year;
   }
+
   public Date copy(){
     return new Date(this.day,this.month,this.year);
   }
 
   @Override public boolean equals(Object obj)
   {
-    if (obj == null || !(obj instanceof Date))
+    if (!(obj instanceof Date))
       return false;
     Date date = (Date) obj;
     return day == date.day && month == date.month && year == date.year;

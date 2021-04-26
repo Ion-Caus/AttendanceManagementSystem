@@ -3,32 +3,25 @@ package model;
 public class Grade
 {
   private int grade;
-  private Course course;
+  private String comment;
 
-  public Grade(int grade, Course course)
-  {
+  public Grade(int grade, String comment) {
     this.grade = grade;
-    this.course = course;
+    this.comment = comment;
   }
 
-  public int getGrade()
-  {
+  public int getGrade() {
     return grade;
   }
 
-  public Course getCourse()
-  {
-    return course;
+  public String getComment() {
+    return comment;
   }
 
   public Grade copy(){
-    return new Grade(this.grade, this.course);
+    return new Grade(this.grade,this.comment);
   }
 
-  @Override
-  public String toString(){
-    return String.format("%s: %s", this.course.getName(), this.grade);
-  }
 
 }
 
