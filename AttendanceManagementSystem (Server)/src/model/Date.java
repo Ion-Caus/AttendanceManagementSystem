@@ -18,9 +18,13 @@ public class Date {
         return new Date(this.date);
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
 
     @Override
     public String toString() {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd").toString();
     }
+
 }

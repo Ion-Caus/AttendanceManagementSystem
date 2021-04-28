@@ -1,6 +1,8 @@
 package model;
 
 
+import java.time.format.DateTimeFormatter;
+
 public class Lesson {
     private Teacher teacher;
     private Date lessonDate;
@@ -53,7 +55,7 @@ public class Lesson {
     }
 
     public String getTimeInterval() {
-        return String.format("%s - %s", startTime, endTime);
+        return String.format("%s - %s", startTime.getTime().format(DateTimeFormatter.ofPattern("HH:mm")), endTime.getTime().format(DateTimeFormatter.ofPattern("HH:mm")));
     }
 
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface Model {
@@ -12,5 +13,7 @@ public interface Model {
 
     ArrayList<Teacher> getAllTeachers();
 
+    ArrayList<Lesson> getScheduleFor(Student student, LocalDate date);
 
+    Student getStudentBy(String id);
 }

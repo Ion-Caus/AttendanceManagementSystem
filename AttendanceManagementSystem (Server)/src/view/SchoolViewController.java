@@ -7,6 +7,8 @@ import viewmodel.SchoolViewModel;
 import viewmodel.StudentViewModel;
 import viewmodel.TeacherViewModel;
 
+import java.util.Optional;
+
 public class SchoolViewController extends ViewController {
     @FXML private TabPane tabPane;
 
@@ -43,12 +45,9 @@ public class SchoolViewController extends ViewController {
         );
         tabPane.getSelectionModel().selectFirst();
 
-        schoolName.textProperty().bind(viewModel.schoolNameProperty());
+        schoolName.textProperty().bindBidirectional(viewModel.schoolNameProperty());
         errorLabel.textProperty().bind(viewModel.errorProperty());
 
-        //TODO check if its working   or change it to .addListener
-        scheduleButton.textProperty().bindBidirectional(viewModel.scheduleButtonProperty());
-        studentListButton.textProperty().bindBidirectional(viewModel.studentListButtonProperty());
 
         // Classes Table
         classNameColumn.setCellValueFactory(
@@ -109,6 +108,16 @@ public class SchoolViewController extends ViewController {
 
     @FXML
     private void editSchoolName() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("School Name");
+        dialog.setHeaderText("School Name");
+        dialog.setContentText("Please enter your school name:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent() && !result.get().isBlank()) {
+            schoolName.setText(result.get());
+            viewModel.setSchoolName(result.get());
+        }
     }
 
     @FXML
@@ -118,10 +127,13 @@ public class SchoolViewController extends ViewController {
 
     @FXML
     private void remove() {
+        viewModel.remove();
     }
 
     @FXML
     private void viewSchedule() {
+        viewModel.viewSchedule();
+        getViewHandler().openView(View.SCHEDULE_VIEW);
     }
 
     @FXML

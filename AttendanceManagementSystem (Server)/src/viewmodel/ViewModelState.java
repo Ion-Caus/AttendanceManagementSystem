@@ -1,30 +1,17 @@
 package viewmodel;
 
-import model.Class;
-import model.Student;
-
 public class ViewModelState {
-    private Class theClass;
-    private Student student;
+    private String id;
 
     public ViewModelState() {
-        this.theClass = null;
-        this.student = null;
+        this.id = null;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setTheClass(Class theClass) {
-        this.theClass = theClass;
-    }
-
-    public Class getTheClass() {
-        return theClass;
+    public String getId() {
+        return id;
     }
 }

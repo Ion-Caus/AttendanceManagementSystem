@@ -6,10 +6,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import model.Model;
 import model.Class;
 import model.Student;
 import model.Teacher;
+
 
 public class SchoolViewModel {
     private ObservableList<ClassViewModel> classList;
@@ -23,9 +25,6 @@ public class SchoolViewModel {
 
     private StringProperty schoolName;
     private StringProperty error;
-
-    private StringProperty scheduleButton;
-    private StringProperty studentListButton;
 
     private StringProperty tabSelectedProperty;
 
@@ -48,12 +47,8 @@ public class SchoolViewModel {
         schoolName = new SimpleStringProperty("School Name");
         error = new SimpleStringProperty();
 
-        scheduleButton = new SimpleStringProperty("Schedule");
-        studentListButton = new SimpleStringProperty("StudentList");
-
         tabSelectedProperty = new SimpleStringProperty("Classes");
 
-        loadFromModel();
     }
 
     private void loadFromModel() {
@@ -74,6 +69,7 @@ public class SchoolViewModel {
     }
 
     public void clear() {
+        loadFromModel();
         //TODO the clear
     }
 
@@ -114,20 +110,6 @@ public class SchoolViewModel {
         return error;
     }
 
-    public StringProperty scheduleButtonProperty() {
-        return scheduleButton;
-    }
-
-    public StringProperty studentListButtonProperty() {
-        return studentListButton;
-    }
-
-
-    //TODO see if needed?
-    public StringProperty tabSelectedProperty() {
-        return tabSelectedProperty;
-    }
-
     // setter for tab property
     public void setTabSelectedProperty(String tabSelectedProperty) {
         this.tabSelectedProperty.set(tabSelectedProperty);
@@ -139,7 +121,46 @@ public class SchoolViewModel {
 
     // button methods
     public void add() {
-        System.out.println(tabSelectedProperty.get());
+        switch (tabSelectedProperty.get()) {
+            case "Classes" :
+
+                break;
+            case "Students" :
+
+                break;
+            case "Teachers" :
+
+                break;
+            case "Admins" :
+                break;
+        }
+    }
+
+    public void remove() {
+        switch (tabSelectedProperty.get()) {
+            case "Classes" :
+
+                break;
+            case "Students" :
+
+                break;
+            case "Teachers" :
+
+                break;
+            case "Admins" :
+                break;
+        }
+    }
+
+    public void viewSchedule() {
+        switch (tabSelectedProperty.get()) {
+            case "Classes" :
+            case "Students" :
+            case "Teachers" :
+                viewModelState.setId(selectedStudentProperty.get().idProperty().get());
+                System.out.println(viewModelState.getId());
+                break;
+        }
     }
 
 }
