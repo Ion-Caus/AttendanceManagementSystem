@@ -57,6 +57,7 @@ public class ScheduleViewController extends ViewController {
         datePicker.valueProperty().bindBidirectional(viewModel.dateProperty());
     }
 
+    @Override
     public void reset() {
         viewModel.clear();
     }

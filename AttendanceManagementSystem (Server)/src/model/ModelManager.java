@@ -1,5 +1,5 @@
 package model;
 
-public class ModelManager {
+public class ModelManager implements Model {
 
 }

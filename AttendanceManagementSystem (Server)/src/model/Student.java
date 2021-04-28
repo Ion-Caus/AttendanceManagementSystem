@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Student
 {
   private LessonData lessonData;
@@ -29,5 +31,17 @@ public class Student
 
   public String getID() {
     return ID;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof Student))
+      return false;
+
+    Student student = (Student) obj;
+    return Objects.equals(name, student.name) &&
+            Objects.equals(lessonData, student.lessonData) &&
+            Objects.equals(ID, student.ID) &&
+            Objects.equals(account, student.account);
   }
 }
