@@ -12,6 +12,7 @@ public class Student
     this.name = name;
     this.ID = ID;
     this.lessonData = lessonData;
+    this.account = null;
   }
 
   public void setAccount(Account account){

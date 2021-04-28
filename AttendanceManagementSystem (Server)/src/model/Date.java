@@ -1,30 +1,28 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Date
 {
-  private int day, month, year;
+  private LocalDate date;
 
-  public Date(int day, int month, int year)
+  public Date(int year, int month, int day)
   {
-    this.day = day;
-    this.month = month;
-    this.year = year;
+    this.date = LocalDate.of(year, month, day);
+  }
+
+  public Date(LocalDate date){
+    this.date = date;
   }
 
   public Date copy(){
-    return new Date(this.day,this.month,this.year);
+    return new Date(this.date);
   }
 
-  @Override public boolean equals(Object obj)
-  {
-    if (!(obj instanceof Date))
-      return false;
-    Date date = (Date) obj;
-    return day == date.day && month == date.month && year == date.year;
-  }
 
   @Override public String toString()
   {
-    return String.format("%s/%s/%s",day,month,year);
+    return DateTimeFormatter.ofPattern("yyyy-MM-dd").toString();
   }
 }

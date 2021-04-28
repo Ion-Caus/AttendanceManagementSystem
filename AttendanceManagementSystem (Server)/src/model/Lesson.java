@@ -12,12 +12,14 @@ public class Lesson
   private String homework;
 
   public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime,
-      String subject, String topic, String classroom, String homework)
+      String subject, String topic, String classroom, String homework) throws IllegalArgumentException
   {
+    if(!hasValidTime(startTime, endTime))
+      throw new IllegalArgumentException("Illegal lesson time");
     this.teacher = teacher;
     this.lessonDate = lessonDate;
-    this.startTime = startTime;
-    this.endTime = endTime;
+    this.startTime = startTime.copy();
+    this.endTime = endTime.copy();
     this.subject = subject;
     this.topic = topic;
     this.classroom = classroom;

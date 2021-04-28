@@ -1,56 +1,27 @@
 package model;
 
-import java.util.ArrayList;
 
 public class Class
 {
-  private ArrayList<Lesson> schedule;
-  private ArrayList<Student> students;
+  private Schedule schedule;
+  private StudentList students;
   private String className;
 
   public Class(String className) {
     this.className = className;
-    this.schedule = new ArrayList<>();
-    this.students = new ArrayList<>();
+    this.schedule = new Schedule();
+    this.students = new StudentList();
   }
 
-  public void addLesson(Lesson lesson){
-    schedule.add(lesson);
+  public String getClassName() {
+    return className;
   }
 
-  public void addStudent(Student student){
-    students.add(student);
-  }
-
-  public void removeLesson(Lesson lesson){
-    schedule.remove(lesson);
-  }
-
-  public void removeStudent(Student student){
-    students.remove(student);
-  }
-
-  public ArrayList<Lesson> getLessonBy(Date date){
-    ArrayList<Lesson> lessons = new ArrayList<>();
-    for(Lesson lesson:schedule){
-      if(lesson.getLessonDate().equals(date))
-        lessons.add(lesson);
-    }
-    return lessons;
-  }
-
-  public ArrayList<Lesson> getLessonBy(Teacher teacher){
-    ArrayList<Lesson> lessons = new ArrayList<>();
-    for(Lesson lesson:schedule){
-      if(lesson.getTeacher().equals(teacher))
-        lessons.add(lesson);
-    }
-    return lessons;
-  }
-
-  public ArrayList<Lesson> getAllLessons(){
+  public Schedule getSchedule() {
     return schedule;
   }
 
-
+  public StudentList getStudents() {
+    return students;
+  }
 }

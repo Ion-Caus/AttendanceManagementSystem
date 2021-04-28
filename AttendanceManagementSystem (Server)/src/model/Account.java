@@ -4,12 +4,10 @@ public class Account
 {
   private UserName username;
   private Password password;
-  private final String accessType;
 
-  public Account(String username, String password, String accessType) throws IllegalArgumentException {
+  public Account(String username, String password) throws IllegalArgumentException {
     this.username = new UserName(username);
     this.password = new Password(password);
-    this.accessType = accessType;
   }
 
   public UserName getUsername() {
