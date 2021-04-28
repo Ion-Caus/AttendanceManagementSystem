@@ -45,13 +45,15 @@ public class SchoolViewModel {
         teacherList = FXCollections.observableArrayList();
         selectedTeacherProperty = new SimpleObjectProperty<>();
 
-        schoolName = new SimpleStringProperty();
+        schoolName = new SimpleStringProperty("School Name");
         error = new SimpleStringProperty();
 
-        scheduleButton = new SimpleStringProperty();
-        studentListButton = new SimpleStringProperty();
+        scheduleButton = new SimpleStringProperty("Schedule");
+        studentListButton = new SimpleStringProperty("StudentList");
 
-        tabSelectedProperty = new SimpleStringProperty();
+        tabSelectedProperty = new SimpleStringProperty("Classes");
+
+        loadFromModel();
     }
 
     private void loadFromModel() {
@@ -66,15 +68,16 @@ public class SchoolViewModel {
         }
 
         teacherList.clear();
-        for (Teacher teacher : model.getAllTeachers()) {
-            teacherList.add(new TeacherViewModel(teacher));
-        }
+//        for (Teacher teacher : model.getAllTeachers()) {
+//            teacherList.add(new TeacherViewModel(teacher));
+//        }
     }
 
     public void clear() {
         //TODO the clear
     }
 
+    // class list
     public ObservableList<ClassViewModel> getAllClasses() {
         return classList;
     }
@@ -83,6 +86,7 @@ public class SchoolViewModel {
         selectedClassProperty.set(selectedLesson);
     }
 
+    // student list
     public ObservableList<StudentViewModel> getAllStudents() {
         return studentList;
     }
@@ -90,6 +94,8 @@ public class SchoolViewModel {
     public void setSelected(StudentViewModel selectedStudent) {
         selectedStudentProperty.set(selectedStudent);
     }
+
+    // teacher list
     public ObservableList<TeacherViewModel> getAllTeachers() {
         return teacherList;
     }
@@ -98,6 +104,8 @@ public class SchoolViewModel {
         selectedTeacherProperty.set(selectedTeacher);
     }
 
+
+    // getters for properties
     public StringProperty schoolNameProperty() {
         return schoolName;
     }
@@ -114,7 +122,24 @@ public class SchoolViewModel {
         return studentListButton;
     }
 
+
+    //TODO see if needed?
     public StringProperty tabSelectedProperty() {
         return tabSelectedProperty;
     }
+
+    // setter for tab property
+    public void setTabSelectedProperty(String tabSelectedProperty) {
+        this.tabSelectedProperty.set(tabSelectedProperty);
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName.set(schoolName);
+    }
+
+    // button methods
+    public void add() {
+        System.out.println(tabSelectedProperty.get());
+    }
+
 }

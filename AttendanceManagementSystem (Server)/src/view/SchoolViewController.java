@@ -1,6 +1,5 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import viewmodel.ClassViewModel;
@@ -36,8 +35,13 @@ public class SchoolViewController extends ViewController {
     protected void init() {
         viewModel = getViewModelFactory().getSchoolViewModel();
 
-        //TODO check if its working   or change it to .addListener
-        tabPane.getSelectionModel().getSelectedItem().textProperty().bind(viewModel.tabSelectedProperty());
+        tabPane.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldVal, newVal) -> {
+                    viewModel.setTabSelectedProperty(newVal.getText());
+                    adjustViewButtons();
+                }
+        );
+        tabPane.getSelectionModel().selectFirst();
 
         schoolName.textProperty().bind(viewModel.schoolNameProperty());
         errorLabel.textProperty().bind(viewModel.errorProperty());
@@ -51,18 +55,27 @@ public class SchoolViewController extends ViewController {
                 cellData -> cellData.getValue().classNameProperty()
         );
         classesTable.setItems(viewModel.getAllClasses());
+        classesTable.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
+        );
 
         // Students Table
         studentColumn.setCellValueFactory(
                 cellData -> cellData.getValue().nameProperty()
         );
         allStudentsTable.setItems(viewModel.getAllStudents());
+        allStudentsTable.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
+        );
 
         // Teachers Table
         teacherColumn.setCellValueFactory(
                 cellData -> cellData.getValue().nameProperty()
         );
         allTeachersTable.setItems(viewModel.getAllTeachers());
+        allTeachersTable.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
+        );
 
 
 
@@ -74,11 +87,33 @@ public class SchoolViewController extends ViewController {
     }
 
     @FXML
+    private void adjustViewButtons() {
+        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
+            case "Classes" :
+                scheduleButton.setVisible(true);
+                studentListButton.setVisible(true);
+                break;
+            case "Students" :
+            case "Teachers" :
+                scheduleButton.setVisible(true);
+                studentListButton.setVisible(false);
+                break;
+            case "Admins" :
+            case "Log" :
+                scheduleButton.setVisible(false);
+                studentListButton.setVisible(false);
+                break;
+        }
+
+    }
+
+    @FXML
     private void editSchoolName() {
     }
 
     @FXML
     private void add() {
+        viewModel.add();
     }
 
     @FXML

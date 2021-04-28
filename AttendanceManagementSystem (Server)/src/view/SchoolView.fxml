@@ -21,7 +21,7 @@
                   <children>
                       <VBox prefHeight="508.0" prefWidth="302.0">
                           <children>
-                        <TabPane prefHeight="500.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="tabPane" prefHeight="500.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab text="Classes">
                               <content>

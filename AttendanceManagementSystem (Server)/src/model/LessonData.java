@@ -1,28 +1,35 @@
 package model;
 
-public class LessonData
-{
-  private Lesson lesson;
-  private Grade grade;
-  private Absence absence;
+public class LessonData {
+    private Lesson lesson;
+    private Grade grade;
+    private Absence absence;
 
-  public LessonData(Lesson lesson, Grade grade, Absence absence) {
-    this.lesson = lesson;
-    this.grade = grade.copy();
-    this.absence = absence.copy();
-  }
+    public LessonData(Lesson lesson) {
+        this.lesson = lesson;
+        this.grade = null;
+        this.absence = null;
+    }
 
-  public Grade getGrade() {
-    return grade;
-  }
+    public void setAbsence(Absence absence) {
+        this.absence = absence;
+    }
 
-  public Absence getAbsence() {
-    return absence;
-  }
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
 
-  public Lesson getLesson() {
-    return lesson;
-  }
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public Absence getAbsence() {
+        return absence;
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
 
 
 }
