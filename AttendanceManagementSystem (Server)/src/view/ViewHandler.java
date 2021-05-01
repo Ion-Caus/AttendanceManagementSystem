@@ -3,7 +3,7 @@ package view;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import viewmodel.ViewModelFactory;
+import viewModel.ViewModelFactory;
 
 
 public class ViewHandler extends ViewCreator {
@@ -25,8 +25,12 @@ public class ViewHandler extends ViewCreator {
 
     public void openView(View view) {
         Region root = null;
+        
+        root = getViewController(view).getRoot();
 
-        switch (view) {
+
+        // TODO: 01/5/2021 replace switch with one line command
+       /* switch (view) {
             case SCHOOL_VIEW:
                 root = getViewController(View.SCHOOL_VIEW).getRoot();
                 break;
@@ -36,7 +40,7 @@ public class ViewHandler extends ViewCreator {
             case SCHEDULE_VIEW:
                 root = getViewController(View.SCHEDULE_VIEW).getRoot();
                 break;
-        }
+        }*/
 
         currentScene.setRoot(root);
 

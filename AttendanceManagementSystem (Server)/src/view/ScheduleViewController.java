@@ -5,8 +5,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import viewmodel.LessonViewModel;
-import viewmodel.ScheduleViewModel;
+import viewModel.LessonViewModel;
+import viewModel.ScheduleViewModel;
 
 
 public class ScheduleViewController extends ViewController {
