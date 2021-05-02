@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import viewModel.ClassViewModel;
@@ -7,6 +9,8 @@ import viewModel.SchoolViewModel;
 import viewModel.StudentViewModel;
 import viewModel.TeacherViewModel;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class SchoolViewController extends ViewController {
@@ -29,12 +33,16 @@ public class SchoolViewController extends ViewController {
 
     private SchoolViewModel viewModel;
 
+
+
     public SchoolViewController() {
         // Called by FXMLLoader
     }
 
     @Override
     protected void init() {
+
+
         viewModel = getViewModelFactory().getSchoolViewModel();
 
         tabPane.getSelectionModel().selectedItemProperty().addListener(
@@ -91,11 +99,13 @@ public class SchoolViewController extends ViewController {
             case "Classes" :
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(true);
-                break;
+
+
             case "Students" :
             case "Teachers" :
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(false);
+
                 break;
             case "Admins" :
             case "Log" :
@@ -103,6 +113,7 @@ public class SchoolViewController extends ViewController {
                 studentListButton.setVisible(false);
                 break;
         }
+
 
     }
 
@@ -122,12 +133,77 @@ public class SchoolViewController extends ViewController {
 
     @FXML
     private void add() {
-        viewModel.add();
+
+        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
+            case "Classes" :
+                getViewHandler().openView(View.CLASS_VIEW);
+
+
+                break;
+
+            case "Students" :
+                getViewHandler().openView(View.STUDENT_VIEW);
+
+                break;
+
+            case "Teachers" :
+
+                break;
+            case "Admins" :
+            case "Log" :
+
+                break;
+        }
+
+
+
     }
 
     @FXML
     private void remove() {
-        viewModel.remove();
+
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+        Optional<ButtonType> result;
+
+        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
+            case "Classes" :
+              ClassViewModel  classViewModel =classesTable.getSelectionModel().getSelectedItem();
+                alert.setTitle("Delete class");
+                alert.setHeaderText("Delete class "+classViewModel.classNameProperty()+" ?");
+
+                result= alert.showAndWait();
+
+                if (result.isPresent() && result.get()==ButtonType.OK){
+                classesTable.getSelectionModel().clearSelection();
+                classesTable.getItems().remove(classViewModel);
+            }
+                break;
+
+            case "Students" :
+                StudentViewModel studentViewModel =allStudentsTable.getSelectionModel().getSelectedItem();
+                alert.setTitle("Delete class");
+                alert.setHeaderText("Delete class "+studentViewModel.nameProperty()+" ?");
+               result = alert.showAndWait();
+
+                if (result.isPresent() && result.get()==ButtonType.OK) {
+
+                    allStudentsTable.getSelectionModel().clearSelection();
+                    allStudentsTable.getItems().remove(studentViewModel);
+                }
+                break;
+
+            case "Teachers" :
+
+                break;
+            case "Admins" :
+            case "Log" :
+
+                break;
+        }
+
+
+
+
     }
 
     @FXML

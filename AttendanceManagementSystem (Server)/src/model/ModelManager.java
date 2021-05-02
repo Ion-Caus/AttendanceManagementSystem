@@ -17,6 +17,8 @@ public class ModelManager implements Model {
         studentList.addStudent(new Student("Denis", "4338234"));
         studentList.addStudent(new Student("Max", "308415"));
 
+
+
         ClassList classList = school.getClassList();
         Class class1 = new Class("12 C");
         Class class2 = new Class("11 A");

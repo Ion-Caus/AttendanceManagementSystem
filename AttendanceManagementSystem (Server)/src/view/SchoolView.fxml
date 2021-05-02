@@ -100,6 +100,7 @@
                            </font>
                         </Label>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#add" prefWidth="70.0" text="Add" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="70.0" text="Modify" />
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#remove" prefWidth="70.0" text="Remove" />
                         <Separator prefWidth="200.0">
                            <VBox.margin>
