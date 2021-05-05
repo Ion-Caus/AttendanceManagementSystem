@@ -21,4 +21,22 @@ public class StudentList {
         return students;
     }
 
+    public Student getStudentByID(String id) {
+        for (Student student: students) {
+            if (student.getID().equals(id)) {
+                return student;
+            }
+        }
+        throw new IllegalArgumentException("No such student with this id (" + id + ")");
+    }
+
+    public Student getStudentByName(String name) {
+        for (Student student: students) {
+            if (student.getName().equals(name)) {
+                return student;
+            }
+        }
+        throw new IllegalArgumentException("No such student with this name (" + name + ")");
+    }
+
 }

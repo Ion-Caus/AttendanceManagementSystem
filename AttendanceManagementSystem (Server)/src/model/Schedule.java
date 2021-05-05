@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Schedule {
@@ -17,10 +18,10 @@ public class Schedule {
         schedule.remove(lesson);
     }
 
-    public ArrayList<Lesson> getLessonBy(Date date) {
+    public ArrayList<Lesson> getLessonBy(LocalDate date) {
         ArrayList<Lesson> lessons = new ArrayList<>();
         for (Lesson lesson : schedule) {
-            if (lesson.getLessonDate().equals(date))
+            if (lesson.getLessonDate().getDate().equals(date))
                 lessons.add(lesson);
         }
         return lessons;

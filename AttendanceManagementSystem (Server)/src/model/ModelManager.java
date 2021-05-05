@@ -12,6 +12,7 @@ public class ModelManager implements Model {
     }
 
     public void createDummy() {
+        setSchoolName("DaVinci");
         StudentList studentList = school.getStudentList();
         studentList.addStudent(new Student("Ion Caus", "308234"));
         studentList.addStudent(new Student("Denis", "4338234"));
@@ -42,7 +43,6 @@ public class ModelManager implements Model {
         );
     }
 
-    // Getters for Lists
     @Override
     public ArrayList<Class> getAllClasses() {
         return school.getClassList().getAllClasses();
@@ -59,39 +59,40 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ArrayList<Lesson> getScheduleFor(Student student, LocalDate date) {
-        ArrayList<Lesson> lessonList = new ArrayList<>();
-        for (Class aClass: school.getClassList().getAllClasses()) {
-            for (Student aStudent: aClass.getStudents().getAllStudents()) {
-                if (aStudent.equals(student)) {
-                    for (Lesson lesson: aClass.getSchedule().getAllLessons()) {
-                        if (lesson.getLessonDate().getDate().equals(date)) {
-                            lessonList.add(lesson);
-                            System.out.println( lesson.getTimeInterval() );
-                        }
-                    }
-                }
-            }
-        }
-        return lessonList;
+    public ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date) {
+        return theClass.getSchedule().getLessonBy(date);
     }
 
     @Override
-    public Student getStudentBy(String id) {
-        for (Class aClass: school.getClassList().getAllClasses()) {
-            for (Student student: aClass.getStudents().getAllStudents()) {
-                if (student.getID().equals(id)) {
-                    return student;
-                }
-            }
-        }
-        //TODO throw exception
-        return null;
+    public ArrayList<Lesson> getScheduleFor(Student student, LocalDate date) {
+        return getClassWith(student).getSchedule().getLessonBy(date);
     }
-    // ---
+    @Override
+    public Class getClassWith(Student student) {
+        return school.getClassList().getClassWith(student);
+    }
+    @Override
+    public Class getClassByName(String name) {
+        return school.getClassList().getClassByName(name);
+    }
+
+    @Override
+    public Student getStudentBy(String id) throws IllegalArgumentException {
+        return school.getStudentList().getStudentByID(id);
+    }
+
+    @Override
+    public String getClassAndSchool(Student student) {
+        return getClassWith(student).getClassName() + ", " + getSchoolName();
+    }
 
     @Override
     public void setSchoolName(String name) {
         school.setName(name);
+    }
+
+    @Override
+    public String getSchoolName() {
+        return school.getName();
     }
 }

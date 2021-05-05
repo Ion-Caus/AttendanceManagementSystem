@@ -44,11 +44,13 @@ public class SchoolViewModel {
         teacherList = FXCollections.observableArrayList();
         selectedTeacherProperty = new SimpleObjectProperty<>();
 
-        schoolName = new SimpleStringProperty("School Name");
+        schoolName = new SimpleStringProperty(model.getSchoolName());
         error = new SimpleStringProperty();
 
         tabSelectedProperty = new SimpleStringProperty("Classes");
 
+        //TODO set in login
+        viewModelState.setAccessLevel("Administrator");
     }
 
     private void loadFromModel() {
@@ -70,7 +72,9 @@ public class SchoolViewModel {
 
     public void clear() {
         loadFromModel();
+
         //TODO the clear
+        error.setValue("");
     }
 
     // class list
@@ -117,6 +121,7 @@ public class SchoolViewModel {
 
     public void setSchoolName(String schoolName) {
         this.schoolName.set(schoolName);
+        model.setSchoolName(schoolName);
     }
 
     // button methods
@@ -152,15 +157,35 @@ public class SchoolViewModel {
         }
     }
 
-    public void viewSchedule() {
+    public boolean viewSchedule() {
         switch (tabSelectedProperty.get()) {
             case "Classes" :
+                try {
+                    viewModelState.setSection("Class");
+                    // TODO leave the school name as the id???
+                    viewModelState.setId(selectedClassProperty.get().classNameProperty().get());
+                    return true;
+                }
+                catch (IllegalArgumentException | NullPointerException e) {
+                    error.setValue("Please select a class.");
+                    return false;
+                }
+
             case "Students" :
+                try {
+                    viewModelState.setSection("Student");
+                    viewModelState.setId(selectedStudentProperty.get().idProperty().get());
+                    return true;
+                }
+                catch (IllegalArgumentException | NullPointerException e) {
+                    error.setValue("Please select a student.");
+                    return false;
+                }
+
             case "Teachers" :
-                viewModelState.setId(selectedStudentProperty.get().idProperty().get());
-                System.out.println(viewModelState.getId());
                 break;
         }
+        return false;
     }
 
 }

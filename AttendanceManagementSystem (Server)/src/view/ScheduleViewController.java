@@ -1,17 +1,16 @@
 package view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import viewmodel.LessonViewModel;
 import viewmodel.ScheduleViewModel;
+
+import java.time.format.DateTimeFormatter;
 
 
 public class ScheduleViewController extends ViewController {
     @FXML private TableView<LessonViewModel> scheduleTable;
-    @FXML private TableColumn<LessonViewModel, String> subjectColumn ;
+    @FXML private TableColumn<LessonViewModel, String> subjectColumn;
     @FXML private TableColumn<LessonViewModel, String> topicColumn;
     @FXML private TableColumn<LessonViewModel, String> teacherColumn;
     @FXML private TableColumn<LessonViewModel, String> timeColumn;
@@ -22,6 +21,10 @@ public class ScheduleViewController extends ViewController {
     @FXML private Label errorLabel;
 
     @FXML private DatePicker datePicker;
+
+    @FXML private Button addLessonButton;
+    @FXML private Button removeLessonButton;
+    @FXML private Button backButton;
 
     private ScheduleViewModel viewModel;
 
@@ -58,11 +61,37 @@ public class ScheduleViewController extends ViewController {
         errorLabel.textProperty().bind(viewModel.errorProperty());
 
         datePicker.valueProperty().bindBidirectional(viewModel.dateProperty());
+        datePicker.getEditor().setText(
+                DateTimeFormatter.ofPattern("yyyy-MM-dd").format(datePicker.getValue())
+        );
+
     }
 
     @Override
     public void reset() {
         viewModel.clear();
+
+        addLessonButton.setVisible(viewModel.canEditProperty().get());
+        removeLessonButton.setVisible(viewModel.canEditProperty().get());
+
+        backButton.setVisible(viewModel.canBackProperty().get());
+    }
+
+    @FXML
+    private void addLesson() {
+        //getViewHandler().openView();
+    }
+
+    @FXML
+    private void removeLesson() {
+
+    }
+
+    @FXML
+    private void backToSchoolView() {
+        //TODO  viewModel.backToSchoolView(); is optional?
+        viewModel.backToSchoolView();
+        getViewHandler().openView(View.SCHOOL_VIEW);
     }
 
 
@@ -75,14 +104,21 @@ public class ScheduleViewController extends ViewController {
     private void infoLesson() {
     }
 
+    @FXML
+    private void changeDateSchedule() {
+        viewModel.changeDate();
+        datePicker.getEditor().setText(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(datePicker.getValue()));
+    }
+
 
     @FXML
     private void previousDay() {
-
+        viewModel.previousDay();
     }
 
     @FXML
     private void nextDay() {
+        viewModel.nextDay();
     }
 
 }

@@ -45,7 +45,7 @@ public class SchoolViewController extends ViewController {
         );
         tabPane.getSelectionModel().selectFirst();
 
-        schoolName.textProperty().bindBidirectional(viewModel.schoolNameProperty());
+        schoolName.textProperty().bind(viewModel.schoolNameProperty());
         errorLabel.textProperty().bind(viewModel.errorProperty());
 
 
@@ -75,8 +75,6 @@ public class SchoolViewController extends ViewController {
         allTeachersTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
         );
-
-
 
     }
 
@@ -115,7 +113,6 @@ public class SchoolViewController extends ViewController {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent() && !result.get().isBlank()) {
-            schoolName.setText(result.get());
             viewModel.setSchoolName(result.get());
         }
     }
@@ -132,8 +129,9 @@ public class SchoolViewController extends ViewController {
 
     @FXML
     private void viewSchedule() {
-        viewModel.viewSchedule();
-        getViewHandler().openView(View.SCHEDULE_VIEW);
+           if ( viewModel.viewSchedule() ) {
+               getViewHandler().openView(View.SCHEDULE_VIEW);
+           }
     }
 
     @FXML

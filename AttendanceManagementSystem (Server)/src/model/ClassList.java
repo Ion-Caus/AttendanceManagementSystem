@@ -20,4 +20,24 @@ public class ClassList {
     public ArrayList<Class> getAllClasses() {
         return classes;
     }
+
+    public Class getClassWith(Student student) {
+        for (Class aClass: classes) {
+            for (Student aStudent: aClass.getStudents().getAllStudents()) {
+                if (aStudent.equals(student)) {
+                    return aClass;
+                }
+            }
+        }
+        throw new IllegalArgumentException("This student is part of no classes");
+    }
+
+    public Class getClassByName(String name) {
+        for (Class aClass: classes) {
+            if (aClass.getClassName().equals(name)) {
+                return aClass;
+            }
+        }
+        throw new IllegalArgumentException("No such class with the name: "+ name);
+    }
 }

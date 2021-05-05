@@ -9,7 +9,7 @@ public class School {
     //private TeacherList teacherList;
 
     public School() {
-        this.name = "";
+        this.name = "School";
         this.classList = new ClassList();
         this.studentList = new StudentList();
     }
@@ -26,6 +26,7 @@ public class School {
 
     public void setName(String name) {
         this.name = name;
+        System.out.println(name);
     }
 
     public ClassList getClassList() {
