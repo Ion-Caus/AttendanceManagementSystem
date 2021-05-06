@@ -24,19 +24,7 @@ public class ViewHandler extends ViewCreator {
     }
 
     public void openView(View view) {
-        Region root = null;
-
-        switch (view) {
-            case SCHOOL_VIEW:
-                root = getViewController(View.SCHOOL_VIEW).getRoot();
-                break;
-            case LOGIN_VIEW:
-                root = getViewController(View.LOGIN_VIEW).getRoot();
-                break;
-            case SCHEDULE_VIEW:
-                root = getViewController(View.SCHEDULE_VIEW).getRoot();
-                break;
-        }
+        Region root = getViewController(view).getRoot();
 
         currentScene.setRoot(root);
 
