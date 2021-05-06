@@ -1,4 +1,4 @@
-package viewmodel;
+package viewModel;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,8 +10,6 @@ import javafx.collections.ObservableList;
 import model.Model;
 import model.Class;
 import model.Student;
-import model.Teacher;
-
 
 public class SchoolViewModel {
     private ObservableList<ClassViewModel> classList;

@@ -2,10 +2,10 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import viewmodel.ClassViewModel;
-import viewmodel.SchoolViewModel;
-import viewmodel.StudentViewModel;
-import viewmodel.TeacherViewModel;
+import viewModel.ClassViewModel;
+import viewModel.SchoolViewModel;
+import viewModel.StudentViewModel;
+import viewModel.TeacherViewModel;
 
 import java.util.Optional;
 

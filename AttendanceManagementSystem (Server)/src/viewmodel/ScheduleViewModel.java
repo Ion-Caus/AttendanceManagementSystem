@@ -1,4 +1,4 @@
-package viewmodel;
+package viewModel;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;

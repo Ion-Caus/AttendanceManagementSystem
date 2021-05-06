@@ -3,7 +3,7 @@ package view;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import viewmodel.ViewModelFactory;
+import viewModel.ViewModelFactory;
 
 
 public class ViewHandler extends ViewCreator {
