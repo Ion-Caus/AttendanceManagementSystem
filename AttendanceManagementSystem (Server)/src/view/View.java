@@ -1,11 +1,14 @@
 package view;
 
 public enum View {
+    LOGIN_VIEW("LoginView.fxml"),
     SCHOOL_VIEW("SchoolView.fxml"),
     SCHEDULE_VIEW("ScheduleView.fxml"),
-    LOGIN_VIEW("LoginView.fxml");
+    CLASS_VIEW("ClassView.fxml"),
+    STUDENT_VIEW("StudentView.fxml");
 
-    private String fxmlFile;
+
+    private final String fxmlFile;
 
     View(String fxmlFile) {
         this.fxmlFile = fxmlFile;

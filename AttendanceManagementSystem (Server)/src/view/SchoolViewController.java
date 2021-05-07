@@ -10,24 +10,36 @@ import viewModel.TeacherViewModel;
 import java.util.Optional;
 
 public class SchoolViewController extends ViewController {
-    @FXML private TabPane tabPane;
+    @FXML
+    private TabPane tabPane;
 
-    @FXML private Label schoolName;
-    @FXML private Label errorLabel;
+    @FXML
+    private Label schoolName;
+    @FXML
+    private Label errorLabel;
 
-    @FXML private Button scheduleButton;
-    @FXML private Button studentListButton;
+    @FXML
+    private Button scheduleButton;
+    @FXML
+    private Button studentListButton;
 
-    @FXML private TableView<ClassViewModel> classesTable;
-    @FXML private TableColumn<ClassViewModel, String> classNameColumn;
+    @FXML
+    private TableView<ClassViewModel> classesTable;
+    @FXML
+    private TableColumn<ClassViewModel, String> classNameColumn;
 
-    @FXML private TableView<StudentViewModel> allStudentsTable;
-    @FXML private TableColumn<StudentViewModel, String> studentColumn;
+    @FXML
+    private TableView<StudentViewModel> allStudentsTable;
+    @FXML
+    private TableColumn<StudentViewModel, String> studentColumn;
 
-    @FXML private TableView<TeacherViewModel> allTeachersTable;
-    @FXML private TableColumn<TeacherViewModel, String> teacherColumn;
+    @FXML
+    private TableView<TeacherViewModel> allTeachersTable;
+    @FXML
+    private TableColumn<TeacherViewModel, String> teacherColumn;
 
     private SchoolViewModel viewModel;
+
 
     public SchoolViewController() {
         // Called by FXMLLoader
@@ -35,6 +47,7 @@ public class SchoolViewController extends ViewController {
 
     @Override
     protected void init() {
+
         viewModel = getViewModelFactory().getSchoolViewModel();
 
         tabPane.getSelectionModel().selectedItemProperty().addListener(
@@ -45,7 +58,7 @@ public class SchoolViewController extends ViewController {
         );
         tabPane.getSelectionModel().selectFirst();
 
-        schoolName.textProperty().bind(viewModel.schoolNameProperty());
+        schoolName.textProperty().bindBidirectional(viewModel.schoolNameProperty());
         errorLabel.textProperty().bind(viewModel.errorProperty());
 
 
@@ -76,6 +89,7 @@ public class SchoolViewController extends ViewController {
                 (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
         );
 
+
     }
 
     @Override
@@ -86,21 +100,24 @@ public class SchoolViewController extends ViewController {
     @FXML
     private void adjustViewButtons() {
         switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
-            case "Classes" :
+            case "Classes":
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(true);
-                break;
-            case "Students" :
-            case "Teachers" :
+
+
+            case "Students":
+            case "Teachers":
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(false);
+
                 break;
-            case "Admins" :
-            case "Log" :
+            case "Admins":
+            case "Log":
                 scheduleButton.setVisible(false);
                 studentListButton.setVisible(false);
                 break;
         }
+
 
     }
 
@@ -113,25 +130,92 @@ public class SchoolViewController extends ViewController {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent() && !result.get().isBlank()) {
+            schoolName.setText(result.get());
             viewModel.setSchoolName(result.get());
         }
     }
 
     @FXML
     private void add() {
-        viewModel.add();
+
+        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
+            case "Classes":
+                getViewHandler().openView(View.CLASS_VIEW);
+
+
+                break;
+
+            case "Students":
+                getViewHandler().openView(View.STUDENT_VIEW);
+
+                break;
+
+            case "Teachers":
+
+                break;
+            case "Admins":
+            case "Log":
+
+                break;
+        }
+
+
     }
 
     @FXML
     private void remove() {
-        viewModel.remove();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Optional<ButtonType> result;
+
+        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
+            case "Classes":
+                ClassViewModel classViewModel = classesTable.getSelectionModel().getSelectedItem();
+                alert.setTitle("Delete class");
+                alert.setHeaderText("Delete class " + classViewModel.classNameProperty().get() + " ?");
+
+                result = alert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    classesTable.getSelectionModel().clearSelection();
+                    classesTable.getItems().remove(classViewModel);
+
+                    //TODO remove from model
+                }
+                break;
+
+            case "Students":
+                StudentViewModel studentViewModel = allStudentsTable.getSelectionModel().getSelectedItem();
+                alert.setTitle("Delete student");
+                alert.setHeaderText("Delete student " + studentViewModel.nameProperty().get() + " ?");
+
+                result = alert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    allStudentsTable.getSelectionModel().clearSelection();
+                    allStudentsTable.getItems().remove(studentViewModel);
+
+                    //TODO remove from model
+                }
+                break;
+
+            case "Teachers":
+
+                break;
+            case "Admins":
+            case "Log":
+
+                break;
+        }
+
+
     }
 
     @FXML
     private void viewSchedule() {
-           if ( viewModel.viewSchedule() ) {
-               getViewHandler().openView(View.SCHEDULE_VIEW);
-           }
+        if (viewModel.viewSchedule()) {
+            getViewHandler().openView(View.SCHEDULE_VIEW);
+        }
     }
 
     @FXML
