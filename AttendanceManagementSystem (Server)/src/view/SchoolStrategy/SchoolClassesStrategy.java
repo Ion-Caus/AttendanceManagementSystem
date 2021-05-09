@@ -21,8 +21,7 @@ public class SchoolClassesStrategy extends SchoolStrategy
   }
 
   @Override public void remove() {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    Optional<ButtonType> result;
+
 
     ClassViewModel classViewModel = controller.getClassesTable().getSelectionModel().getSelectedItem();
     alert.setTitle("Delete class");
@@ -30,12 +29,12 @@ public class SchoolClassesStrategy extends SchoolStrategy
     result = alert.showAndWait();
 
     if (result.isPresent() && result.get() == ButtonType.OK) {
+
       controller.getClassesTable().getSelectionModel().clearSelection();
       viewModel.removeClass(classViewModel);
 
 
-      //placeholder until we have a way to really delete it
-//      controller.getClassesTable().getItems().remove(classViewModel);
+
     }
   }
 }

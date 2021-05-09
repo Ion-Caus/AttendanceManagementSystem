@@ -12,7 +12,12 @@ public class SchoolStrategyContext
   public SchoolStrategyContext(SchoolViewController controller, SchoolViewModel viewModel){
     strategies = new HashMap<>();
     SchoolStrategy classStrategy = new SchoolClassesStrategy(controller,viewModel);
+    SchoolStrategy studentStrategy = new SchoolStudentsStrategy(controller, viewModel);
+
+
     strategies.put("Classes",classStrategy);
+    strategies.put("Students",studentStrategy);
+
   }
 
   public void add(String key){

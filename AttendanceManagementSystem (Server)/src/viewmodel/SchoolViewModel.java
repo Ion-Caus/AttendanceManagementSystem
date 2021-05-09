@@ -128,51 +128,7 @@ public class SchoolViewModel {
         this.schoolName.set(schoolName);
     }
 
-    // button methods
-    public void addStudent() {
 
-    }
-
-    public void addTeacher(){
-
-    }
-
-    public void addAdmin(){
-
-    }
-
-    public void addCLass(){
-
-    }
-
-    public void removeStudent(){
-
-    }
-
-    public void removeTeacher(){
-
-    }
-
-    public void removeAdmin(){
-
-    }
-
-   /* public void remove() {
-        switch (tabSelectedProperty.get()) {
-            case "Classes" :
-
-
-                break;
-            case "Students" :
-
-                break;
-            case "Teachers" :
-
-                break;
-            case "Admins" :
-                break;
-        }
-    }*/
 
     public void AddClass(ClassViewModel theClass){
 //        model.getAllClasses().remove(theClass);
@@ -181,6 +137,20 @@ public class SchoolViewModel {
     public void removeClass(ClassViewModel theClass){
         model.removeClass(theClass.classNameProperty().get());
         clear();
+    }
+
+    public void addStudent(String student){
+        model.addStudent(student,"someTempId");
+        // TODO: 09/5/2021 by tomas replace someTempId with real ID generation
+        clear();
+
+    }
+
+
+    public void removeStudent(StudentViewModel studentViewModel){
+        model.removeStudent(studentViewModel.nameProperty().get());
+       clear();
+
     }
 
     public void viewSchedule() {

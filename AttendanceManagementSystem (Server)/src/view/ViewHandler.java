@@ -28,20 +28,6 @@ public class ViewHandler extends ViewCreator {
         
         root = getViewController(view).getRoot();
 
-
-        // TODO: 01/5/2021 replace switch with one line command
-       /* switch (view) {
-            case SCHOOL_VIEW:
-                root = getViewController(View.SCHOOL_VIEW).getRoot();
-                break;
-            case LOGIN_VIEW:
-                root = getViewController(View.LOGIN_VIEW).getRoot();
-                break;
-            case SCHEDULE_VIEW:
-                root = getViewController(View.SCHEDULE_VIEW).getRoot();
-                break;
-        }*/
-
         currentScene.setRoot(root);
 
         String title = "";

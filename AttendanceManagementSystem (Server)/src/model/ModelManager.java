@@ -73,6 +73,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addStudent(String student, String id){
+        getAllStudents().add(new Student(student, id));
+    }
+
+    @Override
+    public void removeStudent(String studentName){
+        getAllStudents().removeIf(temp -> temp.getName().equals(studentName));
+    }
+
+    @Override
     public ArrayList<Lesson> getScheduleFor(Student student, LocalDate date) {
         ArrayList<Lesson> lessonList = new ArrayList<>();
         for (Class aClass: school.getClassList().getAllClasses()) {
