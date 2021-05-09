@@ -1,16 +1,13 @@
 package view;
 
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import view.SchoolStrategy.SchoolStrategyContext;
 import viewModel.ClassViewModel;
 import viewModel.SchoolViewModel;
 import viewModel.StudentViewModel;
 import viewModel.TeacherViewModel;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class SchoolViewController extends ViewController {
@@ -27,6 +24,18 @@ public class SchoolViewController extends ViewController {
 
     @FXML private TableView<StudentViewModel> allStudentsTable;
     @FXML private TableColumn<StudentViewModel, String> studentColumn;
+
+    public TableView<ClassViewModel> getClassesTable() {
+        return classesTable;
+    }
+
+    public TableView<StudentViewModel> getAllStudentsTable() {
+        return allStudentsTable;
+    }
+
+    public TableView<TeacherViewModel> getAllTeachersTable() {
+        return allTeachersTable;
+    }
 
     @FXML private TableView<TeacherViewModel> allTeachersTable;
     @FXML private TableColumn<TeacherViewModel, String> teacherColumn;
@@ -169,23 +178,25 @@ public class SchoolViewController extends ViewController {
         Optional<ButtonType> result;
 
 
+        new SchoolStrategyContext(this,viewModel).remove(tabPane.getSelectionModel().getSelectedItem().getText());
+
         switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
-            case "Classes" :
-              ClassViewModel  classViewModel =classesTable.getSelectionModel().getSelectedItem();
-                alert.setTitle("Delete class");
-                alert.setHeaderText("Delete class "+classViewModel.classNameProperty()+" ?");
-
-                result= alert.showAndWait();
-
-                if (result.isPresent() && result.get()==ButtonType.OK){
-                classesTable.getSelectionModel().clearSelection();
-                viewModel.removeClass(classViewModel);
-
-                //placeholder until we have a way to really delete it
-                classesTable.getItems().remove(classViewModel);
-
-            }
-                break;
+//            case "Classes" :
+//              ClassViewModel  classViewModel =classesTable.getSelectionModel().getSelectedItem();
+//                alert.setTitle("Delete class");
+//                alert.setHeaderText("Delete class "+classViewModel.classNameProperty()+" ?");
+//
+//                result= alert.showAndWait();
+//
+//                if (result.isPresent() && result.get()==ButtonType.OK){
+//                classesTable.getSelectionModel().clearSelection();
+//                viewModel.removeClass(classViewModel);
+//
+//                //placeholder until we have a way to really delete it
+//                classesTable.getItems().remove(classViewModel);
+//
+//            }
+//                break;
 
             case "Students" :
                 StudentViewModel studentViewModel =allStudentsTable.getSelectionModel().getSelectedItem();

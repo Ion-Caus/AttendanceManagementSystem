@@ -15,7 +15,7 @@ public interface Model {
 
     ArrayList<Administrator> getAllAdministrators();
 
-
+    void removeClass(String classname);
 
     ArrayList<Lesson> getScheduleFor(Student student, LocalDate date);
 

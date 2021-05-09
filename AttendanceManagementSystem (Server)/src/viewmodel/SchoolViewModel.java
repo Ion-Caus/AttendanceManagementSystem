@@ -1,5 +1,6 @@
 package viewModel;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -174,11 +175,11 @@ public class SchoolViewModel {
     }*/
 
     public void AddClass(ClassViewModel theClass){
-        model.getAllClasses().remove(theClass);
+//        model.getAllClasses().remove(theClass);
     }
 
     public void removeClass(ClassViewModel theClass){
-        model.getAllClasses().remove(theClass.getClass());
+        model.removeClass(theClass.classNameProperty().get());
     }
 
     public void viewSchedule() {

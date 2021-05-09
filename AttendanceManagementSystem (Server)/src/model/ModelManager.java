@@ -44,6 +44,7 @@ public class ModelManager implements Model {
                         "ex. 3,4,5 pag 6."
                 )
         );
+
     }
 
     // Getters for Lists
@@ -67,7 +68,9 @@ public class ModelManager implements Model {
         return school.getAdminList().getAllAdmins();
     }
 
-
+    @Override public void removeClass(String classname) {
+        getAllClasses().removeIf(temp -> temp.getClassName().equals(classname));
+    }
 
     @Override
     public ArrayList<Lesson> getScheduleFor(Student student, LocalDate date) {
