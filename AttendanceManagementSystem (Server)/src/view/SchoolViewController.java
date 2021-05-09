@@ -99,6 +99,7 @@ public class SchoolViewController extends ViewController {
             case "Classes" :
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(true);
+                break;
 
 
             case "Students" :
@@ -162,8 +163,11 @@ public class SchoolViewController extends ViewController {
     @FXML
     private void remove() {
 
+        // TODO: 02/5/2021 by tomas this might need to be refactored, this shit ugly as hell, strategy pattern might help here
+
         Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
         Optional<ButtonType> result;
+
 
         switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
             case "Classes" :
@@ -175,7 +179,11 @@ public class SchoolViewController extends ViewController {
 
                 if (result.isPresent() && result.get()==ButtonType.OK){
                 classesTable.getSelectionModel().clearSelection();
+                viewModel.removeClass(classViewModel);
+
+                //placeholder until we have a way to really delete it
                 classesTable.getItems().remove(classViewModel);
+
             }
                 break;
 
@@ -193,6 +201,17 @@ public class SchoolViewController extends ViewController {
                 break;
 
             case "Teachers" :
+
+                TeacherViewModel teacherViewModel =allTeachersTable.getSelectionModel().getSelectedItem();
+                alert.setTitle("Delete teacher");
+                alert.setHeaderText("Delete teacher "+teacherViewModel.nameProperty()+" ?");
+                result = alert.showAndWait();
+
+                if (result.isPresent() && result.get()==ButtonType.OK) {
+
+                    allTeachersTable.getSelectionModel().clearSelection();
+                    allTeachersTable.getItems().remove(teacherViewModel);
+                }
 
                 break;
             case "Admins" :

@@ -23,6 +23,10 @@ public class SchoolViewModel {
     private ObservableList<TeacherViewModel> teacherList;
     private ObjectProperty<TeacherViewModel> selectedTeacherProperty;
 
+    // TODO: 02/5/2021 by tomas should we also add adminList as an ObservableList 
+    
+    
+
     private StringProperty schoolName;
     private StringProperty error;
 
@@ -63,9 +67,13 @@ public class SchoolViewModel {
         }
 
         teacherList.clear();
-//        for (Teacher teacher : model.getAllTeachers()) {
-//            teacherList.add(new TeacherViewModel(teacher));
-//        }
+       for (Teacher teacher : model.getAllTeachers()) {
+           teacherList.add(new TeacherViewModel(teacher));
+       }
+
+        // TODO: 02/5/2021 added by tomas ask ion if we should create a view model for admin and add the for loop here to populate gui 
+       
+       
     }
 
     public void clear() {
@@ -120,23 +128,35 @@ public class SchoolViewModel {
     }
 
     // button methods
-    public void add() {
-        switch (tabSelectedProperty.get()) {
-            case "Classes" :
+    public void addStudent() {
 
-                break;
-            case "Students" :
-
-                break;
-            case "Teachers" :
-
-                break;
-            case "Admins" :
-                break;
-        }
     }
 
-    public void remove() {
+    public void addTeacher(){
+
+    }
+
+    public void addAdmin(){
+
+    }
+
+    public void addCLass(){
+
+    }
+
+    public void removeStudent(){
+
+    }
+
+    public void removeTeacher(){
+
+    }
+
+    public void removeAdmin(){
+
+    }
+
+   /* public void remove() {
         switch (tabSelectedProperty.get()) {
             case "Classes" :
 
@@ -151,6 +171,14 @@ public class SchoolViewModel {
             case "Admins" :
                 break;
         }
+    }*/
+
+    public void AddClass(ClassViewModel theClass){
+        model.getAllClasses().remove(theClass);
+    }
+
+    public void removeClass(ClassViewModel theClass){
+        model.getAllClasses().remove(theClass.getClass());
     }
 
     public void viewSchedule() {

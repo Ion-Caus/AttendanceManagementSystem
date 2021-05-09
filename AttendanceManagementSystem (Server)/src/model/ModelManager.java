@@ -17,11 +17,13 @@ public class ModelManager implements Model {
         studentList.addStudent(new Student("Denis", "4338234"));
         studentList.addStudent(new Student("Max", "308415"));
 
-
+        TeacherList teacherList = school.getTeacherList();
+        teacherList.addTeacher(new Teacher("joseph","zuk","badEnglish"));
 
         ClassList classList = school.getClassList();
         Class class1 = new Class("12 C");
         Class class2 = new Class("11 A");
+
 
         classList.addClass(class1);
         classList.addClass(class2);
@@ -57,8 +59,15 @@ public class ModelManager implements Model {
 
     @Override
     public ArrayList<Teacher> getAllTeachers() throws NullPointerException {
-        return null;
+        return school.getTeacherList().getAllTeachers();
     }
+
+    @Override
+    public ArrayList<Administrator> getAllAdministrators() {
+        return school.getAdminList().getAllAdmins();
+    }
+
+
 
     @Override
     public ArrayList<Lesson> getScheduleFor(Student student, LocalDate date) {
@@ -96,4 +105,7 @@ public class ModelManager implements Model {
     public void setSchoolName(String name) {
         school.setName(name);
     }
+
+
+
 }

@@ -13,6 +13,10 @@ public interface Model {
 
     ArrayList<Teacher> getAllTeachers();
 
+    ArrayList<Administrator> getAllAdministrators();
+
+
+
     ArrayList<Lesson> getScheduleFor(Student student, LocalDate date);
 
     Student getStudentBy(String id);

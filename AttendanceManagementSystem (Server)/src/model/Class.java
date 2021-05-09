@@ -6,6 +6,7 @@ public class Class {
     private StudentList students;
     private String className;
 
+
     public Class(String className) {
         this.className = className;
         this.schedule = new Schedule();
