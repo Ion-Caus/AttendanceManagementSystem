@@ -180,6 +180,7 @@ public class SchoolViewModel {
 
     public void removeClass(ClassViewModel theClass){
         model.removeClass(theClass.classNameProperty().get());
+        clear();
     }
 
     public void viewSchedule() {
