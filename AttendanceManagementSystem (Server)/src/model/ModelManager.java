@@ -16,6 +16,9 @@ public class ModelManager implements Model {
         studentList.addStudent(new Student("Ion Caus", "308234"));
         studentList.addStudent(new Student("Denis", "4338234"));
         studentList.addStudent(new Student("Max", "308415"));
+        studentList.addStudent(new Student("Alex", "830874"));
+        studentList.addStudent(new Student("Tomas", "987438"));
+
 
         TeacherList teacherList = school.getTeacherList();
         teacherList.addTeacher(new Teacher("joseph","zuk","badEnglish"));
