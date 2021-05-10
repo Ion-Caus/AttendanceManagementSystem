@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model {
     private School school;
-    //TODO change <Object, Object>
-    private PropertyChangeHandler<Object,Object> property;
+    private PropertyChangeHandler<String,String> property;
 
     public ModelManager() {
         school = new School();
@@ -92,29 +91,35 @@ public class ModelManager implements Model {
     public void addClass(String className) {
         school.getClassList().addClass(new Class(className));
 
-        property.firePropertyChange("Class", null, className);
+        property.firePropertyChange("ADD Class", null, className);
     }
 
     @Override
     public void removeClass(String className) {
-        school.getClassList().removeClass(className);
+        try{
+            school.getClassList().removeClass(className);
+            property.firePropertyChange("REMOVE Class", null, className);
+        }
+        catch (IllegalAccessException e) {
+            property.firePropertyChange("Error", null, e.getLocalizedMessage());
+        }
 
-        property.firePropertyChange("Class", null, className);
     }
 
     @Override
-    public void addStudent(String studentId, String studentName) {
+    public void addStudent(String studentID, String studentName) {
         //TODO by Ion 10/05  Add student? pass student name and id? or StudentObject
-        school.getStudentList().addStudent(new Student(studentName, studentId));
+        school.getStudentList().addStudent(new Student(studentName, studentID));
 
-        property.firePropertyChange("Student", studentId, studentName);
+        property.firePropertyChange("ADD Student", studentID, studentName);
     }
 
     @Override
     public void removeStudent(String studentID) {
+        //TODO if remove Student from School Student list --> remove it from the class' studentList
         school.getStudentList().removeStudent(studentID);
 
-        property.firePropertyChange("Student", null, studentID);
+        property.firePropertyChange("REMOVE Student", null, studentID);
     }
 
     @Override
@@ -135,12 +140,12 @@ public class ModelManager implements Model {
 
 
     @Override
-    public boolean addListener(GeneralListener<Object, Object> listener, String... propertyNames) {
+    public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) {
         return property.addListener(listener, propertyNames);
     }
 
     @Override
-    public boolean removeListener(GeneralListener<Object, Object> listener, String... propertyNames) {
+    public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) {
         return property.removeListener(listener, propertyNames);
     }
 }

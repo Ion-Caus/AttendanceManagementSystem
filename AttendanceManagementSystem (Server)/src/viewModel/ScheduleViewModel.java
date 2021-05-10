@@ -44,13 +44,12 @@ public class ScheduleViewModel {
 
     }
 
-
+    //TODO How should we load the data, and Database?
     private void loadFromModel() {
         schedule.clear();
 
         switch (viewState.getSection()) {
             case "Student":
-                System.out.println(dateProperty.get());
                 for (Lesson lesson : model.getScheduleFor(model.getStudentBy(viewState.getId()), dateProperty.getValue())) {
                     schedule.add(new LessonViewModel(lesson));
                 }
@@ -70,6 +69,7 @@ public class ScheduleViewModel {
         errorProperty.set("");
         dateProperty.setValue(LocalDate.now());
 
+        //TODO put load in constructor
         loadFromModel();
 
         selectedLessonProperty.set(null);

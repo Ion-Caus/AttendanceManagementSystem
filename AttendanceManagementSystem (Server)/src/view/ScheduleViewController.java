@@ -6,7 +6,6 @@ import viewModel.LessonViewModel;
 import viewModel.ScheduleViewModel;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 
 public class ScheduleViewController extends ViewController {

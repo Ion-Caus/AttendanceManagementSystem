@@ -8,6 +8,7 @@ public class StudentViewModel {
     private StringProperty name;
     private StringProperty id;
 
+    //TODO change to 2 strings
     public StudentViewModel(Student student) {
         this.name = new SimpleStringProperty(student.getName());
         this.id = new SimpleStringProperty(student.getID());

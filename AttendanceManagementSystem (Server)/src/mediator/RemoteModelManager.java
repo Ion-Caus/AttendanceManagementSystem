@@ -14,8 +14,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteModelManager implements RemoteModel, LocalListener<Object, Object> {
-    private PropertyChangeHandler<Object, Object> property;
+public class RemoteModelManager implements RemoteModel, LocalListener<String, String> {
+    private PropertyChangeHandler<String, String> property;
     private Model model;
 
     public RemoteModelManager(Model model) throws RemoteException, MalformedURLException {
@@ -50,17 +50,17 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Object, Ob
     }
 
     @Override
-    public void propertyChange(ObserverEvent<Object, Object> event) {
+    public void propertyChange(ObserverEvent<String, String> event) {
 
     }
 
     @Override
-    public boolean addListener(GeneralListener<Object, Object> listener, String... propertyNames) throws RemoteException {
+    public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
         return property.addListener(listener, propertyNames);
     }
 
     @Override
-    public boolean removeListener(GeneralListener<Object, Object> listener, String... propertyNames) throws RemoteException {
+    public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
         return property.removeListener(listener, propertyNames);
     }
 }

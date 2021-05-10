@@ -5,7 +5,7 @@ import utility.observer.subject.LocalSubject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface Model extends LocalSubject<Object,Object> {
+public interface Model extends LocalSubject<String,String> {
 
     String getClassAndSchool(Student student);
 

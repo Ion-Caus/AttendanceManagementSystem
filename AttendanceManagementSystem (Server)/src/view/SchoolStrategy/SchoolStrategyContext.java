@@ -1,12 +1,9 @@
 package view.SchoolStrategy;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import view.View;
 import viewModel.SchoolViewModel;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 public class SchoolStrategyContext {
     private HashMap<String, SchoolStrategy> strategies;

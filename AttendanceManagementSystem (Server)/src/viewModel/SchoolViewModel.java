@@ -1,5 +1,6 @@
 package viewModel;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,8 +12,10 @@ import model.Model;
 import model.Class;
 import model.Student;
 import model.Teacher;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 
-public class SchoolViewModel {
+public class SchoolViewModel implements LocalListener<String, String> {
     private ObservableList<ClassViewModel> classList;
     private ObjectProperty<ClassViewModel> selectedClassProperty;
 
@@ -32,6 +35,8 @@ public class SchoolViewModel {
 
     public SchoolViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
+        //TODO maybe add a new object
+        this.model.addListener(this, "Error", "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student");
         this.viewModelState = viewModelState;
 
         classList = FXCollections.observableArrayList();
@@ -50,6 +55,7 @@ public class SchoolViewModel {
 
         //TODO set in login
         viewModelState.setAccessLevel("Administrator");
+        loadFromModel();
     }
 
     private void loadFromModel() {
@@ -70,7 +76,7 @@ public class SchoolViewModel {
     }
 
     public void clear() {
-        loadFromModel();
+
 
         //TODO the clear
         error.setValue("");
@@ -184,4 +190,49 @@ public class SchoolViewModel {
         return false;
     }
 
+    private void add(String who, String value1, String value2) {
+        switch (who) {
+            case "Student":
+                studentList.add(new StudentViewModel(new Student(value1, value2)));
+                break;
+            case "Class":
+                classList.add(new ClassViewModel(new Class(value2)));
+                break;
+            case "Teacher":
+                break;
+        }
+    }
+
+    private void remove(String who, String id) {
+        switch (who) {
+            case "Student":
+                studentList.removeIf(student -> student.idProperty().get().equals(id));
+                break;
+            case "Class":
+                classList.removeIf(aClass -> aClass.classNameProperty().get().equals(id));
+                break;
+            case "Teacher":
+                break;
+        }
+    }
+
+    @Override
+    public void propertyChange(ObserverEvent<String, String> event) {
+        Platform.runLater( () -> {
+            if (event.getPropertyName().equals("Error")) {
+                error.set(event.getValue2());
+                return;
+            }
+
+            String[] commands = event.getPropertyName().split(" ");
+            switch (commands[0]) {
+                case "ADD":
+                    add(commands[1], event.getValue1(), event.getValue2());
+                    break;
+                case "REMOVE":
+                    remove(commands[1], event.getValue2());
+                    break;
+            }
+        });
+    }
 }

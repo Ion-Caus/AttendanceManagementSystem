@@ -17,14 +17,23 @@ public class ClassList {
         classes.remove(aClass);
     }
 
-    public void removeClass(String className) {
-        this.classes.removeIf(aClass -> aClass.getClassName().equals(className));
+    public void removeClass(String className) throws IllegalAccessException {
+        for (Class aClass: classes) {
+            if (aClass.getClassName().equals(className)) {
+                if (aClass.getStudents().getAllStudents().isEmpty()) {
+                    this.classes.remove(aClass);
+                }
+                throw new IllegalAccessException("Can not delete a class with students.");
+            }
+        }
+
     }
 
     public ArrayList<Class> getAllClasses() {
         return classes;
     }
 
+    //TODO ArrayList
     public Class getClassWith(Student student) {
         for (Class aClass: classes) {
             for (Student aStudent: aClass.getStudents().getAllStudents()) {
