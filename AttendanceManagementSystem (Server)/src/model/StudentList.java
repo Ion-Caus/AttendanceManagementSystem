@@ -17,6 +17,10 @@ public class StudentList {
         students.remove(student);
     }
 
+    public void removeStudent(String studentID) {
+        students.removeIf(student -> student.getID().equals(studentID));
+    }
+
     public ArrayList<Student> getAllStudents() {
         return students;
     }

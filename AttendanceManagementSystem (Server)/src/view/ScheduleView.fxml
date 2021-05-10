@@ -21,14 +21,14 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#previousDay" text="&lt;" />
-                        <VBox prefHeight="100.0" prefWidth="149.0" spacing="10.0">
+                        <VBox prefHeight="100.0" prefWidth="170.0" spacing="10.0">
                            <children>
                               <Label alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="160.0" text="Date" textAlignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="datePicker" editable="false" onAction="#changeDateSchedule" prefHeight="27.0" prefWidth="170.0" promptText="Monday 26/04" showWeekNumbers="true" />
+                              <DatePicker fx:id="datePicker" editable="false" onAction="#changeDateSchedule" prefHeight="27.0" prefWidth="200.0" promptText="Monday 26/04" showWeekNumbers="true" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
@@ -72,8 +72,8 @@
                   </Separator>
                   <Button mnemonicParsing="false" onAction="#infoLesson" prefWidth="50.0" text="Info" />
                   <Separator prefWidth="200.0" />
-                  <Button fx:id="addLessonButton" layoutX="74.0" layoutY="250.0" mnemonicParsing="false" onAction="#addLesson"  prefWidth="70.0" text="Add" />
-                  <Button fx:id="removeLessonButton" mnemonicParsing="false" onAction="#removeLesson"  prefWidth="70.0" text="Remove" />
+                  <Button fx:id="addLessonButton" layoutX="74.0" layoutY="250.0" mnemonicParsing="false" onAction="#addLesson" prefWidth="70.0" text="Add" />
+                  <Button fx:id="removeLessonButton" mnemonicParsing="false" onAction="#removeLesson" prefWidth="70.0" text="Remove" />
                   <Button fx:id="backButton" layoutX="84.0" layoutY="250.0" mnemonicParsing="false" onAction="#backToSchoolView" prefWidth="50.0" text="Back" />
                </children>
                <padding>

@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import model.Model;
 import model.Class;
 import model.Student;
+import model.Teacher;
 
 public class SchoolViewModel {
     private ObservableList<ClassViewModel> classList;
@@ -62,7 +63,7 @@ public class SchoolViewModel {
             studentList.add(new StudentViewModel(student));
         }
 
-        teacherList.clear();
+//        teacherList.clear();
 //        for (Teacher teacher : model.getAllTeachers()) {
 //            teacherList.add(new TeacherViewModel(teacher));
 //        }
@@ -83,6 +84,9 @@ public class SchoolViewModel {
     public void setSelected(ClassViewModel selectedLesson) {
         selectedClassProperty.set(selectedLesson);
     }
+    public ClassViewModel getSelectedClass() {
+        return selectedClassProperty.get();
+    }
 
     // student list
     public ObservableList<StudentViewModel> getAllStudents() {
@@ -91,6 +95,9 @@ public class SchoolViewModel {
 
     public void setSelected(StudentViewModel selectedStudent) {
         selectedStudentProperty.set(selectedStudent);
+    }
+    public StudentViewModel getSelectedStudent() {
+        return selectedStudentProperty.get();
     }
 
     // teacher list
@@ -101,7 +108,9 @@ public class SchoolViewModel {
     public void setSelected(TeacherViewModel selectedTeacher) {
         selectedTeacherProperty.set(selectedTeacher);
     }
-
+    public TeacherViewModel getSelectedTeacher() {
+        return selectedTeacherProperty.get();
+    }
 
     // getters for properties
     public StringProperty schoolNameProperty() {
@@ -112,9 +121,13 @@ public class SchoolViewModel {
         return error;
     }
 
-    // setter for tab property
+    // tab property
     public void setTabSelectedProperty(String tabSelectedProperty) {
         this.tabSelectedProperty.set(tabSelectedProperty);
+    }
+
+    public String getTabSelectedProperty() {
+        return this.tabSelectedProperty.get();
     }
 
     public void setSchoolName(String schoolName) {
@@ -122,37 +135,22 @@ public class SchoolViewModel {
         model.setSchoolName(schoolName);
     }
 
-    // button methods
-    public void add() {
-        switch (tabSelectedProperty.get()) {
-            case "Classes" :
+    public void addClass() {
 
-                break;
-            case "Students" :
-
-                break;
-            case "Teachers" :
-
-                break;
-            case "Admins" :
-                break;
-        }
     }
 
-    public void remove() {
-        switch (tabSelectedProperty.get()) {
-            case "Classes" :
+    public void removeClass(String className) {
+        model.removeClass(className);
+        clear();
+    }
 
-                break;
-            case "Students" :
+    public void addStudent() {
 
-                break;
-            case "Teachers" :
+    }
 
-                break;
-            case "Admins" :
-                break;
-        }
+    public void removeStudent(String studentID) {
+        model.removeStudent(studentID);
+        clear();
     }
 
     public boolean viewSchedule() {

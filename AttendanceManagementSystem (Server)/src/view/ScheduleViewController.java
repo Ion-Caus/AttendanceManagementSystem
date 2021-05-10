@@ -6,6 +6,7 @@ import viewModel.LessonViewModel;
 import viewModel.ScheduleViewModel;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 
 public class ScheduleViewController extends ViewController {
@@ -62,8 +63,9 @@ public class ScheduleViewController extends ViewController {
 
         datePicker.valueProperty().bindBidirectional(viewModel.dateProperty());
         datePicker.getEditor().setText(
-                DateTimeFormatter.ofPattern("yyyy-MM-dd").format(datePicker.getValue())
+                DateTimeFormatter.ofPattern("EEEE dd/MM").format(datePicker.getValue())
         );
+
 
     }
 
@@ -107,7 +109,9 @@ public class ScheduleViewController extends ViewController {
     @FXML
     private void changeDateSchedule() {
         viewModel.changeDate();
-        datePicker.getEditor().setText(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(datePicker.getValue()));
+        datePicker.getEditor().setText(
+                DateTimeFormatter.ofPattern("EEEE dd/MM").format(datePicker.getValue())
+        );
     }
 
 

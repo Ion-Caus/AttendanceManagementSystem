@@ -9,12 +9,16 @@ public class ClassList {
         this.classes = new ArrayList<>();
     }
 
-    public void addClass(Class temp) {
-        classes.add(temp);
+    public void addClass(Class aClass) {
+        classes.add(aClass);
     }
 
-    public void removeClass(Class temp) {
-        classes.remove(temp);
+    public void removeClass(Class aClass) {
+        classes.remove(aClass);
+    }
+
+    public void removeClass(String className) {
+        this.classes.removeIf(aClass -> aClass.getClassName().equals(className));
     }
 
     public ArrayList<Class> getAllClasses() {

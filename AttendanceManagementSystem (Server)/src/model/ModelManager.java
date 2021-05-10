@@ -1,13 +1,19 @@
 package model;
 
+import utility.observer.listener.GeneralListener;
+import utility.observer.subject.PropertyChangeHandler;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model {
     private School school;
+    //TODO change <Object, Object>
+    private PropertyChangeHandler<Object,Object> property;
 
     public ModelManager() {
         school = new School();
+        this.property = new PropertyChangeHandler<>(this);
         createDummy();
     }
 
@@ -81,6 +87,36 @@ public class ModelManager implements Model {
         return school.getStudentList().getStudentByID(id);
     }
 
+
+    @Override
+    public void addClass(String className) {
+        school.getClassList().addClass(new Class(className));
+
+        property.firePropertyChange("Class", null, className);
+    }
+
+    @Override
+    public void removeClass(String className) {
+        school.getClassList().removeClass(className);
+
+        property.firePropertyChange("Class", null, className);
+    }
+
+    @Override
+    public void addStudent(String studentId, String studentName) {
+        //TODO by Ion 10/05  Add student? pass student name and id? or StudentObject
+        school.getStudentList().addStudent(new Student(studentName, studentId));
+
+        property.firePropertyChange("Student", studentId, studentName);
+    }
+
+    @Override
+    public void removeStudent(String studentID) {
+        school.getStudentList().removeStudent(studentID);
+
+        property.firePropertyChange("Student", null, studentID);
+    }
+
     @Override
     public String getClassAndSchool(Student student) {
         return getClassWith(student).getClassName() + ", " + getSchoolName();
@@ -94,5 +130,17 @@ public class ModelManager implements Model {
     @Override
     public String getSchoolName() {
         return school.getName();
+    }
+
+
+
+    @Override
+    public boolean addListener(GeneralListener<Object, Object> listener, String... propertyNames) {
+        return property.addListener(listener, propertyNames);
+    }
+
+    @Override
+    public boolean removeListener(GeneralListener<Object, Object> listener, String... propertyNames) {
+        return property.removeListener(listener, propertyNames);
     }
 }

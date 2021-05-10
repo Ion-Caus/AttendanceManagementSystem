@@ -50,12 +50,13 @@ public class ScheduleViewModel {
 
         switch (viewState.getSection()) {
             case "Student":
-                for (Lesson lesson : model.getScheduleFor(model.getStudentBy(viewState.getId()), dateProperty.get())) {
+                System.out.println(dateProperty.get());
+                for (Lesson lesson : model.getScheduleFor(model.getStudentBy(viewState.getId()), dateProperty.getValue())) {
                     schedule.add(new LessonViewModel(lesson));
                 }
                 break;
             case "Class":
-                for (Lesson lesson : model.getScheduleFor(model.getClassByName(viewState.getId()), dateProperty.get())) {
+                for (Lesson lesson : model.getScheduleFor(model.getClassByName(viewState.getId()), dateProperty.getValue())) {
                     schedule.add(new LessonViewModel(lesson));
                 }
                 break;
@@ -66,6 +67,9 @@ public class ScheduleViewModel {
     }
 
     public void clear() {
+        errorProperty.set("");
+        dateProperty.setValue(LocalDate.now());
+
         loadFromModel();
 
         selectedLessonProperty.set(null);
@@ -103,11 +107,6 @@ public class ScheduleViewModel {
                 canBackProperty.set(true);
                 break;
         }
-
-
-        errorProperty.set("");
-
-        dateProperty.setValue(LocalDate.now());
     }
 
     // properties

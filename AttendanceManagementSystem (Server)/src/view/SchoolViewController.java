@@ -2,6 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import view.SchoolStrategy.SchoolStrategyContext;
 import viewModel.ClassViewModel;
 import viewModel.SchoolViewModel;
 import viewModel.StudentViewModel;
@@ -137,78 +138,45 @@ public class SchoolViewController extends ViewController {
 
     @FXML
     private void add() {
+        getViewHandler().openView(
+                new SchoolStrategyContext(viewModel).add()
+        );
 
-        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
-            case "Classes":
-                getViewHandler().openView(View.CLASS_VIEW);
 
-
-                break;
-
-            case "Students":
-                getViewHandler().openView(View.STUDENT_VIEW);
-
-                break;
-
-            case "Teachers":
-
-                break;
-            case "Admins":
-            case "Log":
-
-                break;
-        }
+//        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
+//            case "Classes":
+//                getViewHandler().openView(View.CLASS_VIEW);
+//
+//
+//                break;
+//
+//            case "Students":
+//                getViewHandler().openView(View.STUDENT_VIEW);
+//
+//                break;
+//
+//            case "Teachers":
+//
+//                break;
+//            case "Admins":
+//            case "Log":
+//
+//                break;
+//        }
 
 
     }
 
     @FXML
     private void remove() {
+        new SchoolStrategyContext(viewModel).remove();
+        clearSelection();
+    }
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Optional<ButtonType> result;
-
-        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
-            case "Classes":
-                ClassViewModel classViewModel = classesTable.getSelectionModel().getSelectedItem();
-                alert.setTitle("Delete class");
-                alert.setHeaderText("Delete class " + classViewModel.classNameProperty().get() + " ?");
-
-                result = alert.showAndWait();
-
-                if (result.isPresent() && result.get() == ButtonType.OK) {
-                    classesTable.getSelectionModel().clearSelection();
-                    classesTable.getItems().remove(classViewModel);
-
-                    //TODO remove from model
-                }
-                break;
-
-            case "Students":
-                StudentViewModel studentViewModel = allStudentsTable.getSelectionModel().getSelectedItem();
-                alert.setTitle("Delete student");
-                alert.setHeaderText("Delete student " + studentViewModel.nameProperty().get() + " ?");
-
-                result = alert.showAndWait();
-
-                if (result.isPresent() && result.get() == ButtonType.OK) {
-                    allStudentsTable.getSelectionModel().clearSelection();
-                    allStudentsTable.getItems().remove(studentViewModel);
-
-                    //TODO remove from model
-                }
-                break;
-
-            case "Teachers":
-
-                break;
-            case "Admins":
-            case "Log":
-
-                break;
-        }
-
-
+    public void clearSelection() {
+        classesTable.getSelectionModel().clearSelection();
+        allStudentsTable.getSelectionModel().clearSelection();
+        allTeachersTable.getSelectionModel().clearSelection();
     }
 
     @FXML

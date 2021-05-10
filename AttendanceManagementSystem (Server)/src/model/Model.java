@@ -1,9 +1,11 @@
 package model;
 
+import utility.observer.subject.LocalSubject;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface Model {
+public interface Model extends LocalSubject<Object,Object> {
 
     String getClassAndSchool(Student student);
 
@@ -25,4 +27,10 @@ public interface Model {
     Class getClassByName(String name);
 
     Student getStudentBy(String id);
+
+    void addClass(String className);
+    void removeClass(String className);
+
+    void addStudent(String studentID, String studentName);
+    void removeStudent(String studentID);
 }
