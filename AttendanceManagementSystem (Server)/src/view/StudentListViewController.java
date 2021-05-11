@@ -8,12 +8,12 @@ import javafx.scene.control.TableView;
 
 public class StudentListViewController extends ViewController
 {
-  @FXML private TableView<viewModel.LessonViewModel> studentListTable;
-  @FXML private TableColumn<viewModel.LessonViewModel, String> studentNameColumn;
-  @FXML private TableColumn<viewModel.LessonViewModel, String> commentColumn;
-  @FXML private TableColumn<viewModel.LessonViewModel, String> gradeColumn;
-  @FXML private TableColumn<viewModel.LessonViewModel, String> absenceColumn;
-  @FXML private TableColumn<viewModel.LessonViewModel, String> motiveColumn;
+  @FXML private TableView<viewModel.StudentListViewModel> studentListTable;
+  @FXML private TableColumn<viewModel.StudentListViewModel, String> studentNameColumn;
+  @FXML private TableColumn<viewModel.StudentListViewModel, String> commentColumn;
+  @FXML private TableColumn<viewModel.StudentListViewModel, Integer> gradeColumn;
+  @FXML private TableColumn<viewModel.StudentListViewModel, String> absenceColumn;
+  @FXML private TableColumn<viewModel.StudentListViewModel, String> motiveColumn;
   //TODO assign viewModel for columns. Right now - it's a placeholder.
 
   @FXML private Label StudentsClassLabel;
@@ -25,7 +25,7 @@ public class StudentListViewController extends ViewController
   @FXML private Button viewMotiveButton;
   @FXML private Button backButton;
 
-  private viewModel.LessonViewModel viewModel; //TODO assign proper viewModel
+  private viewModel.StudentListViewModel viewModel; //TODO assign proper viewModel
 
   public StudentListViewController()
   {
@@ -34,46 +34,38 @@ public class StudentListViewController extends ViewController
 
   @Override protected void init()
   {
-    // viewModel = getViewModelFactory().getScheduleViewModel();  //TODO get relevant viewModel
+    viewModel = getViewModelFactory().getStudentListViewModel();
 
-    studentNameColumn
-        .setCellValueFactory(cellData -> cellData.getValue().subjectProperty());
-    gradeColumn
-        .setCellValueFactory(cellData -> cellData.getValue().topicProperty());
-    commentColumn
-        .setCellValueFactory(cellData -> cellData.getValue().teacherProperty());
-    absenceColumn
-        .setCellValueFactory(cellData -> cellData.getValue().timeProperty());
+    studentNameColumn.setCellValueFactory(
+        cellData -> cellData.getValue().getStudentNameProperty());
+    gradeColumn.setCellValueFactory(cellData -> cellData.getValue()
+        .getGradeProperty());  //TODO IntegerProperty conversion
+    commentColumn.setCellValueFactory(
+        cellData -> cellData.getValue().getCommentProperty());
+    absenceColumn.setCellValueFactory(
+        cellData -> cellData.getValue().getAbsenceProperty());
     motiveColumn.setCellValueFactory(
-        cellData -> cellData.getValue().classroomProperty());
-    //studentListTable.setItems(viewModel.getStudentList);   //TODO assign students to table + Listener
-    /*studentListTable.getSelectionModel().selectedItemProperty()
-        .addListener((obs, oldVal, newVal) -> viewModel.setSelected(newVal));*/
+        cellData -> cellData.getValue().getMotiveProperty());
+    studentListTable.setItems(viewModel
+        .getStudentList());   //TODO check if students are assigned to the table + Listener
+    studentListTable.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldVal, newVal) -> viewModel.setSelected(newVal));
 
-    // StudentsClassLabel.textProperty().bind(viewModel.ClassProperty()); //TODO assign class name to label
-    //errorLabel.textProperty().bind(viewModel.errorProperty());
+    StudentsClassLabel.textProperty().bind(viewModel.getClassProperty());
+    errorLabel.textProperty().bind(viewModel.getErrorProperty());
   }
 
   @Override public void reset()
   {
-   /* viewModel.clear();  //TODO clear method in corresponding viewModel
-
-    changeStatusButton.setVisible(viewModel.canEditProperty().get());
-    gradeCommentButton.setVisible(viewModel.canEditProperty().get());
-    viewStudentButton.setVisible(viewModel.canEditProperty().get());
-    viewMotiveButton.setVisible(viewModel.canEditProperty().get());
-
-    backButton.setVisible(viewModel.canBackProperty().get());
-    */
+    viewModel.clear();  //TODO check and update clear method in corresponding viewModel
   }
 
-  /*  //TODO  Does it belongs here? P.S. stolen from ScheduleViewController. Haven't done any new methods in viewModels for it to work.
-  @FXML
-  private void backToSchoolView() {
-    viewModel.backToSchoolView();
+  @FXML private void back()
+  {
+    //TODO  change the "back" to view lesson instead of back to SCHOOL_VIEW
     getViewHandler().openView(View.SCHOOL_VIEW);
   }
-   */
+
   @FXML private void changeStatus()
   {
   }

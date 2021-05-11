@@ -109,7 +109,7 @@
                                         text="View motive"/>
                                 <Button fx:id="backButton" layoutX="84.0"
                                         layoutY="250.0" mnemonicParsing="false"
-                                        onAction="#backToSchoolView"
+                                        onAction="#back"
                                         prefHeight="26.0" prefWidth="60.0"
                                         text="Back" textAlignment="JUSTIFY">
                                     <opaqueInsets>
