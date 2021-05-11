@@ -3,27 +3,26 @@ package viewModel;
 import model.Model;
 
 public class ViewModelFactory {
-    private ViewModelState viewModelState;
+    private viewModel.ViewModelState viewModelState;
 
-    private SchoolViewModel schoolViewModel;
-    private ScheduleViewModel scheduleViewModel;
+    private viewModel.SchoolViewModel schoolViewModel;
+    private viewModel.ScheduleViewModel scheduleViewModel;
     private InfoViewModel infoViewModel;
     //private LoginViewModel loginViewModel;
 
     public ViewModelFactory(Model model) {
-        this.viewModelState = new ViewModelState();
+        this.viewModelState = new viewModel.ViewModelState();
 
-        schoolViewModel = new SchoolViewModel(model, viewModelState);
-        scheduleViewModel = new ScheduleViewModel(model, viewModelState);
-
+        schoolViewModel = new viewModel.SchoolViewModel(model, viewModelState);
+        scheduleViewModel = new viewModel.ScheduleViewModel(model, viewModelState);
         infoViewModel = new InfoViewModel(model);
     }
 
-    public SchoolViewModel getSchoolViewModel() {
+    public viewModel.SchoolViewModel getSchoolViewModel() {
         return schoolViewModel;
     }
 
-    public ScheduleViewModel getScheduleViewModel() {
+    public viewModel.ScheduleViewModel getScheduleViewModel() {
         return scheduleViewModel;
     }
 
@@ -32,3 +31,4 @@ public class ViewModelFactory {
         return infoViewModel;
     }
 }
+
