@@ -64,7 +64,7 @@ public class SchoolViewModel {
 
         teacherList.clear();
 //        for (Teacher teacher : model.getAllTeachers()) {
-//            teacherList.add(new viewModel.TeacherViewModel(teacher));
+//            teacherList.add(new TeacherViewModel(teacher));
 //        }
     }
 
