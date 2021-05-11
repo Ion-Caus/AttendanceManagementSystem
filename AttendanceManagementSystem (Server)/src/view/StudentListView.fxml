@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.StudentListViewController">
+    <children>
+        <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="400.0"
+                    minWidth="600.0" prefHeight="520.0" prefWidth="800.0"
+                    userData="Your Schedule">
+            <children>
+                <HBox alignment="CENTER" layoutX="-1.0" prefHeight="420.0"
+                      prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0">
+                    <children>
+                        <VBox prefHeight="500.0" prefWidth="600.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="100.0"
+                                      prefWidth="561.0" spacing="20.0">
+                                    <children>
+                                        <VBox prefHeight="54.0"
+                                              prefWidth="182.0" spacing="10.0">
+                                            <children>
+                                                <Label alignment="BOTTOM_CENTER"
+                                                       prefHeight="30.0"
+                                                       prefWidth="185.0"
+                                                       text="Students / Class lable"
+                                                       textAlignment="CENTER">
+                                                    <font>
+                                                        <Font size="18.0"/>
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="10.0" left="5.0"
+                                                        right="5.0" top="10.0"/>
+                                            </padding>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                <TableView fx:id="scheduleTable"
+                                           prefHeight="484.0" prefWidth="589.0">
+                                    <columns>
+                                        <TableColumn fx:id="subjectColumn"
+                                                     prefWidth="125.0"
+                                                     resizable="false"
+                                                     text="Student name"/>
+                                        <TableColumn fx:id="teacherColumn"
+                                                     prefWidth="51.20001220703125"
+                                                     resizable="false"
+                                                     text="Grade"/>
+                                        <TableColumn fx:id="topicColumn"
+                                                     prefWidth="171.9999542236328"
+                                                     text="Comment"/>
+                                        <TableColumn fx:id="timeColumn"
+                                                     minWidth="0.0"
+                                                     prefWidth="84.00006103515625"
+                                                     resizable="false"
+                                                     text="Absence"/>
+                                        <TableColumn fx:id="classroomColumn"
+                                                     prefWidth="156.79998779296875"
+                                                     resizable="false"
+                                                     text="Motive"/>
+                                    </columns>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" left="5.0"
+                                                right="5.0" top="5.0"/>
+                                    </VBox.margin>
+                                </TableView>
+                                <Label fx:id="errorLabel" alignment="CENTER"
+                                       prefHeight="17.0" prefWidth="604.0"
+                                       text="errorLabel" textAlignment="CENTER"
+                                       textFill="#e40404"/>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="334.0"
+                              prefWidth="198.0" spacing="10.0">
+                            <children>
+                                <Button alignment="CENTER"
+                                        contentDisplay="CENTER"
+                                        mnemonicParsing="false"
+                                        onAction="#changeStatus"
+                                        prefHeight="26.0" prefWidth="125.0"
+                                        text="Change status">
+                                    <VBox.margin>
+                                        <Insets top="110.0"/>
+                                    </VBox.margin>
+                                </Button>
+                                <Button mnemonicParsing="false"
+                                        onAction="#gradeComment" prefHeight="26.0"
+                                        prefWidth="125.0"
+                                        text="Grade / comment"/>
+                                <Separator prefWidth="200.0"/>
+                                <Button fx:id="viewStudentButton" layoutX="74.0"
+                                        layoutY="250.0" mnemonicParsing="false"
+                                        onAction="#viewStudent" prefHeight="26.0"
+                                        prefWidth="110.0" text="View student"/>
+                                <Button fx:id="viewMotiveButton"
+                                        mnemonicParsing="false"
+                                        onAction="#viewMotive"
+                                        prefHeight="26.0" prefWidth="110.0"
+                                        text="View motive"/>
+                                <Button fx:id="backButton" layoutX="84.0"
+                                        layoutY="250.0" mnemonicParsing="false"
+                                        onAction="#backToSchoolView"
+                                        prefHeight="26.0" prefWidth="60.0"
+                                        text="Back" textAlignment="JUSTIFY">
+                                    <opaqueInsets>
+                                        <Insets/>
+                                    </opaqueInsets>
+                                    <VBox.margin>
+                                        <Insets top="150.0"/>
+                                    </VBox.margin>
+                                </Button>
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0"
+                                        top="10.0"/>
+                            </padding>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
