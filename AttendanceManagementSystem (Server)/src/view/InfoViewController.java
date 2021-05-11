@@ -28,12 +28,22 @@ public class InfoViewController extends ViewController
 
   @Override protected void init()
   {
+    this.viewModel = getViewModelFactory().getInfoViewModel();
 
+    this.subject.textProperty().bind(viewModel.getSubjectProperty());
+    this.topicField.textProperty().bind(viewModel.getTopicProperty());
+    this.contentsField.textProperty().bind(viewModel.getContentsProperty());
+    this.homeworkField.textProperty().bind(viewModel.getHomeworkProperty());
+    this.teacherField.textProperty().bind(viewModel.getTeacherProperty()); // can we change a teacher from here or not? if yes, change to bidirectional.
+    this.datePicker.valueProperty().bind(viewModel.getDateProperty()); // can we change the date from here? if yes, change to bidirectional.
+    this.errorLabel.textProperty().bind(viewModel.getErrorProperty());
+    this.classID.textProperty().bind(viewModel.getClassIdProperty());
+    this.teacherAbsenceField.textProperty().bindBidirectional(viewModel.getAbsentProperty());
   }
 
   @Override public void reset()
   {
-
+    viewModel.clear();
   }
 
   @FXML private void studentsButtonPressed()
