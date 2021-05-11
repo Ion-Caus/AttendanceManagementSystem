@@ -7,6 +7,8 @@ public class ViewModelFactory {
 
     private SchoolViewModel schoolViewModel;
     private ScheduleViewModel scheduleViewModel;
+
+    private InfoViewModel infoViewModel;
     //private LoginViewModel loginViewModel;
 
     public ViewModelFactory(Model model) {
@@ -14,6 +16,8 @@ public class ViewModelFactory {
 
         schoolViewModel = new SchoolViewModel(model, viewModelState);
         scheduleViewModel = new ScheduleViewModel(model, viewModelState);
+
+        infoViewModel = new InfoViewModel(model);
     }
 
     public SchoolViewModel getSchoolViewModel() {
@@ -23,4 +27,9 @@ public class ViewModelFactory {
     public ScheduleViewModel getScheduleViewModel() {
         return scheduleViewModel;
     }
+
+  public InfoViewModel getInfoViewModel()
+  {
+      return infoViewModel;
+  }
 }
