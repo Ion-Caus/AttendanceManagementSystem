@@ -1,4 +1,4 @@
-package viewmodel;
+package viewModel;
 
 import model.Model;
 
