@@ -27,7 +27,8 @@
                                         <VBox prefHeight="54.0"
                                               prefWidth="182.0" spacing="10.0">
                                             <children>
-                                                <Label alignment="BOTTOM_CENTER"
+                                                <Label fx:id="StudentsClassLabel"
+                                                       alignment="BOTTOM_CENTER"
                                                        prefHeight="30.0"
                                                        prefWidth="185.0"
                                                        text="Students / Class lable"
@@ -44,26 +45,26 @@
                                         </VBox>
                                     </children>
                                 </HBox>
-                                <TableView fx:id="scheduleTable"
+                                <TableView fx:id="studentListTable"
                                            prefHeight="484.0" prefWidth="589.0">
                                     <columns>
-                                        <TableColumn fx:id="subjectColumn"
+                                        <TableColumn fx:id="studentNameColumn"
                                                      prefWidth="125.0"
                                                      resizable="false"
                                                      text="Student name"/>
-                                        <TableColumn fx:id="teacherColumn"
+                                        <TableColumn fx:id="gradeColumn"
                                                      prefWidth="51.20001220703125"
                                                      resizable="false"
                                                      text="Grade"/>
-                                        <TableColumn fx:id="topicColumn"
+                                        <TableColumn fx:id="commentColumn"
                                                      prefWidth="171.9999542236328"
                                                      text="Comment"/>
-                                        <TableColumn fx:id="timeColumn"
+                                        <TableColumn fx:id="absenceColumn"
                                                      minWidth="0.0"
                                                      prefWidth="84.00006103515625"
                                                      resizable="false"
                                                      text="Absence"/>
-                                        <TableColumn fx:id="classroomColumn"
+                                        <TableColumn fx:id="motiveColumn"
                                                      prefWidth="156.79998779296875"
                                                      resizable="false"
                                                      text="Motive"/>
