@@ -48,6 +48,7 @@ public class InfoViewController extends ViewController
 
   @FXML private void studentsButtonPressed()
   {
+    getViewHandler().openView(View.STUDENTLIST_VIEW);
   }
 
   @FXML private void cancelButtonPressed()

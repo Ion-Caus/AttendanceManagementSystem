@@ -38,8 +38,8 @@ public class StudentListViewController extends ViewController
 
     studentNameColumn.setCellValueFactory(
         cellData -> cellData.getValue().getStudentNameProperty());
-    gradeColumn.setCellValueFactory(cellData -> cellData.getValue()
-        .getGradeProperty());  //TODO IntegerProperty conversion
+//    gradeColumn.setCellValueFactory(cellData -> cellData.getValue()
+//        .getGradeProperty());  //TODO IntegerProperty conversion
     commentColumn.setCellValueFactory(
         cellData -> cellData.getValue().getCommentProperty());
     absenceColumn.setCellValueFactory(
@@ -63,7 +63,7 @@ public class StudentListViewController extends ViewController
   @FXML private void back()
   {
     //TODO  change the "back" to view lesson instead of back to SCHOOL_VIEW
-    getViewHandler().openView(View.SCHOOL_VIEW);
+    getViewHandler().openView(View.INFOVIEW_VIEW);
   }
 
   @FXML private void changeStatus()

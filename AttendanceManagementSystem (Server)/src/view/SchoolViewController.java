@@ -104,13 +104,11 @@ public class SchoolViewController extends ViewController {
             case "Classes":
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(true);
-
-
+                break;
             case "Students":
             case "Teachers":
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(false);
-
                 break;
             case "Admins":
             case "Log":
@@ -118,7 +116,6 @@ public class SchoolViewController extends ViewController {
                 studentListButton.setVisible(false);
                 break;
         }
-
 
     }
 
@@ -142,26 +139,6 @@ public class SchoolViewController extends ViewController {
                 new SchoolStrategyContext(viewModel).add()
         );
 
-//        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
-//            case "Classes":
-//                getViewHandler().openView(View.CLASS_VIEW);
-//
-//
-//                break;
-//
-//            case "Students":
-//                getViewHandler().openView(View.STUDENT_VIEW);
-//
-//                break;
-//
-//            case "Teachers":
-//
-//                break;
-//            case "Admins":
-//            case "Log":
-//
-//                break;
-//        }
     }
 
     @FXML

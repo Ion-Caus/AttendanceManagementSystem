@@ -103,6 +103,7 @@ public class ScheduleViewController extends ViewController {
 
     @FXML
     private void infoLesson() {
+
     }
 
     @FXML
