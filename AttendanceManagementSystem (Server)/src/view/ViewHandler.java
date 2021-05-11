@@ -5,6 +5,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import viewModel.ViewModelFactory;
 
+
 public class ViewHandler extends ViewCreator {
     private Scene currentScene;
     private Stage primaryStage;
