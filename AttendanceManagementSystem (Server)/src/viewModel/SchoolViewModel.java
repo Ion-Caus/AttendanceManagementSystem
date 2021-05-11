@@ -76,8 +76,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
     }
 
     public void clear() {
-
-
         //TODO the clear
         error.setValue("");
     }
@@ -146,8 +144,8 @@ public class SchoolViewModel implements LocalListener<String, String> {
     }
 
     public void removeClass(String className) {
+        System.out.println("model.removeClass");
         model.removeClass(className);
-        clear();
     }
 
     public void addStudent() {
@@ -156,7 +154,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     public void removeStudent(String studentID) {
         model.removeStudent(studentID);
-        clear();
     }
 
     public boolean viewSchedule() {

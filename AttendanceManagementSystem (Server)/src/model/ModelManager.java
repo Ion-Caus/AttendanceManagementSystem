@@ -73,11 +73,11 @@ public class ModelManager implements Model {
         return getClassWith(student).getSchedule().getLessonBy(date);
     }
     @Override
-    public Class getClassWith(Student student) {
+    public Class getClassWith(Student student) throws IllegalArgumentException {
         return school.getClassList().getClassWith(student);
     }
     @Override
-    public Class getClassByName(String name) {
+    public Class getClassByName(String name) throws IllegalArgumentException {
         return school.getClassList().getClassByName(name);
     }
 
@@ -96,7 +96,7 @@ public class ModelManager implements Model {
 
     @Override
     public void removeClass(String className) {
-        try{
+        try {
             school.getClassList().removeClass(className);
             property.firePropertyChange("REMOVE Class", null, className);
         }
@@ -117,7 +117,15 @@ public class ModelManager implements Model {
     @Override
     public void removeStudent(String studentID) {
         //TODO if remove Student from School Student list --> remove it from the class' studentList
-        school.getStudentList().removeStudent(studentID);
+        try {
+            //remove from class' studentList
+            school.getClassList().getClassWith(getStudentBy(studentID)).getStudents().removeStudent(studentID);
+            //remove from school's studentList
+            school.getStudentList().removeStudent(studentID);
+        }
+        catch (IllegalArgumentException e) {
+                property.firePropertyChange("Error", null, e.getLocalizedMessage());
+            }
 
         property.firePropertyChange("REMOVE Student", null, studentID);
     }

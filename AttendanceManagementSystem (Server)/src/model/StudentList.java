@@ -25,7 +25,7 @@ public class StudentList {
         return students;
     }
 
-    public Student getStudentByID(String id) {
+    public Student getStudentByID(String id) throws IllegalArgumentException {
         for (Student student: students) {
             if (student.getID().equals(id)) {
                 return student;
@@ -34,7 +34,7 @@ public class StudentList {
         throw new IllegalArgumentException("No such student with this id (" + id + ")");
     }
 
-    public Student getStudentByName(String name) {
+    public Student getStudentByName(String name) throws IllegalArgumentException {
         for (Student student: students) {
             if (student.getName().equals(name)) {
                 return student;

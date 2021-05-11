@@ -12,6 +12,7 @@ public class Lesson {
     private String classroom;
     private String homework;
 
+    //TODO 11/05 by Ion Move the homework
     public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime,
                   String subject, String topic, String classroom, String homework) throws IllegalArgumentException {
         if (!hasValidTime(startTime, endTime))

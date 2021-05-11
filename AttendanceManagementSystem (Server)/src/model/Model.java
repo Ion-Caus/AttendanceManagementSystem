@@ -26,7 +26,7 @@ public interface Model extends LocalSubject<String,String> {
 
     Class getClassByName(String name);
 
-    Student getStudentBy(String id);
+    Student getStudentBy(String id) throws IllegalArgumentException;
 
     void addClass(String className);
     void removeClass(String className);

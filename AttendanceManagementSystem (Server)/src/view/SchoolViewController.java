@@ -142,7 +142,6 @@ public class SchoolViewController extends ViewController {
                 new SchoolStrategyContext(viewModel).add()
         );
 
-
 //        switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
 //            case "Classes":
 //                getViewHandler().openView(View.CLASS_VIEW);
@@ -163,14 +162,15 @@ public class SchoolViewController extends ViewController {
 //
 //                break;
 //        }
-
-
     }
 
     @FXML
     private void remove() {
+        System.out.println("1 remove");
         new SchoolStrategyContext(viewModel).remove();
         clearSelection();
+        reset();
+        System.out.println("2 remove");
     }
 
     public void clearSelection() {
