@@ -1,7 +1,7 @@
 package view;
 
 import javafx.scene.layout.Region;
-import viewModel.ViewModelFactory;
+import viewmodel.ViewModelFactory;
 
 public abstract class ViewController {
 

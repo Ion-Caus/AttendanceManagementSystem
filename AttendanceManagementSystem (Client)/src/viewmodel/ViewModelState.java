@@ -1,4 +1,4 @@
-package viewModel;
+package viewmodel;
 
 public class ViewModelState {
 

@@ -2,8 +2,8 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import viewModel.LessonViewModel;
-import viewModel.ScheduleViewModel;
+import viewmodel.LessonViewModel;
+import viewmodel.ScheduleViewModel;
 
 
 public class ScheduleViewController extends ViewController {
