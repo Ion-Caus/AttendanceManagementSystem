@@ -27,6 +27,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     private StringProperty schoolName;
     private StringProperty error;
+    private StringProperty addStudentErrorLabel;
 
     private StringProperty tabSelectedProperty;
 
@@ -53,6 +54,8 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
         tabSelectedProperty = new SimpleStringProperty("Classes");
 
+        addStudentErrorLabel = new SimpleStringProperty();
+
         //TODO set in login
         viewModelState.setAccessLevel("Administrator");
         loadFromModel();
@@ -66,7 +69,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
         studentList.clear();
         for (Student student : model.getAllStudents()) {
-            studentList.add(new StudentViewModel(student));
+            studentList.add(new StudentViewModel(student.getName(),student.getID()));
         }
 
 //        teacherList.clear();
@@ -125,6 +128,10 @@ public class SchoolViewModel implements LocalListener<String, String> {
         return error;
     }
 
+    public StringProperty addStudentErrorLabel(){
+        return addStudentErrorLabel;
+    }
+
     // tab property
     public void setTabSelectedProperty(String tabSelectedProperty) {
         this.tabSelectedProperty.set(tabSelectedProperty);
@@ -148,7 +155,16 @@ public class SchoolViewModel implements LocalListener<String, String> {
         model.removeClass(className);
     }
 
-    public void addStudent() {
+    public boolean addStudent(String studentName) {
+        try{
+        model.addStudent(studentName,"someTempId");
+            clear();
+            return true;
+        }catch (IllegalArgumentException e){
+            addStudentErrorLabel.set(e.getMessage());
+            return false;
+        }
+        // TODO: 09/5/2021 by tomas replace someTempId with real ID generation
 
     }
 
@@ -190,7 +206,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     private void add(String who, String value1, String value2) {
         switch (who) {
             case "Student":
-                studentList.add(new StudentViewModel(new Student(value1, value2)));
+                studentList.add(new StudentViewModel(value1, value2));
                 break;
             case "Class":
                 classList.add(new ClassViewModel(new Class(value2)));

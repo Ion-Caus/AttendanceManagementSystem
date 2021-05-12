@@ -4,11 +4,13 @@ public class LessonData {
     private Lesson lesson;
     private Grade grade;
     private Absence absence;
+    private Student student;
 
-    public LessonData(Lesson lesson) {
+    public LessonData(Lesson lesson, Student student) {
         this.lesson = lesson;
         this.grade = null;
         this.absence = null;
+        this.student = student;
     }
 
     public void setAbsence(Absence absence) {
@@ -31,5 +33,7 @@ public class LessonData {
         return lesson;
     }
 
-
+    public Student getStudent() {
+        return student;
+    }
 }

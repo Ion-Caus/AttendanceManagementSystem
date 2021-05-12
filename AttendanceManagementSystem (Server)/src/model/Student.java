@@ -2,26 +2,25 @@ package model;
 
 import java.util.Objects;
 
-public class Student {
-    private LessonData lessonData;
+public class Student
+{
     private String name;
     private String ID;
 
     private Account account;
 
     public Student(String name, String ID) {
+        System.out.println("the student constructor is called");
+        System.out.println(name);
+        if(name.isBlank()) {
+            throw new IllegalArgumentException("Student name cannot be empty");}
         this.name = name;
         this.ID = ID;
-        this.lessonData = null;
         this.account = null;
     }
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public LessonData getLessonData() {
-        return lessonData;
     }
 
     public String getName() {
@@ -39,7 +38,6 @@ public class Student {
 
         Student student = (Student) obj;
         return Objects.equals(name, student.name) &&
-                Objects.equals(lessonData, student.lessonData) &&
                 Objects.equals(ID, student.ID) &&
                 Objects.equals(account, student.account);
     }

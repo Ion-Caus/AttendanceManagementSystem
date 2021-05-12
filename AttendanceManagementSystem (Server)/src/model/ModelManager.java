@@ -14,6 +14,10 @@ public class ModelManager implements Model {
         school = new School();
         this.property = new PropertyChangeHandler<>(this);
         createDummy();
+
+
+
+
     }
 
     public void createDummy() {
@@ -107,11 +111,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addStudent(String studentID, String studentName) {
+    public void addStudent(String studentName, String studentID) {
         //TODO by Ion 10/05  Add student? pass student name and id? or StudentObject
+
         school.getStudentList().addStudent(new Student(studentName, studentID));
 
-        property.firePropertyChange("ADD Student", studentID, studentName);
+        property.firePropertyChange("ADD Student", studentName, studentID);
     }
 
     @Override

@@ -5,19 +5,20 @@ public class School {
     private String name;
     private ClassList classList;
     private StudentList studentList;
-    //TODO add TeacherList class and the list here
-    //private TeacherList teacherList;
+    private LessonDataList lessonDataList;
+    private TeacherList teacherList;
 
     public School() {
         this.name = "School";
         this.classList = new ClassList();
         this.studentList = new StudentList();
+        this.lessonDataList = new LessonDataList();
+        this.teacherList = new TeacherList();
     }
 
     public School(String name) {
+        this();
         this.name = name;
-        this.classList = new ClassList();
-        this.studentList = new StudentList();
     }
 
     public String getName() {
@@ -35,5 +36,13 @@ public class School {
 
     public StudentList getStudentList() {
         return studentList;
+    }
+
+    public LessonDataList getLessonDataList() {
+        return lessonDataList;
+    }
+
+    public TeacherList getTeacherList() {
+        return teacherList;
     }
 }
