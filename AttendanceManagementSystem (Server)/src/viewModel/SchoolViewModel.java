@@ -55,7 +55,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
         tabSelectedProperty = new SimpleStringProperty("Classes");
 
-        addStudentErrorLabel = new SimpleStringProperty();
 
         //TODO set in login
         viewModelState.setAccessLevel("Administrator");

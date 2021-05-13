@@ -11,6 +11,7 @@ public class ViewModelFactory
 
   private InfoViewModel infoViewModel;
   private StudentListViewModel studentListViewModel;
+  private AddStudentViewModel addStudentViewModel;
   //private LoginViewModel loginViewModel;
 
   public ViewModelFactory(Model model)
@@ -22,6 +23,7 @@ public class ViewModelFactory
 
     infoViewModel = new InfoViewModel(model, viewModelState);
     studentListViewModel = new StudentListViewModel(model);
+    addStudentViewModel = new AddStudentViewModel(model);
   }
 
   public SchoolViewModel getSchoolViewModel()
@@ -42,5 +44,9 @@ public class ViewModelFactory
   public StudentListViewModel getStudentListViewModel()
   {
     return studentListViewModel;
+  }
+
+  public AddStudentViewModel getAddStudentViewModel(){
+    return addStudentViewModel;
   }
 }
