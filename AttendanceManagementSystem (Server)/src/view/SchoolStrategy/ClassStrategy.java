@@ -23,8 +23,6 @@ public class ClassStrategy extends SchoolStrategy {
 
     @Override
     public void remove() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Optional<ButtonType> result;
 
         ClassViewModel classViewModel = viewModel.getSelectedClass();
         alert.setTitle("Delete class");

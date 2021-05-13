@@ -38,7 +38,7 @@ public class ModelManager implements Model {
 
         class1.getSchedule().addLesson(
                 new Lesson(new Teacher("Steffen", "SVA", "325632"),
-                        new Date(2021,4,29),
+                        new Date(2021,5,13),
                         new Time(1,1,1),
                         new Time(2,2,2),
                         "Math",

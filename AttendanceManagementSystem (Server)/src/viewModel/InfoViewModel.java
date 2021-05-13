@@ -109,8 +109,10 @@ public class InfoViewModel {
         return viewState.getAccessLevel();
     }
 
-    public void clear() {
+    public void loadData() {
         //TODO clear the rest property
+
+
 
         switch (viewState.getSection()) {
             case "Student":

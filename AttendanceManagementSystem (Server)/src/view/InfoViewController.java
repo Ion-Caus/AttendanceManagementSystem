@@ -43,8 +43,8 @@ public class InfoViewController extends ViewController {
         this.topicField.textProperty().bind(viewModel.getTopicProperty());
         this.contentsField.textProperty().bind(viewModel.getContentsProperty());
         this.homeworkField.textProperty().bind(viewModel.getHomeworkProperty());
-        this.teacherField.textProperty().bind(viewModel.getTeacherProperty()); // can we change a teacher from here or not? if yes, change to bidirectional.
-        this.datePicker.valueProperty().bind(viewModel.getDateProperty()); // can we change the date from here? if yes, change to bidirectional.
+        this.teacherField.textProperty().bind(viewModel.getTeacherProperty()); // TODO: 13/5/2021   can we change a teacher from here or not? if yes, change to bidirectional.
+        this.datePicker.valueProperty().bind(viewModel.getDateProperty()); // TODO: 13/5/2021  can we change the date from here? if yes, change to bidirectional.
 
         this.className.textProperty().bind(viewModel.getClassNameProperty());
         this.errorLabel.textProperty().bind(viewModel.getErrorProperty());
@@ -59,7 +59,7 @@ public class InfoViewController extends ViewController {
 
     @Override
     public void reset() {
-        viewModel.clear();
+        viewModel.loadData();
     }
 
     public void adjustView() {
@@ -85,6 +85,7 @@ public class InfoViewController extends ViewController {
 
     @FXML
     private void backToScheduleView() {
+        getViewHandler().openView(View.SCHEDULE_VIEW);
 
     }
 }

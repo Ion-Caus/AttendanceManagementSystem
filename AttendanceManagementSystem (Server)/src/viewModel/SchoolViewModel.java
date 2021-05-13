@@ -28,7 +28,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     private StringProperty schoolName;
     private StringProperty error;
 
-    //TODO why? AddStudentViewController is not Using another viewModel like AddStudentViewModel????
+
 
     private StringProperty tabSelectedProperty;
 
@@ -37,7 +37,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     public SchoolViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        //TODO maybe add a new object
+        //TODO ion?? maybe add a new object
         this.model.addListener(this, "Error", "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student");
         this.viewModelState = viewModelState;
 

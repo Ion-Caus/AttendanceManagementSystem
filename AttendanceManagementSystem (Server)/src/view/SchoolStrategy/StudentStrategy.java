@@ -24,8 +24,7 @@ public class StudentStrategy extends SchoolStrategy {
 
     @Override
     public void remove() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Optional<ButtonType> result;
+
 
         StudentViewModel studentViewModel = viewModel.getSelectedStudent();
         alert.setTitle("Delete student");
