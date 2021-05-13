@@ -74,7 +74,7 @@ public class ScheduleViewModel {
 
         selectedLessonProperty.set(null);
 
-        System.out.println(viewState.getSection());
+
         switch (viewState.getSection()) {
             case "Student":
                 Student student = model.getStudentBy(viewState.getId());

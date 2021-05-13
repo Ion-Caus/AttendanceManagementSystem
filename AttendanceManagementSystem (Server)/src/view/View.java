@@ -5,8 +5,8 @@ public enum View {
     SCHOOL_VIEW("SchoolView.fxml"),
     SCHEDULE_VIEW("ScheduleView.fxml"),
     CLASS_VIEW("ClassView.fxml"),
-    STUDENT_VIEW("StudentView.fxml"),
-    INFOVIEW_VIEW("InfoView.fxml"),
+    STUDENT_VIEW("AddStudentView.fxml"),
+    INFO_VIEW("InfoView.fxml"),
     STUDENTLIST_VIEW("StudentListView.fxml");
 
 

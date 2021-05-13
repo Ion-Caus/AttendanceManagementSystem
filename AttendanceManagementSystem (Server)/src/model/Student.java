@@ -2,21 +2,24 @@ package model;
 
 import java.util.Objects;
 
-public class Student
-{
+public class Student {
     private String name;
     private String ID;
 
     private Account account;
 
+    //TODO 13/5 by Ion add the className
+    private String className;
+
     public Student(String name, String ID) {
-        System.out.println("the student constructor is called");
-        System.out.println(name);
-        if(name.isBlank()) {
-            throw new IllegalArgumentException("Student name cannot be empty");}
+        if (name.isBlank()) {
+            throw new IllegalArgumentException("Student name cannot be empty");
+        }
+
         this.name = name;
         this.ID = ID;
         this.account = null;
+        this.name = name;
     }
 
     public void setAccount(Account account) {

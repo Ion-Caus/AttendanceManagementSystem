@@ -2,9 +2,10 @@ package model;
 
 public class LessonData {
     private Lesson lesson;
+    private Student student;
     private Grade grade;
     private Absence absence;
-    private Student student;
+
 
     public LessonData(Lesson lesson, Student student) {
         this.lesson = lesson;

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StudentViewController">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddStudentViewController">
     <children>
         <VBox layoutX="120.0" layoutY="58.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -31,7 +31,7 @@
                 </HBox>
                 <HBox alignment="BOTTOM_LEFT" prefHeight="68.0" prefWidth="600.0" spacing="30.0">
                <children>
-                  <Label fx:id="errorLabel" text="Label" textFill="RED" />
+                  <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="519.0" text="errorLabel" textAlignment="CENTER" textFill="RED" />
                </children></HBox>
                 <HBox prefHeight="24.0" prefWidth="600.0">
                     <children>
@@ -41,7 +41,7 @@
                 <HBox alignment="CENTER" prefHeight="55.0" prefWidth="546.0" spacing="10.0">
                     <children>
                         <Button mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="35.0" prefWidth="80.0" text="Cancel" />
-                        <Button mnemonicParsing="false" onAction="#okayButtonClicked" prefHeight="35.0" prefWidth="80.0" text="Okay" />
+                        <Button mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="35.0" prefWidth="80.0" text="Submit" />
                     </children>
                     <padding>
                         <Insets right="100.0" />

@@ -4,87 +4,129 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.Lesson;
 import model.Model;
+import model.Student;
 
 import java.time.LocalDate;
 
-public class InfoViewModel
-{
-  private StringProperty subject;
-  private StringProperty topic;
-  private StringProperty contents;
-  private StringProperty homework;
-  private StringProperty teacher;
-  private ObjectProperty<LocalDate> date;
-  private StringProperty error;
-  private StringProperty classId;
-  private StringProperty absent;
+public class InfoViewModel {
+    private StringProperty subject;
+    private StringProperty topic;
+    private StringProperty contents;
+    private StringProperty homework;
+    private StringProperty teacher;
+    private ObjectProperty<LocalDate> date;
 
-  private Model model;
+    private StringProperty error;
+    private StringProperty className;
 
-  public InfoViewModel(Model model)
-  {
-    this.model = model;
+    private StringProperty absent;
+    private StringProperty motive;
 
-    this.subject = new SimpleStringProperty();
-    this.topic = new SimpleStringProperty();
-    this.contents = new SimpleStringProperty();
-    this.homework = new SimpleStringProperty();
-    this.teacher = new SimpleStringProperty();
-    this.date = new SimpleObjectProperty<>();
-    this.error = new SimpleStringProperty();
-    this.classId = new SimpleStringProperty();
-    this.absent = new SimpleStringProperty();
-  }
+    //TODO 13/5 by Ion Make this IntegerProperty? in my opinion is not needed
+    private StringProperty grade;
+    private StringProperty comment;
 
-  public StringProperty getSubjectProperty()
-  {
-    return subject;
-  }
+    private Model model;
+    private ViewModelState viewState;
 
-  public StringProperty getTopicProperty()
-  {
-    return topic;
-  }
+    public InfoViewModel(Model model, ViewModelState viewModelStat) {
+        this.model = model;
+        this.viewState = viewModelStat;
 
-  public StringProperty getContentsProperty()
-  {
-    return contents;
-  }
+        //Lesson properties
+        this.subject = new SimpleStringProperty();
+        this.topic = new SimpleStringProperty();
+        this.contents = new SimpleStringProperty();
+        this.homework = new SimpleStringProperty();
+        this.teacher = new SimpleStringProperty();
+        this.date = new SimpleObjectProperty<>();
+        //--
 
-  public StringProperty getHomeworkProperty()
-  {
-    return homework;
-  }
 
-  public StringProperty getTeacherProperty()
-  {
-    return teacher;
-  }
+        this.className = new SimpleStringProperty();
+        this.error = new SimpleStringProperty();
 
-  public ObjectProperty<LocalDate> getDateProperty()
-  {
-    return date;
-  }
+        //Student View properties
+        this.absent = new SimpleStringProperty();
+        this.motive = new SimpleStringProperty();
+        this.grade = new SimpleStringProperty();
+        this.comment = new SimpleStringProperty();
+        //--
 
-  public StringProperty getErrorProperty()
-  {
-    return error;
-  }
+    }
 
-  public StringProperty getClassIdProperty()
-  {
-    return classId;
-  }
+    public StringProperty getSubjectProperty() {
+        return subject;
+    }
 
-  public StringProperty getAbsentProperty()
-  {
-    return absent;
-  }
+    public StringProperty getTopicProperty() {
+        return topic;
+    }
 
-  public void clear()
-  {
-  }
+    public StringProperty getContentsProperty() {
+        return contents;
+    }
 
-  // TODO
+    public StringProperty getHomeworkProperty() {
+        return homework;
+    }
+
+    public StringProperty getTeacherProperty() {
+        return teacher;
+    }
+
+    public ObjectProperty<LocalDate> getDateProperty() {
+        return date;
+    }
+
+    public StringProperty getClassNameProperty() {
+        return className;
+    }
+
+    public StringProperty getErrorProperty() {
+        return error;
+    }
+
+    public StringProperty getAbsentProperty() {
+        return absent;
+    }
+
+    public StringProperty getMotiveProperty() {
+        return motive;
+    }
+
+    public StringProperty getGradeProperty() {
+        return grade;
+    }
+
+    public StringProperty getCommentProperty() {
+        return comment;
+    }
+
+    public String getViewStateAccessLevel() {
+        return viewState.getAccessLevel();
+    }
+
+    public void clear() {
+        //TODO clear the rest property
+
+        switch (viewState.getSection()) {
+            case "Student":
+                Student student = model.getStudentBy(viewState.getId());
+                //TODO get the lesson somehow
+                //Lesson lesson = model.getLesson(viewState.)
+                //className.set(lesson.getClassName);
+
+                break;
+
+            case "Teacher":
+
+                break;
+
+        }
+    }
+
+    // TODO
 }

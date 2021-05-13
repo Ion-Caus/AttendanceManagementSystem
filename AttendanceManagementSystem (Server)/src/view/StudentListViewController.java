@@ -5,15 +5,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import viewModel.StudentListViewModel;
 
 public class StudentListViewController extends ViewController
 {
-  @FXML private TableView<viewModel.StudentListViewModel> studentListTable;
-  @FXML private TableColumn<viewModel.StudentListViewModel, String> studentNameColumn;
-  @FXML private TableColumn<viewModel.StudentListViewModel, String> commentColumn;
-  @FXML private TableColumn<viewModel.StudentListViewModel, Integer> gradeColumn;
-  @FXML private TableColumn<viewModel.StudentListViewModel, String> absenceColumn;
-  @FXML private TableColumn<viewModel.StudentListViewModel, String> motiveColumn;
+  @FXML private TableView<StudentListViewModel> studentListTable;
+  @FXML private TableColumn<StudentListViewModel, String> studentNameColumn;
+  @FXML private TableColumn<StudentListViewModel, String> commentColumn;
+  @FXML private TableColumn<StudentListViewModel, Integer> gradeColumn;
+  @FXML private TableColumn<StudentListViewModel, String> absenceColumn;
+  @FXML private TableColumn<StudentListViewModel, String> motiveColumn;
   //TODO assign viewModel for columns. Right now - it's a placeholder.
 
   @FXML private Label StudentsClassLabel;
@@ -25,7 +26,7 @@ public class StudentListViewController extends ViewController
   @FXML private Button viewMotiveButton;
   @FXML private Button backButton;
 
-  private viewModel.StudentListViewModel viewModel; //TODO assign proper viewModel
+  private StudentListViewModel viewModel; //TODO assign proper viewModel
 
   public StudentListViewController()
   {
@@ -62,8 +63,7 @@ public class StudentListViewController extends ViewController
 
   @FXML private void back()
   {
-    //TODO  change the "back" to view lesson instead of back to SCHOOL_VIEW
-    getViewHandler().openView(View.INFOVIEW_VIEW);
+    getViewHandler().openView(View.INFO_VIEW);
   }
 
   @FXML private void changeStatus()

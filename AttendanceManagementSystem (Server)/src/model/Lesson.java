@@ -12,6 +12,9 @@ public class Lesson {
     private String classroom;
     private String homework;
 
+    //TODO set and get the class
+    private String className;
+
     //TODO 11/05 by Ion Move the homework
     public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime,
                   String subject, String topic, String classroom, String homework) throws IllegalArgumentException {

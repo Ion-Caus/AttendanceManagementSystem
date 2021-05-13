@@ -27,7 +27,8 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     private StringProperty schoolName;
     private StringProperty error;
-    private StringProperty addStudentErrorLabel;
+
+    //TODO why? AddStudentViewController is not Using another viewModel like AddStudentViewModel????
 
     private StringProperty tabSelectedProperty;
 
@@ -69,7 +70,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
         studentList.clear();
         for (Student student : model.getAllStudents()) {
-            studentList.add(new StudentViewModel(student.getName(),student.getID()));
+            studentList.add(new StudentViewModel(student.getName(), student.getID()));
         }
 
 //        teacherList.clear();
@@ -91,6 +92,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     public void setSelected(ClassViewModel selectedLesson) {
         selectedClassProperty.set(selectedLesson);
     }
+
     public ClassViewModel getSelectedClass() {
         return selectedClassProperty.get();
     }
@@ -103,6 +105,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     public void setSelected(StudentViewModel selectedStudent) {
         selectedStudentProperty.set(selectedStudent);
     }
+
     public StudentViewModel getSelectedStudent() {
         return selectedStudentProperty.get();
     }
@@ -115,6 +118,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     public void setSelected(TeacherViewModel selectedTeacher) {
         selectedTeacherProperty.set(selectedTeacher);
     }
+
     public TeacherViewModel getSelectedTeacher() {
         return selectedTeacherProperty.get();
     }
@@ -128,9 +132,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
         return error;
     }
 
-    public StringProperty addStudentErrorLabel(){
-        return addStudentErrorLabel;
-    }
+
 
     // tab property
     public void setTabSelectedProperty(String tabSelectedProperty) {
@@ -146,27 +148,17 @@ public class SchoolViewModel implements LocalListener<String, String> {
         model.setSchoolName(schoolName);
     }
 
+    //TODO 13/5 by Ion this method should be moved in AddClassViewModel (used by AddClassViewController that will have a textfiled to add students)
+    // or if we use a pop-up we'll keep it here
     public void addClass() {
 
     }
 
     public void removeClass(String className) {
-        System.out.println("model.removeClass");
         model.removeClass(className);
     }
 
-    public boolean addStudent(String studentName) {
-        try{
-        model.addStudent(studentName,"someTempId");
-            clear();
-            return true;
-        }catch (IllegalArgumentException e){
-            addStudentErrorLabel.set(e.getMessage());
-            return false;
-        }
-        // TODO: 09/5/2021 by tomas replace someTempId with real ID generation
 
-    }
 
     public void removeStudent(String studentID) {
         model.removeStudent(studentID);
@@ -174,30 +166,28 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     public boolean viewSchedule() {
         switch (tabSelectedProperty.get()) {
-            case "Classes" :
+            case "Classes":
                 try {
                     viewModelState.setSection("Class");
                     // TODO leave the school name as the id???
                     viewModelState.setId(selectedClassProperty.get().classNameProperty().get());
                     return true;
-                }
-                catch (IllegalArgumentException | NullPointerException e) {
+                } catch (IllegalArgumentException | NullPointerException e) {
                     error.setValue("Please select a class.");
                     return false;
                 }
 
-            case "Students" :
+            case "Students":
                 try {
                     viewModelState.setSection("Student");
                     viewModelState.setId(selectedStudentProperty.get().idProperty().get());
                     return true;
-                }
-                catch (IllegalArgumentException | NullPointerException e) {
+                } catch (IllegalArgumentException | NullPointerException e) {
                     error.setValue("Please select a student.");
                     return false;
                 }
 
-            case "Teachers" :
+            case "Teachers":
                 break;
         }
         return false;
@@ -231,7 +221,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     @Override
     public void propertyChange(ObserverEvent<String, String> event) {
-        Platform.runLater( () -> {
+        Platform.runLater(() -> {
             if (event.getPropertyName().equals("Error")) {
                 error.set(event.getValue2());
                 return;

@@ -20,7 +20,7 @@ public class ViewModelFactory
     schoolViewModel = new SchoolViewModel(model, viewModelState);
     scheduleViewModel = new ScheduleViewModel(model, viewModelState);
 
-    infoViewModel = new InfoViewModel(model);
+    infoViewModel = new InfoViewModel(model, viewModelState);
     studentListViewModel = new StudentListViewModel(model);
   }
 

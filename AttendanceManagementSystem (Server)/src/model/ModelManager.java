@@ -15,9 +15,6 @@ public class ModelManager implements Model {
         this.property = new PropertyChangeHandler<>(this);
         createDummy();
 
-
-
-
     }
 
     public void createDummy() {
