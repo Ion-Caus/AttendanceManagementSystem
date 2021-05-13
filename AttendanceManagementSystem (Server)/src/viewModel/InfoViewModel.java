@@ -109,25 +109,15 @@ public class InfoViewModel {
         return viewState.getAccessLevel();
     }
 
-    public void loadData() {
+    public void loadFromModel() {
+
+    }
+
+    public void clear() {
         //TODO clear the rest property
+        //Lesson lesson = viewState.getLessonID()
+        //className.set(model.getLessonBy());
 
-
-
-        switch (viewState.getSection()) {
-            case "Student":
-                Student student = model.getStudentBy(viewState.getId());
-                //TODO get the lesson somehow
-                //Lesson lesson = model.getLesson(viewState.)
-                //className.set(lesson.getClassName);
-
-                break;
-
-            case "Teacher":
-
-                break;
-
-        }
     }
 
     // TODO

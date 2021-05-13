@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import model.Model;
 import model.Class;
 import model.Student;
-import model.Teacher;
+
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
@@ -28,8 +28,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
     private StringProperty schoolName;
     private StringProperty error;
 
-
-
     private StringProperty tabSelectedProperty;
 
     private Model model;
@@ -38,7 +36,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     public SchoolViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
         //TODO ion?? maybe add a new object
-        this.model.addListener(this, "Error", "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student");
+        this.model.addListener(this,  "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student");
         this.viewModelState = viewModelState;
 
         classList = FXCollections.observableArrayList();
@@ -147,19 +145,24 @@ public class SchoolViewModel implements LocalListener<String, String> {
         model.setSchoolName(schoolName);
     }
 
-    //TODO 13/5 by Ion this method should be moved in AddClassViewModel (used by AddClassViewController that will have a textfiled to add students)
-    // or if we use a pop-up we'll keep it here
+    //TODO 13/5 by Ion this method should be moved in AddClassViewModel (used by AddClassViewController that will have a TextField to add students)
     public void addClass() {
 
     }
 
     public void removeClass(String className) {
-        model.removeClass(className);
+        try {
+            clear();
+            model.removeClass(className);
+        }
+        catch (IllegalAccessException e) {
+            System.out.println(e.getLocalizedMessage());
+            error.set(e.getLocalizedMessage());
+        }
     }
 
-
-
     public void removeStudent(String studentID) {
+        clear();
         model.removeStudent(studentID);
     }
 
@@ -169,7 +172,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
                 try {
                     viewModelState.setSection("Class");
                     // TODO leave the school name as the id???
-                    viewModelState.setId(selectedClassProperty.get().classNameProperty().get());
+                    viewModelState.setID(selectedClassProperty.get().classNameProperty().get());
                     return true;
                 } catch (IllegalArgumentException | NullPointerException e) {
                     error.setValue("Please select a class.");
@@ -179,7 +182,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
             case "Students":
                 try {
                     viewModelState.setSection("Student");
-                    viewModelState.setId(selectedStudentProperty.get().idProperty().get());
+                    viewModelState.setID(selectedStudentProperty.get().idProperty().get());
                     return true;
                 } catch (IllegalArgumentException | NullPointerException e) {
                     error.setValue("Please select a student.");
@@ -221,11 +224,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
     @Override
     public void propertyChange(ObserverEvent<String, String> event) {
         Platform.runLater(() -> {
-            if (event.getPropertyName().equals("Error")) {
-                error.set(event.getValue2());
-                return;
-            }
-
             String[] commands = event.getPropertyName().split(" ");
             switch (commands[0]) {
                 case "ADD":

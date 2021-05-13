@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddStudentViewController">
+<AnchorPane prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddStudentViewController">
     <children>
-        <VBox layoutX="120.0" layoutY="58.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox layoutX="120.0" layoutY="58.0" prefHeight="350.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
@@ -23,29 +23,38 @@
                         </Label>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="92.0" prefWidth="600.0" spacing="30.0">
+                <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="600.0" spacing="30.0">
                     <children>
+                        <Label prefHeight="23.0" prefWidth="150.0" text="Student name">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding></Label>
                         <TextField fx:id="studentName" prefHeight="42.0" prefWidth="185.0" />
-                        <Label prefWidth="80.0" text="Student name" />
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_LEFT" prefHeight="68.0" prefWidth="600.0" spacing="30.0">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" prefHeight="70.0" prefWidth="400.0" spacing="30.0">
                <children>
-                  <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="519.0" text="errorLabel" textAlignment="CENTER" textFill="RED" />
-               </children></HBox>
-                <HBox prefHeight="24.0" prefWidth="600.0">
-                    <children>
-                        <Separator prefHeight="11.0" prefWidth="592.0" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="55.0" prefWidth="546.0" spacing="10.0">
+                  <Label prefHeight="23.0" prefWidth="150.0" text="Student ID">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="studentID" prefHeight="42.0" prefWidth="185.0" />
+               </children>
+            </HBox>
+            <Label fx:id="errorLabel" alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="400.0" text="errorLabel" textAlignment="CENTER" textFill="RED" />
+                  <Separator prefHeight="11.0" prefWidth="592.0" />
+                <HBox alignment="CENTER" prefHeight="55.0" prefWidth="546.0" spacing="20.0">
                     <children>
                         <Button mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="35.0" prefWidth="80.0" text="Cancel" />
                         <Button mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="35.0" prefWidth="80.0" text="Submit" />
                     </children>
-                    <padding>
-                        <Insets right="100.0" />
-                    </padding>
                 </HBox>
             </children>
         </VBox>

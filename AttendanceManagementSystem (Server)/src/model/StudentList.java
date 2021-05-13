@@ -9,7 +9,10 @@ public class StudentList {
         this.students = new ArrayList<>();
     }
 
-    public void addStudent(Student student) {
+    public void addStudent(Student student) throws IllegalArgumentException {
+        if (!isUnique(student.getID())) {
+            throw new IllegalArgumentException("Student with ID ("+ student.getID() + ") already exists.");
+        }
         students.add(student);
     }
 
@@ -32,6 +35,15 @@ public class StudentList {
             }
         }
         throw new IllegalArgumentException("No such student with this id (" + id + ")");
+    }
+
+    public boolean isUnique(String studentID) {
+        for (Student student: students) {
+            if (student.getID().equals(studentID)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Student getStudentByName(String name) throws IllegalArgumentException {

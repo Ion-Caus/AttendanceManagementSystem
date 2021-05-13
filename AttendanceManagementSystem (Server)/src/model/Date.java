@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 public class Date {
     private LocalDate date;
 
+    public Date() {
+        date = LocalDate.now();
+    }
+
     public Date(int year, int month, int day) {
         this.date = LocalDate.of(year, month, day);
     }

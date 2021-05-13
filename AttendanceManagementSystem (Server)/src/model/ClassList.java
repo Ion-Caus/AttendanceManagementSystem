@@ -9,7 +9,10 @@ public class ClassList {
         this.classes = new ArrayList<>();
     }
 
-    public void addClass(Class aClass) {
+    public void addClass(Class aClass) throws IllegalArgumentException {
+        if (classes.contains(aClass)) {
+            throw new IllegalArgumentException("Can not add a duplicate class.");
+        }
         classes.add(aClass);
     }
 
@@ -34,7 +37,6 @@ public class ClassList {
         return classes;
     }
 
-    //TODO Student can be just in 1 class
     public Class getClassWith(Student student) throws IllegalArgumentException {
         for (Class aClass : classes) {
             for (Student aStudent : aClass.getStudents().getAllStudents()) {

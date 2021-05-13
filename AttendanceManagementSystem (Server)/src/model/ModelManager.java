@@ -14,15 +14,15 @@ public class ModelManager implements Model {
         school = new School();
         this.property = new PropertyChangeHandler<>(this);
         createDummy();
-
     }
 
     public void createDummy() {
         setSchoolName("DaVinci");
         StudentList studentList = school.getStudentList();
         studentList.addStudent(new Student("Ion Caus", "308234"));
-        studentList.addStudent(new Student("Denis", "4338234"));
+        studentList.addStudent(new Student("Denis", "433234"));
         studentList.addStudent(new Student("Max", "308415"));
+
 
         ClassList classList = school.getClassList();
         Class class1 = new Class("12 C");
@@ -38,7 +38,7 @@ public class ModelManager implements Model {
 
         class1.getSchedule().addLesson(
                 new Lesson(new Teacher("Steffen", "SVA", "325632"),
-                        new Date(2021,5,13),
+                        new Date(), //now
                         new Time(1,1,1),
                         new Time(2,2,2),
                         "Math",
@@ -89,52 +89,40 @@ public class ModelManager implements Model {
 
 
     @Override
-    public void addClass(String className) {
+    public void addClass(String className) throws IllegalArgumentException {
         school.getClassList().addClass(new Class(className));
 
         property.firePropertyChange("ADD Class", null, className);
     }
 
     @Override
-    public void removeClass(String className) {
-        try {
-            school.getClassList().removeClass(className);
-            property.firePropertyChange("REMOVE Class", null, className);
-        }
-        catch (IllegalAccessException e) {
-            property.firePropertyChange("Error", null, e.getLocalizedMessage());
-        }
+    public void removeClass(String className) throws IllegalAccessException {
+        school.getClassList().removeClass(className);
+        property.firePropertyChange("REMOVE Class", null, className);
 
     }
 
     @Override
-    public void addStudent(String studentName, String studentID) {
-        //TODO by Ion 10/05  Add student? pass student name and id? or StudentObject
-
+    public void addStudent(String studentName, String studentID) throws IllegalArgumentException {
         school.getStudentList().addStudent(new Student(studentName, studentID));
 
         property.firePropertyChange("ADD Student", studentName, studentID);
     }
 
     @Override
-    public void removeStudent(String studentID) {
-        //TODO if remove Student from School Student list --> remove it from the class' studentList
-        try {
-            //remove from class' studentList
-            school.getClassList().getClassWith(getStudentBy(studentID)).getStudents().removeStudent(studentID);
-            //remove from school's studentList
-            school.getStudentList().removeStudent(studentID);
-        }
-        catch (IllegalArgumentException e) {
-                property.firePropertyChange("Error", null, e.getLocalizedMessage());
-            }
+    public void removeStudent(String studentID) throws IllegalArgumentException {
+        //remove from class' studentList
+        //TODO 14/5 by Ion Change ".getClassWith(getStudentBy(studentID))." to "getClassByName(getStudentBy(studentID).getClassName())" after we implement the className in the student
+        school.getClassList().getClassWith(getStudentBy(studentID)).getStudents().removeStudent(studentID);
+        //remove from school's studentList
+        school.getStudentList().removeStudent(studentID);
 
         property.firePropertyChange("REMOVE Student", null, studentID);
     }
 
     @Override
     public String getClassAndSchool(Student student) {
-        return getClassWith(student).getClassName() + ", " + getSchoolName();
+        return student.getClassName() + ", " + getSchoolName();
     }
 
     @Override
@@ -146,8 +134,6 @@ public class ModelManager implements Model {
     public String getSchoolName() {
         return school.getName();
     }
-
-
 
     @Override
     public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) {

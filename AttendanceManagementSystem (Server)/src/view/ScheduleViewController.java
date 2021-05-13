@@ -72,10 +72,9 @@ public class ScheduleViewController extends ViewController {
     public void reset() {
         viewModel.clear();
 
-        addLessonButton.setVisible(viewModel.canEditProperty().get());
-        removeLessonButton.setVisible(viewModel.canEditProperty().get());
-
-        backButton.setVisible(viewModel.canBackProperty().get());
+        addLessonButton.setVisible(viewModel.forAdminProperty().get());
+        removeLessonButton.setVisible(viewModel.forAdminProperty().get());
+        backButton.setVisible(viewModel.forAdminProperty().get());
     }
 
     @FXML

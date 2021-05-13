@@ -58,6 +58,15 @@ public class Lesson {
         return homework;
     }
 
+    //TODO 14/5 by Ion find a way to set the className for this lesson
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
     public String getTimeInterval() {
         return String.format("%s - %s", startTime.getTime().format(DateTimeFormatter.ofPattern("HH:mm")), endTime.getTime().format(DateTimeFormatter.ofPattern("HH:mm")));
     }

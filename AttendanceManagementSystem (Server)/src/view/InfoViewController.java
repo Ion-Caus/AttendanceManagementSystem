@@ -59,7 +59,7 @@ public class InfoViewController extends ViewController {
 
     @Override
     public void reset() {
-        viewModel.loadData();
+        viewModel.clear();
     }
 
     public void adjustView() {
