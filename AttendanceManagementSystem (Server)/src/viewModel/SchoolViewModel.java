@@ -145,11 +145,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
         model.setSchoolName(schoolName);
     }
 
-    //TODO 13/5 by Ion this method should be moved in AddClassViewModel (used by AddClassViewController that will have a TextField to add students)
-    public void addClass() {
-
-    }
-
     public void removeClass(String className) {
         try {
             clear();

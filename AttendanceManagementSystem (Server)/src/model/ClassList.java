@@ -10,7 +10,7 @@ public class ClassList {
     }
 
     public void addClass(Class aClass) throws IllegalArgumentException {
-        if (classes.contains(aClass)) {
+        if (!isUnique(aClass.getClassName())) {
             throw new IllegalArgumentException("Can not add a duplicate class.");
         }
         classes.add(aClass);
@@ -56,4 +56,9 @@ public class ClassList {
         }
         throw new IllegalArgumentException("No such class with the name: " + name);
     }
+
+    public boolean isUnique(String className) {
+        return classes.stream().noneMatch(aClass -> aClass.getClassName().equals(className));
+    }
+
 }

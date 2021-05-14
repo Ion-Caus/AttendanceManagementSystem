@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="269.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddClassViewController">
+    <VBox layoutX="120.0" layoutY="58.0" prefHeight="220.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Label text="Add new class">
+                <font>
+                    <Font size="22.0"/>
+                </font>
+            </Label>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="600.0" spacing="30.0">
+            <Label prefHeight="23.0" prefWidth="150.0" text="Class name">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+                <padding>
+                    <Insets left="20.0"/>
+                </padding>
+            </Label>
+            <TextField fx:id="className" prefHeight="42.0" prefWidth="185.0"/>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" prefHeight="36.0" prefWidth="400.0"
+              spacing="30.0"/>
+        <Label fx:id="errorLabel" alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="400.0" text="errorLabel"
+               textAlignment="CENTER" textFill="RED"/>
+        <Separator prefHeight="11.0" prefWidth="592.0"/>
+        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="546.0" spacing="20.0">
+            <Button mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="35.0" prefWidth="80.0"
+                    text="Cancel"/>
+            <Button mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="35.0" prefWidth="80.0"
+                    text="Submit"/>
+        </HBox>
+    </VBox>
+</AnchorPane>
