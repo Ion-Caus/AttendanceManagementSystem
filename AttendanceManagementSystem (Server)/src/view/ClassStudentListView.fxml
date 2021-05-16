@@ -5,61 +5,96 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ClassStudentListViewController">
    <children>
-      <Label alignment="CENTER" prefHeight="56.0" prefWidth="600.0" text="Class">
+      <Label fx:id="classLabel" alignment="CENTER" prefHeight="60.0" prefWidth="500.0" text="Class">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <HBox prefHeight="322.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="120.0" prefWidth="500.0">
          <children>
-            <TableView prefHeight="322.0" prefWidth="426.0">
-              <columns>
-                <TableColumn prefWidth="467.19999998807907" text="Student name" />
-              </columns>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-            </TableView>
-            <VBox alignment="CENTER" prefHeight="355.0" prefWidth="141.0" spacing="50.0">
+            <VBox prefHeight="70.0" prefWidth="280.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Change class">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="25.0" layoutY="156.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Add">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="25.0" layoutY="196.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Remove">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="25.0" layoutY="237.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Back">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="60.0" text="Name">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nameField">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="60.0" text="ID">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="labelField">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
+            <Button onAction="#addButtonPressed" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" text="Add">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
       </HBox>
-      <Label prefHeight="26.0" prefWidth="560.0" text="errorLabel" textFill="#f80000">
+      <HBox alignment="CENTER" prefHeight="240.0" prefWidth="500.0">
+         <children>
+            <TableView fx:id="classStudentTable" prefHeight="240.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="studentNameColumn" prefWidth="256.80000150203705" text="Student name" />
+                <TableColumn fx:id="studentIDColumn" minWidth="0.0" prefWidth="142.4000244140625" text="ID" />
+              </columns>
+            </TableView>
+         </children>
          <VBox.margin>
-            <Insets left="20.0" top="20.0" />
+            <Insets top="10.0" />
          </VBox.margin>
+      </HBox>
+      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="40.0" prefWidth="500.0" text="errorLabel" textFill="RED">
          <font>
-            <Font size="16.0" />
+            <Font size="15.0" />
          </font>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
       </Label>
+      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="30.0">
+         <children>
+            <Button onAction="#backButtonPressed" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="Back">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button onAction="#removeButtonPressed" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="Remove">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </VBox>
