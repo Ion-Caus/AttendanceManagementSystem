@@ -12,6 +12,7 @@ import model.Model;
 import model.Class;
 import model.Student;
 
+import model.Teacher;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
@@ -36,7 +37,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     public SchoolViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
         //TODO ion?? maybe add a new object
-        this.model.addListener(this,  "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student");
+        this.model.addListener(this,  "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
         this.viewModelState = viewModelState;
 
         classList = FXCollections.observableArrayList();
@@ -67,13 +68,13 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
         studentList.clear();
         for (Student student : model.getAllStudents()) {
-            studentList.add(new StudentViewModel(student.getName(), student.getID()));
+            studentList.add(new StudentViewModel(student));
         }
 
-//        teacherList.clear();
-//        for (Teacher teacher : model.getAllTeachers()) {
-//            teacherList.add(new TeacherViewModel(teacher));
-//        }
+        teacherList.clear();
+        for (Teacher teacher : model.getAllTeachers()) {
+            teacherList.add(new TeacherViewModel(teacher));
+        }
     }
 
     public void clear() {
@@ -130,7 +131,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
     }
 
 
-
     // tab property
     public void setTabSelectedProperty(String tabSelectedProperty) {
         this.tabSelectedProperty.set(tabSelectedProperty);
@@ -159,6 +159,11 @@ public class SchoolViewModel implements LocalListener<String, String> {
     public void removeStudent(String studentID) {
         clear();
         model.removeStudent(studentID);
+    }
+
+    public void removeTeacher(String teacherID) {
+        clear();
+        model.removeTeacher(teacherID);
     }
 
     public boolean viewSchedule() {
@@ -193,12 +198,13 @@ public class SchoolViewModel implements LocalListener<String, String> {
     private void add(String who, String value1, String value2) {
         switch (who) {
             case "Student":
-                studentList.add(new StudentViewModel(value1, value2));
+                studentList.add(new StudentViewModel(new Student(value1, value2)));
                 break;
             case "Class":
                 classList.add(new ClassViewModel(new Class(value2)));
                 break;
             case "Teacher":
+                teacherList.add(new TeacherViewModel(new Teacher(value1,value2)));
                 break;
         }
     }
@@ -212,6 +218,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
                 classList.removeIf(aClass -> aClass.classNameProperty().get().equals(id));
                 break;
             case "Teacher":
+                teacherList.removeIf(teacher -> teacher.idProperty().get().equals(id));
                 break;
         }
     }

@@ -16,10 +16,12 @@ public class SchoolStrategyContext {
 
         SchoolStrategy classStrategy = new ClassStrategy(viewModel);
         SchoolStrategy studentStrategy = new StudentStrategy(viewModel);
-
+        SchoolStrategy teacherStrategy = new TeacherStrategy(viewModel);
 
         strategies.put("Classes", classStrategy);
         strategies.put("Students", studentStrategy);
+        strategies.put("Teachers",teacherStrategy);
+
     }
 
     public View add() {

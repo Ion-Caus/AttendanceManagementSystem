@@ -33,4 +33,7 @@ public interface Model extends LocalSubject<String,String> {
 
     void addStudent(String studentName, String studentID) throws IllegalArgumentException;
     void removeStudent(String studentID);
+
+    void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException;
+    void removeTeacher(String studentID);
 }

@@ -137,11 +137,9 @@ public class SchoolViewController extends ViewController {
 
     @FXML
     private void add() {
-
         getViewHandler().openView(
                 new SchoolStrategyContext(viewModel).add()
         );
-
     }
 
     @FXML

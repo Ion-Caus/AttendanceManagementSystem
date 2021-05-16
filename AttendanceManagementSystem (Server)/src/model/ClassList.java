@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ClassList {
@@ -47,6 +48,7 @@ public class ClassList {
         }
         throw new IllegalArgumentException("This student is part of no classes");
     }
+
 
     public Class getClassByName(String name) throws IllegalArgumentException {
         for (Class aClass : classes) {

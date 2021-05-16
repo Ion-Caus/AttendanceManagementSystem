@@ -15,7 +15,7 @@ public class LessonViewModel {
     public LessonViewModel(Lesson lesson) {
         subject = new SimpleStringProperty(lesson.getSubject());
         topic = new SimpleStringProperty(lesson.getTopic());
-        teacher = new SimpleStringProperty(lesson.getTeacher().getName());
+        teacher = new SimpleStringProperty(lesson.getTeacher().getInitials());
         time = new SimpleStringProperty(lesson.getTimeInterval());
         classroom = new SimpleStringProperty(lesson.getClassroom());
     }

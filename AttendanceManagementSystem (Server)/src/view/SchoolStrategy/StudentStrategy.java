@@ -33,7 +33,6 @@ public class StudentStrategy extends SchoolStrategy {
         result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-
             viewModel.removeStudent(studentViewModel.idProperty().get());
         }
 

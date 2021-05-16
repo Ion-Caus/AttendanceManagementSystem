@@ -23,6 +23,9 @@ public class ModelManager implements Model {
         studentList.addStudent(new Student("Denis", "433234"));
         studentList.addStudent(new Student("Max", "308415"));
 
+        TeacherList teacherList = school.getTeacherList();
+        Teacher steffen = new Teacher("Steffen Vissing Andersen", "325632");
+        teacherList.addTeacher(steffen);
 
         ClassList classList = school.getClassList();
         Class class1 = new Class("12 C");
@@ -37,7 +40,7 @@ public class ModelManager implements Model {
         class2.getStudents().addStudent(studentList.getAllStudents().get(2));
 
         class1.getSchedule().addLesson(
-                new Lesson(new Teacher("Steffen", "SVA", "325632"),
+                new Lesson(steffen,
                         new Date(), //now
                         new Time(1,1,1),
                         new Time(2,2,2),
@@ -60,8 +63,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ArrayList<Teacher> getAllTeachers() throws NullPointerException {
-        return null;
+    public ArrayList<Teacher> getAllTeachers() {
+        return school.getTeacherList().getAllTeachers();
     }
 
     @Override
@@ -118,6 +121,19 @@ public class ModelManager implements Model {
         school.getStudentList().removeStudent(studentID);
 
         property.firePropertyChange("REMOVE Student", null, studentID);
+    }
+
+    @Override
+    public void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException {
+        school.getTeacherList().addTeacher(new Teacher(teacherName, teacherID));
+        property.firePropertyChange("ADD Teacher", teacherName, teacherID);
+    }
+
+    @Override
+    public void removeTeacher(String teacherID) {
+       //TODO 16/5 by Deniss handle removing the teacher from lessons or throw exception if teacher has lessons
+        school.getTeacherList().removeTeacher(teacherID);
+        property.firePropertyChange("REMOVE Teacher", null, teacherID);
     }
 
     @Override

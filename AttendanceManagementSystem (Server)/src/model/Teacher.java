@@ -9,9 +9,18 @@ public class Teacher {
 
     private Account account;
 
-    public Teacher(String name, String initials, String ID) {
+    public Teacher(String name, String ID) {
+
+        if (name.isBlank()) {
+            throw new IllegalArgumentException("Teacher name cannot be empty");
+        }
+        if (ID.isBlank()) {
+            throw new IllegalArgumentException("Teacher ID cannot be empty");
+        }
+
         this.name = name;
-        this.initials = initials;
+        this.initials = getInitials(name);
+        System.out.println(initials);
         this.ID = ID;
     }
 
@@ -29,6 +38,14 @@ public class Teacher {
 
     public String getID() {
         return ID;
+    }
+
+    private String getInitials(String name){
+        String[] names = name.split(" ");
+        String initials = "";
+        for(String temp: names)
+            initials+=temp.charAt(0);
+        return initials;
     }
 
     @Override
