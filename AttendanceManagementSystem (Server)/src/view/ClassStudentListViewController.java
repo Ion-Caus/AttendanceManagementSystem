@@ -1,6 +1,6 @@
 package view;
 
-public class ClassViewController extends ViewController {
+public class ClassStudentListViewController extends ViewController {
     @Override
     protected void init() {
 
