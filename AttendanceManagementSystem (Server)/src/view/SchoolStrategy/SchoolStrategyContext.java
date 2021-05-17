@@ -9,7 +9,6 @@ public class SchoolStrategyContext {
     private HashMap<String, SchoolStrategy> strategies;
     private String key;
 
-    //TODO maybe add controller if it is needed
     public SchoolStrategyContext(SchoolViewModel viewModel) {
         strategies = new HashMap<>();
         key = viewModel.getTabSelectedProperty();

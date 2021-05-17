@@ -24,7 +24,6 @@ public class AddStudentViewModel {
         errorProperty.set("");
     }
 
-
     public boolean addStudent() {
         try {
             model.addStudent(studentName.get(), studentID.get());

@@ -35,9 +35,13 @@ public class ModelManager implements Model {
         classList.addClass(class2);
 
         class1.getStudents().addStudent(studentList.getAllStudents().get(0));
+        studentList.getAllStudents().get(0).setClassName(class1.getClassName());
+
         class1.getStudents().addStudent(studentList.getAllStudents().get(1));
+        studentList.getAllStudents().get(1).setClassName(class2.getClassName());
 
         class2.getStudents().addStudent(studentList.getAllStudents().get(2));
+        studentList.getAllStudents().get(2).setClassName(class2.getClassName());
 
         class1.getSchedule().addLesson(
                 new Lesson(steffen,
@@ -108,15 +112,15 @@ public class ModelManager implements Model {
     @Override
     public void addStudent(String studentName, String studentID) throws IllegalArgumentException {
         school.getStudentList().addStudent(new Student(studentName, studentID));
-
         property.firePropertyChange("ADD Student", studentName, studentID);
     }
 
     @Override
     public void removeStudent(String studentID) throws IllegalArgumentException {
         //remove from class' studentList
-        //TODO 14/5 by Ion Change ".getClassWith(getStudentBy(studentID))." to "getClassByName(getStudentBy(studentID).getClassName())" after we implement the className in the student
-        school.getClassList().getClassWith(getStudentBy(studentID)).getStudents().removeStudent(studentID);
+        String className = getStudentBy(studentID).getClassName();
+        if(className!=null)
+            school.getClassList().getClassByName(className).getStudents().removeStudent(studentID);
         //remove from school's studentList
         school.getStudentList().removeStudent(studentID);
 
