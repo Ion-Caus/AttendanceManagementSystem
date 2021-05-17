@@ -36,7 +36,9 @@ public class Student {
     public void setClassName(String className) {
         this.className = className;
     }
-
+    public void clearClassName() {
+        this.className = null;
+    }
     public String getClassName() {
         return className;
     }

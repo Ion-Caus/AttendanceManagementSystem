@@ -1,7 +1,9 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import viewModel.ClassStudentListViewModel;
 import viewModel.StudentViewModel;
@@ -21,6 +23,8 @@ public class ClassStudentListViewController extends ViewController {
     private TableColumn<StudentViewModel, String> studentIDColumn;
     @FXML
     private Label errorLabel;
+
+    private AutoCompletionBinding<String> searchAutoCompletion;
 
     private ClassStudentListViewModel viewModel;
 
@@ -43,18 +47,25 @@ public class ClassStudentListViewController extends ViewController {
         errorLabel.textProperty().bind(viewModel.errorProperty());
 
         searchField.textProperty().bindBidirectional(viewModel.searchFieldProperty());
-        TextFields.bindAutoCompletion(searchField, viewModel.getUnassignedStudents());
 
+        searchAutoCompletion = TextFields.bindAutoCompletion(searchField, viewModel.getUnassignedStudents());
+    }
+
+    private void rebindTextField() {
+        searchAutoCompletion.dispose();
+        TextFields.bindAutoCompletion(searchField, viewModel.getUnassignedStudents());
     }
 
     @Override
     public void reset() {
+        viewModel.loadFromModel();
         viewModel.clear();
     }
 
     @FXML
     private void addButtonPressed() {
         viewModel.addStudent();
+        rebindTextField();
     }
 
     @FXML
@@ -74,6 +85,15 @@ public class ClassStudentListViewController extends ViewController {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             viewModel.removeStudent(studentViewModel.idProperty().get());
+            rebindTextField();
         }
     }
+
+    @FXML
+    private void onEnter(ActionEvent event) {
+        if (event.getSource() == searchField) {
+            addButtonPressed();
+        }
+    }
+
 }

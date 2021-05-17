@@ -19,12 +19,12 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="120.0" prefWidth="500.0" spacing="20.0">
          <children>
-            <Label prefHeight="26.0" prefWidth="60.0" text="Name/ID">
+            <Label prefHeight="26.0" prefWidth="60.0" text="Name">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="searchField">
+            <TextField fx:id="searchField" onAction="#onEnter" >
                <font>
                   <Font size="15.0" />
                </font>

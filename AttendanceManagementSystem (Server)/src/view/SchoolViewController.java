@@ -32,12 +32,18 @@ public class SchoolViewController extends ViewController {
     @FXML
     private TableView<StudentViewModel> allStudentsTable;
     @FXML
+    private TableColumn<StudentViewModel, String> idStudentColumn;
+    @FXML
     private TableColumn<StudentViewModel, String> studentColumn;
+    @FXML
+    private TableColumn<StudentViewModel, String> studentClassColumn;
 
     @FXML
     private TableView<TeacherViewModel> allTeachersTable;
     @FXML
     private TableColumn<TeacherViewModel, String> teacherColumn;
+    @FXML
+    private TableColumn<TeacherViewModel, String> initialsColumn;
 
     private SchoolViewModel viewModel;
 
@@ -73,8 +79,14 @@ public class SchoolViewController extends ViewController {
         );
 
         // Students Table
+        idStudentColumn.setCellValueFactory(
+                cellData -> cellData.getValue().idProperty()
+        );
         studentColumn.setCellValueFactory(
                 cellData -> cellData.getValue().nameProperty()
+        );
+        studentClassColumn.setCellValueFactory(
+                cellData -> cellData.getValue().classNameProperty()
         );
         allStudentsTable.setItems(viewModel.getAllStudents());
         allStudentsTable.getSelectionModel().selectedItemProperty().addListener(
@@ -84,6 +96,9 @@ public class SchoolViewController extends ViewController {
         // Teachers Table
         teacherColumn.setCellValueFactory(
                 cellData -> cellData.getValue().nameProperty()
+        );
+        initialsColumn.setCellValueFactory(
+                cellData -> cellData.getValue().initialsProperty()
         );
         allTeachersTable.setItems(viewModel.getAllTeachers());
         allTeachersTable.getSelectionModel().selectedItemProperty().addListener(

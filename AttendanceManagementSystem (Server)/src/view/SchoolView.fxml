@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" userData="School Panel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SchoolViewController">
+<AnchorPane minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="600.0" userData="School Panel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SchoolViewController">
     <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
               <HBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
                   <children>
-                      <VBox prefHeight="508.0" prefWidth="302.0">
+                      <VBox prefHeight="508.0" prefWidth="400.0">
                           <children>
                         <TabPane fx:id="tabPane" prefHeight="500.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
@@ -29,9 +29,9 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="400.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <children>
-                                                      <TableView fx:id="classesTable" prefHeight="500.0" prefWidth="300.0">
+                                                      <TableView fx:id="classesTable" prefHeight="500.0" prefWidth="400.0">
                                                           <columns>
-                                                              <TableColumn fx:id="classNameColumn" prefWidth="300.0" resizable="false" text="Class" />
+                                                              <TableColumn fx:id="classNameColumn" prefWidth="390.0" resizable="false" text="Class" />
                                                           </columns>
                                                       </TableView>
                                              </children>
@@ -46,7 +46,9 @@
                                        <children>
                                           <TableView fx:id="allStudentsTable" prefHeight="457.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <columns>
-                                                <TableColumn fx:id="studentColumn" prefWidth="300.0" resizable="false" text="Student" />
+                                                <TableColumn fx:id="idStudentColumn" prefWidth="100.0" resizable="false" text="ID" />
+                                                <TableColumn fx:id="studentColumn" prefWidth="200.0" resizable="false" text="Student" />
+                                                <TableColumn fx:id="studentClassColumn" prefWidth="90.0" resizable="false" text="Class" />
                                              </columns>
                                           </TableView>
                                        </children>
@@ -59,7 +61,8 @@
                                        <children>
                                           <TableView fx:id="allTeachersTable" prefHeight="457.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <columns>
-                                                <TableColumn fx:id="teacherColumn" prefWidth="300.0" resizable="false" text="Teacher" />
+                                                <TableColumn fx:id="teacherColumn" prefWidth="250.0" resizable="false" text="Teacher" />
+                                                <TableColumn fx:id="initialsColumn" prefWidth="140.0" resizable="false" text="Initials" />
                                              </columns>
                                           </TableView>
                                        </children>

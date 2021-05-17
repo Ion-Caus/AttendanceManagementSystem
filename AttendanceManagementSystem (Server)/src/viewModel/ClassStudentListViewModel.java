@@ -1,5 +1,6 @@
 package viewModel;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,10 +16,12 @@ import model.Class;
 import model.Model;
 import model.Student;
 import model.StudentList;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 
 import java.util.ArrayList;
 
-public class ClassStudentListViewModel {
+public class ClassStudentListViewModel implements LocalListener<String, String> {
 
     private Model model;
     private ViewModelState viewModelState;
@@ -32,16 +35,19 @@ public class ClassStudentListViewModel {
 
     ClassStudentListViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
+        this.model.addListener(this,  "ADD Student Class", "REMOVE Student Class");
         this.viewModelState = viewModelState;
+
         className = new SimpleStringProperty(viewModelState.getID());
         searchField = new SimpleStringProperty();
-        classStudentTable = FXCollections.observableArrayList();
         errorProperty = new SimpleStringProperty();
+
+        classStudentTable = FXCollections.observableArrayList();
         selectedStudentProperty = new SimpleObjectProperty<>();
 
     }
     
-    private void loadFromModel() {
+    public void loadFromModel() {
         classStudentTable.clear();
         for(Student student: model.getClassByName(viewModelState.getID()).getStudents().getAllStudents()){
             classStudentTable.add(new StudentViewModel(student));
@@ -49,22 +55,17 @@ public class ClassStudentListViewModel {
     }
 
     public void clear() {
-        className.setValue(viewModelState.getID());
+        className.setValue("Class " + viewModelState.getID());
         searchField.setValue("");
         errorProperty.setValue("");
-
-        loadFromModel();
     }
 
     public void addStudent() {
         try {
-            Class theClass = getTheClass();
-            Student student = model.getStudentBy(searchField.get().split("[()]")[1]);
 
-            student.setClassName(theClass.getClassName());
-            theClass.getStudents().addStudent(student);
-
-            // TODO: 5/17/2021 replace with observer
+            //TODO 17/5 by Ion clean up
+            String id = (searchField.get().contains("("))? searchField.get().split("[()]")[1] : "no id";
+            model.addStudentToClass(id, viewModelState.getID() );
             clear();
         }
         catch (IllegalArgumentException e) {
@@ -72,17 +73,23 @@ public class ClassStudentListViewModel {
         }
     }
 
-    private Class getTheClass() {
-        return model.getClassByName(viewModelState.getID());
+    public void removeStudent(String ID) {
+        try {
+            model.removeStudentFromClass(ID, viewModelState.getID() );
+            clear();
+        }
+        catch (IllegalArgumentException e) {
+            errorProperty.set(e.getMessage());
+        }
+
     }
+
+
 
     public ArrayList<String> getUnassignedStudents() {
         return model.getUnassignedStudents();
     }
-    
-    public void removeStudent(String id) {
-        getTheClass().getStudents().removeStudent(id);
-    }
+
 
     public StudentViewModel getSelectedStudent() {
         return selectedStudentProperty.get();
@@ -106,5 +113,29 @@ public class ClassStudentListViewModel {
 
     public StringProperty errorProperty() {
         return errorProperty;
+    }
+
+    @Override
+    public void propertyChange(ObserverEvent<String, String> event) {
+        Platform.runLater(() -> {
+            if (!viewModelState.getID().equals(event.getValue1())) {
+                return;
+            }
+
+            String[] commands = event.getPropertyName().split(" ");
+            switch (commands[0]) {
+                case "ADD":
+                    classStudentTable.add(new StudentViewModel(
+                            model.getStudentBy(event.getValue2())
+                            )
+                    );
+                    break;
+                case "REMOVE":
+                    classStudentTable.removeIf(
+                            student -> student.idProperty().get().equals(event.getValue2())
+                    );
+                    break;
+            }
+        });
     }
 }

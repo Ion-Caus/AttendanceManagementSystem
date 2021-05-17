@@ -7,11 +7,12 @@ import model.Student;
 public class StudentViewModel {
     private StringProperty name;
     private StringProperty id;
+    private StringProperty className;
 
-    //TODO 13/5 by Ion Change this to Student, and add StringProperty class to display on the table the class.
     public StudentViewModel(Student student) {
         this.name = new SimpleStringProperty(student.getName());
         this.id = new SimpleStringProperty(student.getID());
+        this.className = new SimpleStringProperty(student.getClassName());
     }
 
     public StringProperty nameProperty() {
@@ -20,5 +21,9 @@ public class StudentViewModel {
 
     public StringProperty idProperty() {
         return id;
+    }
+
+    public StringProperty classNameProperty() {
+        return className;
     }
 }

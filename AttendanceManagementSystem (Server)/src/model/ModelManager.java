@@ -39,7 +39,7 @@ public class ModelManager implements Model {
         studentList.getAllStudents().get(0).setClassName(class1.getClassName());
 
         class1.getStudents().addStudent(studentList.getAllStudents().get(1));
-        studentList.getAllStudents().get(1).setClassName(class2.getClassName());
+        studentList.getAllStudents().get(1).setClassName(class1.getClassName());
 
         class2.getStudents().addStudent(studentList.getAllStudents().get(2));
         studentList.getAllStudents().get(2).setClassName(class2.getClassName());
@@ -125,12 +125,37 @@ public class ModelManager implements Model {
     public void removeStudent(String studentID) throws IllegalArgumentException {
         //remove from class' studentList
         String className = getStudentBy(studentID).getClassName();
-        if(className!=null)
+        if(className != null)
             school.getClassList().getClassByName(className).getStudents().removeStudent(studentID);
         //remove from school's studentList
         school.getStudentList().removeStudent(studentID);
 
         property.firePropertyChange("REMOVE Student", null, studentID);
+    }
+
+    @Override
+    public void addStudentToClass(String studentID, String className) throws IllegalArgumentException {
+        Class theClass = getClassByName(className);
+        Student student = getStudentBy(studentID);
+
+            theClass.getStudents().addStudent(student);
+            student.setClassName(theClass.getClassName());
+            property.firePropertyChange("ADD Student Class", className, studentID);
+
+        System.out.println("fire add");
+    }
+
+    @Override
+    public void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException {
+        Class theClass = getClassByName(className);
+        Student student = getStudentBy(studentID);
+
+        student.clearClassName();
+        theClass.getStudents().removeStudent(student);
+
+        property.firePropertyChange("REMOVE Student Class", className, studentID);
+
+        System.out.println("fire remove");
     }
 
     @Override
