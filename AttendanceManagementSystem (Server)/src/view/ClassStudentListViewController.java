@@ -13,9 +13,9 @@ public class ClassStudentListViewController extends ViewController {
     @FXML private Label classLabel;
     @FXML private TextField nameField;
     @FXML private TextField idField;
-    @FXML private TableView classStudentTable;
-    @FXML private TableColumn studentNameColumn;
-    @FXML private TableColumn studentIDColumn;
+    @FXML private TableView<StudentViewModel> classStudentTable;
+    @FXML private TableColumn<StudentViewModel, String> studentNameColumn;
+    @FXML private TableColumn<StudentViewModel, String> studentIDColumn;
     @FXML private Label errorLabel;
 
     private ClassStudentListViewModel viewModel;
@@ -28,7 +28,13 @@ public class ClassStudentListViewController extends ViewController {
     protected void init() {
         viewModel = getViewModelFactory().getClassStudentListViewModel();
 
-
+        studentNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        studentIDColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+        classStudentTable.setItems(viewModel.getClassStudentTable());
+        classStudentTable.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
+        );
+        errorLabel.textProperty().bind(viewModel.errorProperty());
 
     }
 

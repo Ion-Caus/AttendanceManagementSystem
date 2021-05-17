@@ -24,71 +24,82 @@ public class ClassStudentListViewModel {
     private StringProperty nameField;
     private StringProperty labelField;
     private ObservableList<StudentViewModel> classStudentTable;
-    private StringProperty errorLabel;
-    private ObjectProperty<StudentViewModel> selectedStudent;
+    private StringProperty errorProperty;
+    private ObjectProperty<StudentViewModel> selectedStudentProperty;
 
-    ClassStudentListViewModel(Model model, ViewModelState viewModelState){
+    ClassStudentListViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
         this.viewModelState = viewModelState;
         classLabel = new SimpleStringProperty(viewModelState.getID());
         nameField = new SimpleStringProperty();
         labelField = new SimpleStringProperty();
         classStudentTable = FXCollections.observableArrayList();
-        errorLabel = new SimpleStringProperty();
-        selectedStudent = new SimpleObjectProperty<>();
+        errorProperty = new SimpleStringProperty();
+        selectedStudentProperty = new SimpleObjectProperty<>();
 
-        //loadFromModel();
-
-
-
-
-    }
-
-
-    private void loadFromModel(){
-        clear();
-        model.getClassByName(viewModelState.getID());
+        loadFromModel();
         
-
+    }
+    
+    private void loadFromModel() {
+        clear();
+        for(Student student: model.getClassByName("12 C").getStudents().getAllStudents()){
+            classStudentTable.add(new StudentViewModel(student));
+        }
+//        model.getClassByName(viewModelState.getID());
+        
     }
 
-    public void clear(){
+    public void clear() {
         classLabel.setValue("");
         nameField.setValue("");
         nameField.setValue("");
         labelField.setValue("");
-        errorLabel.setValue("");
+        errorProperty.setValue("");
 
     }
-
-
-
+    
     public void setSelectedStudent(StudentViewModel selectedStudent) {
-        this.selectedStudent.set(selectedStudent);
+        this.selectedStudentProperty.set(selectedStudent);
     }
 
-    public void addStudent() {
-
-        StudentViewModel studentViewModel = selectedStudent.get();
-        StudentList studentList = getStudentList();
-        studentList.addStudent(new Student(studentViewModel.nameProperty().get(),studentViewModel.idProperty().get()));
-
-
+    public boolean addStudent() {
+        try {
+            // TODO: 5/17/2021 DENISS fix the add method with the search library
+            StudentViewModel studentViewModel = null;
+            getStudentList().addStudent(new Student(studentViewModel.nameProperty().get(), studentViewModel.idProperty().get()));
+            // TODO: 5/17/2021 replace with observer
+            loadFromModel();
+            return true;
+        }
+        catch (IllegalArgumentException e) {
+            errorProperty.set(e.getMessage());
+            return false;
+        }
     }
 
     private StudentList getStudentList() {
         return model.getClassByName(viewModelState.getID()).getStudents();
     }
-
-
+    
     public void removeStudent(String id) {
-         getStudentList().removeStudent(id);
-
+        getStudentList().removeStudent(id);
     }
 
     public StudentViewModel getSelectedStudent() {
-        return selectedStudent.get();
+        return selectedStudentProperty.get();
+    }
+    
+    public void setSelected(StudentViewModel selectedStudent) {
+        selectedStudentProperty.set(selectedStudent);
+    }
+
+    public ObservableList<StudentViewModel> getClassStudentTable() {
+        return classStudentTable;
     }
 
 
+    public StringProperty errorProperty() {
+        return errorProperty;
+    }
 }
