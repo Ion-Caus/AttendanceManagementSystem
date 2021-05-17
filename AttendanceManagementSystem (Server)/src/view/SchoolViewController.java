@@ -164,5 +164,7 @@ public class SchoolViewController extends ViewController {
     @FXML
     private void viewStudentList() {
 
+        getViewHandler().openView(View.STUDENTLIST_VIEW);
+
     }
 }

@@ -45,7 +45,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="labelField">
+                        <TextField fx:id="idField">
                            <font>
                               <Font size="15.0" />
                            </font>

@@ -31,9 +31,9 @@ public class InfoViewModel {
     private Model model;
     private ViewModelState viewState;
 
-    public InfoViewModel(Model model, ViewModelState viewModelStat) {
+    public InfoViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        this.viewState = viewModelStat;
+        this.viewState = viewModelState;
 
         //Lesson properties
         this.subject = new SimpleStringProperty();
@@ -41,14 +41,14 @@ public class InfoViewModel {
         this.contents = new SimpleStringProperty();
         this.homework = new SimpleStringProperty();
         this.teacher = new SimpleStringProperty();
-        this.date = new SimpleObjectProperty<>();
-        //--
 
 
         this.className = new SimpleStringProperty();
         this.error = new SimpleStringProperty();
 
         //Student View properties
+        this.date = new SimpleObjectProperty<>();
+        //--
         this.absent = new SimpleStringProperty();
         this.motive = new SimpleStringProperty();
         this.grade = new SimpleStringProperty();
@@ -110,6 +110,14 @@ public class InfoViewModel {
     }
 
     public void loadFromModel() {
+
+
+
+
+
+
+
+
 
     }
 

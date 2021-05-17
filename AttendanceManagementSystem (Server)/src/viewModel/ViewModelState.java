@@ -37,6 +37,10 @@ public class ViewModelState {
         return accessLevel;
     }
 
+    public String getLessonID() {
+        return lessonID;
+    }
+
     public void clear() {
         this.section = null;
         this.ID = null;
