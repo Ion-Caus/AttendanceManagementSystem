@@ -16,74 +16,72 @@ import model.Model;
 import model.Student;
 import model.StudentList;
 
+import java.util.ArrayList;
+
 public class ClassStudentListViewModel {
 
     private Model model;
     private ViewModelState viewModelState;
-    private StringProperty classLabel;
-    private StringProperty nameField;
-    private StringProperty labelField;
-    private ObservableList<StudentViewModel> classStudentTable;
+
+    private StringProperty className;
+    private StringProperty searchField;
     private StringProperty errorProperty;
+
+    private ObservableList<StudentViewModel> classStudentTable;
     private ObjectProperty<StudentViewModel> selectedStudentProperty;
 
     ClassStudentListViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
         this.viewModelState = viewModelState;
-        classLabel = new SimpleStringProperty(viewModelState.getID());
-        nameField = new SimpleStringProperty();
-        labelField = new SimpleStringProperty();
+        className = new SimpleStringProperty(viewModelState.getID());
+        searchField = new SimpleStringProperty();
         classStudentTable = FXCollections.observableArrayList();
         errorProperty = new SimpleStringProperty();
         selectedStudentProperty = new SimpleObjectProperty<>();
 
-        loadFromModel();
-        
     }
     
     private void loadFromModel() {
-        clear();
-        for(Student student: model.getClassByName("12 C").getStudents().getAllStudents()){
+        classStudentTable.clear();
+        for(Student student: model.getClassByName(viewModelState.getID()).getStudents().getAllStudents()){
             classStudentTable.add(new StudentViewModel(student));
         }
-//        model.getClassByName(viewModelState.getID());
-        
     }
 
     public void clear() {
-        classLabel.setValue("");
-        nameField.setValue("");
-        nameField.setValue("");
-        labelField.setValue("");
+        className.setValue(viewModelState.getID());
+        searchField.setValue("");
         errorProperty.setValue("");
 
-    }
-    
-    public void setSelectedStudent(StudentViewModel selectedStudent) {
-        this.selectedStudentProperty.set(selectedStudent);
+        loadFromModel();
     }
 
-    public boolean addStudent() {
+    public void addStudent() {
         try {
-            // TODO: 5/17/2021 DENISS fix the add method with the search library
-            StudentViewModel studentViewModel = null;
-            getStudentList().addStudent(new Student(studentViewModel.nameProperty().get(), studentViewModel.idProperty().get()));
+            Class theClass = getTheClass();
+            Student student = model.getStudentBy(searchField.get().split("[()]")[1]);
+
+            student.setClassName(theClass.getClassName());
+            theClass.getStudents().addStudent(student);
+
             // TODO: 5/17/2021 replace with observer
-            loadFromModel();
-            return true;
+            clear();
         }
         catch (IllegalArgumentException e) {
             errorProperty.set(e.getMessage());
-            return false;
         }
     }
 
-    private StudentList getStudentList() {
-        return model.getClassByName(viewModelState.getID()).getStudents();
+    private Class getTheClass() {
+        return model.getClassByName(viewModelState.getID());
+    }
+
+    public ArrayList<String> getUnassignedStudents() {
+        return model.getUnassignedStudents();
     }
     
     public void removeStudent(String id) {
-        getStudentList().removeStudent(id);
+        getTheClass().getStudents().removeStudent(id);
     }
 
     public StudentViewModel getSelectedStudent() {
@@ -98,6 +96,13 @@ public class ClassStudentListViewModel {
         return classStudentTable;
     }
 
+    public StringProperty classProperty() {
+        return className;
+    }
+
+    public StringProperty searchFieldProperty() {
+        return searchField;
+    }
 
     public StringProperty errorProperty() {
         return errorProperty;

@@ -163,8 +163,7 @@ public class SchoolViewController extends ViewController {
 
     @FXML
     private void viewStudentList() {
-
+        viewModel.viewStudentList();
         getViewHandler().openView(View.STUDENTLIST_VIEW);
-
     }
 }

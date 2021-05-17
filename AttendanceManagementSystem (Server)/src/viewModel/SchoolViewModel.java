@@ -195,6 +195,10 @@ public class SchoolViewModel implements LocalListener<String, String> {
         return false;
     }
 
+    public void viewStudentList() {
+        viewModelState.setID(selectedClassProperty.get().classNameProperty().get());
+    }
+
     private void add(String who, String value1, String value2) {
         switch (who) {
             case "Student":

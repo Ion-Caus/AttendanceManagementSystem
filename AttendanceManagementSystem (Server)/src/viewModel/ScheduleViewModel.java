@@ -39,6 +39,7 @@ public class ScheduleViewModel {
         dateProperty = new SimpleObjectProperty<>(LocalDate.now());
 
         forAdminProperty = new SimpleBooleanProperty();
+
     }
 
     //TODO How should we load the data, and Database?

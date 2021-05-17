@@ -10,54 +10,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ClassStudentListViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ClassStudentListViewController">
    <children>
       <Label fx:id="classLabel" alignment="CENTER" prefHeight="60.0" prefWidth="500.0" text="Class">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" prefHeight="120.0" prefWidth="500.0">
+      <HBox alignment="CENTER" prefHeight="120.0" prefWidth="500.0" spacing="20.0">
          <children>
-            <VBox prefHeight="70.0" prefWidth="280.0">
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="26.0" prefWidth="60.0" text="Name">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="nameField">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="26.0" prefWidth="60.0" text="ID">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="idField">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <Button onAction="#addButtonPressed" mnemonicParsing="false" prefHeight="31.0" prefWidth="60.0" text="Add">
+            <Label prefHeight="26.0" prefWidth="60.0" text="Name/ID">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="searchField">
                <font>
                   <Font size="15.0" />
                </font>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="31.0" prefWidth="60.0" text="Add">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </Button>
          </children>
       </HBox>
@@ -84,12 +62,12 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="30.0">
          <children>
-            <Button onAction="#backButtonPressed" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="Back">
+            <Button mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="31.0" prefWidth="80.0" text="Back">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button onAction="#removeButtonPressed" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="Remove">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#removeButtonPressed" prefHeight="31.0" prefWidth="80.0" text="Remove">
                <font>
                   <Font size="15.0" />
                </font>

@@ -22,6 +22,7 @@ public class ModelManager implements Model {
         studentList.addStudent(new Student("Ion Caus", "308234"));
         studentList.addStudent(new Student("Denis", "433234"));
         studentList.addStudent(new Student("Max", "308415"));
+        studentList.addStudent(new Student("Tomas", "308400"));
 
         TeacherList teacherList = school.getTeacherList();
         Teacher steffen = new Teacher("Steffen Vissing Andersen", "325632");
@@ -64,6 +65,11 @@ public class ModelManager implements Model {
     @Override
     public ArrayList<Student> getAllStudents() {
         return school.getStudentList().getAllStudents();
+    }
+
+    @Override
+    public ArrayList<String> getUnassignedStudents() {
+        return school.getStudentList().getUnassignedStudents();
     }
 
     @Override

@@ -28,6 +28,16 @@ public class StudentList {
         return students;
     }
 
+    public ArrayList<String> getUnassignedStudents() {
+        ArrayList<String> unassignedStudents = new ArrayList<>();
+        for (Student student: students) {
+            if (student.getClassName() == null) {
+                unassignedStudents.add(String.format("%s (%S)",student.getName(), student.getID()));
+            }
+        }
+        return unassignedStudents;
+    }
+
     public Student getStudentByID(String id) throws IllegalArgumentException {
         for (Student student: students) {
             if (student.getID().equals(id)) {

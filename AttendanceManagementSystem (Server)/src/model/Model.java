@@ -15,6 +15,7 @@ public interface Model extends LocalSubject<String,String> {
     ArrayList<Class> getAllClasses();
 
     ArrayList<Student> getAllStudents();
+    ArrayList<String> getUnassignedStudents();
 
     ArrayList<Teacher> getAllTeachers();
 
