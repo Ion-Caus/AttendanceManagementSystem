@@ -75,12 +75,13 @@ public class ModelManager implements Model {
         );
 
         class1.getSchedule().addLesson(lesson1);
-        class1.getSchedule().addLesson(lesson2);
-        class2.getSchedule().addLesson(lesson3);
+        lesson1.setClassName(class1.getClassName());
 
-        System.out.println(lesson1.getId());
-        System.out.println(lesson2.getId());
-        System.out.println(lesson3.getId());
+        class1.getSchedule().addLesson(lesson2);
+        lesson2.setClassName(class1.getClassName());
+
+        class2.getSchedule().addLesson(lesson3);
+        lesson3.setClassName(class2.getClassName());
 
     }
 
@@ -125,6 +126,33 @@ public class ModelManager implements Model {
     @Override
     public Student getStudentBy(String id) throws IllegalArgumentException {
         return school.getStudentList().getStudentByID(id);
+    }
+
+    @Override
+    public Lesson getLesson(String lessonID, Student student) throws IllegalArgumentException {
+        return getClassByName(student.getClassName()).getSchedule().getLessonBy(lessonID);
+    }
+
+    @Override
+    public Lesson getLesson(String lessonID, Teacher teacher) throws IllegalArgumentException {
+        //TODO 18/05 by Ion find a way to get the lesson by ID for the teacher
+        return null;
+    }
+
+    @Override
+    public Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException {
+        return aClass.getSchedule().getLessonBy(lessonID);
+    }
+
+    @Override
+    public LessonData getLessonData(Lesson lesson, Student student) throws IllegalArgumentException {
+        try {
+            LessonData data = school.getLessonDataList().getByStudentAndLesson(lesson, student);
+        }
+        catch (IllegalArgumentException e) {
+            school.getLessonDataList().addLessonData(new LessonData(lesson, student));
+        }
+        return school.getLessonDataList().getByStudentAndLesson(lesson, student);
     }
 
 

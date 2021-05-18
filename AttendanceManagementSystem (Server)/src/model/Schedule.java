@@ -18,6 +18,14 @@ public class Schedule {
         schedule.remove(lesson);
     }
 
+    public Lesson getLessonBy(String lessonId) {
+        for (Lesson lesson : schedule) {
+            if (lesson.getId().equals(lessonId))
+                return lesson;
+        }
+        throw new IllegalArgumentException("No such lesson with this id (" + lessonId + ")");
+    }
+
     public ArrayList<Lesson> getLessonBy(LocalDate date) {
         ArrayList<Lesson> lessons = new ArrayList<>();
         for (Lesson lesson : schedule) {

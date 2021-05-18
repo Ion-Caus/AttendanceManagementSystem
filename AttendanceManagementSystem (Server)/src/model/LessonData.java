@@ -15,11 +15,11 @@ public class LessonData {
     }
 
     public void setAbsence(Absence absence) {
-        this.absence = absence;
+        this.absence = absence.copy();
     }
 
     public void setGrade(Grade grade) {
-        this.grade = grade;
+        this.grade = grade.copy();
     }
 
     public Grade getGrade() {

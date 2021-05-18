@@ -55,7 +55,12 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
 
         //TODO set in login
-        viewModelState.setAccessLevel("Administrator");
+        viewModelState.setAccessLevel("Student");
+
+
+        //TODO 18/05 by Ion
+        // if setAccessLevel("Teacher"); or Student
+        // viewModelState.setSection("Teacher"); or Student
         loadFromModel();
     }
 
@@ -152,7 +157,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
             model.removeClass(className);
         }
         catch (IllegalAccessException e) {
-            System.out.println(e.getLocalizedMessage());
             error.set(e.getLocalizedMessage());
         }
     }
@@ -172,7 +176,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
             case "Classes":
                 try {
                     viewModelState.setSection("Class");
-                    // TODO leave the school name as the id???
                     viewModelState.setID(selectedClassProperty.get().classNameProperty().get());
                     return true;
                 } catch (IllegalArgumentException | NullPointerException e) {

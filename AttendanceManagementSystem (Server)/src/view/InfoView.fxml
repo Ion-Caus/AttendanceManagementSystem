@@ -177,11 +177,15 @@
                         <Insets left="10.0" right="10.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#backToScheduleView" prefHeight="30.0" prefWidth="60.0" text="Back">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#backToScheduleView" prefHeight="30.0" prefWidth="60.0" text="Back" />
+                        <Button alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#submitChangeLesson" prefHeight="30.0" prefWidth="60.0" text="Submit" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
                </children>
             </VBox>
             </children>

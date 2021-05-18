@@ -5,9 +5,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Lesson;
+import model.LessonData;
 import model.Model;
+import model.Student;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class InfoViewModel {
     private StringProperty subject;
@@ -107,16 +112,55 @@ public class InfoViewModel {
         return viewState.getAccessLevel();
     }
 
-    public void loadFromModel() {
+    public void loadLessonFromModel() {
+        Lesson lesson = null;
+        switch (viewState.getSection()) {
+            case "Student":
+                Student student = model.getStudentBy(viewState.getID());
+                lesson = model.getLesson(viewState.getLessonID(), student);
+                loadLessonDataFroStudent(lesson, student);
+                break;
+            case "Teacher":
+//                lesson = model.getLesson(
+//                        viewState.getLessonID(),
+//                        model.getTeacherBy(viewState.getID())
+//                );
+                break;
+            case "Class":
+                lesson = model.getLesson(
+                        viewState.getLessonID(),
+                        model.getClassByName(viewState.getID())
+                );
+                break;
+        }
 
 
-
-
-        /*Lesson lesson = model.getLessonBy(viewState.getLessonID());
+        assert lesson != null;
         subject.set(lesson.getSubject());
         topic.set(lesson.getTopic());
-*/
+        //TODO 18/5 by Ion add contents to Lesson Class
+        //contents.set(lesson.);
+        homework.set(lesson.getHomework());
+        teacher.set(lesson.getTeacher().getName());
+        date.set(lesson.getLessonDate().getDate());
+        className.set(lesson.getClassName());
     }
+
+    public void loadLessonDataFroStudent(Lesson lesson, Student student) {
+        LessonData data = model.getLessonData(lesson, student);
+
+        if (data.getAbsence() != null) {
+            absent.set( Boolean.toString( data.getAbsence().isWasAbsent() ));
+            motive.set(data.getAbsence().getReason());
+        }
+
+        if (data.getGrade() != null) {
+            grade.set( Integer.toString( data.getGrade().getGrade() ));
+            comment.set(data.getGrade().getComment());
+        }
+
+    }
+
 
     public void clear() {
         //TODO clear the rest property
@@ -125,5 +169,18 @@ public class InfoViewModel {
 
     }
 
-    // TODO
+    public void openStudentList() {
+
+    }
+
+    public boolean submitChangeLesson() {
+        switch (viewState.getAccessLevel()) {
+            case "Student":
+                break;
+            case "Administrator":
+                break;
+        }
+        //TODO use observer to change lesson for all
+        return false;
+    }
 }

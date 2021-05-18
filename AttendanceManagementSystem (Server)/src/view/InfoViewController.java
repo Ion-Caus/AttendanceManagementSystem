@@ -39,10 +39,11 @@ public class InfoViewController extends ViewController {
     protected void init() {
         this.viewModel = getViewModelFactory().getInfoViewModel();
 
+        this.topicField.textProperty().bindBidirectional(viewModel.getTopicProperty());
+        this.contentsField.textProperty().bindBidirectional(viewModel.getContentsProperty());
+        this.homeworkField.textProperty().bindBidirectional(viewModel.getHomeworkProperty());
+
         this.subject.textProperty().bind(viewModel.getSubjectProperty());
-        this.topicField.textProperty().bind(viewModel.getTopicProperty());
-        this.contentsField.textProperty().bind(viewModel.getContentsProperty());
-        this.homeworkField.textProperty().bind(viewModel.getHomeworkProperty());
         this.teacherField.textProperty().bind(viewModel.getTeacherProperty()); // TODO: 13/5/2021   can we change a teacher from here or not? if yes, change to bidirectional.
         this.datePicker.valueProperty().bind(viewModel.getDateProperty()); // TODO: 13/5/2021  can we change the date from here? if yes, change to bidirectional.
 
@@ -60,26 +61,32 @@ public class InfoViewController extends ViewController {
     @Override
     public void reset() {
         viewModel.clear();
+        viewModel.loadLessonFromModel();
     }
 
     public void adjustView(){
         switch (viewModel.getViewStateAccessLevel()) {
             case "Student":
                 studentView.setVisible(true);
-                teacherView.setPrefHeight(10);
                 teacherView.setVisible(false);
+                teacherView.setPrefHeight(10);
                 break;
             case "Teacher":
             case "Administrator":
                 teacherView.setVisible(true);
-                studentView.setPrefHeight(10);
                 studentView.setVisible(false);
+                studentView.setPrefHeight(10);
+
+                topicField.editableProperty().set(true);
+                contentsField.editableProperty().set(true);
+                homeworkField.editableProperty().set(true);
                 break;
         }
     }
 
     @FXML
     private void openStudentList() {
+        viewModel.openStudentList();
         getViewHandler().openView(View.CLASS_STUDENT_VIEW);
     }
 
@@ -87,5 +94,12 @@ public class InfoViewController extends ViewController {
     private void backToScheduleView() {
         getViewHandler().openView(View.SCHEDULE_VIEW);
 
+    }
+
+    @FXML
+    private void submitChangeLesson() {
+        if (viewModel.submitChangeLesson()) {
+            getViewHandler().openView(View.SCHEDULE_VIEW);
+        }
     }
 }

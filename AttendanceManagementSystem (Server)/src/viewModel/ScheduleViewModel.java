@@ -151,7 +151,7 @@ public class ScheduleViewModel {
 
 
     public void loadInfoLesson(){
-        viewState.setLessonID(selectedLessonProperty.getName()); // TODO: 18/5/2021  this is unfinished  
+        viewState.setLessonID(selectedLessonProperty.get().idProperty().get()); // TODO: 18/5/2021  this is unfinished
     }
 
 }

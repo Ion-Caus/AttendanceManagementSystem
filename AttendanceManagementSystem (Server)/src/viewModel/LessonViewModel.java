@@ -14,11 +14,16 @@ public class LessonViewModel {
     private StringProperty classroom;
 
     public LessonViewModel(Lesson lesson) {
+        id = new SimpleStringProperty(lesson.getId());
         subject = new SimpleStringProperty(lesson.getSubject());
         topic = new SimpleStringProperty(lesson.getTopic());
         teacher = new SimpleStringProperty(lesson.getTeacher().getInitials());
         time = new SimpleStringProperty(lesson.getTimeInterval());
         classroom = new SimpleStringProperty(lesson.getClassroom());
+    }
+
+    public StringProperty idProperty() {
+        return id;
     }
 
     public StringProperty subjectProperty() {
@@ -41,6 +46,4 @@ public class LessonViewModel {
     public StringProperty classroomProperty() {
         return classroom;
     }
-
-    public StringProperty idProperty(){return id;}
 }

@@ -1,6 +1,5 @@
 package model;
 
-
 import java.time.format.DateTimeFormatter;
 
 public class Lesson {
