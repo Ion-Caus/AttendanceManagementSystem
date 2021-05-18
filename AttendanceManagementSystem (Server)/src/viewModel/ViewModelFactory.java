@@ -2,6 +2,8 @@ package viewModel;
 
 import model.Model;
 
+import java.sql.SQLException;
+
 public class ViewModelFactory
 {
   private ViewModelState viewModelState;
@@ -17,7 +19,7 @@ public class ViewModelFactory
   //private LoginViewModel loginViewModel;
   private ClassStudentListViewModel classStudentListViewModel;
 
-  public ViewModelFactory(Model model)
+  public ViewModelFactory(Model model) throws SQLException
   {
     this.viewModelState = new ViewModelState();
 

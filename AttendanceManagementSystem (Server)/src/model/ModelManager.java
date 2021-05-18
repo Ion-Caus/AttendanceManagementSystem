@@ -3,6 +3,7 @@ package model;
 import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeHandler;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -85,7 +86,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ArrayList<Class> getAllClasses() {
+    public ArrayList<Class> getAllClasses() throws SQLException
+    {
         return school.getClassList().getAllClasses();
     }
 

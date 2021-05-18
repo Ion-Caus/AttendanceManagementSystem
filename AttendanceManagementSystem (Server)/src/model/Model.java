@@ -2,6 +2,7 @@ package model;
 
 import utility.observer.subject.LocalSubject;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public interface Model extends LocalSubject<String,String> {
     void setSchoolName(String name);
     String getSchoolName();
 
-    ArrayList<Class> getAllClasses();
+    ArrayList<Class> getAllClasses() throws SQLException;
 
     ArrayList<Student> getAllStudents();
     ArrayList<String> getUnassignedStudents();

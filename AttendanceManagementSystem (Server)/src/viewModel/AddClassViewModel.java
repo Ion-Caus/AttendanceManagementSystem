@@ -1,8 +1,12 @@
 package viewModel;
 
+import dao.ClassesDAO;
+import dao.ClassesDAOImpl;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Model;
+
+import java.sql.SQLException;
 
 public class AddClassViewModel {
     private StringProperty className;
@@ -25,9 +29,10 @@ public class AddClassViewModel {
     public boolean addclass() {
         try {
             model.addClass(className.get());
+            ClassesDAOImpl.getInstance().create(className.get());
             return true;
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException | SQLException e) {
             errorProperty.set(e.getMessage());
             return false;
         }

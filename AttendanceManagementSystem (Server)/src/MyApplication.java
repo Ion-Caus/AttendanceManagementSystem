@@ -9,13 +9,15 @@ import viewModel.ViewModelFactory;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class MyApplication extends Application {
     private Model model;
     private RemoteModel server;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException
+    {
         model = new ModelManager();
         ViewModelFactory viewModelFactory = new ViewModelFactory(model);
         ViewHandler viewHandler = new ViewHandler(viewModelFactory);

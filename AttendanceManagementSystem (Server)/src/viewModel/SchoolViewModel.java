@@ -1,5 +1,6 @@
 package viewModel;
 
+import dao.ClassesDAOImpl;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,6 +16,8 @@ import model.Student;
 import model.Teacher;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
+
+import java.sql.SQLException;
 
 public class SchoolViewModel implements LocalListener<String, String> {
     private ObservableList<ClassViewModel> classList;
@@ -34,7 +37,9 @@ public class SchoolViewModel implements LocalListener<String, String> {
     private Model model;
     private ViewModelState viewModelState;
 
-    public SchoolViewModel(Model model, ViewModelState viewModelState) {
+    public SchoolViewModel(Model model, ViewModelState viewModelState)
+        throws SQLException
+    {
         this.model = model;
         this.model.addListener(this,  "ADD Student Class","Remove Student Class","ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
         this.viewModelState = viewModelState;
@@ -59,7 +64,8 @@ public class SchoolViewModel implements LocalListener<String, String> {
         loadFromModel();
     }
 
-    private void loadFromModel() {
+    private void loadFromModel() throws SQLException
+    {
 
         classList.clear();
         for (Class theClass : model.getAllClasses()) {
@@ -150,8 +156,9 @@ public class SchoolViewModel implements LocalListener<String, String> {
         try {
             clear();
             model.removeClass(className);
+            ClassesDAOImpl.getInstance().delete(className);
         }
-        catch (IllegalAccessException e) {
+        catch (IllegalAccessException | SQLException e) {
             System.out.println(e.getLocalizedMessage());
             error.set(e.getLocalizedMessage());
         }

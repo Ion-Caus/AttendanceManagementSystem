@@ -1,6 +1,9 @@
 package model;
 
+import dao.ClassesDAOImpl;
+
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ClassList {
@@ -34,8 +37,10 @@ public class ClassList {
     }
 
 
-    public ArrayList<Class> getAllClasses() {
-        return classes;
+    public ArrayList<Class> getAllClasses() throws SQLException
+    {
+        //return classes;
+        return (ArrayList<Class>) ClassesDAOImpl.getInstance().readClasses();
     }
 
     public Class getClassWith(Student student) throws IllegalArgumentException {
