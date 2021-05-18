@@ -28,7 +28,7 @@ public class ClassesDAOImpl implements ClassesDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=attendancemanagementsystem",
-        "postgres", "password!");
+        "postgres", "admin");
     //TODO change password to your local database password for it to work
   }
 
