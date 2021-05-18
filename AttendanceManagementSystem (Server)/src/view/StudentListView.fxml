@@ -13,7 +13,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StudentListViewController">
     <children>
-        <AnchorPane minHeight="600.0" minWidth="600.0" prefHeight="520.0" prefWidth="800.0" userData="Your Schedule">
+        <AnchorPane userData="Your Schedule">
             <children>
                 <HBox alignment="CENTER" layoutX="-1.0" prefHeight="420.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>

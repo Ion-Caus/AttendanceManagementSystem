@@ -4,6 +4,9 @@ package model;
 import java.time.format.DateTimeFormatter;
 
 public class Lesson {
+    private static int count = 10_000;
+
+    private String id;
     private Teacher teacher;
     private Date lessonDate;
     private Time startTime, endTime;
@@ -28,10 +31,19 @@ public class Lesson {
         this.topic = topic;
         this.classroom = classroom;
         this.homework = homework;
+
+        //TODO 18/05 by Ion get the id from database?
+        this.id = "L" + count;
+        count++;
+
     }
 
     public static boolean hasValidTime(Time startTime, Time endTime) {
         return !(endTime.isBefore(startTime));
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Teacher getTeacher() {

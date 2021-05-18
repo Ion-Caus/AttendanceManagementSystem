@@ -6,6 +6,7 @@ import javafx.beans.property.StringProperty;
 import model.Lesson;
 
 public class LessonViewModel {
+    private StringProperty id;
     private StringProperty subject;
     private StringProperty topic;
     private StringProperty teacher;
@@ -41,6 +42,5 @@ public class LessonViewModel {
         return classroom;
     }
 
-
-
+    public StringProperty idProperty(){return id;}
 }

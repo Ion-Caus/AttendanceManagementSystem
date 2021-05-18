@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Lesson;
 import model.Model;
-import model.Student;
 
 import java.time.LocalDate;
 
@@ -41,14 +40,13 @@ public class InfoViewModel {
         this.contents = new SimpleStringProperty();
         this.homework = new SimpleStringProperty();
         this.teacher = new SimpleStringProperty();
-
+        this.date = new SimpleObjectProperty<>();
+        //--
 
         this.className = new SimpleStringProperty();
         this.error = new SimpleStringProperty();
 
         //Student View properties
-        this.date = new SimpleObjectProperty<>();
-        //--
         this.absent = new SimpleStringProperty();
         this.motive = new SimpleStringProperty();
         this.grade = new SimpleStringProperty();
@@ -114,11 +112,10 @@ public class InfoViewModel {
 
 
 
-
-
-
-
-
+        /*Lesson lesson = model.getLessonBy(viewState.getLessonID());
+        subject.set(lesson.getSubject());
+        topic.set(lesson.getTopic());
+*/
     }
 
     public void clear() {

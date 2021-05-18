@@ -60,6 +60,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     }
 
     private void loadFromModel() {
+
         classList.clear();
         for (Class theClass : model.getAllClasses()) {
             classList.add(new ClassViewModel(theClass));

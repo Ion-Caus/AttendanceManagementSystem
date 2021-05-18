@@ -149,5 +149,10 @@ public class ScheduleViewModel {
         dateProperty.setValue(dateProperty.get().plusDays(1));
     }
 
+
+    public void loadInfoLesson(){
+        viewState.setLessonID(selectedLessonProperty.getName()); // TODO: 18/5/2021  this is unfinished  
+    }
+
 }
 

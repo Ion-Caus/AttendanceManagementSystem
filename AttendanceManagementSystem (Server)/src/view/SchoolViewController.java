@@ -115,6 +115,7 @@ public class SchoolViewController extends ViewController {
 
     @FXML
     private void adjustViewButtons() {
+        viewModel.clear();
         switch (tabPane.getSelectionModel().getSelectedItem().getText()) {
             case "Classes":
                 scheduleButton.setVisible(true);
@@ -179,6 +180,6 @@ public class SchoolViewController extends ViewController {
     @FXML
     private void viewStudentList() {
         if(viewModel.viewStudentList())
-            getViewHandler().openView(View.STUDENTLIST_VIEW);
+            getViewHandler().openView(View.CLASS_STUDENT_LIST_VIEW);
     }
 }

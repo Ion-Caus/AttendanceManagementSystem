@@ -62,7 +62,7 @@ public class InfoViewController extends ViewController {
         viewModel.clear();
     }
 
-    public void adjustView() {
+    public void adjustView(){
         switch (viewModel.getViewStateAccessLevel()) {
             case "Student":
                 studentView.setVisible(true);
@@ -80,7 +80,7 @@ public class InfoViewController extends ViewController {
 
     @FXML
     private void openStudentList() {
-        getViewHandler().openView(View.STUDENTLIST_VIEW);
+        getViewHandler().openView(View.CLASS_STUDENT_VIEW);
     }
 
     @FXML

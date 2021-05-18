@@ -44,17 +44,44 @@ public class ModelManager implements Model {
         class2.getStudents().addStudent(studentList.getAllStudents().get(2));
         studentList.getAllStudents().get(2).setClassName(class2.getClassName());
 
-        class1.getSchedule().addLesson(
-                new Lesson(steffen,
-                        new Date(), //now
-                        new Time(1,1,1),
-                        new Time(2,2,2),
-                        "Math",
-                        "Logarithms",
-                        "305A",
-                        "ex. 3,4,5 pag 6."
-                )
+        Lesson lesson1 = new Lesson(steffen,
+                new Date(), //now
+                new Time(1,1,1),
+                new Time(2,2,2),
+                "Math",
+                "Logarithms",
+                "305A",
+                "ex. 3,4,5 pag 6."
         );
+
+        Lesson lesson2 = new Lesson(steffen,
+                new Date(), //now
+                new Time(3,1,1),
+                new Time(4,2,2),
+                "DBS",
+                "Logarithms",
+                "305A",
+                "ex. 3,4,5 pag 6."
+        );
+
+        Lesson lesson3 = new Lesson(steffen,
+                new Date(), //now
+                new Time(5,1,1),
+                new Time(6,2,2),
+                "Java",
+                "Logarithms",
+                "305A",
+                "ex. 3,4,5 pag 6."
+        );
+
+        class1.getSchedule().addLesson(lesson1);
+        class1.getSchedule().addLesson(lesson2);
+        class2.getSchedule().addLesson(lesson3);
+
+        System.out.println(lesson1.getId());
+        System.out.println(lesson2.getId());
+        System.out.println(lesson3.getId());
+
     }
 
     @Override

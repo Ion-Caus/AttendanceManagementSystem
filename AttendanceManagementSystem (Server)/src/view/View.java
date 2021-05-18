@@ -8,7 +8,8 @@ public enum View {
     STUDENT_VIEW("AddStudentView.fxml"),
     TEACHER_VIEW("AddTeacherView.fxml"),
     INFO_VIEW("InfoView.fxml"),
-    STUDENTLIST_VIEW("ClassStudentListView.fxml");
+    CLASS_STUDENT_LIST_VIEW("ClassStudentListView.fxml"),
+    CLASS_STUDENT_VIEW("StudentListView.fxml");
 
 
 

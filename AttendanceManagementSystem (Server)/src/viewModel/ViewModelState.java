@@ -3,7 +3,7 @@ package viewModel;
 public class ViewModelState {
     private String accessLevel;
     private String section;
-    private String ID;
+    private String ID; // this can either be a class/ student / teacher
     private String lessonID;
 
     public ViewModelState() {
@@ -39,6 +39,10 @@ public class ViewModelState {
 
     public String getLessonID() {
         return lessonID;
+    }
+
+    public void setLessonID(String lessonID) {
+        this.lessonID = lessonID;
     }
 
     public void clear() {
