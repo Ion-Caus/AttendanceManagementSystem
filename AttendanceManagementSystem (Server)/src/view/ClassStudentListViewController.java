@@ -47,17 +47,17 @@ public class ClassStudentListViewController extends ViewController {
         errorLabel.textProperty().bind(viewModel.errorProperty());
 
         searchField.textProperty().bindBidirectional(viewModel.searchFieldProperty());
-
         searchAutoCompletion = TextFields.bindAutoCompletion(searchField, viewModel.getUnassignedStudents());
     }
 
     private void rebindTextField() {
         searchAutoCompletion.dispose();
-        TextFields.bindAutoCompletion(searchField, viewModel.getUnassignedStudents());
+        searchAutoCompletion = TextFields.bindAutoCompletion(searchField, viewModel.getUnassignedStudents());
     }
 
     @Override
     public void reset() {
+        rebindTextField();
         viewModel.loadFromModel();
         viewModel.clear();
     }

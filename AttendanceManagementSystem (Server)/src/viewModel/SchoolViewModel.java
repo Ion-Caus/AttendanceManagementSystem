@@ -36,8 +36,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     public SchoolViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        //TODO ion?? maybe add a new object
-        this.model.addListener(this,  "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
+        this.model.addListener(this,  "ADD Student Class","Remove Student Class","ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
         this.viewModelState = viewModelState;
 
         classList = FXCollections.observableArrayList();
@@ -180,6 +179,11 @@ public class SchoolViewModel implements LocalListener<String, String> {
                 }
 
             case "Students":
+                if (selectedStudentProperty.get().classNameProperty().get() == null) {
+                    error.set("Student is not in a class.");
+                    return false;
+                }
+
                 try {
                     viewModelState.setSection("Student");
                     viewModelState.setID(selectedStudentProperty.get().idProperty().get());
@@ -229,8 +233,17 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     @Override
     public void propertyChange(ObserverEvent<String, String> event) {
+        //TODO 17/05 by Ion Clean up this part of code and the Observer names for remove and add Student to/from class
         Platform.runLater(() -> {
             String[] commands = event.getPropertyName().split(" ");
+            if (commands.length > 2) {
+                studentList.clear();
+                for (Student student : model.getAllStudents()) {
+                    studentList.add(new StudentViewModel(student));
+                }
+                return;
+            }
+
             switch (commands[0]) {
                 case "ADD":
                     add(commands[1], event.getValue1(), event.getValue2());
