@@ -23,16 +23,18 @@ public class ClassStrategy extends SchoolStrategy {
 
     @Override
     public void remove() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Optional<ButtonType> result;
+        if (viewModel.hasSelectionClass()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Optional<ButtonType> result;
 
-        ClassViewModel classViewModel = viewModel.getSelectedClass();
-        alert.setTitle("Delete class");
-        alert.setHeaderText("Delete class " + classViewModel.classNameProperty().get() + " ?");
-        result = alert.showAndWait();
+            ClassViewModel classViewModel = viewModel.getSelectedClass();
+            alert.setTitle("Delete class");
+            alert.setHeaderText("Delete class " + classViewModel.classNameProperty().get() + " ?");
+            result = alert.showAndWait();
 
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            viewModel.removeClass(classViewModel.classNameProperty().get());
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                viewModel.removeClass(classViewModel.classNameProperty().get());
+            }
         }
     }
 }

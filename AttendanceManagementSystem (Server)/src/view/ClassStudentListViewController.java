@@ -75,17 +75,19 @@ public class ClassStudentListViewController extends ViewController {
 
     @FXML
     private void removeButtonPressed() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Optional<ButtonType> result;
+        if (viewModel.hasSelection()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Optional<ButtonType> result;
 
-        StudentViewModel studentViewModel = viewModel.getSelectedStudent();
-        alert.setTitle("Delete student");
-        alert.setHeaderText("Delete student " + studentViewModel.nameProperty().get() + " ?");
-        result = alert.showAndWait();
+            StudentViewModel studentViewModel = viewModel.getSelectedStudent();
+            alert.setTitle("Delete student");
+            alert.setHeaderText("Delete student " + studentViewModel.nameProperty().get() + " ?");
+            result = alert.showAndWait();
 
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            viewModel.removeStudent(studentViewModel.idProperty().get());
-            rebindTextField();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                viewModel.removeStudent(studentViewModel.idProperty().get());
+                rebindTextField();
+            }
         }
     }
 

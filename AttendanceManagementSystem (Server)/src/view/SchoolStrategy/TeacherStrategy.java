@@ -21,16 +21,18 @@ public class TeacherStrategy extends SchoolStrategy {
 
     @Override
     void remove() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Optional<ButtonType> result;
+        if (viewModel.hasSelectionTeacher()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Optional<ButtonType> result;
 
-        TeacherViewModel teacherViewModel = viewModel.getSelectedTeacher();
-        alert.setTitle("Delete teacher");
-        alert.setHeaderText("Delete teacher " + teacherViewModel.nameProperty().get() + " ?");
-        result = alert.showAndWait();
+            TeacherViewModel teacherViewModel = viewModel.getSelectedTeacher();
+            alert.setTitle("Delete teacher");
+            alert.setHeaderText("Delete teacher " + teacherViewModel.nameProperty().get() + " ?");
+            result = alert.showAndWait();
 
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            viewModel.removeTeacher(teacherViewModel.idProperty().get());
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                viewModel.removeTeacher(teacherViewModel.idProperty().get());
+            }
         }
     }
 }

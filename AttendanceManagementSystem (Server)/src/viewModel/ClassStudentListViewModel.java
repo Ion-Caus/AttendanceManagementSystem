@@ -138,4 +138,13 @@ public class ClassStudentListViewModel implements LocalListener<String, String> 
             }
         });
     }
+
+    public boolean hasSelection() {
+        if (selectedStudentProperty.get() == null) {
+            errorProperty.set("Please select a student.");
+            return false;
+        }
+        return true;
+    }
+
 }

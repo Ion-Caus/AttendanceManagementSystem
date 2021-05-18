@@ -107,6 +107,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
         return selectedStudentProperty.get();
     }
 
+
     // teacher list
     public ObservableList<TeacherViewModel> getAllTeachers() {
         return teacherList;
@@ -179,12 +180,11 @@ public class SchoolViewModel implements LocalListener<String, String> {
                 }
 
             case "Students":
-                if (selectedStudentProperty.get().classNameProperty().get() == null) {
-                    error.set("Student is not in a class.");
-                    return false;
-                }
-
                 try {
+                    if (selectedStudentProperty.get().classNameProperty().get() == null) {
+                        error.set("Student is not in a class.");
+                        return false;
+                    }
                     viewModelState.setSection("Student");
                     viewModelState.setID(selectedStudentProperty.get().idProperty().get());
                     return true;
@@ -199,8 +199,14 @@ public class SchoolViewModel implements LocalListener<String, String> {
         return false;
     }
 
-    public void viewStudentList() {
-        viewModelState.setID(selectedClassProperty.get().classNameProperty().get());
+    public boolean viewStudentList() {
+        try {
+            viewModelState.setID(selectedClassProperty.get().classNameProperty().get());
+            return true;
+        }catch (NullPointerException e){
+            error.setValue("Please select a class.");
+            return false;
+        }
     }
 
     private void add(String who, String value1, String value2) {
@@ -254,4 +260,32 @@ public class SchoolViewModel implements LocalListener<String, String> {
             }
         });
     }
+
+    public boolean hasSelectionClass() {
+        if (selectedClassProperty.get() == null) {
+            error.set("Please select a class.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean hasSelectionStudent() {
+        if (selectedStudentProperty.get() == null) {
+            error.set("Please select a student.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean hasSelectionTeacher() {
+        if (selectedTeacherProperty.get() == null) {
+            error.set("Please select a teacher.");
+            return false;
+        }
+        return true;
+    }
+
+
+
+
 }
