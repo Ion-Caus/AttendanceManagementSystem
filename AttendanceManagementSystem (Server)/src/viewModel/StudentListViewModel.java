@@ -106,7 +106,7 @@ public class StudentListViewModel {
                 absenceProperty.set("YES");
                 break;
         }
-        model.changeAbsence(selectedStudentProperty.get())
+        //model.changeAbsence(selectedStudentProperty.get());
 
         //TODO 19/5 by Ion change the student lessonDATA and send a broadcast
     }
