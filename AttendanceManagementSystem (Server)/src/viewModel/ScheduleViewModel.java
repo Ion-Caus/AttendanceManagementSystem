@@ -43,7 +43,6 @@ public class ScheduleViewModel {
 
     }
 
-    //TODO How should we load the data, and Database?
     private void loadScheduleForDay() {
         schedule.clear();
 

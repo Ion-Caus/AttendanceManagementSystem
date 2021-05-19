@@ -85,6 +85,10 @@ public class SchoolViewModel implements LocalListener<String, String> {
     public void clear() {
         //TODO the clear
         error.setValue("");
+        selectedTeacherProperty.set(null);
+        selectedClassProperty.set(null);
+        selectedStudentProperty.set(null);
+
     }
 
     // class list

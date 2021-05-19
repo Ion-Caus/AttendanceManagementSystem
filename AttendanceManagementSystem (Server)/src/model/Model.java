@@ -17,6 +17,8 @@ public interface Model extends LocalSubject<String,String> {
     ArrayList<Student> getAllStudents();
     ArrayList<String> getUnassignedStudents();
 
+    ArrayList<Student> getStudentsByClass(String className);
+
     ArrayList<Teacher> getAllTeachers();
 
     ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date);
@@ -34,7 +36,7 @@ public interface Model extends LocalSubject<String,String> {
     Lesson getLesson(String lessonID, Teacher teacher) throws IllegalArgumentException;
     Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException;
 
-    LessonData getLessonData(Lesson lesson, Student student) throws IllegalArgumentException;
+    LessonData getLessonData(Lesson lesson, Student student);
 
     void addClass(String className)  throws IllegalArgumentException ;
     void removeClass(String className) throws IllegalAccessException;

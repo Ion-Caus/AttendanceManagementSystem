@@ -103,8 +103,8 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#add" prefWidth="70.0" text="Add" />
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#remove" prefWidth="70.0" text="Remove" />
+                        <Button fx:id="addButton"  alignment="CENTER" mnemonicParsing="false" onAction="#add" prefWidth="70.0" text="Add" />
+                        <Button fx:id="removeButton" alignment="CENTER" mnemonicParsing="false" onAction="#remove" prefWidth="70.0" text="Remove" />
                         <Separator prefWidth="200.0">
                            <VBox.margin>
                               <Insets bottom="20.0" />

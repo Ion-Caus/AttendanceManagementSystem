@@ -25,7 +25,7 @@ public class ViewModelFactory
     scheduleViewModel = new ScheduleViewModel(model, viewModelState);
 
     infoViewModel = new InfoViewModel(model, viewModelState);
-    studentListViewModel = new StudentListViewModel(model);
+    studentListViewModel = new StudentListViewModel(model, viewModelState);
     addStudentViewModel = new AddStudentViewModel(model);
     addClassViewModel = new AddClassViewModel(model);
     addTeacherViewModel = new AddTeacherViewModel(model);

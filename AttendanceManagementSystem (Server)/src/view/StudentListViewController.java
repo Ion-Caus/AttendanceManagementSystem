@@ -23,20 +23,12 @@ public class StudentListViewController extends ViewController {
     //TODO assign viewModel for columns. Right now - it's a placeholder.
 
     @FXML
-    private Label StudentsClassLabel;
+    private Label lessonTopicLabel;
     @FXML
-    private Label errorLabel;
+    private Label classNameLabel;
 
     @FXML
-    private Button changeStatusButton;
-    @FXML
-    private Button gradeCommentButton;
-    @FXML
-    private Button viewStudentButton;
-    @FXML
-    private Button viewMotiveButton;
-    @FXML
-    private Button backButton;
+    private Label errorLabel;
 
     private StudentListViewModel viewModel; //TODO assign proper viewModel
 
@@ -50,20 +42,22 @@ public class StudentListViewController extends ViewController {
 
         studentNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getStudentNameProperty());
-//    gradeColumn.setCellValueFactory(cellData -> cellData.getValue()
-//        .getGradeProperty());  //TODO IntegerProperty conversion
+        // TODO IntegerProperty conversion
+        //gradeColumn.setCellValueFactory(cellData -> cellData.getValue().getGradeProperty());
+
         commentColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getCommentProperty());
         absenceColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getAbsenceProperty());
         motiveColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getMotiveProperty());
-        studentListTable.setItems(viewModel
-                .getStudentList());   //TODO check if students are assigned to the table + Listener
-        studentListTable.getSelectionModel().selectedItemProperty()
-                .addListener((obs, oldVal, newVal) -> viewModel.setSelected(newVal));
+        studentListTable.setItems(viewModel.getStudentList());
+        studentListTable.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
+        );
 
-        StudentsClassLabel.textProperty().bind(viewModel.getClassProperty());
+        lessonTopicLabel.textProperty().bind(viewModel.getLessonTopicProperty());
+        classNameLabel.textProperty().bind(viewModel.getClassNameProperty());
         errorLabel.textProperty().bind(viewModel.getErrorProperty());
     }
 
@@ -72,13 +66,10 @@ public class StudentListViewController extends ViewController {
         viewModel.clear();  //TODO check and update clear method in corresponding viewModel
     }
 
-    @FXML
-    private void back() {
-        getViewHandler().openView(View.INFO_VIEW);
-    }
 
     @FXML
-    private void changeStatus() {
+    private void changeAbsence() {
+        viewModel.changeAbsence();
     }
 
     @FXML
@@ -91,5 +82,16 @@ public class StudentListViewController extends ViewController {
 
     @FXML
     private void viewMotive() {
+    }
+
+    @FXML
+    private void backButtonPressed() {
+        getViewHandler().openView(View.INFO_VIEW);
+    }
+
+    @FXML
+    private void submitButtonPressed() {
+        if (viewModel.submitDataChange())
+            getViewHandler().openView(View.INFO_VIEW);
     }
 }

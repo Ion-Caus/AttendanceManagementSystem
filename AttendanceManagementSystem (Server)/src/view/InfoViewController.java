@@ -86,7 +86,7 @@ public class InfoViewController extends ViewController {
 
     @FXML
     private void openStudentList() {
-        viewModel.openStudentList();
+
         getViewHandler().openView(View.CLASS_STUDENT_VIEW);
     }
 

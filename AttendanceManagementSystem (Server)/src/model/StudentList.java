@@ -60,4 +60,14 @@ public class StudentList {
         throw new IllegalArgumentException("No such student with this name (" + name + ")");
     }
 
+    public ArrayList<Student> getStudentsByClass(String className) {
+        ArrayList<Student> studentsInAClass = new ArrayList<>();
+        for (Student student: students) {
+            if (student.getClassName().equals(className)) {
+                studentsInAClass.add(student);
+            }
+        }
+        return studentsInAClass;
+    }
+
 }

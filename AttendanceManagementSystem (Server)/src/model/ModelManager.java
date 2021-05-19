@@ -117,6 +117,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ArrayList<Student> getStudentsByClass(String className) {
+        return school.getStudentList().getStudentsByClass(className);
+    }
+
+    @Override
     public ArrayList<Teacher> getAllTeachers() {
         return school.getTeacherList().getAllTeachers();
     }
@@ -166,25 +171,25 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException {
+        return aClass.getSchedule().getLessonBy(lessonID);
+    }
+
+    @Override
     public Lesson getLesson(String lessonID, Teacher teacher) throws IllegalArgumentException {
         //TODO 18/05 by Ion find a way to get the lesson by ID for the teacher
         return null;
     }
 
     @Override
-    public Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException {
-        return aClass.getSchedule().getLessonBy(lessonID);
-    }
-
-    @Override
-    public LessonData getLessonData(Lesson lesson, Student student) throws IllegalArgumentException {
+    public LessonData getLessonData(Lesson lesson, Student student) {
         try {
-            LessonData data = school.getLessonDataList().getByStudentAndLesson(lesson, student);
+            return school.getLessonDataList().getByStudentAndLesson(lesson, student);
         }
         catch (IllegalArgumentException e) {
             school.getLessonDataList().addLessonData(new LessonData(lesson, student));
+            return school.getLessonDataList().getByStudentAndLesson(lesson, student);
         }
-        return school.getLessonDataList().getByStudentAndLesson(lesson, student);
     }
 
 
