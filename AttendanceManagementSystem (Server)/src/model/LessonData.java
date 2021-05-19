@@ -6,11 +6,11 @@ public class LessonData {
     private Grade grade;
     private Absence absence;
 
-
     public LessonData(Lesson lesson, Student student) {
         this.lesson = lesson;
-        this.grade = null;
-        this.absence = null;
+        // TODO: 5/19/2021 Handle default values, null causes exception 
+        this.grade = new Grade(12,"");
+        this.absence = new Absence(false);
         this.student = student;
     }
 

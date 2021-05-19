@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class StudentList {
     private ArrayList<Student> students;
@@ -63,7 +64,7 @@ public class StudentList {
     public ArrayList<Student> getStudentsByClass(String className) {
         ArrayList<Student> studentsInAClass = new ArrayList<>();
         for (Student student: students) {
-            if (student.getClassName().equals(className)) {
+            if (Objects.equals(student.getClassName(),className)) {
                 studentsInAClass.add(student);
             }
         }

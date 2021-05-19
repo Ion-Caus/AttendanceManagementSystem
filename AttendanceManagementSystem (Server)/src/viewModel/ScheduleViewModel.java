@@ -153,13 +153,19 @@ public class ScheduleViewModel {
     }
 
 
-    public void loadInfoLesson(){
-        viewState.setLessonID(selectedLessonProperty.get().idProperty().get());
-        System.out.println("View State");
-        System.out.println("AccessLevel: " + viewState.getAccessLevel());
-        System.out.println("ID: " + viewState.getID());
-        System.out.println("Selection: " + viewState.getSection());
-        System.out.println("LessonID: " + viewState.getLessonID());
+    public boolean loadInfoLesson(){
+        try {
+            viewState.setLessonID(selectedLessonProperty.get().idProperty().get());
+            System.out.println("View State");
+            System.out.println("AccessLevel: " + viewState.getAccessLevel());
+            System.out.println("ID: " + viewState.getID());
+            System.out.println("Selection: " + viewState.getSection());
+            System.out.println("LessonID: " + viewState.getLessonID());
+            return true;
+        } catch (NullPointerException e) {
+            errorProperty.set("Please select a lesson.");
+            return false;
+        }
     }
 
 }

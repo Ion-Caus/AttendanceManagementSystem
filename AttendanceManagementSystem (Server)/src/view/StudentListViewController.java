@@ -1,25 +1,25 @@
 package view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import viewModel.StudentLessonDataViewModel;
 import viewModel.StudentListViewModel;
 
 public class StudentListViewController extends ViewController {
     @FXML
-    private TableView<StudentListViewModel> studentListTable;
+    private TableView<StudentLessonDataViewModel> studentListTable;
     @FXML
-    private TableColumn<StudentListViewModel, String> studentNameColumn;
+    private TableColumn<StudentLessonDataViewModel, String> studentNameColumn;
     @FXML
-    private TableColumn<StudentListViewModel, String> commentColumn;
+    private TableColumn<StudentLessonDataViewModel, String> commentColumn;
     @FXML
-    private TableColumn<StudentListViewModel, Integer> gradeColumn;
+    private TableColumn<StudentLessonDataViewModel, String> gradeColumn;
     @FXML
-    private TableColumn<StudentListViewModel, String> absenceColumn;
+    private TableColumn<StudentLessonDataViewModel, String> absenceColumn;
     @FXML
-    private TableColumn<StudentListViewModel, String> motiveColumn;
+    private TableColumn<StudentLessonDataViewModel, String> motiveColumn;
     //TODO assign viewModel for columns. Right now - it's a placeholder.
 
     @FXML
@@ -42,8 +42,8 @@ public class StudentListViewController extends ViewController {
 
         studentNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getStudentNameProperty());
-        // TODO IntegerProperty conversion
-        //gradeColumn.setCellValueFactory(cellData -> cellData.getValue().getGradeProperty());
+
+        gradeColumn.setCellValueFactory(cellData -> cellData.getValue().getGradeProperty());
 
         commentColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getCommentProperty());
@@ -51,7 +51,7 @@ public class StudentListViewController extends ViewController {
                 cellData -> cellData.getValue().getAbsenceProperty());
         motiveColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getMotiveProperty());
-        studentListTable.setItems(viewModel.getStudentList());
+        studentListTable.setItems(viewModel.getLessonDataList());
         studentListTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
         );
@@ -63,6 +63,7 @@ public class StudentListViewController extends ViewController {
 
     @Override
     public void reset() {
+        viewModel.loadFromModel();
         viewModel.clear();  //TODO check and update clear method in corresponding viewModel
     }
 

@@ -9,10 +9,7 @@ import model.LessonData;
 import model.Model;
 import model.Student;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class InfoViewModel {
     private StringProperty subject;
@@ -152,7 +149,7 @@ public class InfoViewModel {
 
         if (data.getAbsence() != null) {
             absent.set( Boolean.toString( data.getAbsence().isWasAbsent() ));
-            motive.set(data.getAbsence().getReason());
+            motive.set(data.getAbsence().getMotive());
         }
 
         if (data.getGrade() != null) {

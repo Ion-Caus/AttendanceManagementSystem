@@ -18,7 +18,7 @@ public class Absence {
         return new Absence(this.wasAbsent, this.reason);
     }
 
-    public String getReason() {
+    public String getMotive() {
         return reason;
     }
 

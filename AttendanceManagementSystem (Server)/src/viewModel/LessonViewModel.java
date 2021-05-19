@@ -42,7 +42,6 @@ public class LessonViewModel {
         return time;
     }
 
-
     public StringProperty classroomProperty() {
         return classroom;
     }

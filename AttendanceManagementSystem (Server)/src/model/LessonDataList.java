@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class LessonDataList {
 
-
     private final ArrayList<LessonData> lessonDataList;
 
     public LessonDataList() {
