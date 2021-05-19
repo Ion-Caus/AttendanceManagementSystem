@@ -8,9 +8,9 @@ public class LessonData {
 
     public LessonData(Lesson lesson, Student student) {
         this.lesson = lesson;
-        // TODO: 5/19/2021 Handle default values, null causes exception 
-        this.grade = new Grade(12,"");
-        this.absence = new Absence(false);
+        // TODO: 5/19/2021 Handle default values, null causes exception
+        this.grade = new Grade();
+        this.absence = new Absence();
         this.student = student;
     }
 
