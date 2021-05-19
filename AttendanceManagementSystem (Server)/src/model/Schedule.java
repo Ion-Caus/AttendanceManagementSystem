@@ -10,6 +10,7 @@ public class Schedule {
         this.schedule = new ArrayList<>();
     }
 
+    //TODO 19/5 by Ion Check if there is not a lesson on that date and at that time in the list.
     public void addLesson(Lesson lesson) {
         schedule.add(lesson);
     }
@@ -35,11 +36,14 @@ public class Schedule {
         return lessons;
     }
 
-    public ArrayList<Lesson> getLessonBy(Teacher teacher) {
+    public ArrayList<Lesson> getLessonBy(Teacher teacher, LocalDate date) {
         ArrayList<Lesson> lessons = new ArrayList<>();
         for (Lesson lesson : schedule) {
-            if (lesson.getTeacher().equals(teacher))
+            if (lesson.getTeacher().equals(teacher) &&
+                lesson.getLessonDate().getDate().equals(date)) {
+
                 lessons.add(lesson);
+            }
         }
         return lessons;
     }

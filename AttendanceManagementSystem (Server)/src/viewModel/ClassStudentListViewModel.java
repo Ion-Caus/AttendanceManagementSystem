@@ -35,7 +35,7 @@ public class ClassStudentListViewModel implements LocalListener<String, String> 
 
     ClassStudentListViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        this.model.addListener(this,  "ADD Student Class", "REMOVE Student Class");
+        this.model.addListener(this,  "ADD_TO_CLASS Student", "REMOVE_FROM_CLASS Student");
         this.viewModelState = viewModelState;
 
         className = new SimpleStringProperty(viewModelState.getID());
@@ -122,15 +122,14 @@ public class ClassStudentListViewModel implements LocalListener<String, String> 
                 return;
             }
 
-            String[] commands = event.getPropertyName().split(" ");
-            switch (commands[0]) {
-                case "ADD":
+            switch (event.getPropertyName().split(" ")[0]) {
+                case "ADD_TO_CLASS":
                     classStudentTable.add(new StudentViewModel(
                             model.getStudentBy(event.getValue2())
                             )
                     );
                     break;
-                case "REMOVE":
+                case "REMOVE_FROM_CLASS":
                     classStudentTable.removeIf(
                             student -> student.idProperty().get().equals(event.getValue2())
                     );

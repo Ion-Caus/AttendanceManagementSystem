@@ -21,7 +21,6 @@ public class Student {
         this.name = name;
         this.ID = ID;
         this.account = null;
-        this.name = name;
     }
 
     public String getName() {
@@ -32,10 +31,10 @@ public class Student {
         return ID;
     }
 
-    //TODO 14/05 by Ion find a method where the student is assigned in the class and set it
     public void setClassName(String className) {
         this.className = className;
     }
+
     public void clearClassName() {
         this.className = null;
     }

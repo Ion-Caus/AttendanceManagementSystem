@@ -32,6 +32,15 @@ public class TeacherList {
         return teachers.stream().noneMatch(teacher -> teacher.getID().equals(teacherID));
     }
 
+    public Teacher getTeacherByID(String id) throws IllegalArgumentException {
+        for (Teacher teacher: teachers) {
+            if (teacher.getID().equals(id)) {
+                return teacher;
+            }
+        }
+        throw new IllegalArgumentException("No such teacher with this id (" + id + ")");
+    }
+
 }
 
 

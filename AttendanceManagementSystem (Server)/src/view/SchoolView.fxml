@@ -46,8 +46,8 @@
                                        <children>
                                           <TableView fx:id="allStudentsTable" prefHeight="457.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <columns>
-                                                <TableColumn fx:id="idStudentColumn" prefWidth="100.0" resizable="false" text="ID" />
-                                                <TableColumn fx:id="studentColumn" prefWidth="200.0" resizable="false" text="Student" />
+                                                <TableColumn fx:id="idStudentColumn" resizable="false" text="ID" />
+                                                <TableColumn fx:id="studentColumn" prefWidth="220.0" resizable="false" text="Student" />
                                                 <TableColumn fx:id="studentClassColumn" prefWidth="90.0" resizable="false" text="Class" />
                                              </columns>
                                           </TableView>
@@ -61,8 +61,9 @@
                                        <children>
                                           <TableView fx:id="allTeachersTable" prefHeight="457.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <columns>
-                                                <TableColumn fx:id="teacherColumn" prefWidth="250.0" resizable="false" text="Teacher" />
-                                                <TableColumn fx:id="initialsColumn" prefWidth="140.0" resizable="false" text="Initials" />
+                                                <TableColumn fx:id="idTeacherColumn" resizable="false" text="ID" />
+                                                <TableColumn fx:id="teacherColumn" prefWidth="220.0" resizable="false" text="Teacher" />
+                                                <TableColumn fx:id="initialsColumn" prefWidth="90.0" resizable="false" text="Initials" />
                                              </columns>
                                           </TableView>
                                        </children>

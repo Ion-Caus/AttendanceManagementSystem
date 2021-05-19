@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import model.Lesson;
 import model.Model;
 import model.Student;
+import model.Teacher;
 
 import java.time.LocalDate;
 
@@ -58,6 +59,9 @@ public class ScheduleViewModel {
                 }
                 break;
             case "Teacher":
+                for (Lesson lesson : model.getScheduleFor(model.getTeacherBy(viewState.getID()), dateProperty.getValue())) {
+                    schedule.add(new LessonViewModel(lesson));
+                }
                 break;
         }
 
@@ -79,8 +83,8 @@ public class ScheduleViewModel {
                 break;
 
             case "Teacher":
-                //Teacher teacher = model.getTeacherBy(viewState.getId();
-                //userProperty.set(teacher.getName());
+                Teacher teacher = model.getTeacherBy(viewState.getID());
+                userProperty.set(teacher.getName());
                 schoolClassProperty.set(model.getSchoolName());
                 break;
 
@@ -151,7 +155,12 @@ public class ScheduleViewModel {
 
 
     public void loadInfoLesson(){
-        viewState.setLessonID(selectedLessonProperty.get().idProperty().get()); // TODO: 18/5/2021  this is unfinished
+        viewState.setLessonID(selectedLessonProperty.get().idProperty().get());
+        System.out.println("View State");
+        System.out.println("AccessLevel: " + viewState.getAccessLevel());
+        System.out.println("ID: " + viewState.getID());
+        System.out.println("Selection: " + viewState.getSection());
+        System.out.println("LessonID: " + viewState.getLessonID());
     }
 
 }

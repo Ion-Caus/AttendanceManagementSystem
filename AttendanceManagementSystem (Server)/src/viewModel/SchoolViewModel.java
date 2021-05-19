@@ -36,7 +36,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     public SchoolViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        this.model.addListener(this,  "ADD Student Class","Remove Student Class","ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
+        this.model.addListener(this,  "ADD_TO_CLASS Student","REMOVE_FROM_CLASS Student","ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
         this.viewModelState = viewModelState;
 
         classList = FXCollections.observableArrayList();
@@ -55,7 +55,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
 
         //TODO set in login
-        viewModelState.setAccessLevel("Student");
+        viewModelState.setAccessLevel("Administrator");
 
 
         //TODO 18/05 by Ion
@@ -198,7 +198,14 @@ public class SchoolViewModel implements LocalListener<String, String> {
                 }
 
             case "Teachers":
-                break;
+                try {
+                    viewModelState.setSection("Teacher");
+                    viewModelState.setID(selectedTeacherProperty.get().idProperty().get());
+                    return true;
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    error.setValue("Please select a teacher.");
+                    return false;
+                }
         }
         return false;
     }
@@ -246,15 +253,14 @@ public class SchoolViewModel implements LocalListener<String, String> {
         //TODO 17/05 by Ion Clean up this part of code and the Observer names for remove and add Student to/from class
         Platform.runLater(() -> {
             String[] commands = event.getPropertyName().split(" ");
-            if (commands.length > 2) {
-                studentList.clear();
-                for (Student student : model.getAllStudents()) {
-                    studentList.add(new StudentViewModel(student));
-                }
-                return;
-            }
 
             switch (commands[0]) {
+                case "ADD_TO_CLASS":
+                case "REMOVE_FROM_CLASS":
+                    Student student = model.getStudentBy(event.getValue2());
+                    studentList.removeIf(studentVM -> studentVM.idProperty().get().equals(student.getID()));
+                    studentList.add(0, new StudentViewModel(student));
+                    break;
                 case "ADD":
                     add(commands[1], event.getValue1(), event.getValue2());
                     break;

@@ -41,6 +41,8 @@ public class SchoolViewController extends ViewController {
     @FXML
     private TableView<TeacherViewModel> allTeachersTable;
     @FXML
+    private TableColumn<TeacherViewModel, String> idTeacherColumn;
+    @FXML
     private TableColumn<TeacherViewModel, String> teacherColumn;
     @FXML
     private TableColumn<TeacherViewModel, String> initialsColumn;
@@ -94,6 +96,9 @@ public class SchoolViewController extends ViewController {
         );
 
         // Teachers Table
+        idTeacherColumn.setCellValueFactory(
+                cellData -> cellData.getValue().idProperty()
+        );
         teacherColumn.setCellValueFactory(
                 cellData -> cellData.getValue().nameProperty()
         );

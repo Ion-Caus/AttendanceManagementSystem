@@ -20,7 +20,6 @@ public class Teacher {
 
         this.name = name;
         this.initials = getInitials(name);
-        System.out.println(initials);
         this.ID = ID;
     }
 
@@ -40,11 +39,11 @@ public class Teacher {
         return ID;
     }
 
-    private String getInitials(String name){
+    private String getInitials(String name) {
         String[] names = name.split(" ");
         String initials = "";
-        for(String temp: names)
-            initials+=temp.charAt(0);
+        for (String temp : names)
+            initials += temp.charAt(0);
         return initials;
     }
 

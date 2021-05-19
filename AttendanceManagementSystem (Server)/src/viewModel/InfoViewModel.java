@@ -118,6 +118,7 @@ public class InfoViewModel {
             case "Student":
                 Student student = model.getStudentBy(viewState.getID());
                 lesson = model.getLesson(viewState.getLessonID(), student);
+
                 loadLessonDataFroStudent(lesson, student);
                 break;
             case "Teacher":
@@ -143,7 +144,7 @@ public class InfoViewModel {
         homework.set(lesson.getHomework());
         teacher.set(lesson.getTeacher().getName());
         date.set(lesson.getLessonDate().getDate());
-        className.set(lesson.getClassName());
+        className.set("Class " + lesson.getClassName());
     }
 
     public void loadLessonDataFroStudent(Lesson lesson, Student student) {

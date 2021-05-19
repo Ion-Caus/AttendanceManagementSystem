@@ -20,14 +20,15 @@ public interface Model extends LocalSubject<String,String> {
     ArrayList<Teacher> getAllTeachers();
 
     ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date);
-
     ArrayList<Lesson> getScheduleFor(Student student, LocalDate date);
+    ArrayList<Lesson> getScheduleFor(Teacher teacher, LocalDate date);
 
     Class getClassWith(Student student);
-
     Class getClassByName(String name);
 
     Student getStudentBy(String id) throws IllegalArgumentException;
+
+    Teacher getTeacherBy(String id) throws IllegalArgumentException;
 
     Lesson getLesson(String lessonID, Student student) throws IllegalArgumentException;
     Lesson getLesson(String lessonID, Teacher teacher) throws IllegalArgumentException;

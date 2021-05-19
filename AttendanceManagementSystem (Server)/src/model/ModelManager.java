@@ -27,6 +27,9 @@ public class ModelManager implements Model {
         TeacherList teacherList = school.getTeacherList();
         Teacher steffen = new Teacher("Steffen Vissing Andersen", "325632");
         teacherList.addTeacher(steffen);
+        Teacher ole = new Teacher("Ole Ildsgaard Hougaard", "325600");
+        teacherList.addTeacher(ole);
+
 
         ClassList classList = school.getClassList();
         Class class1 = new Class("12 C");
@@ -44,34 +47,44 @@ public class ModelManager implements Model {
         class2.getStudents().addStudent(studentList.getAllStudents().get(2));
         studentList.getAllStudents().get(2).setClassName(class2.getClassName());
 
-        Lesson lesson1 = new Lesson(steffen,
+        Lesson lesson1 = new Lesson(ole,
                 new Date(), //now
-                new Time(1,1,1),
-                new Time(2,2,2),
-                "Math",
-                "Logarithms",
+                new Time(9,20,0),
+                new Time(10,30,0),
+                "DBS",
+                "Stating with Databases",
                 "305A",
-                "ex. 3,4,5 pag 6."
+                "Download Postgres"
         );
 
         Lesson lesson2 = new Lesson(steffen,
                 new Date(), //now
-                new Time(3,1,1),
-                new Time(4,2,2),
-                "DBS",
-                "Logarithms",
-                "305A",
-                "ex. 3,4,5 pag 6."
+                new Time(10,30,0),
+                new Time(11,45,0),
+                "Java",
+                "Threads",
+                "Zoom",
+                "Counter Incrementer exercise"
         );
 
-        Lesson lesson3 = new Lesson(steffen,
+        Lesson lesson3 = new Lesson(ole,
                 new Date(), //now
-                new Time(5,1,1),
-                new Time(6,2,2),
-                "Java",
-                "Logarithms",
+                new Time(12,45,0),
+                new Time(14,15,0),
+                "DBS",
+                "ER Diagrams",
                 "305A",
-                "ex. 3,4,5 pag 6."
+                "Hospital exercise"
+        );
+
+        Lesson lesson4 = new Lesson(steffen,
+                new Date(),
+                new Time(14,30,0),
+                new Time(16,0,0),
+                "Java",
+                "Observer",
+                "305A",
+                "Observer Pattern exercises"
         );
 
         class1.getSchedule().addLesson(lesson1);
@@ -79,6 +92,9 @@ public class ModelManager implements Model {
 
         class1.getSchedule().addLesson(lesson2);
         lesson2.setClassName(class1.getClassName());
+
+        class1.getSchedule().addLesson(lesson4);
+        lesson4.setClassName(class1.getClassName());
 
         class2.getSchedule().addLesson(lesson3);
         lesson3.setClassName(class2.getClassName());
@@ -114,6 +130,17 @@ public class ModelManager implements Model {
     public ArrayList<Lesson> getScheduleFor(Student student, LocalDate date) {
         return getClassWith(student).getSchedule().getLessonBy(date);
     }
+
+    @Override
+    public ArrayList<Lesson> getScheduleFor(Teacher teacher, LocalDate date) {
+        ArrayList<Lesson> lessons = new ArrayList<>();
+
+        for (Class aClass: getAllClasses()) {
+            lessons.addAll(aClass.getSchedule().getLessonBy(teacher, date));
+        }
+        return lessons;
+    }
+
     @Override
     public Class getClassWith(Student student) throws IllegalArgumentException {
         return school.getClassList().getClassWith(student);
@@ -126,6 +153,11 @@ public class ModelManager implements Model {
     @Override
     public Student getStudentBy(String id) throws IllegalArgumentException {
         return school.getStudentList().getStudentByID(id);
+    }
+
+    @Override
+    public Teacher getTeacherBy(String id) throws IllegalArgumentException {
+        return school.getTeacherList().getTeacherByID(id);
     }
 
     @Override
@@ -193,11 +225,10 @@ public class ModelManager implements Model {
         Class theClass = getClassByName(className);
         Student student = getStudentBy(studentID);
 
-            theClass.getStudents().addStudent(student);
-            student.setClassName(theClass.getClassName());
-            property.firePropertyChange("ADD Student Class", className, studentID);
+        theClass.getStudents().addStudent(student);
+        student.setClassName(theClass.getClassName());
 
-        System.out.println("fire add");
+        property.firePropertyChange("ADD_TO_CLASS Student", className, studentID);
     }
 
     @Override
@@ -205,12 +236,10 @@ public class ModelManager implements Model {
         Class theClass = getClassByName(className);
         Student student = getStudentBy(studentID);
 
-        student.clearClassName();
         theClass.getStudents().removeStudent(student);
+        student.clearClassName();
 
-        property.firePropertyChange("REMOVE Student Class", className, studentID);
-
-        System.out.println("fire remove");
+        property.firePropertyChange("REMOVE_FROM_CLASS Student", className, studentID);
     }
 
     @Override

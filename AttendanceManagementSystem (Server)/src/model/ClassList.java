@@ -62,5 +62,4 @@ public class ClassList {
     public boolean isUnique(String className) {
         return classes.stream().noneMatch(aClass -> aClass.getClassName().equals(className));
     }
-
 }
