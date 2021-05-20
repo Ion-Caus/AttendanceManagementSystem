@@ -57,10 +57,9 @@ public class ModelManager implements Model {
                 new Time(10,30,0),
                 "DBS",
                 "Stating with Databases",
-                "--",
+                "set up a database",
                 "305A",
-                "Download Postgres",
-                "set up a database"
+                "Download Postgres"
         );
 
         Lesson lesson2 = new Lesson(steffen,
@@ -69,9 +68,8 @@ public class ModelManager implements Model {
                 new Time(11,45,0),
                 "Java",
                 "Threads",
-                "--",
-                "Zoom",
                 "Counter Incrementer exercise",
+                "Zoom",
                 "dont be drunk on lesson"
         );
 
@@ -81,9 +79,8 @@ public class ModelManager implements Model {
                 new Time(14,15,0),
                 "DBS",
                 "ER Diagrams",
-                "--",
-                "305A",
                 "Hospital exercise",
+                "305A",
                 "bring paper and pen"
         );
 
@@ -93,9 +90,8 @@ public class ModelManager implements Model {
                 new Time(16,0,0),
                 "Java",
                 "Observer",
-                "--",
-                "305A",
                 "Observer Pattern exercises",
+                "305A",
                 "be on time"
         );
 

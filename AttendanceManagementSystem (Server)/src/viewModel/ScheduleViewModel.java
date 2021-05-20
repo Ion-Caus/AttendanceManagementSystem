@@ -176,8 +176,6 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         }
     }
 
-
-
     public  boolean hasSelectionProperty(){
         if (selectedLessonProperty.get() == null) {
             errorProperty.set("Please select a class.");
@@ -191,8 +189,8 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         try {
 
             // TODO: 20/5/2021 by tomas use observer and move this code to model manager as a method and call that method from here 
-            Lesson lesson = model.getClassByName(viewState.getID()).getSchedule().getLessonBy(selectedLessonProperty.get().idProperty().get());
-            model.getClassByName(viewState.getID()).getSchedule().removeLesson(lesson);
+            Lesson lesson = model.getClassByName(viewState.getClassName()).getSchedule().getLessonBy(selectedLessonProperty.get().idProperty().get());
+            model.getClassByName(viewState.getClassName()).getSchedule().removeLesson(lesson);
             loadScheduleForDay();
             errorProperty.set("");
             return true;
@@ -201,15 +199,11 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
            return false;
         }
 
-
     }
-
-
 
     public boolean addLesson(){
         return false;
     }
-
 
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {

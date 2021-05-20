@@ -5,7 +5,7 @@ public class ViewModelState {
     private String section;
     private String studentID;
     private String teacherID;
-    private String className;// this can either be a class/ student / teacher
+    private String className;
     private String lessonID;
 
     public ViewModelState() {
@@ -20,9 +20,11 @@ public class ViewModelState {
     public void setStudentID(String id) {
         this.studentID = id;
     }
+
     public void setTeacherID(String id) {
         this.teacherID = id;
     }
+
     public void setClassName(String id) {
         this.className = id;
     }

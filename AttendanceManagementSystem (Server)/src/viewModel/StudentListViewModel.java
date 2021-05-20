@@ -98,7 +98,6 @@ public class StudentListViewModel implements GeneralListener<String, Package>  {
                 selectedStudentProperty.get().getAbsenceProperty().get().equals("YES")
         );
 
-
         clear();
     }
 

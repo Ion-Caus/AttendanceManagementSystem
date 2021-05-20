@@ -25,7 +25,6 @@ public class InfoViewModel {
     private StringProperty absent;
     private StringProperty motive;
 
-    //TODO 13/5 by Ion Make this IntegerProperty? in my opinion is not needed
     private StringProperty grade;
     private StringProperty comment;
 
@@ -116,7 +115,7 @@ public class InfoViewModel {
                 Student student = model.getStudentBy(viewState.getStudentID());
                 lesson = model.getLesson(viewState.getLessonID(), student);
 
-                loadLessonDataFroStudent(lesson, student);
+                loadLessonDataFromStudent(lesson, student);
                 break;
             case "Teacher":
                 lesson = model.getLesson(
@@ -135,15 +134,14 @@ public class InfoViewModel {
         assert lesson != null;
         subject.set(lesson.getSubject());
         topic.set(lesson.getTopic());
-        //TODO 18/5 by Ion add contents to Lesson Class
-        //contents.set(lesson.);
+        contents.set(lesson.getContents());
         homework.set(lesson.getHomework());
         teacher.set(lesson.getTeacher().getName());
         date.set(lesson.getLessonDate().getDate());
         className.set("Class " + lesson.getClassName());
     }
 
-    public void loadLessonDataFroStudent(Lesson lesson, Student student) {
+    public void loadLessonDataFromStudent(Lesson lesson, Student student) {
         LessonData data = model.getLessonData(lesson, student);
 
         if (data.getAbsence() != null) {

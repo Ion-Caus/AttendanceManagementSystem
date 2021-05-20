@@ -36,7 +36,8 @@ public class SchoolViewModel implements LocalListener<String, Package> {
 
     public SchoolViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        this.model.addListener(this,  "ADD_TO_CLASS Student","REMOVE_FROM_CLASS Student","ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
+        this.model.addListener(this,  "ADD_TO_CLASS Student","REMOVE_FROM_CLASS Student",
+                "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
         this.viewModelState = viewModelState;
 
         classList = FXCollections.observableArrayList();

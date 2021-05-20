@@ -14,6 +14,7 @@ public class ViewModelFactory
   private AddStudentViewModel addStudentViewModel;
   private AddClassViewModel addClassViewModel;
   private AddTeacherViewModel addTeacherViewModel;
+  private AddGradeViewModel addGradeViewModel;
   //private LoginViewModel loginViewModel;
   private ClassStudentListViewModel classStudentListViewModel;
   private AddLessonViewModel addLessonViewModel;
@@ -31,8 +32,9 @@ public class ViewModelFactory
     addStudentViewModel = new AddStudentViewModel(model);
     addClassViewModel = new AddClassViewModel(model);
     addTeacherViewModel = new AddTeacherViewModel(model);
-    this.classStudentListViewModel = new ClassStudentListViewModel(model, viewModelState);
-    this.addLessonViewModel = new AddLessonViewModel(model, viewModelState);
+    classStudentListViewModel = new ClassStudentListViewModel(model, viewModelState);
+    addLessonViewModel = new AddLessonViewModel(model, viewModelState);
+    addGradeViewModel = new AddGradeViewModel(model);
   }
 
   public SchoolViewModel getSchoolViewModel()
@@ -73,5 +75,9 @@ public class ViewModelFactory
 
   public AddLessonViewModel getAddLessonViewModel() {
     return addLessonViewModel;
+  }
+
+  public AddGradeViewModel getAddGradeViewModel() {
+    return addGradeViewModel;
   }
 }

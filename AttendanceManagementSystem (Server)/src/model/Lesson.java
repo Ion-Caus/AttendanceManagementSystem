@@ -14,7 +14,6 @@ public class Lesson {
     private String contents;
     private String classroom;
     private String homework;
-    private String contents;
 
     //TODO set and get the class
     private String className;
@@ -33,7 +32,6 @@ public class Lesson {
         this.contents = contents;
         this.classroom = classroom;
         this.homework = homework;
-        this.contents = contents;
 
         //TODO 18/05 by Ion get the id from database?
         this.id = "L" + count;
