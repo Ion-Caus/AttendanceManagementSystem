@@ -16,6 +16,10 @@ public class AddStudentViewController extends ViewController {
 
     private AddStudentViewModel viewModel;
 
+    public AddStudentViewController() {
+        // Called by FXMLLoader
+    }
+
     @Override
     protected void init() {
         viewModel = getViewModelFactory().getAddStudentViewModel();

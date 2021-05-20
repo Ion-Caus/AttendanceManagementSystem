@@ -1,11 +1,14 @@
 package model;
 
+import model.packages.Package;
 import utility.observer.subject.LocalSubject;
+import viewModel.ScheduleViewModel;
+import viewModel.StudentListViewModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface Model extends LocalSubject<String,String> {
+public interface Model extends LocalSubject<String, Package> {
 
     String getClassAndSchool(Student student);
 
@@ -33,10 +36,14 @@ public interface Model extends LocalSubject<String,String> {
     Teacher getTeacherBy(String id) throws IllegalArgumentException;
 
     Lesson getLesson(String lessonID, Student student) throws IllegalArgumentException;
-    Lesson getLesson(String lessonID, Teacher teacher) throws IllegalArgumentException;
+    Lesson getLesson(String lessonID) throws IllegalArgumentException;
     Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException;
 
     LessonData getLessonData(Lesson lesson, Student student);
+
+    boolean changeMotive(String studentId, String lessonID, String motive);
+    boolean changeAbsence(String studentID, String lessonID, boolean absence);
+    boolean changeLesson(String lessonID, String topic, String contents, String homework);
 
     void addClass(String className)  throws IllegalArgumentException ;
     void removeClass(String className) throws IllegalAccessException;

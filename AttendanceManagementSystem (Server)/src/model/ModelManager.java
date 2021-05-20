@@ -1,5 +1,9 @@
 package model;
 
+import model.packages.Package;
+import model.packages.PackageAbsence;
+import model.packages.PackageLesson;
+import model.packages.PackageName;
 import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeHandler;
 
@@ -8,7 +12,7 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model {
     private School school;
-    private PropertyChangeHandler<String,String> property;
+    private PropertyChangeHandler<String, Package> property;
 
     public ModelManager() {
         school = new School();
@@ -53,6 +57,7 @@ public class ModelManager implements Model {
                 new Time(10,30,0),
                 "DBS",
                 "Stating with Databases",
+                "--",
                 "305A",
                 "Download Postgres"
         );
@@ -63,6 +68,7 @@ public class ModelManager implements Model {
                 new Time(11,45,0),
                 "Java",
                 "Threads",
+                "--",
                 "Zoom",
                 "Counter Incrementer exercise"
         );
@@ -73,6 +79,7 @@ public class ModelManager implements Model {
                 new Time(14,15,0),
                 "DBS",
                 "ER Diagrams",
+                "--",
                 "305A",
                 "Hospital exercise"
         );
@@ -83,6 +90,7 @@ public class ModelManager implements Model {
                 new Time(16,0,0),
                 "Java",
                 "Observer",
+                "--",
                 "305A",
                 "Observer Pattern exercises"
         );
@@ -176,9 +184,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Lesson getLesson(String lessonID, Teacher teacher) throws IllegalArgumentException {
-        //TODO 18/05 by Ion find a way to get the lesson by ID for the teacher
-        return null;
+    public Lesson getLesson(String lessonID) throws IllegalArgumentException {
+        for (Class aClass: getAllClasses()) {
+            for (Lesson lesson: aClass.getSchedule().getAllLessons()) {
+                if (lesson.getId().equals(lessonID)) {
+                    return lesson;
+                }
+            }
+        }
+        throw new IllegalArgumentException("No such lesson with the id (" + lessonID + ")");
     }
 
     @Override
@@ -197,20 +211,20 @@ public class ModelManager implements Model {
     public void addClass(String className) throws IllegalArgumentException {
         school.getClassList().addClass(new Class(className));
 
-        property.firePropertyChange("ADD Class", null, className);
+        property.firePropertyChange("ADD Class", null, new Package(className));
     }
 
     @Override
     public void removeClass(String className) throws IllegalAccessException {
         school.getClassList().removeClass(className);
-        property.firePropertyChange("REMOVE Class", null, className);
+        property.firePropertyChange("REMOVE Class", null, new Package(className));
 
     }
 
     @Override
     public void addStudent(String studentName, String studentID) throws IllegalArgumentException {
         school.getStudentList().addStudent(new Student(studentName, studentID));
-        property.firePropertyChange("ADD Student", studentName, studentID);
+        property.firePropertyChange("ADD Student", null, new PackageName(studentID, studentName));
     }
 
     @Override
@@ -222,7 +236,7 @@ public class ModelManager implements Model {
         //remove from school's studentList
         school.getStudentList().removeStudent(studentID);
 
-        property.firePropertyChange("REMOVE Student", null, studentID);
+        property.firePropertyChange("REMOVE Student", null, new Package(studentID));
     }
 
     @Override
@@ -233,7 +247,7 @@ public class ModelManager implements Model {
         theClass.getStudents().addStudent(student);
         student.setClassName(theClass.getClassName());
 
-        property.firePropertyChange("ADD_TO_CLASS Student", className, studentID);
+        property.firePropertyChange("ADD_TO_CLASS Student", null,  new PackageName(studentID, className));
     }
 
     @Override
@@ -244,21 +258,49 @@ public class ModelManager implements Model {
         theClass.getStudents().removeStudent(student);
         student.clearClassName();
 
-        property.firePropertyChange("REMOVE_FROM_CLASS Student", className, studentID);
+        property.firePropertyChange("REMOVE_FROM_CLASS Student", null, new PackageName(studentID, className));
     }
 
     @Override
     public void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException {
         school.getTeacherList().addTeacher(new Teacher(teacherName, teacherID));
-        property.firePropertyChange("ADD Teacher", teacherName, teacherID);
+        property.firePropertyChange("ADD Teacher", null, new PackageName(teacherID, teacherName));
     }
 
     @Override
     public void removeTeacher(String teacherID) {
        //TODO 16/5 by Deniss handle removing the teacher from lessons or throw exception if teacher has lessons
         school.getTeacherList().removeTeacher(teacherID);
-        property.firePropertyChange("REMOVE Teacher", null, teacherID);
+        property.firePropertyChange("REMOVE Teacher", null, new Package(teacherID));
     }
+
+    //--
+    @Override
+    public boolean changeMotive(String studentId, String lessonID, String motive) {
+        getLessonData(getLesson(lessonID), getStudentBy(studentId)).getAbsence().setMotive(motive);
+        property.firePropertyChange("ChangeMotive", null, new PackageAbsence(studentId, lessonID,motive));
+        return true;
+    }
+
+    @Override
+    public boolean changeAbsence(String studentID, String lessonID, boolean absence) {
+        getLessonData(getLesson(lessonID), getStudentBy(studentID)).getAbsence().setWasAbsent(!absence);
+
+        property.firePropertyChange("ChangeAbsence", null, new PackageAbsence(studentID, lessonID, absence));
+        return !absence;
+    }
+
+    @Override
+    public boolean changeLesson(String lessonID, String topic, String contents, String homework) {
+        Lesson lesson = getLesson(lessonID);
+        lesson.setTopic(topic);
+        lesson.setContents(contents);
+        lesson.setHomework(homework);
+
+        property.firePropertyChange("ChangeLesson", null, new PackageLesson(lessonID, topic, contents, homework));
+        return true;
+    }
+    //--
 
     @Override
     public String getClassAndSchool(Student student) {
@@ -275,13 +317,14 @@ public class ModelManager implements Model {
         return school.getName();
     }
 
+
     @Override
-    public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) {
+    public boolean addListener(GeneralListener<String, Package> listener, String... propertyNames) {
         return property.addListener(listener, propertyNames);
     }
 
     @Override
-    public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) {
+    public boolean removeListener(GeneralListener<String, Package> listener, String... propertyNames) {
         return property.removeListener(listener, propertyNames);
     }
 }

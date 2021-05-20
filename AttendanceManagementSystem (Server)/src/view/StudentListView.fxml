@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="460.0" prefWidth="690.0" userData="Student List" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StudentListViewController">
+<HBox alignment="CENTER" prefHeight="460.0" prefWidth="1000.0" userData="Student List" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StudentListViewController">
         <children>
-            <VBox prefHeight="500.0" prefWidth="600.0">
+            <VBox prefHeight="500.0" prefWidth="850.0">
                 <children>
                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="561.0" spacing="20.0">
                         <children>
@@ -25,25 +30,26 @@
                             </VBox>
                         </children>
                     </HBox>
-                    <TableView fx:id="studentListTable" prefHeight="484.0" prefWidth="589.0">
+                    <TableView fx:id="studentListTable" prefHeight="484.0" prefWidth="700.0">
                         <columns>
+                  <TableColumn fx:id="idStudentColumn" prefWidth="60.0" resizable="false" text="ID" />
                             <TableColumn fx:id="studentNameColumn" prefWidth="200.0" resizable="false" text="Student name" />
-                            <TableColumn fx:id="absenceColumn" minWidth="0.0" prefWidth="84.00006103515625" resizable="false" text="Absence" />
                             <TableColumn fx:id="gradeColumn" prefWidth="60.0" resizable="false" text="Grade" />
-                            <TableColumn fx:id="commentColumn" prefWidth="200.0" text="Comment" />
-                            <TableColumn fx:id="motiveColumn" prefWidth="156.79998779296875" resizable="false" text="Motive" />
+                            <TableColumn fx:id="commentColumn" prefWidth="250.0" text="Comment" />
+                            <TableColumn fx:id="absenceColumn" minWidth="0.0" prefWidth="84.00006103515625" resizable="false" text="Absence" />
+                            <TableColumn fx:id="motiveColumn" prefWidth="200.0" resizable="false" text="Motive" />
                         </columns>
                         <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                         </VBox.margin>
                     </TableView>
-                    <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="604.0" text="errorLabel" textAlignment="CENTER" textFill="#e40404">
+                    <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="850.0" text="errorLabel" textAlignment="CENTER" textFill="#e40404">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin></Label>
                 </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="334.0" prefWidth="220.0" spacing="10.0">
+            <VBox alignment="TOP_CENTER" prefHeight="334.0" prefWidth="180.0" spacing="10.0">
                 <children>
             <Label fx:id="classNameLabel" alignment="CENTER" prefHeight="17.0" prefWidth="200.0" text="Class">
                <font>

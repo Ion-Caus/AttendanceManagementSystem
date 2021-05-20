@@ -8,15 +8,15 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import model.Model;
-import model.Class;
-import model.Student;
+import model.*;
 
-import model.Teacher;
+import model.Class;
+import model.packages.Package;
+import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
-public class SchoolViewModel implements LocalListener<String, String> {
+public class SchoolViewModel implements LocalListener<String, Package> {
     private ObservableList<ClassViewModel> classList;
     private ObjectProperty<ClassViewModel> selectedClassProperty;
 
@@ -85,9 +85,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
     public void clear() {
         //TODO the clear
         error.setValue("");
-//        selectedTeacherProperty.set(null);
-//        selectedClassProperty.set(null);
-//        selectedStudentProperty.set(null);
 
     }
 
@@ -180,7 +177,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
             case "Classes":
                 try {
                     viewModelState.setSection("Class");
-                    viewModelState.setID(selectedClassProperty.get().classNameProperty().get());
+                    viewModelState.setClassName(selectedClassProperty.get().classNameProperty().get());
                     return true;
                 } catch (IllegalArgumentException | NullPointerException e) {
                     error.setValue("Please select a class.");
@@ -194,7 +191,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
                         return false;
                     }
                     viewModelState.setSection("Student");
-                    viewModelState.setID(selectedStudentProperty.get().idProperty().get());
+                    viewModelState.setStudentID(selectedStudentProperty.get().idProperty().get());
                     return true;
                 } catch (IllegalArgumentException | NullPointerException e) {
                     error.setValue("Please select a student.");
@@ -204,7 +201,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
             case "Teachers":
                 try {
                     viewModelState.setSection("Teacher");
-                    viewModelState.setID(selectedTeacherProperty.get().idProperty().get());
+                    viewModelState.setTeacherID(selectedTeacherProperty.get().idProperty().get());
                     return true;
                 } catch (IllegalArgumentException | NullPointerException e) {
                     error.setValue("Please select a teacher.");
@@ -216,7 +213,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
 
     public boolean viewStudentList() {
         try {
-            viewModelState.setID(selectedClassProperty.get().classNameProperty().get());
+            viewModelState.setClassName(selectedClassProperty.get().classNameProperty().get());
             return true;
         }catch (NullPointerException e){
             error.setValue("Please select a class.");
@@ -224,16 +221,16 @@ public class SchoolViewModel implements LocalListener<String, String> {
         }
     }
 
-    private void add(String who, String value1, String value2) {
+    private void add(String who, String name, String id) {
         switch (who) {
             case "Student":
-                studentList.add(new StudentViewModel(new Student(value1, value2)));
+                studentList.add(new StudentViewModel(new Student(name, id)));
                 break;
             case "Class":
-                classList.add(new ClassViewModel(new Class(value2)));
+                classList.add(new ClassViewModel(new Class(id)));
                 break;
             case "Teacher":
-                teacherList.add(new TeacherViewModel(new Teacher(value1,value2)));
+                teacherList.add(new TeacherViewModel(new Teacher(name,id)));
                 break;
         }
     }
@@ -253,7 +250,7 @@ public class SchoolViewModel implements LocalListener<String, String> {
     }
 
     @Override
-    public void propertyChange(ObserverEvent<String, String> event) {
+    public void propertyChange(ObserverEvent<String, Package> event) {
         //TODO 17/05 by Ion Clean up this part of code and the Observer names for remove and add Student to/from class
         Platform.runLater(() -> {
             String[] commands = event.getPropertyName().split(" ");
@@ -261,15 +258,16 @@ public class SchoolViewModel implements LocalListener<String, String> {
             switch (commands[0]) {
                 case "ADD_TO_CLASS":
                 case "REMOVE_FROM_CLASS":
-                    Student student = model.getStudentBy(event.getValue2());
+                    Student student = model.getStudentBy( event.getValue2().getID() );
                     studentList.removeIf(studentVM -> studentVM.idProperty().get().equals(student.getID()));
                     studentList.add(0, new StudentViewModel(student));
                     break;
                 case "ADD":
-                    add(commands[1], event.getValue1(), event.getValue2());
+                    PackageName pm = (PackageName)event.getValue2();
+                    add(commands[1], pm.getName(), pm.getID());
                     break;
                 case "REMOVE":
-                    remove(commands[1], event.getValue2());
+                    remove(commands[1],  event.getValue2().getID());
                     break;
             }
         });

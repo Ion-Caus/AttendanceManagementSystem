@@ -7,21 +7,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import model.Class;
-import model.Model;
-import model.Student;
-import model.StudentList;
+import model.*;
+import model.packages.Package;
+import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
 import java.util.ArrayList;
 
-public class ClassStudentListViewModel implements LocalListener<String, String> {
+public class ClassStudentListViewModel implements LocalListener<String, Package> {
 
     private Model model;
     private ViewModelState viewModelState;
@@ -38,7 +32,7 @@ public class ClassStudentListViewModel implements LocalListener<String, String> 
         this.model.addListener(this,  "ADD_TO_CLASS Student", "REMOVE_FROM_CLASS Student");
         this.viewModelState = viewModelState;
 
-        className = new SimpleStringProperty(viewModelState.getID());
+        className = new SimpleStringProperty(viewModelState.getClassName());
         searchField = new SimpleStringProperty();
         errorProperty = new SimpleStringProperty();
 
@@ -49,13 +43,13 @@ public class ClassStudentListViewModel implements LocalListener<String, String> 
     
     public void loadFromModel() {
         classStudentTable.clear();
-        for(Student student: model.getClassByName(viewModelState.getID()).getStudents().getAllStudents()){
+        for(Student student: model.getClassByName(viewModelState.getClassName()).getStudents().getAllStudents()){
             classStudentTable.add(new StudentViewModel(student));
         }
     }
 
     public void clear() {
-        className.setValue("Class " + viewModelState.getID());
+        className.setValue("Class " + viewModelState.getClassName());
         searchField.setValue("");
         errorProperty.setValue("");
     }
@@ -65,7 +59,7 @@ public class ClassStudentListViewModel implements LocalListener<String, String> 
 
             //TODO 17/5 by Ion clean up
             String id = (searchField.get().contains("("))? searchField.get().split("[()]")[1] : "no id";
-            model.addStudentToClass(id, viewModelState.getID() );
+            model.addStudentToClass(id, viewModelState.getClassName() );
             clear();
         }
         catch (IllegalArgumentException e) {
@@ -75,7 +69,7 @@ public class ClassStudentListViewModel implements LocalListener<String, String> 
 
     public void removeStudent(String ID) {
         try {
-            model.removeStudentFromClass(ID, viewModelState.getID() );
+            model.removeStudentFromClass(ID, viewModelState.getClassName() );
             clear();
         }
         catch (IllegalArgumentException e) {
@@ -116,22 +110,24 @@ public class ClassStudentListViewModel implements LocalListener<String, String> 
     }
 
     @Override
-    public void propertyChange(ObserverEvent<String, String> event) {
+    public void propertyChange(ObserverEvent<String, Package> event) {
         Platform.runLater(() -> {
-            if (!viewModelState.getID().equals(event.getValue1())) {
+            PackageName packageName = (PackageName)event.getValue2();
+
+            if (!viewModelState.getClassName().equals(packageName.getName())) {
                 return;
             }
 
             switch (event.getPropertyName().split(" ")[0]) {
                 case "ADD_TO_CLASS":
                     classStudentTable.add(new StudentViewModel(
-                            model.getStudentBy(event.getValue2())
+                            model.getStudentBy(packageName.getID())
                             )
                     );
                     break;
                 case "REMOVE_FROM_CLASS":
                     classStudentTable.removeIf(
-                            student -> student.idProperty().get().equals(event.getValue2())
+                            student -> student.idProperty().get().equals(packageName.getID())
                     );
                     break;
             }

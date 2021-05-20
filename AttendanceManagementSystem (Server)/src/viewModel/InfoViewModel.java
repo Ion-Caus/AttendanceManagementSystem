@@ -113,21 +113,20 @@ public class InfoViewModel {
         Lesson lesson = null;
         switch (viewState.getSection()) {
             case "Student":
-                Student student = model.getStudentBy(viewState.getID());
+                Student student = model.getStudentBy(viewState.getStudentID());
                 lesson = model.getLesson(viewState.getLessonID(), student);
 
                 loadLessonDataFroStudent(lesson, student);
                 break;
             case "Teacher":
-//                lesson = model.getLesson(
-//                        viewState.getLessonID(),
-//                        model.getTeacherBy(viewState.getID())
-//                );
+                lesson = model.getLesson(
+                        viewState.getLessonID()
+                );
                 break;
             case "Class":
                 lesson = model.getLesson(
                         viewState.getLessonID(),
-                        model.getClassByName(viewState.getID())
+                        model.getClassByName(viewState.getClassName())
                 );
                 break;
         }
@@ -148,7 +147,7 @@ public class InfoViewModel {
         LessonData data = model.getLessonData(lesson, student);
 
         if (data.getAbsence() != null) {
-            absent.set( Boolean.toString( data.getAbsence().isWasAbsent() ));
+            absent.set(  data.getAbsence().isWasAbsent()? "YES" : "---");
             motive.set(data.getAbsence().getMotive());
         }
 
@@ -162,21 +161,16 @@ public class InfoViewModel {
 
     public void clear() {
         //TODO clear the rest property
-        //Lesson lesson = viewState.getLessonID()
-        //className.set(model.getLessonBy());
-
-    }
-
-    public void openStudentList() {
+        error.set("");
 
     }
 
     public boolean submitChangeLesson() {
         switch (viewState.getAccessLevel()) {
             case "Student":
-                break;
+                return model.changeMotive(viewState.getStudentID(), viewState.getLessonID(), motive.get());
             case "Administrator":
-                break;
+                return model.changeLesson(viewState.getLessonID(), topic.get(), contents.get(), homework.get());
         }
         //TODO use observer to change lesson for all
         return false;

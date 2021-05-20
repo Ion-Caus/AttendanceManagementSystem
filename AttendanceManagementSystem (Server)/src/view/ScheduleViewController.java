@@ -55,6 +55,8 @@ public class ScheduleViewController extends ViewController {
         scheduleTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
         );
+        scheduleTable.getSortOrder().add(timeColumn);
+
 
         userLabel.textProperty().bind(viewModel.userProperty());
         schoolClassLabel.textProperty().bind(viewModel.schoolClassProperty());
@@ -64,7 +66,6 @@ public class ScheduleViewController extends ViewController {
         datePicker.getEditor().setText(
                 DateTimeFormatter.ofPattern("EEEE dd/MM").format(datePicker.getValue())
         );
-
 
     }
 

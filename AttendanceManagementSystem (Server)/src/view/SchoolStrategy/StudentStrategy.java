@@ -19,7 +19,7 @@ public class StudentStrategy extends SchoolStrategy {
 
     @Override
     public View add() {
-        return View.STUDENT_VIEW;
+        return View.ADD_STUDENT_VIEW;
     }
 
     @Override
