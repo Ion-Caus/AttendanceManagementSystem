@@ -8,18 +8,17 @@ public class LessonData {
 
     public LessonData(Lesson lesson, Student student) {
         this.lesson = lesson;
-        // TODO: 5/19/2021 Handle default values, null causes exception
         this.grade = new Grade();
         this.absence = new Absence();
         this.student = student;
     }
 
     public void setAbsence(Absence absence) {
-        this.absence = absence.copy();
+        this.absence = absence;
     }
 
     public void setGrade(Grade grade) {
-        this.grade = grade.copy();
+        this.grade = grade;
     }
 
     public Grade getGrade() {

@@ -4,13 +4,14 @@ public enum View {
     LOGIN_VIEW("LoginView.fxml"),
     SCHOOL_VIEW("SchoolView.fxml"),
     SCHEDULE_VIEW("ScheduleView.fxml"),
-    CLASS_VIEW("AddClassView.fxml"),
-    STUDENT_VIEW("AddStudentView.fxml"),
-    TEACHER_VIEW("AddTeacherView.fxml"),
+    ADD_CLASS_VIEW("AddClassView.fxml"),
+    ADD_STUDENT_VIEW("AddStudentView.fxml"),
+    ADD_TEACHER_VIEW("AddTeacherView.fxml"),
+    ADD_GRADE_VIEW("AddGradeView.fxml"),
     INFO_VIEW("InfoView.fxml"),
     CLASS_STUDENT_LIST_VIEW("ClassStudentListView.fxml"),
-    CLASS_STUDENT_VIEW("StudentListView.fxml"),
     ADD_CLASS("AddLessonView.fxml");
+    STUDENT_LIST_VIEW("StudentListView.fxml");
 
 
 

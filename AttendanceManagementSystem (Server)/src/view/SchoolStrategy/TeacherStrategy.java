@@ -16,7 +16,7 @@ public class TeacherStrategy extends SchoolStrategy {
 
     @Override
     View add() {
-        return View.TEACHER_VIEW;
+        return View.ADD_TEACHER_VIEW;
     }
 
     @Override

@@ -11,6 +11,8 @@ public class StudentListViewController extends ViewController {
     @FXML
     private TableView<StudentLessonDataViewModel> studentListTable;
     @FXML
+    private TableColumn<StudentLessonDataViewModel, String> idStudentColumn;
+    @FXML
     private TableColumn<StudentLessonDataViewModel, String> studentNameColumn;
     @FXML
     private TableColumn<StudentLessonDataViewModel, String> commentColumn;
@@ -39,6 +41,9 @@ public class StudentListViewController extends ViewController {
     @Override
     protected void init() {
         viewModel = getViewModelFactory().getStudentListViewModel();
+
+        idStudentColumn.setCellValueFactory(
+                cellData -> cellData.getValue().getIDStudentProperty());
 
         studentNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getStudentNameProperty());
@@ -71,10 +76,12 @@ public class StudentListViewController extends ViewController {
     @FXML
     private void changeAbsence() {
         viewModel.changeAbsence();
+        studentListTable.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void gradeComment() {
+        getViewHandler().openView(View.ADD_GRADE_VIEW);
     }
 
     @FXML

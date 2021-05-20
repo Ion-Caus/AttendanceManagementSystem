@@ -1,6 +1,5 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -9,7 +8,12 @@ import viewModel.AddClassViewModel;
 public class AddClassViewController extends ViewController {
     @FXML private TextField className;
     @FXML private Label errorLabel;
+
     private AddClassViewModel viewModel;
+
+    public AddClassViewController() {
+        // Called by FXMLLoader
+    }
 
     @Override
     protected void init() {

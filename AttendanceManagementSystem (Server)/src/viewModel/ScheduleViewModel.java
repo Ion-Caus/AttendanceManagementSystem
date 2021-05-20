@@ -1,5 +1,6 @@
 package viewModel;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,11 +8,16 @@ import model.Lesson;
 import model.Model;
 import model.Student;
 import model.Teacher;
+import model.packages.Package;
+import model.packages.PackageLesson;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
+
 
 import java.time.LocalDate;
 
 
-public class ScheduleViewModel {
+public class ScheduleViewModel implements LocalListener<String, Package> {
     private ObservableList<LessonViewModel> schedule;
     private ObjectProperty<LessonViewModel> selectedLessonProperty;
 
@@ -28,6 +34,7 @@ public class ScheduleViewModel {
 
     public ScheduleViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
+        model.addListener(this, "ChangeLesson");
         this.viewState = viewModelState;
 
         schedule = FXCollections.observableArrayList();
@@ -48,17 +55,17 @@ public class ScheduleViewModel {
 
         switch (viewState.getSection()) {
             case "Student":
-                for (Lesson lesson : model.getScheduleFor(model.getStudentBy(viewState.getID()), dateProperty.getValue())) {
+                for (Lesson lesson : model.getScheduleFor(model.getStudentBy(viewState.getStudentID()), dateProperty.getValue())) {
                     schedule.add(new LessonViewModel(lesson));
                 }
                 break;
             case "Class":
-                for (Lesson lesson : model.getScheduleFor(model.getClassByName(viewState.getID()), dateProperty.getValue())) {
+                for (Lesson lesson : model.getScheduleFor(model.getClassByName(viewState.getClassName()), dateProperty.getValue())) {
                     schedule.add(new LessonViewModel(lesson));
                 }
                 break;
             case "Teacher":
-                for (Lesson lesson : model.getScheduleFor(model.getTeacherBy(viewState.getID()), dateProperty.getValue())) {
+                for (Lesson lesson : model.getScheduleFor(model.getTeacherBy(viewState.getTeacherID()), dateProperty.getValue())) {
                     schedule.add(new LessonViewModel(lesson));
                 }
                 break;
@@ -76,21 +83,20 @@ public class ScheduleViewModel {
 
         switch (viewState.getSection()) {
             case "Student":
-                Student student = model.getStudentBy(viewState.getID());
+                Student student = model.getStudentBy(viewState.getStudentID());
                 userProperty.set(student.getName());
                 schoolClassProperty.set(model.getClassAndSchool(student));
                 break;
 
             case "Teacher":
-                Teacher teacher = model.getTeacherBy(viewState.getID());
+                Teacher teacher = model.getTeacherBy(viewState.getTeacherID());
                 userProperty.set(teacher.getName());
                 schoolClassProperty.set(model.getSchoolName());
                 break;
 
             case "Class":
                 userProperty.set("");
-                //TODO 13/5 by Ion Student has the String className so just return it
-                schoolClassProperty.set(model.getClassByName(viewState.getID()).getClassName() + ", " + model.getSchoolName());
+                schoolClassProperty.set(model.getClassByName(viewState.getClassName()).getClassName() + ", " + model.getSchoolName());
                 break;
         }
 
@@ -163,17 +169,13 @@ public class ScheduleViewModel {
     public boolean loadInfoLesson(){
         try {
             viewState.setLessonID(selectedLessonProperty.get().idProperty().get());
-            System.out.println("View State");
-            System.out.println("AccessLevel: " + viewState.getAccessLevel());
-            System.out.println("ID: " + viewState.getID());
-            System.out.println("Selection: " + viewState.getSection());
-            System.out.println("LessonID: " + viewState.getLessonID());
             return true;
         } catch (NullPointerException e) {
             errorProperty.set("Please select a lesson.");
             return false;
         }
     }
+
 
 
     public  boolean hasSelectionProperty(){
@@ -206,6 +208,29 @@ public class ScheduleViewModel {
 
     public boolean addLesson(){
         return false;
+    }
+
+
+    @Override
+    public void propertyChange(ObserverEvent<String, Package> event) {
+        Platform.runLater(() -> {
+            switch (event.getPropertyName()) {
+                case "ChangeLesson":
+                    PackageLesson pl = (PackageLesson)event.getValue2();
+                    Lesson lesson = model.getLesson(pl.getID());
+                    int index = 0;
+                    for (int i = 0; i < schedule.size(); i++) {
+                        if (schedule.get(i).idProperty().get().equals(pl.getID())) {
+                            schedule.remove(schedule.get(i));
+                            index = i;
+                            break; // break for-loop
+                        }
+                    }
+                    schedule.add(index, new LessonViewModel(lesson));
+                    break;
+                case "ADD Lesson":
+            }
+        });
     }
 
 }

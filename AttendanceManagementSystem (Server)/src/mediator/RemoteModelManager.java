@@ -1,6 +1,7 @@
 package mediator;
 
 import model.Model;
+import model.packages.Package;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
@@ -14,8 +15,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteModelManager implements RemoteModel, LocalListener<String, String> {
-    private PropertyChangeHandler<String, String> property;
+public class RemoteModelManager implements RemoteModel, LocalListener<String, Package> {
+    private PropertyChangeHandler<String, Package> property;
     private Model model;
 
     public RemoteModelManager(Model model) throws RemoteException, MalformedURLException {
@@ -50,17 +51,17 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, St
     }
 
     @Override
-    public void propertyChange(ObserverEvent<String, String> event) {
+    public void propertyChange(ObserverEvent<String, Package> event) {
 
     }
 
     @Override
-    public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
+    public boolean addListener(GeneralListener<String, Package> listener, String... propertyNames) throws RemoteException {
         return property.addListener(listener, propertyNames);
     }
 
     @Override
-    public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
+    public boolean removeListener(GeneralListener<String, Package> listener, String... propertyNames) throws RemoteException {
         return property.removeListener(listener, propertyNames);
     }
 }

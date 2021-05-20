@@ -11,6 +11,7 @@ public class Lesson {
     private Time startTime, endTime;
     private String subject;
     private String topic;
+    private String contents;
     private String classroom;
     private String homework;
     private String contents;
@@ -19,8 +20,8 @@ public class Lesson {
     private String className;
 
     //TODO 11/05 by Ion Move the homework
-    public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime,
-                  String subject, String topic, String classroom, String homework, String contents) throws IllegalArgumentException {
+    public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime, String subject, String topic, String contents, String classroom, String homework) throws IllegalArgumentException {
+
         if (!hasValidTime(startTime, endTime))
             throw new IllegalArgumentException("Illegal lesson time");
         this.teacher = teacher;
@@ -29,6 +30,7 @@ public class Lesson {
         this.endTime = endTime.copy();
         this.subject = subject;
         this.topic = topic;
+        this.contents = contents;
         this.classroom = classroom;
         this.homework = homework;
         this.contents = contents;
@@ -63,12 +65,52 @@ public class Lesson {
         return topic;
     }
 
+    public String getContents() {
+        return contents;
+    }
+
     public String getClassroom() {
         return classroom;
     }
 
     public String getHomework() {
         return homework;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public void setLessonDate(Date lessonDate) {
+        this.lessonDate = lessonDate;
+    }
+
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public void setClassroom(String classroom) {
+        this.classroom = classroom;
+    }
+
+    public void setHomework(String homework) {
+        this.homework = homework;
     }
 
     //TODO 14/5 by Ion find a way to set the className for this lesson

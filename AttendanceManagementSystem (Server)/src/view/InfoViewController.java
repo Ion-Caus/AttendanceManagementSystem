@@ -46,6 +46,9 @@ public class InfoViewController extends ViewController {
         this.subject.textProperty().bind(viewModel.getSubjectProperty());
         this.teacherField.textProperty().bind(viewModel.getTeacherProperty()); // TODO: 13/5/2021   can we change a teacher from here or not? if yes, change to bidirectional.
         this.datePicker.valueProperty().bind(viewModel.getDateProperty()); // TODO: 13/5/2021  can we change the date from here? if yes, change to bidirectional.
+        this.datePicker.setDisable(true);
+        this.datePicker.setStyle("-fx-opacity: 1");
+        this.datePicker.getEditor().setStyle("-fx-opacity: 1");
 
         this.className.textProperty().bind(viewModel.getClassNameProperty());
         this.errorLabel.textProperty().bind(viewModel.getErrorProperty());
@@ -87,7 +90,7 @@ public class InfoViewController extends ViewController {
     @FXML
     private void openStudentList() {
 
-        getViewHandler().openView(View.CLASS_STUDENT_VIEW);
+        getViewHandler().openView(View.STUDENT_LIST_VIEW);
     }
 
     @FXML

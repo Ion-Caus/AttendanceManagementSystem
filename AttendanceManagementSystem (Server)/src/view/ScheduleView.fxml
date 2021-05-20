@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox alignment="CENTER" prefHeight="450.0" prefWidth="780.0" userData="Schedule" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ScheduleViewController">
    <children>
@@ -49,7 +55,7 @@
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="200.0" spacing="10.0">
          <children>
-            <Label fx:id="userLabel" alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0" text="Lastname Firstname" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="userLabel" alignment="BOTTOM_CENTER" prefHeight="60.0" prefWidth="200.0" text="Lastname Firstname" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>

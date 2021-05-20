@@ -3,22 +3,40 @@ package viewModel;
 public class ViewModelState {
     private String accessLevel;
     private String section;
-    private String ID; // this can either be a class/ student / teacher
+    private String studentID;
+    private String teacherID;
+    private String className;// this can either be a class/ student / teacher
     private String lessonID;
 
     public ViewModelState() {
         this.accessLevel = null;
         this.section = null;
-        this.ID = null;
+        this.studentID = null;
+        this.teacherID = null;
+        this.className = null;
         this.lessonID = null;
     }
 
-    public void setID(String id) {
-        this.ID = id;
+    public void setStudentID(String id) {
+        this.studentID = id;
+    }
+    public void setTeacherID(String id) {
+        this.teacherID = id;
+    }
+    public void setClassName(String id) {
+        this.className = id;
     }
 
-    public String getID() {
-        return ID;
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public String getTeacherID() {
+        return teacherID;
+    }
+
+    public String getClassName() {
+        return className;
     }
 
     public void setSection(String section) {
@@ -47,7 +65,9 @@ public class ViewModelState {
 
     public void clear() {
         this.section = null;
-        this.ID = null;
+        this.studentID = null;
+        this.teacherID = null;
+        this.className = null;
         this.lessonID = null;
     }
 }

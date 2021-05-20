@@ -5,7 +5,7 @@ public class Grade {
     private String comment;
 
     public Grade(){
-        this.grade = 0;
+        this.grade = -1;
         this.comment = null;
     }
 
@@ -25,10 +25,6 @@ public class Grade {
 
     public String getComment() {
         return comment;
-    }
-
-    public Grade copy() {
-        return new Grade(this.grade, this.comment);
     }
 
 
