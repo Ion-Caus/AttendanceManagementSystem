@@ -1,95 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefWidth="730.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StudentListViewController">
-    <children>
-          <HBox alignment="CENTER" prefHeight="420.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <children>
-                  <VBox prefHeight="500.0" prefWidth="600.0">
-                      <children>
-                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="561.0" spacing="20.0">
-                              <children>
-                                  <VBox prefHeight="54.0" prefWidth="182.0" spacing="10.0">
-                                      <children>
-                                          <Label fx:id="lessonTopicLabel" alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="185.0" text="The Lesson Topic" textAlignment="CENTER">
-                                              <font>
-                                                  <Font size="18.0" />
-                                              </font>
-                                          </Label>
-                                      </children>
-                                      <padding>
-                                          <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                      </padding>
-                                  </VBox>
-                              </children>
-                          </HBox>
-                          <TableView fx:id="studentListTable" prefHeight="484.0" prefWidth="589.0">
-                              <columns>
-                                  <TableColumn fx:id="studentNameColumn" prefWidth="200.0" resizable="false" text="Student name" />
-                                  <TableColumn fx:id="absenceColumn" minWidth="0.0" prefWidth="84.00006103515625" resizable="false" text="Absence" />
-                                  <TableColumn fx:id="gradeColumn" prefWidth="60.0" resizable="false" text="Grade" />
-                                  <TableColumn fx:id="commentColumn" prefWidth="200.0" text="Comment" />
-                                  <TableColumn fx:id="motiveColumn" prefWidth="156.79998779296875" resizable="false" text="Motive" />
-                              </columns>
-                              <VBox.margin>
-                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </VBox.margin>
-                          </TableView>
-                          <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="604.0" text="errorLabel" textAlignment="CENTER" textFill="#e40404" />
-                      </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="334.0" prefWidth="220.0" spacing="10.0">
-                      <children>
-                  <Label fx:id="classNameLabel" alignment="CENTER" prefHeight="17.0" prefWidth="200.0" text="Class">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeAbsence" prefHeight="26.0" prefWidth="125.0" text="Change absence" textAlignment="CENTER">
-                              <VBox.margin>
-                                  <Insets top="110.0" />
-                              </VBox.margin>
+<HBox alignment="CENTER" prefHeight="460.0" prefWidth="690.0" userData="Student List" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StudentListViewController">
+        <children>
+            <VBox prefHeight="500.0" prefWidth="600.0">
+                <children>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="561.0" spacing="20.0">
+                        <children>
+                            <VBox prefHeight="54.0" prefWidth="182.0" spacing="10.0">
+                                <children>
+                                    <Label fx:id="lessonTopicLabel" alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="185.0" text="The Lesson Topic" textAlignment="CENTER">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Label>
+                                </children>
+                                <padding>
+                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                </padding>
+                            </VBox>
+                        </children>
+                    </HBox>
+                    <TableView fx:id="studentListTable" prefHeight="484.0" prefWidth="589.0">
+                        <columns>
+                            <TableColumn fx:id="studentNameColumn" prefWidth="200.0" resizable="false" text="Student name" />
+                            <TableColumn fx:id="absenceColumn" minWidth="0.0" prefWidth="84.00006103515625" resizable="false" text="Absence" />
+                            <TableColumn fx:id="gradeColumn" prefWidth="60.0" resizable="false" text="Grade" />
+                            <TableColumn fx:id="commentColumn" prefWidth="200.0" text="Comment" />
+                            <TableColumn fx:id="motiveColumn" prefWidth="156.79998779296875" resizable="false" text="Motive" />
+                        </columns>
+                        <VBox.margin>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        </VBox.margin>
+                    </TableView>
+                    <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="604.0" text="errorLabel" textAlignment="CENTER" textFill="#e40404">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Label>
+                </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="334.0" prefWidth="220.0" spacing="10.0">
+                <children>
+            <Label fx:id="classNameLabel" alignment="CENTER" prefHeight="17.0" prefWidth="200.0" text="Class">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeAbsence" prefHeight="26.0" prefWidth="125.0" text="Change absence" textAlignment="CENTER">
+                        <VBox.margin>
+                            <Insets top="110.0" />
+                        </VBox.margin>
+                    </Button>
+                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#gradeComment" prefHeight="26.0" prefWidth="125.0" text="Grade" textAlignment="CENTER" />
+                    <Separator prefWidth="200.0" />
+                    <Button alignment="CENTER" layoutX="74.0" layoutY="250.0" mnemonicParsing="false" onAction="#viewStudent" prefHeight="26.0" prefWidth="110.0" text="View student" textAlignment="CENTER" />
+                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#viewMotive" prefHeight="26.0" prefWidth="110.0" text="View motive" textAlignment="CENTER" />
+            <HBox alignment="BOTTOM_CENTER" prefHeight="240.0" prefWidth="165.0" spacing="20.0">
+               <children>
+                          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="26.0" prefWidth="60.0" text="Back">
+                              <opaqueInsets>
+                                  <Insets />
+                              </opaqueInsets>
                           </Button>
-                          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#gradeComment" prefHeight="26.0" prefWidth="125.0" text="Grade" textAlignment="CENTER" />
-                          <Separator prefWidth="200.0" />
-                          <Button alignment="CENTER" layoutX="74.0" layoutY="250.0" mnemonicParsing="false" onAction="#viewStudent" prefHeight="26.0" prefWidth="110.0" text="View student" textAlignment="CENTER" />
-                          <Button alignment="CENTER" mnemonicParsing="false" onAction="#viewMotive" prefHeight="26.0" prefWidth="110.0" text="View motive" textAlignment="CENTER" />
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="240.0" prefWidth="165.0" spacing="20.0">
-                     <children>
-                                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="26.0" prefWidth="60.0" text="Back">
-                                    <opaqueInsets>
-                                        <Insets />
-                                    </opaqueInsets>
-                                </Button>
-                        <Button mnemonicParsing="false" onAction="#submitButtonPressed" prefHeight="26.0" prefWidth="60.0" text="Submit" textAlignment="JUSTIFY">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </HBox>
-                      </children>
-                      <padding>
-                          <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
-                      </padding>
-                  </VBox>
-              </children>
-          </HBox>
-    </children>
-</AnchorPane>
+                  <Button mnemonicParsing="false" onAction="#submitButtonPressed" prefHeight="26.0" prefWidth="60.0" text="Submit" textAlignment="JUSTIFY">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+                </children>
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                </padding>
+            </VBox>
+        </children>
+    </HBox>
