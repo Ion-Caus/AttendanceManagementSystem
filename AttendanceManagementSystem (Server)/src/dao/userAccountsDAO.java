@@ -11,13 +11,7 @@ import java.util.List;
 public interface userAccountsDAO
 {
   // creating accounts
-  Student createStudent(String name, String ID) throws SQLException;
-  Teacher createTeacher(String name, String ID) throws SQLException;
-  Administrator createAdmin(String name, String ID) throws SQLException;
-
-//  Student readById(String ID) throws SQLException;
-//  Teacher readById(String ID) throws SQLException;
-//  Administrator readById(String ID) throws SQLException;
+  void createUserAccount(String name, String ID, String password, String access) throws SQLException;
 
   // reading accounts
   List<Student> readStudentByName() throws SQLException;
@@ -26,8 +20,6 @@ public interface userAccountsDAO
 
   // updating accounts
    void updateUserAccount(Account account) throws SQLException;
-//   void updateTeacher(Teacher teacher) throws SQLException;
-//   void updateAdmin(Administrator admin) throws SQLException;
 
   // deleting accounts
   void deleteUser(String userID) throws SQLException;

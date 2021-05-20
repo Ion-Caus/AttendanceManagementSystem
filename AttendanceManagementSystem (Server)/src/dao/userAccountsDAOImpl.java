@@ -35,77 +35,27 @@ public class userAccountsDAOImpl implements userAccountsDAO
         "postgres", "admin");
   }
 
-  @Override public Student createStudent(String name, String ID)
-      throws SQLException
+  @Override public void createUserAccount(String name, String ID,
+      String password, String access) throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO user_account(userid, full_name, access) VALUES (?, ?, ?);");
+          "INSERT INTO user_account(userid, full_name, password, access) VALUES (?, ?, ?, ?);");
       statement.setString(1, ID);
       statement.setString(2, name);
-      statement.setString(3, "student");
+      statement.setString(3, password);
+      statement.setString(4, access);
       statement.executeUpdate();
-      return new Student(name, ID);
     }
   }
-
-  @Override public Teacher createTeacher(String name, String ID)
-      throws SQLException
-  {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO user_account(userid, full_name, access) VALUES (?, ?, ?);");
-      statement.setString(1, ID);
-      statement.setString(2, name);
-      statement.setString(3, "teacher");
-      statement.executeUpdate();
-      return new Teacher(name, ID);
-    }
-  }
-
-  @Override public Administrator createAdmin(String name, String ID)
-      throws SQLException
-  {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO user_account(userid, full_name, access) VALUES (?, ?, ?);");
-      statement.setString(1, ID);
-      statement.setString(2, name);
-      statement.setString(3, "admin");
-      statement.executeUpdate();
-      return new Administrator(name, ID);
-    }
-  }
-
-  //    @Override public Student readById(String id) throws SQLException
-  //    {
-  //      try (Connection connection = getConnection())
-  //      {
-  //        PreparedStatement statement = connection
-  //            .prepareStatement("SELECT * FROM user_account WHERE userid = ?");
-  //        statement.setString(1, id);
-  //        ResultSet resultSet = statement.executeQuery();
-  //        if (resultSet.next())
-  //        {
-  //          String studentName = resultSet.getString("full_name");
-  //          return createStudent(resultSet);
-  //        }
-  //        else
-  //        {
-  //          return null;
-  //        }
-  //      }
-  //    }
 
   @Override public List<Student> readStudentByName() throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM user_account");
+          .prepareStatement("SELECT * FROM user_account WHERE access = 'student';");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Student> result = new ArrayList<>();
       while (resultSet.next())
@@ -129,7 +79,7 @@ public class userAccountsDAOImpl implements userAccountsDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM user_account");
+          .prepareStatement("SELECT * FROM user_account WHERE access = 'teacher';");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Teacher> result = new ArrayList<>();
       while (resultSet.next())
@@ -153,7 +103,7 @@ public class userAccountsDAOImpl implements userAccountsDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM user_account");
+          .prepareStatement("SELECT * FROM user_account WHERE access = 'admin';");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Administrator> result = new ArrayList<>();
       while (resultSet.next())
@@ -194,6 +144,4 @@ public class userAccountsDAOImpl implements userAccountsDAO
       statement.executeUpdate();
     }
   }
-
-  // TODO need to also add Passwords to the creation of userAccounts
 }
