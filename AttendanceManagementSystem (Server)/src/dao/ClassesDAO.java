@@ -11,5 +11,5 @@ public interface ClassesDAO
   void create(String className) throws SQLException;
   List<Class> readClasses() throws SQLException;
   void update(Class someClass) throws SQLException; //not needed, check Impl class
-  Class delete(String className) throws SQLException;
+  void delete(String className) throws SQLException;
 }

@@ -16,10 +16,10 @@ public class ModelManager implements Model {
     {
         school = new School();
         this.property = new PropertyChangeHandler<>(this);
-        createDummy();
+        //createDummy();
     }
 
-    public void createDummy() throws SQLException
+  /*  public void createDummy() throws SQLException
     {
         setSchoolName("DaVinci");
         StudentList studentList = school.getStudentList();
@@ -32,7 +32,7 @@ public class ModelManager implements Model {
         Teacher steffen = new Teacher("Steffen Vissing Andersen", "325632");
         teacherList.addTeacher(steffen);
 
-        ClassList classList = school.getClassList();
+       ClassList classList = school.getClassList();
         Class class1 = new Class("12 C");
         Class class2 = new Class("11 A");
 
@@ -48,7 +48,7 @@ public class ModelManager implements Model {
         class2.getStudents().addStudent(studentList.getAllStudents().get(2));
         studentList.getAllStudents().get(2).setClassName(class2.getClassName());
 
-        Lesson lesson1 = new Lesson(steffen,
+        Lesson lesson1 = new Lesson("12s1" ,steffen,
                 new Date(), //now
                 new Time(1,1,1),
                 new Time(2,2,2),
@@ -58,7 +58,7 @@ public class ModelManager implements Model {
                 "ex. 3,4,5 pag 6."
         );
 
-        Lesson lesson2 = new Lesson(steffen,
+        Lesson lesson2 = new Lesson("12s2" ,steffen,
                 new Date(), //now
                 new Time(3,1,1),
                 new Time(4,2,2),
@@ -68,7 +68,7 @@ public class ModelManager implements Model {
                 "ex. 3,4,5 pag 6."
         );
 
-        Lesson lesson3 = new Lesson(steffen,
+        Lesson lesson3 = new Lesson("12s3" ,steffen,
                 new Date(), //now
                 new Time(5,1,1),
                 new Time(6,2,2),
@@ -86,7 +86,7 @@ public class ModelManager implements Model {
         System.out.println(lesson2.getId());
         System.out.println(lesson3.getId());
 
-    }
+    } */
 
     @Override
     public ArrayList<Class> getAllClasses() throws SQLException

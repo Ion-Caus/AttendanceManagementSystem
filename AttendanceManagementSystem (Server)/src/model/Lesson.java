@@ -9,7 +9,8 @@ public class Lesson {
     private String id;
     private Teacher teacher;
     private Date lessonDate;
-    private Time startTime, endTime;
+    private Time startTime;
+    private Time endTime;
     private String subject;
     private String topic;
     private String classroom;
@@ -19,22 +20,23 @@ public class Lesson {
     private String className;
 
     //TODO 11/05 by Ion Move the homework
-    public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime,
+    public Lesson(String id, Teacher teacher, Date lessonDate, Time startTime, Time endTime,
                   String subject, String topic, String classroom, String homework) throws IllegalArgumentException {
-        if (!hasValidTime(startTime, endTime))
-            throw new IllegalArgumentException("Illegal lesson time");
+      // if (!hasValidTime(startTime, endTime))
+         //   throw new IllegalArgumentException("Illegal lesson time");
+        this.id = id;
         this.teacher = teacher;
         this.lessonDate = lessonDate;
-        this.startTime = startTime.copy();
-        this.endTime = endTime.copy();
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.subject = subject;
         this.topic = topic;
         this.classroom = classroom;
         this.homework = homework;
 
         //TODO 18/05 by Ion get the id from database?
-        this.id = "L" + count;
-        count++;
+       /* this.id = "L" + count;
+        count++;*/
 
     }
 

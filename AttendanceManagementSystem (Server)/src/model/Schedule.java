@@ -1,10 +1,14 @@
 package model;
 
+import dao.ScheduleDAOImpl;
+
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Schedule {
     private ArrayList<Lesson> schedule;
+    private String scheduleID;
 
     public Schedule() {
         this.schedule = new ArrayList<>();
@@ -18,7 +22,7 @@ public class Schedule {
         schedule.remove(lesson);
     }
 
-    public ArrayList<Lesson> getLessonBy(LocalDate date) {
+   public ArrayList<Lesson> getLessonBy(LocalDate date) {
         ArrayList<Lesson> lessons = new ArrayList<>();
         for (Lesson lesson : schedule) {
             if (lesson.getLessonDate().getDate().equals(date))
@@ -36,7 +40,8 @@ public class Schedule {
         return lessons;
     }
 
-    public ArrayList<Lesson> getAllLessons() {
+    public ArrayList<Lesson> getAllLessons() throws SQLException
+    {
         return schedule;
     }
 }

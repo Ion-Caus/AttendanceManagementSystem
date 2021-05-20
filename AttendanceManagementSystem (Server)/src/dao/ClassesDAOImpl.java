@@ -73,7 +73,7 @@ public class ClassesDAOImpl implements ClassesDAO
 
   }
 
-  @Override public Class delete(String className) throws SQLException
+  @Override public void delete(String className) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -82,6 +82,5 @@ public class ClassesDAOImpl implements ClassesDAO
       statement.setString(1, className);
       statement.executeUpdate();
     }
-    return null;
   }
 }
