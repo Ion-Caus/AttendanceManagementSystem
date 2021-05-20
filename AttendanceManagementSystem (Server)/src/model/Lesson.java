@@ -14,13 +14,14 @@ public class Lesson {
     private String contents;
     private String classroom;
     private String homework;
+    private String contents;
 
     //TODO set and get the class
     private String className;
 
     //TODO 11/05 by Ion Move the homework
-    public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime,
-                  String subject, String topic, String contents, String classroom, String homework) throws IllegalArgumentException {
+    public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime, String subject, String topic, String contents, String classroom, String homework) throws IllegalArgumentException {
+
         if (!hasValidTime(startTime, endTime))
             throw new IllegalArgumentException("Illegal lesson time");
         this.teacher = teacher;
@@ -32,6 +33,7 @@ public class Lesson {
         this.contents = contents;
         this.classroom = classroom;
         this.homework = homework;
+        this.contents = contents;
 
         //TODO 18/05 by Ion get the id from database?
         this.id = "L" + count;

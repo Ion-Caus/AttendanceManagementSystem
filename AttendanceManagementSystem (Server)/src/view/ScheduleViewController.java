@@ -2,10 +2,12 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import viewModel.ClassViewModel;
 import viewModel.LessonViewModel;
 import viewModel.ScheduleViewModel;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 
 public class ScheduleViewController extends ViewController {
@@ -80,13 +82,32 @@ public class ScheduleViewController extends ViewController {
 
     @FXML
     private void addLesson() {
-        //getViewHandler().openView();
+        if (viewModel.hasSelectionProperty()) {
+            getViewHandler().openView(View.ADD_CLASS);
+        }
+
     }
 
     @FXML
     private void removeLesson() {
 
+        if (viewModel.hasSelectionProperty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Optional<ButtonType> result;
+
+            alert.setTitle("Delete Lesson");
+            alert.setHeaderText("Delete " +viewModel.getSelected().get().subjectProperty().get()+ " lesson "  +viewModel.getSelected().get().topicProperty().get()+ " ?");
+            result = alert.showAndWait();
+
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                viewModel.deleteLesson();
+            }
+        }
     }
+
+
+
 
     @FXML
     private void backToSchoolView() {

@@ -120,6 +120,11 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         selectedLessonProperty.set(selectedLesson);
     }
 
+    public ObjectProperty<LessonViewModel> getSelected() {
+       return selectedLessonProperty;
+    }
+
+
     public StringProperty userProperty() {
         return userProperty;
     }
@@ -139,6 +144,8 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
     public ObjectProperty<LocalDate> dateProperty() {
         return dateProperty;
     }
+
+
     //--
 
     public void backToSchoolView() {
@@ -170,6 +177,40 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
     }
 
 
+
+    public  boolean hasSelectionProperty(){
+        if (selectedLessonProperty.get() == null) {
+            errorProperty.set("Please select a class.");
+            return false;
+        }
+        return true;
+
+    }
+
+    public boolean deleteLesson(){
+        try {
+
+            // TODO: 20/5/2021 by tomas use observer and move this code to model manager as a method and call that method from here 
+            Lesson lesson = model.getClassByName(viewState.getID()).getSchedule().getLessonBy(selectedLessonProperty.get().idProperty().get());
+            model.getClassByName(viewState.getID()).getSchedule().removeLesson(lesson);
+            loadScheduleForDay();
+            errorProperty.set("");
+            return true;
+        } catch (NullPointerException | IllegalArgumentException e) {
+           errorProperty.set("Please select a lesson");
+           return false;
+        }
+
+
+    }
+
+
+
+    public boolean addLesson(){
+        return false;
+    }
+
+
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {
         Platform.runLater(() -> {
@@ -191,5 +232,6 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
             }
         });
     }
+
 }
 

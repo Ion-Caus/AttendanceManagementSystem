@@ -10,6 +10,7 @@ public enum View {
     ADD_GRADE_VIEW("AddGradeView.fxml"),
     INFO_VIEW("InfoView.fxml"),
     CLASS_STUDENT_LIST_VIEW("ClassStudentListView.fxml"),
+    ADD_CLASS("AddLessonView.fxml");
     STUDENT_LIST_VIEW("StudentListView.fxml");
 
 
