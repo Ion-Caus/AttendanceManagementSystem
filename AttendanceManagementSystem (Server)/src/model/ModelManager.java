@@ -1,5 +1,6 @@
 package model;
 
+import dao.ClassesDAOImpl;
 import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeHandler;
 
@@ -11,13 +12,15 @@ public class ModelManager implements Model {
     private School school;
     private PropertyChangeHandler<String,String> property;
 
-    public ModelManager() {
+    public ModelManager() throws SQLException
+    {
         school = new School();
         this.property = new PropertyChangeHandler<>(this);
         createDummy();
     }
 
-    public void createDummy() {
+    public void createDummy() throws SQLException
+    {
         setSchoolName("DaVinci");
         StudentList studentList = school.getStudentList();
         studentList.addStudent(new Student("Ion Caus", "308234"));
@@ -131,14 +134,18 @@ public class ModelManager implements Model {
 
 
     @Override
-    public void addClass(String className) throws IllegalArgumentException {
+    public void addClass(String className)
+        throws IllegalArgumentException, SQLException
+    {
         school.getClassList().addClass(new Class(className));
 
         property.firePropertyChange("ADD Class", null, className);
     }
 
     @Override
-    public void removeClass(String className) throws IllegalAccessException {
+    public void removeClass(String className)
+        throws IllegalAccessException, SQLException
+    {
         school.getClassList().removeClass(className);
         property.firePropertyChange("REMOVE Class", null, className);
 

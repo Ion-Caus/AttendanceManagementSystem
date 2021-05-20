@@ -156,7 +156,6 @@ public class SchoolViewModel implements LocalListener<String, String> {
         try {
             clear();
             model.removeClass(className);
-            ClassesDAOImpl.getInstance().delete(className);
         }
         catch (IllegalAccessException | SQLException e) {
             System.out.println(e.getLocalizedMessage());

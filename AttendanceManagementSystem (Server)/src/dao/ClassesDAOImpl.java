@@ -32,7 +32,8 @@ public class ClassesDAOImpl implements ClassesDAO
     //TODO change password to your local database password for it to work
   }
 
-  @Override public Class create(String className) throws SQLException
+
+  @Override public void create(String className) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -40,7 +41,6 @@ public class ClassesDAOImpl implements ClassesDAO
           .prepareStatement("INSERT INTO classes(classID) VALUES (?);");
       statement.setString(1, className);
       statement.executeUpdate();
-      return new Class(className);
     }
   }
 
@@ -55,7 +55,7 @@ public class ClassesDAOImpl implements ClassesDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM Classes");
+          .prepareStatement("SELECT distinct classID FROM Classes");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Class> result = new ArrayList<>();
       while (resultSet.next())

@@ -29,7 +29,6 @@ public class AddClassViewModel {
     public boolean addclass() {
         try {
             model.addClass(className.get());
-            ClassesDAOImpl.getInstance().create(className.get());
             return true;
         }
         catch (IllegalArgumentException | SQLException e) {

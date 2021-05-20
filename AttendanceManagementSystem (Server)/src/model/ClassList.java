@@ -13,22 +13,28 @@ public class ClassList {
         this.classes = new ArrayList<>();
     }
 
-    public void addClass(Class aClass) throws IllegalArgumentException {
+    public void addClass(Class aClass)
+        throws IllegalArgumentException, SQLException
+    {
         if (!isUnique(aClass.getClassName())) {
             throw new IllegalArgumentException("Can not add a duplicate class.");
         }
-        classes.add(aClass);
+       // classes.add(aClass);
+        ClassesDAOImpl.getInstance().create(aClass.getClassName());
     }
 
     public void removeClass(Class aClass) {
         classes.remove(aClass);
     }
 
-    public void removeClass(String className) throws IllegalAccessException {
+    public void removeClass(String className)
+        throws IllegalAccessException, SQLException
+    {
         for (Class aClass : classes) {
             if (aClass.getClassName().equals(className)) {
                 if (aClass.getStudents().getAllStudents().isEmpty()) {
-                    this.classes.remove(aClass);
+                   //this.classes.remove(aClass);
+                    ClassesDAOImpl.getInstance().delete(aClass.getClassName());
                     return;
                 }
                 throw new IllegalAccessException("Can not delete a class with students.");

@@ -30,8 +30,10 @@ public interface Model extends LocalSubject<String,String> {
 
     Student getStudentBy(String id) throws IllegalArgumentException;
 
-    void addClass(String className)  throws IllegalArgumentException ;
-    void removeClass(String className) throws IllegalAccessException;
+    void addClass(String className)
+        throws IllegalArgumentException, SQLException;
+    void removeClass(String className)
+        throws IllegalAccessException, SQLException;
 
     void addStudent(String studentName, String studentID) throws IllegalArgumentException;
     void removeStudent(String studentID);
