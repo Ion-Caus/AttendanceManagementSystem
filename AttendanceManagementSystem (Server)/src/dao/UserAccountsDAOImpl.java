@@ -9,21 +9,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class userAccountsDAOImpl implements userAccountsDAO
+public class UserAccountsDAOImpl implements UserAccountsDAO
 {
-  private static userAccountsDAOImpl instance;
+  private static UserAccountsDAOImpl instance;
 
-  private userAccountsDAOImpl() throws SQLException
+  private UserAccountsDAOImpl() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized userAccountsDAOImpl getInstance()
+  public static synchronized UserAccountsDAOImpl getInstance()
       throws SQLException
   {
     if (instance == null)
     {
-      instance = new userAccountsDAOImpl();
+      instance = new UserAccountsDAOImpl();
     }
     return instance;
   }
@@ -49,6 +49,51 @@ public class userAccountsDAOImpl implements userAccountsDAO
       statement.executeUpdate();
     }
   }
+
+//  @Override public Student createStudent(String name, String ID)
+//      throws SQLException
+//  {
+//    try (Connection connection = getConnection())
+//    {
+//      PreparedStatement statement = connection.prepareStatement(
+//          "INSERT INTO user_account(userid, full_name, access) VALUES (?, ?, ?);");
+//      statement.setString(1, ID);
+//      statement.setString(2, name);
+//      statement.setString(3, "student");
+//      statement.executeUpdate();
+//      return new Student(name, ID);
+//    }
+//  }
+//
+//  @Override public Teacher createTeacher(String name, String ID)
+//      throws SQLException
+//  {
+//    try (Connection connection = getConnection())
+//    {
+//      PreparedStatement statement = connection.prepareStatement(
+//          "INSERT INTO user_account(userid, full_name, access) VALUES (?, ?, ?);");
+//      statement.setString(1, ID);
+//      statement.setString(2, name);
+//      statement.setString(3, "teacher");
+//      statement.executeUpdate();
+//      return new Teacher(name, ID);
+//    }
+//  }
+//
+//  @Override public Administrator createAdmin(String name, String ID)
+//      throws SQLException
+//  {
+//    try (Connection connection = getConnection())
+//    {
+//      PreparedStatement statement = connection.prepareStatement(
+//          "INSERT INTO user_account(userid, full_name, access) VALUES (?, ?, ?);");
+//      statement.setString(1, ID);
+//      statement.setString(2, name);
+//      statement.setString(3, "admin");
+//      statement.executeUpdate();
+//      return new Administrator(name, ID);
+//    }
+//  }
 
   @Override public List<Student> readStudentByName() throws SQLException
   {

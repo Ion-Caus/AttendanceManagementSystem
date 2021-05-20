@@ -8,10 +8,13 @@ import model.Teacher;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface userAccountsDAO
+public interface UserAccountsDAO
 {
   // creating accounts
   void createUserAccount(String name, String ID, String password, String access) throws SQLException;
+//  Student createStudent(String name, String ID) throws SQLException;
+//  Teacher createTeacher(String name, String ID) throws SQLException;
+//  Administrator createAdmin(String name, String ID) throws SQLException;
 
   // reading accounts
   List<Student> readStudentByName() throws SQLException;
