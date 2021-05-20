@@ -1,5 +1,6 @@
 package dao;
 
+import model.Account;
 import model.Administrator;
 import model.Student;
 import model.Teacher;
@@ -23,9 +24,10 @@ public interface userAccountsDAO
   List<Teacher> readTeacherByName() throws SQLException;
   List<Administrator> readAdminByName() throws SQLException;
 
-//   void update(Student student) throws SQLException;
-//   void update(Teacher teacher) throws SQLException;
-//   void update(Administrator admin) throws SQLException;
+  // updating accounts
+   void updateUserAccount(Account account) throws SQLException;
+//   void updateTeacher(Teacher teacher) throws SQLException;
+//   void updateAdmin(Administrator admin) throws SQLException;
 
   // deleting accounts
   void deleteUser(String userID) throws SQLException;

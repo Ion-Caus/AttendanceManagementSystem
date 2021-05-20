@@ -1,5 +1,6 @@
 package dao;
 
+import model.Account;
 import model.Administrator;
 import model.Student;
 import model.Teacher;
@@ -171,10 +172,17 @@ public class userAccountsDAOImpl implements userAccountsDAO
     return new Administrator(name, studentID);
   }
 
-  //  @Override public void update(Student student) throws SQLException
-  //  {
-  //
-  //  }
+  @Override public void updateUserAccount(Account account) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection
+          .prepareStatement("UPDATE user_account SET password = ? WHERE id = ?");
+      statement.setString(1, account.getPassword().toString());
+      statement.setString(2, account.getUsername().toString());
+      statement.executeUpdate();
+    }
+  }
 
   @Override public void deleteUser(String userID) throws SQLException
   {
