@@ -4,6 +4,7 @@ import model.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -67,10 +68,17 @@ public class LessonDataDAOImpl implements LessonDataDAO
 
   }
 
-  @Override public void updateAbsenceStatus(LessonData lessonData)   //Update statement
+  @Override public void updateAbsenceStatus(LessonData lessonData)   //Update statement for changing status to opposite
       throws SQLException
   {
-
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection
+          .prepareStatement("UPDATE lesson_data SET absence_status = not absence_status WHERE userID = ? and lessonID = ?");
+      statement.setString(1, lessonData.getStudent().getID());
+      statement.setString(2, lessonData.getLesson().getId());
+      statement.executeUpdate();
+    }
   }
 
   @Override public void updateAbsenceMotive(LessonData lessonData)   //Update statement

@@ -48,7 +48,7 @@ public class ScheduleDAOImpl implements ScheduleDAO
     }
   }*/
 
-  public static Lesson createLesson(ResultSet resultSet) throws SQLException
+  public static Lesson createLesson(ResultSet resultSet) throws SQLException //TODO I guess we also should store an ID of a lesson locally (and receive it from database)
   {
     Teacher Teacher = new Teacher(resultSet.getString("full_name"), resultSet.getString("userid"));
     Date date = resultSet.getDate("date");
