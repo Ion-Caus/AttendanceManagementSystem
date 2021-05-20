@@ -13,6 +13,7 @@ public class Lesson {
     private Time endTime;
     private String subject;
     private String topic;
+    private String contents;
     private String classroom;
     private String homework;
 
@@ -20,17 +21,18 @@ public class Lesson {
     private String className;
 
     //TODO 11/05 by Ion Move the homework
-    public Lesson(String id, Teacher teacher, Date lessonDate, Time startTime, Time endTime,
-                  String subject, String topic, String classroom, String homework) throws IllegalArgumentException {
+    public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime,
+                  String subject, String topic, String contents, String classroom, String homework) throws IllegalArgumentException {
       // if (!hasValidTime(startTime, endTime))
          //   throw new IllegalArgumentException("Illegal lesson time");
-        this.id = id;
+       // this.id = id;
         this.teacher = teacher;
         this.lessonDate = lessonDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.subject = subject;
         this.topic = topic;
+        this.contents = contents
         this.classroom = classroom;
         this.homework = homework;
 

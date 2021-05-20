@@ -50,16 +50,16 @@ public class ScheduleDAOImpl implements ScheduleDAO
 
   public static Lesson createLesson(ResultSet resultSet) throws SQLException
   {
-    String lessonID = resultSet.getString("lessonid");
-    Teacher Teacher = new Teacher(resultSet.getString("full_name"), resultSet.getString("teacherid"));
+    Teacher Teacher = new Teacher(resultSet.getString("full_name"), resultSet.getString("userid"));
     Date date = resultSet.getDate("date");
     Time time1 = resultSet.getTime("timefrom");
     Time time2 = resultSet.getTime("timeto");
     String subject = resultSet.getString("subject");
     String topic = resultSet.getString("topic");
+    String contents = resultSet.getString("description");
     String classroom = resultSet.getString("classroom");
     String homework = resultSet.getString("homework");
-    return new Lesson(lessonID, Teacher, date, time1, time2, subject, topic, classroom, homework);
+    return new Lesson(Teacher, date, time1, time2, subject, topic, contents, classroom, homework);
   }
 
   @Override public List<Lesson> readLessons(Class aClass, Date date) throws SQLException
@@ -67,7 +67,7 @@ public class ScheduleDAOImpl implements ScheduleDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT lessonID FROM schedule_lessons join time_of_conduct using (lessonID) where classID = (?) and date = (?)");
+          "SELECT full_name, userID, date, subject, topic, description, classroom, homework FROM lesson join time_of_conduct using (lessonID) join taught_by using (lessonID) join user_account on Taught_by.teacherID = User_account.userID join schedule_lessons using (lessonID) where classID = ? and date=?");
       statement.setString(1, aClass.getClassName());
       statement.setString(2, String.valueOf(date));
       ResultSet resultSet = statement.executeQuery();
@@ -87,7 +87,7 @@ public class ScheduleDAOImpl implements ScheduleDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT lessonID FROM taught_by join User_account on userID = Taught_by.teacherID) where full_name = (?)");
+          "SELECT full_name, userID, date, subject, topic, description, classroom, homework FROM lesson join time_of_conduct using (lessonID) join taught_by using (lessonID) join user_account on Taught_by.teacherID = User_account.userID join schedule_lessons using (lessonID) where full_name = ?");
       statement.setString(1, teacher.getName());
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Lesson> result = new ArrayList<>();
