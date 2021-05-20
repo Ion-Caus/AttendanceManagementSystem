@@ -54,7 +54,8 @@ public class ModelManager implements Model {
                 "DBS",
                 "Stating with Databases",
                 "305A",
-                "Download Postgres"
+                "Download Postgres",
+                "set up a database"
         );
 
         Lesson lesson2 = new Lesson(steffen,
@@ -64,7 +65,8 @@ public class ModelManager implements Model {
                 "Java",
                 "Threads",
                 "Zoom",
-                "Counter Incrementer exercise"
+                "Counter Incrementer exercise",
+                "dont be drunk on lesson"
         );
 
         Lesson lesson3 = new Lesson(ole,
@@ -74,7 +76,8 @@ public class ModelManager implements Model {
                 "DBS",
                 "ER Diagrams",
                 "305A",
-                "Hospital exercise"
+                "Hospital exercise",
+                "bring paper and pen"
         );
 
         Lesson lesson4 = new Lesson(steffen,
@@ -84,7 +87,8 @@ public class ModelManager implements Model {
                 "Java",
                 "Observer",
                 "305A",
-                "Observer Pattern exercises"
+                "Observer Pattern exercises",
+                "be on time"
         );
 
         class1.getSchedule().addLesson(lesson1);
@@ -98,6 +102,8 @@ public class ModelManager implements Model {
 
         class2.getSchedule().addLesson(lesson3);
         lesson3.setClassName(class2.getClassName());
+
+
 
     }
 

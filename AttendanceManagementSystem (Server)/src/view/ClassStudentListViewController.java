@@ -48,7 +48,10 @@ public class ClassStudentListViewController extends ViewController {
 
         searchField.textProperty().bindBidirectional(viewModel.searchFieldProperty());
         searchAutoCompletion = TextFields.bindAutoCompletion(searchField, viewModel.getUnassignedStudents());
+
+
     }
+
 
     private void rebindTextField() {
         searchAutoCompletion.dispose();
