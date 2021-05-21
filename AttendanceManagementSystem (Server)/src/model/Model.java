@@ -5,6 +5,7 @@ import utility.observer.subject.LocalSubject;
 import viewModel.ScheduleViewModel;
 import viewModel.StudentListViewModel;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -45,8 +46,8 @@ public interface Model extends LocalSubject<String, Package> {
     boolean changeAbsence(String studentID, String lessonID, boolean absence);
     boolean changeLesson(String lessonID, String topic, String contents, String homework);
 
-    void addClass(String className)  throws IllegalArgumentException ;
-    void removeClass(String className) throws IllegalAccessException;
+    void addClass(String className) throws IllegalArgumentException, SQLException;
+    void removeClass(String className) throws IllegalAccessException, SQLException;
 
     void addStudent(String studentName, String studentID) throws IllegalArgumentException;
     void removeStudent(String studentID);

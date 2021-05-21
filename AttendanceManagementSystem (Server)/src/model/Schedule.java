@@ -19,7 +19,6 @@ public class Schedule {
         schedule.remove(lesson);
     }
 
-
     public Lesson getLessonBy(String lessonId) {
         for (Lesson lesson : schedule) {
             if (lesson.getId().equals(lessonId))

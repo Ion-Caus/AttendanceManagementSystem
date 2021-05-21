@@ -19,10 +19,10 @@ public class Lesson {
     private String className;
 
     //TODO 11/05 by Ion Move the homework
-    public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime, String subject, String topic, String contents, String classroom, String homework) throws IllegalArgumentException {
-
+    public Lesson(String id, Teacher teacher, Date lessonDate, Time startTime, Time endTime, String subject, String topic, String contents, String classroom, String homework, String className) throws IllegalArgumentException {
         if (!hasValidTime(startTime, endTime))
             throw new IllegalArgumentException("Illegal lesson time");
+        this.id = id;
         this.teacher = teacher;
         this.lessonDate = lessonDate;
         this.startTime = startTime.copy();
@@ -32,11 +32,7 @@ public class Lesson {
         this.contents = contents;
         this.classroom = classroom;
         this.homework = homework;
-
-        //TODO 18/05 by Ion get the id from database?
-        this.id = "L" + count;
-        count++;
-
+        this.className = className;
     }
 
     public static boolean hasValidTime(Time startTime, Time endTime) {

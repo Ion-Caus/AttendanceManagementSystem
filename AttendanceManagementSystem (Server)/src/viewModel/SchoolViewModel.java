@@ -16,6 +16,8 @@ import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
+import java.sql.SQLException;
+
 public class SchoolViewModel implements LocalListener<String, Package> {
     private ObservableList<ClassViewModel> classList;
     private ObjectProperty<ClassViewModel> selectedClassProperty;
@@ -158,7 +160,7 @@ public class SchoolViewModel implements LocalListener<String, Package> {
             clear();
             model.removeClass(className);
         }
-        catch (IllegalAccessException e) {
+        catch (IllegalAccessException | SQLException e) {
             error.set(e.getLocalizedMessage());
         }
     }

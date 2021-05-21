@@ -10,6 +10,10 @@ public class StudentList {
         this.students = new ArrayList<>();
     }
 
+    public StudentList(ArrayList<Student> students) {
+        this.students = students;
+    }
+
     public void addStudent(Student student) throws IllegalArgumentException {
         if (!isUnique(student.getID())) {
             throw new IllegalArgumentException("Student with ID ("+ student.getID() + ") already exists.");

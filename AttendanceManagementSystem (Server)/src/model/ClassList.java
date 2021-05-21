@@ -10,6 +10,10 @@ public class ClassList {
         this.classes = new ArrayList<>();
     }
 
+    public ClassList(ArrayList<Class> classes) {
+        this.classes = classes;
+    }
+
     public void addClass(Class aClass) throws IllegalArgumentException {
         if (!isUnique(aClass.getClassName())) {
             throw new IllegalArgumentException("Can not add a duplicate class.");

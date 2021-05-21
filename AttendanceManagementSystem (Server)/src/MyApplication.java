@@ -9,6 +9,7 @@ import viewModel.ViewModelFactory;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class MyApplication extends Application {
     private Model model;
@@ -16,17 +17,18 @@ public class MyApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        model = new ModelManager();
-        ViewModelFactory viewModelFactory = new ViewModelFactory(model);
-        ViewHandler viewHandler = new ViewHandler(viewModelFactory);
-
-        viewHandler.start(primaryStage);
-
-        // starting server...
-
         try {
+            model = new ModelManager();
+            ViewModelFactory viewModelFactory = new ViewModelFactory(model);
+            ViewHandler viewHandler = new ViewHandler(viewModelFactory);
+
+            viewHandler.start(primaryStage);
+
+            // starting server...
+
             server = new RemoteModelManager(model);
-        } catch (RemoteException | MalformedURLException e) {
+
+        } catch (RemoteException | MalformedURLException | SQLException e) {
             e.printStackTrace();
         }
     }

@@ -187,7 +187,6 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
 
     public boolean deleteLesson(){
         try {
-
             // TODO: 20/5/2021 by tomas use observer and move this code to model manager as a method and call that method from here 
             Lesson lesson = model.getClassByName(viewState.getClassName()).getSchedule().getLessonBy(selectedLessonProperty.get().idProperty().get());
             model.getClassByName(viewState.getClassName()).getSchedule().removeLesson(lesson);

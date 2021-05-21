@@ -9,6 +9,10 @@ public class TeacherList {
         this.teachers = new ArrayList<>();
     }
 
+    public TeacherList(ArrayList<Teacher> teachers) {
+        this.teachers = teachers;
+    }
+
     public void addTeacher(Teacher teacher) throws IllegalArgumentException {
         if (!isUnique(teacher.getID())) {
             throw new IllegalArgumentException("Teacher with ID ("+ teacher.getID() + ") already exists.");

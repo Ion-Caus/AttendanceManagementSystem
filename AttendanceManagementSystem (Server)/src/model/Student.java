@@ -7,8 +7,6 @@ public class Student {
     private String ID;
 
     private Account account;
-
-    //TODO 13/5 by Ion add the className
     private String className;
 
     public Student(String name, String ID) {

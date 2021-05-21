@@ -10,6 +10,10 @@ public class LessonDataList {
         this.lessonDataList = new ArrayList<>();
     }
 
+    public LessonDataList(ArrayList<LessonData> lessonDataList) {
+        this.lessonDataList = lessonDataList;
+    }
+
     public void addLessonData(LessonData lessonData) {
         lessonDataList.add(lessonData);
     }
