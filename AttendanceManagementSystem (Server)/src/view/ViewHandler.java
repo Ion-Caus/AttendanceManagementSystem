@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import viewModel.ViewModelFactory;
@@ -34,6 +35,8 @@ public class ViewHandler extends ViewCreator {
         {
             title += root.getUserData();
         }
+        Image image = new Image("/view/study.png");
+        primaryStage.getIcons().add(image);
         primaryStage.setTitle(title);
         primaryStage.setScene(currentScene);
         primaryStage.setWidth(root.getPrefWidth());
