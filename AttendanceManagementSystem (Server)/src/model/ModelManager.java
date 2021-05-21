@@ -166,12 +166,7 @@ public class ModelManager implements Model {
 
     @Override
     public ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date) {
-        try {
-            return ScheduleDAOImpl.getInstance().readLessons(theClass,date);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
-        }
+        return theClass.getSchedule().getLessonBy(date);
     }
 
     @Override
