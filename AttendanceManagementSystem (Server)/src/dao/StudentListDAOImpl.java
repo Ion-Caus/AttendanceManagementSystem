@@ -1,6 +1,5 @@
 package dao;
 
-import model.Class;
 import model.Student;
 
 import java.sql.*;
@@ -37,7 +36,7 @@ public class StudentListDAOImpl implements StudentListDAO
   {
     String name = resultSet.getString("full_name");
     String id = resultSet.getString("userid");
-    return new Student(String name, String id);
+    return new Student(name, id);
   }
 
 

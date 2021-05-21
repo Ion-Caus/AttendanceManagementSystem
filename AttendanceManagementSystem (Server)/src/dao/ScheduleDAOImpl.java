@@ -2,11 +2,11 @@ package dao;
 
 import model.Class;
 import model.Lesson;
-import model.Schedule;
 import model.Teacher;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,15 +53,16 @@ public class ScheduleDAOImpl implements ScheduleDAO
   {
     Teacher teacher = new Teacher(resultSet.getString("full_name"), resultSet.getString("userid"));
     LocalDate date = resultSet.getDate("date").toLocalDate();
-    Time time1 = resultSet.getTime("timefrom");
-    Time time2 = resultSet.getTime("timeto");
+    LocalTime time1 = resultSet.getTime("timefrom").toLocalTime();
+    LocalTime time2 = resultSet.getTime("timeto").toLocalTime();
     String subject = resultSet.getString("subject");
     String topic = resultSet.getString("topic");
     String contents = resultSet.getString("description");
     String classroom = resultSet.getString("classroom");
     String homework = resultSet.getString("homework");
-    return new Lesson(teacher, date, time1, time2, subject, topic, contents, classroom, homework);
-  }  //TODO date.toLocalDate()
+    return new Lesson(teacher, new model.Date(date), new model.Time(time1),
+        new model.Time(time2), subject, topic, contents, classroom, homework);
+  }
 
   @Override public List<Lesson> readLessons(Class aClass, Date date) throws SQLException
   {
@@ -103,7 +104,7 @@ public class ScheduleDAOImpl implements ScheduleDAO
 
   @Override public void update(String scheduleID) throws SQLException
   {
-
+    // not needed?
   }
 
   @Override public void addLesson(Class aClass, String lessonID) throws SQLException

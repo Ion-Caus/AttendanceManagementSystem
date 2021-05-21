@@ -172,7 +172,7 @@ public class UserAccountsDAOImpl implements UserAccountsDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("UPDATE user_account SET password = ? WHERE id = ?");
+          .prepareStatement("UPDATE user_account SET password = ? WHERE userid = ?");
       statement.setString(1, account.getPassword().toString());
       statement.setString(2, account.getUsername().toString());
       statement.executeUpdate();

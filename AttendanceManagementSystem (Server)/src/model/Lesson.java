@@ -32,7 +32,7 @@ public class Lesson {
         this.endTime = endTime;
         this.subject = subject;
         this.topic = topic;
-        this.contents = contents
+        this.contents = contents;
         this.classroom = classroom;
         this.homework = homework;
 
