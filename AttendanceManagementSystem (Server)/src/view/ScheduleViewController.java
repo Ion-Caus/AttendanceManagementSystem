@@ -82,9 +82,9 @@ public class ScheduleViewController extends ViewController {
 
     @FXML
     private void addLesson() {
-        if (viewModel.hasSelectionProperty()) {
+
             getViewHandler().openView(View.ADD_CLASS);
-        }
+
 
     }
 

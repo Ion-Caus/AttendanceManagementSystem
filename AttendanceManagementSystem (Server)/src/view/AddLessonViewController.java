@@ -40,6 +40,10 @@ public class AddLessonViewController extends ViewController{
         contentsField.textProperty().bindBidirectional(viewModel.contentsProperty());
         homeworkField.textProperty().bindBidirectional(viewModel.homeworkProperty());
         teacherField.textProperty().bindBidirectional(viewModel.teacherProperty());
+        startTimeField.textProperty().bindBidirectional(viewModel.startTimeProperty());
+        endTimeField.textProperty().bindBidirectional(viewModel.endTimeProperty());
+        errorLabel.textProperty().bind(viewModel.errorProperty());
+
         TextFields.bindAutoCompletion(teacherField,viewModel.getTeacherList());
 
          datePicker.valueProperty().bindBidirectional(viewModel.dateProperty());
@@ -59,13 +63,19 @@ public class AddLessonViewController extends ViewController{
     @Override
     public void reset() {
 
+        viewModel.clear();
     }
 
 
 
 
-    public boolean createLessonButtonPressed(){
-        return false;
+    public void createLessonButtonPressed(){
+        if (viewModel.createLesson()) {
+            reset();
+            getViewHandler().openView(View.SCHEDULE_VIEW);
+
+        }
+
     }
 
     public void backButtonClicked(){
