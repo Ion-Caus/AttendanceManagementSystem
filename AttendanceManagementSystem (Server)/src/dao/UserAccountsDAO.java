@@ -6,6 +6,7 @@ import model.Student;
 import model.Teacher;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UserAccountsDAO
@@ -17,7 +18,7 @@ public interface UserAccountsDAO
 //  Administrator createAdmin(String name, String ID) throws SQLException;
 
   // reading accounts
-  List<Student> readStudents() throws SQLException;
+  ArrayList<Student> readAllStudents() throws SQLException;
   List<Teacher> readTeachers() throws SQLException;
   List<Administrator> readAdmins() throws SQLException;
 

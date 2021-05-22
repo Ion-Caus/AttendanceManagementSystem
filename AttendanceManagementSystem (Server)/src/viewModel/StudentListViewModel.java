@@ -13,6 +13,8 @@ import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
 
+import java.sql.SQLException;
+
 public class StudentListViewModel implements GeneralListener<String, Package>  {
     private ObservableList<StudentLessonDataViewModel> lessonDataList;
     private ObjectProperty<StudentLessonDataViewModel> selectedStudentProperty;
@@ -93,10 +95,14 @@ public class StudentListViewModel implements GeneralListener<String, Package>  {
             return;
         }
 
-        model.changeAbsence(selectedStudentProperty.get().getIDStudentProperty().get(),
-                viewState.getLessonID(),
-                selectedStudentProperty.get().getAbsenceProperty().get().equals("YES")
-        );
+        try {
+            model.changeAbsence(selectedStudentProperty.get().getIDStudentProperty().get(),
+                    viewState.getLessonID(),
+                    selectedStudentProperty.get().getAbsenceProperty().get().equals("YES")
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         clear();
     }

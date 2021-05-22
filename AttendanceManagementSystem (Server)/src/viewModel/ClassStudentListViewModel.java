@@ -13,6 +13,7 @@ import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ClassStudentListViewModel implements LocalListener<String, Package> {
@@ -61,7 +62,7 @@ public class ClassStudentListViewModel implements LocalListener<String, Package>
             model.addStudentToClass(id, viewModelState.getClassName() );
             clear();
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException | SQLException e) {
             errorProperty.set(e.getMessage());
         }
     }
@@ -71,7 +72,7 @@ public class ClassStudentListViewModel implements LocalListener<String, Package>
             model.removeStudentFromClass(ID, viewModelState.getClassName() );
             clear();
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException | SQLException e) {
             errorProperty.set(e.getMessage());
         }
 

@@ -7,10 +7,12 @@ import model.Teacher;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserAccountsDAOImpl implements UserAccountsDAO
 {
   private static UserAccountsDAOImpl instance;
+  public static final String STUDENT = "student", TEACHER = "teacher", ADMIN = "admin";
 
   private UserAccountsDAOImpl() throws SQLException
   {
@@ -94,12 +96,14 @@ public class UserAccountsDAOImpl implements UserAccountsDAO
 //    }
 //  }
 
-  @Override public ArrayList<Student> readStudents() throws SQLException
+
+
+  @Override public ArrayList<Student> readAllStudents() throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM user_account join student_list sl on user_account.userid = sl.userid WHERE access = 'student';");
+          .prepareStatement("SELECT userID, full_name, classID from student_list full join User_account using (userID) where access='student';");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Student> result = new ArrayList<>();
       while (resultSet.next())
@@ -110,6 +114,7 @@ public class UserAccountsDAOImpl implements UserAccountsDAO
       return result;
     }
   }
+
 
   private static Student createStudent(ResultSet resultSet) throws SQLException
   {
@@ -130,14 +135,14 @@ public class UserAccountsDAOImpl implements UserAccountsDAO
       ArrayList<Teacher> result = new ArrayList<>();
       while (resultSet.next())
       {
-        Teacher teacher = createT(resultSet);
+        Teacher teacher = createTeacher(resultSet);
         result.add(teacher);
       }
       return result;
     }
   }
 
-  public static Teacher createT(ResultSet resultSet) throws SQLException
+  public static Teacher createTeacher(ResultSet resultSet) throws SQLException
   {
     String name = resultSet.getString("full_name");
     String studentID = resultSet.getString("userid");
@@ -184,10 +189,11 @@ public class UserAccountsDAOImpl implements UserAccountsDAO
   {
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection
-          .prepareStatement("DELETE FROM user_account WHERE userid = ?");
-      statement.setString(1, userID);
-      statement.executeUpdate();
+
+      PreparedStatement deleteUA = connection
+          .prepareStatement("DELETE FROM user_account WHERE userid = ?;");
+      deleteUA.setString(1, userID);
+      deleteUA.executeUpdate();
     }
   }
 }

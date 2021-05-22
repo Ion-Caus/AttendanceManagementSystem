@@ -43,18 +43,18 @@ public interface Model extends LocalSubject<String, Package> {
     LessonData getLessonData(Lesson lesson, Student student);
 
     boolean changeMotive(String studentId, String lessonID, String motive);
-    boolean changeAbsence(String studentID, String lessonID, boolean absence);
+    boolean changeAbsence(String studentID, String lessonID, boolean absence) throws SQLException;
     boolean changeLesson(String lessonID, String topic, String contents, String homework);
 
     void addClass(String className) throws IllegalArgumentException, SQLException;
     void removeClass(String className) throws IllegalAccessException, SQLException;
 
-    void addStudent(String studentName, String studentID) throws IllegalArgumentException;
-    void removeStudent(String studentID);
+    void addStudent(String studentName, String studentID) throws IllegalArgumentException, SQLException;
+    void removeStudent(String studentID) throws SQLException;
 
-    void addStudentToClass(String studentID, String className) throws IllegalArgumentException;
-    void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException;
+    void addStudentToClass(String studentID, String className) throws IllegalArgumentException, SQLException;
+    void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException, SQLException;
 
-    void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException;
-    void removeTeacher(String studentID);
+    void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException, SQLException;
+    void removeTeacher(String studentID) throws SQLException;
 }

@@ -63,16 +63,17 @@ public class LessonDataDAOImpl implements LessonDataDAO
     }
   }
 
+
   @Override
   public ArrayList<LessonData> readAll() throws SQLException {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
               .prepareStatement("SELECT * FROM lesson_data " +
-                      "join user_account ua on ua.userid = lesson_data.userid " +
-                      "join time_of_conduct toc on lesson_data.lessonid = toc.lessonid " +
-                      "join lesson l on l.lessonid = lesson_data.lessonid " +
-                      "join schedule_lessons sl on l.lessonid = sl.lessonid");
+                      "join user_account using(userid) " +
+                      "join lesson using(lessonid) " +
+                      "join time_of_conduct using(lessonid) " +
+                      "join schedule_lessons using(lessonid);");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<LessonData> result = new ArrayList<>();
       while (resultSet.next())
@@ -146,8 +147,19 @@ public class LessonDataDAOImpl implements LessonDataDAO
     String userID = resultSet.getString("userid");
     String name = resultSet.getString("full_name");
     Student student = new Student(name, userID);
+    student.setClassName(className);
 
-    return new LessonData(lesson, student);
+    // creating LessonData
+    LessonData lessonData = new LessonData(lesson, student);
+
+    Absence absence = new Absence(resultSet.getBoolean("absence_status"), resultSet.getString("absence_motive"));
+    lessonData.setAbsence(absence);
+
+    Grade grade = new Grade(resultSet.getInt("grade"), resultSet.getString("comment"));
+    lessonData.setGrade(grade);
+
+    return lessonData;
+
   }
 
   @Override public void updateGrade(LessonData lessonData) throws SQLException
@@ -185,7 +197,7 @@ public class LessonDataDAOImpl implements LessonDataDAO
       PreparedStatement statement = connection.prepareStatement(
           "UPDATE lesson_data SET absence_status = not absence_status WHERE userID = ? and lessonID = ?");
       statement.setString(1, lessonData.getStudent().getID());
-      statement.setString(2, lessonData.getLesson().getId());
+      statement.setInt(2, Integer.parseInt(lessonData.getLesson().getId()));
       statement.executeUpdate();
     }
   }

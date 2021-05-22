@@ -2,6 +2,7 @@ package dao;
 
 import model.Class;
 import model.Lesson;
+import model.LessonData;
 import model.Teacher;
 
 import java.sql.*;
@@ -73,6 +74,29 @@ public class ScheduleDAOImpl implements ScheduleDAO
     }
   }
 
+
+  @Override
+  public ArrayList<Lesson> readAll() throws SQLException {
+    try (Connection connection = getConnection())
+    {
+
+      PreparedStatement statement = connection
+              .prepareStatement("SELECT classid, lessonid, full_name, userID, date, timefrom, timeto, subject, topic, description, classroom, homework FROM lesson " +
+                      "join time_of_conduct using (lessonID) " +
+                      "join taught_by using (lessonID) " +
+                      "join user_account on Taught_by.teacherID = User_account.userID " +
+                      "join schedule_lessons using (lessonID)"
+              );
+      ResultSet resultSet = statement.executeQuery();
+      ArrayList<Lesson> result = new ArrayList<>();
+      while (resultSet.next())
+      {
+        Lesson lesson = createLesson(resultSet);
+        result.add(lesson);
+      }
+      return result;
+    }
+  }
 
   @Override public ArrayList<Lesson> readLessonsByTeacherName(Teacher teacher) throws SQLException  //searches by name, but also could replace it with id
   {

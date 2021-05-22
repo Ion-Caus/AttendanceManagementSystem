@@ -1,9 +1,6 @@
 package model;
 
-import dao.ClassesDAOImpl;
-import dao.LessonDataDAOImpl;
-import dao.ScheduleDAOImpl;
-import dao.UserAccountsDAOImpl;
+import dao.*;
 import model.packages.Package;
 import model.packages.PackageAbsence;
 import model.packages.PackageLesson;
@@ -28,18 +25,20 @@ public class ModelManager implements Model {
 
     private void loadFromDatabase() throws SQLException {
        school.setClassList(ClassesDAOImpl.getInstance().readClasses());
-       school.setStudentList(UserAccountsDAOImpl.getInstance().readStudents());
+       school.setStudentList(UserAccountsDAOImpl.getInstance().readAllStudents());
        school.setTeacherList(UserAccountsDAOImpl.getInstance().readTeachers());
        school.setLessonDataList(LessonDataDAOImpl.getInstance().readAll());
+       ArrayList<Lesson> lessonList = ScheduleDAOImpl.getInstance().readAll();
        loadStudentsInClasses();
-       loadLessonsInClasses();
+       loadLessonsInClasses(lessonList);
+        System.out.println(school.getLessonDataList().getLessonDataList());
     }
 
-    private void loadLessonsInClasses() {
+    private void loadLessonsInClasses(ArrayList<Lesson> lessonList){
         for(Class aClass : getAllClasses())
-            for(LessonData ld : school.getLessonDataList().getLessonDataList())
-                if(Objects.equals(aClass.getClassName(),ld.getLesson().getClassName()))
-                    aClass.getSchedule().getAllLessons().add(ld.getLesson());
+            for(Lesson lesson : lessonList)
+                if(Objects.equals(aClass.getClassName(),lesson.getClassName()))
+                    aClass.getSchedule().getAllLessons().add(lesson);
     }
 
     private void loadStudentsInClasses() {
@@ -228,14 +227,15 @@ public class ModelManager implements Model {
     @Override
     public LessonData getLessonData(Lesson lesson, Student student) {
         try {
+            System.out.println(school.getLessonDataList().getLessonDataList());
             return school.getLessonDataList().getByStudentAndLesson(lesson, student);
         }
         catch (IllegalArgumentException e) {
             school.getLessonDataList().addLessonData(new LessonData(lesson, student));
+            // TODO: 5/22/2021 Add Lesson Data to DAO here 
             return school.getLessonDataList().getByStudentAndLesson(lesson, student);
         }
     }
-
 
     @Override
     public void addClass(String className) throws IllegalArgumentException, SQLException {
@@ -254,55 +254,69 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addStudent(String studentName, String studentID) throws IllegalArgumentException {
+    public void addStudent(String studentName, String studentID) throws IllegalArgumentException, SQLException {
         school.getStudentList().addStudent(new Student(studentName, studentID));
+        UserAccountsDAOImpl.getInstance().createUserAccount(studentName,studentID,"default",UserAccountsDAOImpl.STUDENT);
         property.firePropertyChange("ADD Student", null, new PackageName(studentID, studentName));
     }
 
     @Override
-    public void removeStudent(String studentID) throws IllegalArgumentException {
+    public void removeStudent(String studentID) throws IllegalArgumentException, SQLException {
         //remove from class' studentList
         String className = getStudentBy(studentID).getClassName();
-        if(className != null)
+
+        for(LessonData ld : school.getLessonDataList().getLessonDataList())
+            if(Objects.equals(ld.getStudent().getID(),studentID))
+                school.getLessonDataList().removeLessonData(ld);
+
+        if(className != null) {
             school.getClassList().getClassByName(className).getStudents().removeStudent(studentID);
+        }
         //remove from school's studentList
         school.getStudentList().removeStudent(studentID);
+        UserAccountsDAOImpl.getInstance().deleteUser(studentID);
 
         property.firePropertyChange("REMOVE Student", null, new Package(studentID));
     }
 
     @Override
-    public void addStudentToClass(String studentID, String className) throws IllegalArgumentException {
+    public void addStudentToClass(String studentID, String className) throws IllegalArgumentException, SQLException {
         Class theClass = getClassByName(className);
         Student student = getStudentBy(studentID);
 
         theClass.getStudents().addStudent(student);
         student.setClassName(theClass.getClassName());
 
+        StudentListDAOImpl.getInstance().addToClass(className,studentID);
+
         property.firePropertyChange("ADD_TO_CLASS Student", null,  new PackageName(studentID, className));
     }
 
     @Override
-    public void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException {
+    public void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException, SQLException {
         Class theClass = getClassByName(className);
         Student student = getStudentBy(studentID);
 
         theClass.getStudents().removeStudent(student);
         student.clearClassName();
 
+        StudentListDAOImpl.getInstance().removeFromClass(className,studentID);
+
         property.firePropertyChange("REMOVE_FROM_CLASS Student", null, new PackageName(studentID, className));
     }
 
     @Override
-    public void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException {
+    public void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException, SQLException {
         school.getTeacherList().addTeacher(new Teacher(teacherName, teacherID));
+        UserAccountsDAOImpl.getInstance().createUserAccount(teacherName,teacherID,"default",UserAccountsDAOImpl.TEACHER);
         property.firePropertyChange("ADD Teacher", null, new PackageName(teacherID, teacherName));
     }
 
     @Override
-    public void removeTeacher(String teacherID) {
+    public void removeTeacher(String teacherID) throws SQLException {
        //TODO 16/5 by Deniss handle removing the teacher from lessons or throw exception if teacher has lessons
         school.getTeacherList().removeTeacher(teacherID);
+        UserAccountsDAOImpl.getInstance().deleteUser(teacherID);
         property.firePropertyChange("REMOVE Teacher", null, new Package(teacherID));
     }
 
@@ -315,9 +329,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean changeAbsence(String studentID, String lessonID, boolean absence) {
-        getLessonData(getLesson(lessonID), getStudentBy(studentID)).getAbsence().setWasAbsent(!absence);
-
+    public boolean changeAbsence(String studentID, String lessonID, boolean absence) throws SQLException {
+        LessonData ld = getLessonData(getLesson(lessonID), getStudentBy(studentID));
+        ld.getAbsence().setWasAbsent(!absence);
+        LessonDataDAOImpl.getInstance().updateAbsenceStatus(ld);
         property.firePropertyChange("ChangeAbsence", null, new PackageAbsence(studentID, lessonID, absence));
         return !absence;
     }

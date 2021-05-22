@@ -14,6 +14,7 @@ import java.util.List;
 public interface ScheduleDAO
 {
   //void create(Class className) throws SQLException;
+  ArrayList<Lesson> readAll() throws SQLException;
   ArrayList<Lesson> readLessons(Class aClass, LocalDate date) throws SQLException;
   ArrayList<Lesson> readLessonsByTeacherName(Teacher teacher) throws SQLException;
   void addLesson(Class aClass, String lessonID) throws SQLException;

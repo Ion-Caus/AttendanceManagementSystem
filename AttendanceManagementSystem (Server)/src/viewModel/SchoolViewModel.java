@@ -167,12 +167,20 @@ public class SchoolViewModel implements LocalListener<String, Package> {
 
     public void removeStudent(String studentID) {
         clear();
-        model.removeStudent(studentID);
+        try {
+            model.removeStudent(studentID);
+        } catch (SQLException throwables) {
+            errorProperty().set(throwables.getMessage());
+        }
     }
 
     public void removeTeacher(String teacherID) {
         clear();
-        model.removeTeacher(teacherID);
+        try {
+            model.removeTeacher(teacherID);
+        } catch (SQLException throwables) {
+            errorProperty().set(throwables.getMessage());
+        }
     }
 
     public boolean viewSchedule() {

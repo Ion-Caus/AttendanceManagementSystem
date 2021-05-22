@@ -4,6 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Model;
 
+import java.sql.SQLException;
+
 public class AddStudentViewModel {
     private StringProperty studentName;
     private StringProperty studentID;
@@ -29,7 +31,7 @@ public class AddStudentViewModel {
             model.addStudent(studentName.get(), studentID.get());
             return true;
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException | SQLException e) {
             errorProperty.set(e.getMessage());
             return false;
         }

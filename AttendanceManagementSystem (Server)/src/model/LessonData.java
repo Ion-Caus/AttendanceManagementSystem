@@ -36,4 +36,14 @@ public class LessonData {
     public Student getStudent() {
         return student;
     }
+
+    @Override
+    public String toString() {
+        return "LessonData{" +
+                "lesson=" + lesson.getClassName() +
+                ", student=" + student.getName() +
+                ", grade=" + grade.getGrade() +
+                ", absence=" + absence.isWasAbsent() +
+                '}';
+    }
 }
