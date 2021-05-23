@@ -332,8 +332,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addLesson(Class aClass, Lesson lesson) {
-//        lessonDAO.createLesson(aClass,lesson);
+    public void addLesson(Class aClass, Lesson lesson) throws SQLException {
+        lessonDAO.createLesson(aClass,lesson);
+        System.out.println(lesson);
         aClass.getSchedule().addLesson(lesson);
     }
 

@@ -46,7 +46,12 @@ public class LessonDAOImpl implements LessonDAO
       statement1.setString(4, lesson.getContents());
       statement1.executeUpdate();
 
-      lesson.setId(String.valueOf(statement1.getGeneratedKeys().getInt(1)));
+      ResultSet generatedKeys = statement1.getGeneratedKeys();
+      if (!generatedKeys.next()) {
+        throw new SQLException("No keys generated");
+      }
+      int lessonID = generatedKeys.getInt(1);
+      lesson.setId(String.valueOf(lessonID));
       System.out.println(lesson);
 
       PreparedStatement statement2 = connection
@@ -69,7 +74,6 @@ public class LessonDAOImpl implements LessonDAO
       statement4.setString(1, aClass.getClassName());
       statement4.setInt(2, Integer.parseInt(lesson.getId()));
       statement4.executeUpdate();
-
 
     }
   }

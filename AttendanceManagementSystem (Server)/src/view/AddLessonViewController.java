@@ -46,17 +46,11 @@ public class AddLessonViewController extends ViewController{
 
         TextFields.bindAutoCompletion(teacherField,viewModel.getTeacherList());
 
-         datePicker.valueProperty().bindBidirectional(viewModel.dateProperty());
+        datePicker.valueProperty().bindBidirectional(viewModel.dateProperty());
         datePicker.getEditor().setText(
                 DateTimeFormatter.ofPattern("EEEE dd/MM").format(datePicker.getValue())
         );
         classroom.textProperty().bindBidirectional(viewModel.classroomProperty());
-
-
-
-
-
-
 
     }
 
@@ -64,9 +58,6 @@ public class AddLessonViewController extends ViewController{
     public void reset() {
         viewModel.clear();
     }
-
-
-
 
     public void createLessonButtonPressed(){
         if (viewModel.createLesson()) {
