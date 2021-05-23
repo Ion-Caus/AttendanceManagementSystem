@@ -1,5 +1,6 @@
 package dao;
 
+import model.Class;
 import model.Lesson;
 import model.LessonData;
 import model.Teacher;
@@ -33,7 +34,7 @@ public class LessonDAOImpl implements LessonDAO
 
 
 
-  @Override public void createLesson(Lesson lesson) throws SQLException //TODO change what we're receiving and finish corresponding inserts
+  @Override public void createLesson(Class aClass, Lesson lesson) throws SQLException //TODO change what we're receiving and finish corresponding inserts
   {
     try (Connection connection = getConnection())
     {
@@ -55,6 +56,19 @@ public class LessonDAOImpl implements LessonDAO
       statement2.setTime(4, Time.valueOf(lesson.getEndTime().getTime()));
       statement2.setString(5, lesson.getClassroom());
       statement2.executeUpdate();
+
+      PreparedStatement statement3 = connection
+          .prepareStatement("INSERT INTO taught_by(teacherid, lessonid) VALUES (?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+      statement3.setString(1, lesson.getTeacher().getID());
+      statement3.setInt(2, Integer.parseInt(lesson.getId()));
+      statement3.executeUpdate();
+
+      PreparedStatement statement4 = connection
+          .prepareStatement("INSERT INTO schedule_lessons(classid, lessonid) VALUES (?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+      statement4.setString(1, aClass.getClassName());
+      statement4.setInt(2, Integer.parseInt(lesson.getId()));
+      statement4.executeUpdate();
+
 
     }
   }

@@ -4,10 +4,10 @@ import model.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface LessonDataDAO
 {
+  void createLessonData(String lessonID, String studentID) throws SQLException;
   LessonData readByStudentAndLessonID(String studentID, String lessonID) throws SQLException;
   ArrayList<LessonData> readAll() throws SQLException;
   ArrayList<LessonData> readAllByStudentID(String studentID) throws SQLException;
@@ -16,5 +16,4 @@ public interface LessonDataDAO
   void updateComment(LessonData lessonData) throws SQLException;
   void updateAbsenceStatus(LessonData lessonData) throws SQLException;
   void updateAbsenceMotive(LessonData lessonData) throws SQLException;
-  void delete(LessonData lessonData) throws SQLException; //not sure if there is anything to delete
 }

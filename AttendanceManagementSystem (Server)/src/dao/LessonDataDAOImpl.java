@@ -37,6 +37,18 @@ public class LessonDataDAOImpl implements LessonDataDAO
 
   //TODO need to think how are we generating initial (empty) lessonData for students on exact lessons? Maybe it should appear in another DAO or here (new statement for it is needed)
 
+  @Override public void createLessonData(String lessonID, String studentID) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "INSERT INTO lesson_data(userid, lessonid) VALUES (?,?)");
+      statement.setString(1, studentID);
+      statement.setInt(2, Integer.parseInt(lessonID));
+      statement.executeUpdate();
+    }
+  }
+
   @Override public LessonData readByStudentAndLessonID(String studentID, String lessonID)
       throws SQLException   // TODO check! not 100% sure
   {
@@ -49,7 +61,7 @@ public class LessonDataDAOImpl implements LessonDataDAO
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next())
       {
-        Grade grade = new Grade(resultSet.getInt("grade"), // change grade to String!
+        Grade grade = new Grade(resultSet.getInt("grade"),
             resultSet.getString("comment"));
         Absence absence = new Absence(resultSet.getBoolean("absence_status"),
             resultSet.getString("absence_motive"));
@@ -168,7 +180,7 @@ public class LessonDataDAOImpl implements LessonDataDAO
     {
       PreparedStatement statement = connection.prepareStatement(
           "UPDATE lesson_data SET grade = ? WHERE userID = ? and lessonID = ?");
-      statement.setInt(1, lessonData.getGrade().getGrade()); // will change to String!
+      statement.setInt(1, lessonData.getGrade().getGrade());
       statement.setString(2, lessonData.getStudent().getID());
       statement.setString(3, lessonData.getLesson().getId());
       statement.executeUpdate();
@@ -214,9 +226,5 @@ public class LessonDataDAOImpl implements LessonDataDAO
       statement.setString(3, lessonData.getLesson().getId());
       statement.executeUpdate();
     }
-  }
-
-  @Override public void delete(LessonData lessonData) throws SQLException //Not sure if we need it
-  {
   }
 }
