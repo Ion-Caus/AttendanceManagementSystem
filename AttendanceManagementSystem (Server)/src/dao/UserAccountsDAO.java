@@ -19,8 +19,8 @@ public interface UserAccountsDAO
 
   // reading accounts
   ArrayList<Student> readAllStudents() throws SQLException;
-  List<Teacher> readTeachers() throws SQLException;
-  List<Administrator> readAdmins() throws SQLException;
+  ArrayList<Teacher> readTeachers() throws SQLException;
+  ArrayList<Administrator> readAdmins() throws SQLException;
 
   // updating accounts
    void updateUserAccount(Account account) throws SQLException;

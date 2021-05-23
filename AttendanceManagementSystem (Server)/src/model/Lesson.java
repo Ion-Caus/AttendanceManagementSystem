@@ -14,8 +14,6 @@ public class Lesson {
     private String contents;
     private String classroom;
     private String homework;
-
-    //TODO set and get the class
     private String className;
 
     //TODO 11/05 by Ion Move the homework
