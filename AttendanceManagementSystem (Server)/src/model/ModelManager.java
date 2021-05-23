@@ -327,16 +327,29 @@ public class ModelManager implements Model {
     @Override
     public void removeTeacher(String teacherID) throws SQLException {
        //TODO 16/5 by Deniss handle removing the teacher from lessons or throw exception if teacher has lessons
+
+        ArrayList<Lesson> lessons = getLessonsByTeacher(teacherID);
+        lessons.forEach(lesson -> lesson.setTeacher(getTeacherBy("000000")));
         school.getTeacherList().removeTeacher(teacherID);
-        userAccountsDAO.deleteUser(teacherID);
+
+        userAccountsDAO.deleteTeacher(teacherID);
+
         property.firePropertyChange("REMOVE Teacher", null, new Package(teacherID));
+    }
+
+    private ArrayList<Lesson> getLessonsByTeacher(String teacherID) {
+        ArrayList<Lesson> lessons = new ArrayList<>();
+        for(Class temp : school.getClassList().getAllClasses())
+            for(Lesson lesson : temp.getSchedule().getAllLessons())
+                if(lesson.getTeacher().getID().equals(teacherID))
+                    lessons.add(lesson);
+        return lessons;
     }
 
 
     @Override
     public void addLesson(Class aClass, Lesson lesson) throws SQLException {
         lessonDAO.createLesson(aClass,lesson);
-        System.out.println(lesson);
         aClass.getSchedule().addLesson(lesson);
     }
 

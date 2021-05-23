@@ -27,4 +27,5 @@ public interface UserAccountsDAO
 
   // deleting accounts
   void deleteUser(String userID) throws SQLException;
+  void deleteTeacher(String teacherID) throws SQLException;
 }

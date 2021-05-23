@@ -37,7 +37,6 @@ public class ClassList {
         }
     }
 
-
     public ArrayList<Class> getAllClasses() {
         return classes;
     }

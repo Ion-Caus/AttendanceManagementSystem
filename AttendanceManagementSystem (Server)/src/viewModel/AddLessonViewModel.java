@@ -8,9 +8,6 @@ import javafx.beans.property.StringProperty;
 import model.*;
 import model.Class;
 
-import javax.print.DocFlavor;
-import java.lang.reflect.InvocationTargetException;
-import java.security.InvalidParameterException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;

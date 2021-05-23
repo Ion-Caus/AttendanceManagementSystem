@@ -3,7 +3,6 @@ package model;
 import java.time.format.DateTimeFormatter;
 
 public class Lesson {
-    private static int count = 10_000;
 
     private String id;
     private Teacher teacher;
@@ -16,7 +15,6 @@ public class Lesson {
     private String homework;
     private String className;
 
-    //TODO 11/05 by Ion Move the homework
     public Lesson(String id, Teacher teacher, Date lessonDate, Time startTime, Time endTime, String subject, String topic, String contents, String classroom, String homework, String className) throws IllegalArgumentException {
         if (!hasValidTime(startTime, endTime))
             throw new IllegalArgumentException("Illegal lesson time");
@@ -117,7 +115,6 @@ public class Lesson {
         this.homework = homework;
     }
 
-    //TODO 14/5 by Ion find a way to set the className for this lesson
     public void setClassName(String className) {
         this.className = className;
     }

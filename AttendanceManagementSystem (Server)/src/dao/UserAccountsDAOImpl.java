@@ -189,11 +189,23 @@ public class UserAccountsDAOImpl implements UserAccountsDAO
   {
     try (Connection connection = getConnection())
     {
-
       PreparedStatement deleteUA = connection
           .prepareStatement("DELETE FROM user_account WHERE userid = ?;");
       deleteUA.setString(1, userID);
       deleteUA.executeUpdate();
+    }
+  }
+
+  @Override
+  public void deleteTeacher(String teacherID) throws SQLException {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement deleteTaught = connection
+              .prepareStatement("UPDATE taught_by set teacherid=? WHERE teacherid = ?;");
+      deleteTaught.setString(1, "000000");
+      deleteTaught.setString(2, teacherID);
+      deleteTaught.executeUpdate();
+      deleteUser(teacherID);
     }
   }
 }

@@ -26,8 +26,6 @@ public class School {
         this.lessonDataList = new LessonDataList(lessonDataList);
     }
 
-
-
     public School() {
         this.name = "School";
         this.classList = new ClassList();

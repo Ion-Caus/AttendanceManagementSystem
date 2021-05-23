@@ -27,6 +27,14 @@ public class Teacher {
         this.account = account;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     public String getName() {
         return name;
     }

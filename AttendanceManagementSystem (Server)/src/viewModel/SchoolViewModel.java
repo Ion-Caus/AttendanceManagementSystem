@@ -81,7 +81,8 @@ public class SchoolViewModel implements LocalListener<String, Package> {
 
         teacherList.clear();
         for (Teacher teacher : model.getAllTeachers()) {
-            teacherList.add(new TeacherViewModel(teacher));
+            if(!(teacher.getID().equals("000000"))) //Skipping the default profile
+                teacherList.add(new TeacherViewModel(teacher));
         }
     }
 
