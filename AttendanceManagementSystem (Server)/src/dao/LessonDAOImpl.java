@@ -126,13 +126,13 @@ public class LessonDAOImpl implements LessonDAO
   }
   }
 
-  @Override public void delete(Lesson lesson) throws SQLException
+  @Override public void delete(String lessonID) throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement deleteUA = connection
           .prepareStatement("DELETE FROM lesson WHERE lessonid = ?;");
-      deleteUA.setString(1, lesson.getId());
+      deleteUA.setInt(1, Integer.parseInt(lessonID));
       deleteUA.executeUpdate();
     }
   }

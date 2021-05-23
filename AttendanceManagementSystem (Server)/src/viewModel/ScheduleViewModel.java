@@ -14,6 +14,7 @@ import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 
@@ -185,19 +186,17 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
 
     }
 
-    public boolean deleteLesson(){
+    public void deleteLesson(){
         try {
-            // TODO: 20/5/2021 by tomas use observer and move this code to model manager as a method and call that method from here 
-            Lesson lesson = model.getClassByName(viewState.getClassName()).getSchedule().getLessonBy(selectedLessonProperty.get().idProperty().get());
-            model.getClassByName(viewState.getClassName()).getSchedule().removeLesson(lesson);
+            // TODO: 20/5/2021 by tomas use observer and move this code to model manager as a method and call that method from here
+            model.removeLesson(viewState.getClassName(), selectedLessonProperty.get().idProperty().get());
             loadScheduleForDay();
             errorProperty.set("");
-            return true;
         } catch (NullPointerException | IllegalArgumentException e) {
            errorProperty.set("Please select a lesson");
-           return false;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-
     }
 
     @Override

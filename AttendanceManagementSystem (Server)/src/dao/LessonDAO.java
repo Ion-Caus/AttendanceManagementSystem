@@ -15,5 +15,5 @@ public interface LessonDAO
   void updateTopic(Lesson lesson, String topic) throws SQLException;
   void updateHomework(Lesson lesson, String homework) throws SQLException;
   void updateContent(Lesson lesson, String content) throws SQLException;
-  void delete(Lesson lesson) throws SQLException;
+  void delete(String lessonID) throws SQLException;
 }

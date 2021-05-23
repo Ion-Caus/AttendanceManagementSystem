@@ -9,6 +9,7 @@ import model.LessonData;
 import model.Model;
 import model.Student;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class InfoViewModel {
@@ -164,11 +165,16 @@ public class InfoViewModel {
     }
 
     public boolean submitChangeLesson() {
-        switch (viewState.getAccessLevel()) {
-            case "Student":
-                return model.changeMotive(viewState.getStudentID(), viewState.getLessonID(), motive.get());
-            case "Administrator":
-                return model.changeLesson(viewState.getLessonID(), topic.get(), contents.get(), homework.get());
+        try {
+            switch (viewState.getAccessLevel()) {
+                case "Student":
+                    return model.changeMotive(viewState.getStudentID(), viewState.getLessonID(), motive.get());
+                case "Administrator":
+                    return model.changeLesson(viewState.getLessonID(), topic.get(), contents.get(), homework.get());
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            error.set(e.getLocalizedMessage());
         }
         //TODO use observer to change lesson for all
         return false;

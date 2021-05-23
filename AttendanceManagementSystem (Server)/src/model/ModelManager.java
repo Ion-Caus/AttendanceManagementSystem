@@ -240,10 +240,13 @@ public class ModelManager implements Model {
     public LessonData getLessonData(Lesson lesson, Student student) {
         try {
             return school.getLessonDataList().getByStudentAndLesson(lesson, student);
-        }
-        catch (IllegalArgumentException e) {
-            school.getLessonDataList().addLessonData(new LessonData(lesson, student));
-            // TODO: 5/22/2021 Add Lesson Data to DAO here 
+        } catch (IllegalArgumentException e) {
+            try {
+                lessonDataDAO.createLessonData(lesson.getId(), student.getID());
+                school.getLessonDataList().addLessonData(new LessonData(lesson, student));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             return school.getLessonDataList().getByStudentAndLesson(lesson, student);
         }
     }
@@ -274,12 +277,10 @@ public class ModelManager implements Model {
     @Override
     public void removeStudent(String studentID) throws IllegalArgumentException, SQLException {
         //remove from class' studentList
+
+        school.getLessonDataList().removeLessonDataByStudent(studentID);
+
         String className = getStudentBy(studentID).getClassName();
-
-        for(LessonData ld : school.getLessonDataList().getLessonDataList())
-            if(Objects.equals(ld.getStudent().getID(),studentID))
-                school.getLessonDataList().removeLessonData(ld);
-
         if(className != null) {
             school.getClassList().getClassByName(className).getStudents().removeStudent(studentID);
         }
@@ -331,6 +332,7 @@ public class ModelManager implements Model {
         property.firePropertyChange("REMOVE Teacher", null, new Package(teacherID));
     }
 
+
     @Override
     public void addLesson(Class aClass, Lesson lesson) throws SQLException {
         lessonDAO.createLesson(aClass,lesson);
@@ -338,10 +340,20 @@ public class ModelManager implements Model {
         aClass.getSchedule().addLesson(lesson);
     }
 
+    @Override
+    public void removeLesson(String className, String lessonID) throws SQLException {
+        var schedule = getClassByName(className).getSchedule();
+        Lesson lesson = schedule.getLessonBy(lessonID);
+        lessonDAO.delete(lessonID);
+        schedule.removeLesson(lesson);
+    }
+
     //--
     @Override
-    public boolean changeMotive(String studentId, String lessonID, String motive) {
-        getLessonData(getLesson(lessonID), getStudentBy(studentId)).getAbsence().setMotive(motive);
+    public boolean changeMotive(String studentId, String lessonID, String motive) throws SQLException {
+        LessonData ld = getLessonData(getLesson(lessonID), getStudentBy(studentId));
+        ld.getAbsence().setMotive(motive);
+        lessonDataDAO.updateAbsenceMotive(ld);
         property.firePropertyChange("ChangeMotive", null, new PackageAbsence(studentId, lessonID,motive));
         return true;
     }

@@ -42,7 +42,7 @@ public interface Model extends LocalSubject<String, Package> {
 
     LessonData getLessonData(Lesson lesson, Student student);
 
-    boolean changeMotive(String studentId, String lessonID, String motive);
+    boolean changeMotive(String studentId, String lessonID, String motive) throws SQLException;
     boolean changeAbsence(String studentID, String lessonID, boolean absence) throws SQLException;
     boolean changeLesson(String lessonID, String topic, String contents, String homework);
 
@@ -57,6 +57,6 @@ public interface Model extends LocalSubject<String, Package> {
 
     void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException, SQLException;
     void removeTeacher(String studentID) throws SQLException;
-
     void addLesson(Class aClass, Lesson lesson) throws SQLException;
+    void removeLesson(String className, String lessonID) throws SQLException;
 }

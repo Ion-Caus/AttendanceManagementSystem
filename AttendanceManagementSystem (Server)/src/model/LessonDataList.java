@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LessonDataList {
 
@@ -21,6 +22,10 @@ public class LessonDataList {
     public void removeLessonData(LessonData lessonData) {
         lessonDataList.remove(lessonData);
 
+    }
+
+    public void removeLessonDataByStudent(String studentID){
+        lessonDataList.removeIf(lessonData -> Objects.equals(lessonData.getStudent().getID(),studentID));
     }
 
     public ArrayList<LessonData> getLessonDataList() {

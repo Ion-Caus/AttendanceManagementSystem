@@ -8,7 +8,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LessonDataDAOImpl implements LessonDataDAO
 {
@@ -42,9 +41,10 @@ public class LessonDataDAOImpl implements LessonDataDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO lesson_data(userid, lessonid) VALUES (?,?)");
+          "INSERT INTO lesson_data(userid, lessonid, absence_status) VALUES (?,?,?)");
       statement.setString(1, studentID);
       statement.setInt(2, Integer.parseInt(lessonID));
+      statement.setBoolean(3,false);
       statement.executeUpdate();
     }
   }
@@ -66,7 +66,7 @@ public class LessonDataDAOImpl implements LessonDataDAO
         Absence absence = new Absence(resultSet.getBoolean("absence_status"),
             resultSet.getString("absence_motive"));
 
-        return createLessonData(resultSet);
+        return createLessonDataResultSet(resultSet);
       }
       else
       {
@@ -90,7 +90,7 @@ public class LessonDataDAOImpl implements LessonDataDAO
       ArrayList<LessonData> result = new ArrayList<>();
       while (resultSet.next())
       {
-        LessonData lessonData = createLessonData(resultSet);
+        LessonData lessonData = createLessonDataResultSet(resultSet);
         result.add(lessonData);
       }
       return result;
@@ -129,13 +129,13 @@ public class LessonDataDAOImpl implements LessonDataDAO
     ArrayList<LessonData> result = new ArrayList<>();
     while (resultSet.next())
     {
-      LessonData lessonData = createLessonData(resultSet);
+      LessonData lessonData = createLessonDataResultSet(resultSet);
       result.add(lessonData);
     }
     return result;
   }
 
-  private static LessonData createLessonData(ResultSet resultSet)
+  private static LessonData createLessonDataResultSet(ResultSet resultSet)
       throws SQLException
   {
     // creating Lesson
