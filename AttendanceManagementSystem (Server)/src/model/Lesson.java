@@ -49,6 +49,16 @@ public class Lesson {
         return lessonDate;
     }
 
+    public Time getStartTime()
+    {
+        return startTime;
+    }
+
+    public Time getEndTime()
+    {
+        return endTime;
+    }
+
     public String getSubject() {
         return subject;
     }
@@ -67,6 +77,11 @@ public class Lesson {
 
     public String getHomework() {
         return homework;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
     }
 
     public void setTeacher(Teacher teacher) {
