@@ -18,7 +18,7 @@ public class ModelManager implements Model {
     private PropertyChangeHandler<String, Package> property;
     private ClassesDAO classesDAO;
     private LessonDataDAO lessonDataDAO;
-//    private LessonDAO lessonDAO;
+    private LessonDAO lessonDAO;
     private ScheduleDAO scheduleDAO;
     private StudentListDAO studentListDAO;
     private UserAccountsDAO userAccountsDAO;
@@ -29,6 +29,7 @@ public class ModelManager implements Model {
         this.lessonDataDAO = LessonDataDAOImpl.getInstance();
         this.scheduleDAO = ScheduleDAOImpl.getInstance();
         this.studentListDAO = StudentListDAOImpl.getInstance();
+        this.lessonDAO = LessonDAOImpl.getInstance();
 
         school = new School();
         this.property = new PropertyChangeHandler<>(this);
@@ -328,6 +329,12 @@ public class ModelManager implements Model {
         school.getTeacherList().removeTeacher(teacherID);
         userAccountsDAO.deleteUser(teacherID);
         property.firePropertyChange("REMOVE Teacher", null, new Package(teacherID));
+    }
+
+    @Override
+    public void addLesson(Class aClass, Lesson lesson) {
+//        lessonDAO.createLesson(aClass,lesson);
+        aClass.getSchedule().addLesson(lesson);
     }
 
     //--

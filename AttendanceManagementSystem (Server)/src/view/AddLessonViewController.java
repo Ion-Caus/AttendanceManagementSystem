@@ -62,7 +62,6 @@ public class AddLessonViewController extends ViewController{
 
     @Override
     public void reset() {
-
         viewModel.clear();
     }
 
@@ -73,9 +72,7 @@ public class AddLessonViewController extends ViewController{
         if (viewModel.createLesson()) {
             reset();
             getViewHandler().openView(View.SCHEDULE_VIEW);
-
         }
-
     }
 
     public void backButtonClicked(){

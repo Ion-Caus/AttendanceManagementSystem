@@ -200,10 +200,6 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
 
     }
 
-    public boolean addLesson(){
-        return false;
-    }
-
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {
         Platform.runLater(() -> {
