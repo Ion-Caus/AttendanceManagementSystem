@@ -79,18 +79,16 @@ public class AddLessonViewModel {
            Time startingTime = new Time(LocalTime.parse(startTime.get()));
            Time endingTime = new Time(LocalTime.parse(endTime.get()));
 
-           aClass.getSchedule().addLesson(new Lesson("bohatam", teacher1, dateFromModel, startingTime, endingTime, subject.get(), topic.get(), contents.get(), classroom.get(), homework.get(), classroom.get()));
-           System.out.println("we are here");
-
+           model.addLesson(aClass,new Lesson("dummy", teacher1, dateFromModel, startingTime, endingTime, subject.get(), topic.get(), contents.get(), classroom.get(), homework.get(), classroom.get()));
            return true;
        }
 
        catch (NullPointerException | IllegalArgumentException e){
-           error.set("please make sure to fill out all the fields");
+           error.set("Please make sure to fill out all the fields");
            return false;
        }
        catch (DateTimeParseException parseException){
-           error.set("please fill out the lesson time in this format hh:mm for example 12:20");
+           error.set("Please fill out the lesson time in this format hh:mm for example 12:20");
            startTime.set("");
            endTime.set("");
            return false;

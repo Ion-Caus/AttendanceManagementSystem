@@ -47,6 +47,7 @@ public class LessonDAOImpl implements LessonDAO
       statement1.executeUpdate();
 
       lesson.setId(String.valueOf(statement1.getGeneratedKeys().getInt(1)));
+      System.out.println(lesson);
 
       PreparedStatement statement2 = connection
           .prepareStatement("INSERT INTO time_of_conduct(lessonid, date, timefrom, timeto, classroom) VALUES (?,?,?,?,?)");

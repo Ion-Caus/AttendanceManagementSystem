@@ -2,7 +2,6 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import viewModel.ClassViewModel;
 import viewModel.LessonViewModel;
 import viewModel.ScheduleViewModel;
 
@@ -82,10 +81,7 @@ public class ScheduleViewController extends ViewController {
 
     @FXML
     private void addLesson() {
-
-            getViewHandler().openView(View.ADD_CLASS);
-
-
+        getViewHandler().openView(View.ADD_LESSON_VIEW);
     }
 
     @FXML

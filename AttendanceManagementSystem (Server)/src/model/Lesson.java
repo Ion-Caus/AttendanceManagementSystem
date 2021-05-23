@@ -133,4 +133,20 @@ public class Lesson {
         return String.format("%s - %s", startTime.getTime().format(DateTimeFormatter.ofPattern("HH:mm")), endTime.getTime().format(DateTimeFormatter.ofPattern("HH:mm")));
     }
 
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "id='" + id + '\'' +
+                ", teacher=" + teacher +
+                ", lessonDate=" + lessonDate +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", subject='" + subject + '\'' +
+                ", topic='" + topic + '\'' +
+                ", contents='" + contents + '\'' +
+                ", classroom='" + classroom + '\'' +
+                ", homework='" + homework + '\'' +
+                ", className='" + className + '\'' +
+                '}';
+    }
 }
