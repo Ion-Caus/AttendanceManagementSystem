@@ -16,9 +16,14 @@ public class Lesson {
     private String className;
 
     public Lesson(String id, Teacher teacher, Date lessonDate, Time startTime, Time endTime, String subject, String topic, String contents, String classroom, String homework, String className) throws IllegalArgumentException {
+        this(teacher, lessonDate, startTime, endTime, subject, topic, contents, classroom, homework, className);
+        this.id = id;
+    }
+
+    public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime, String subject, String topic, String contents, String classroom, String homework, String className) throws IllegalArgumentException {
         if (!hasValidTime(startTime, endTime))
             throw new IllegalArgumentException("Illegal lesson time");
-        this.id = id;
+        this.id = "no id";
         this.teacher = teacher;
         this.lessonDate = lessonDate;
         this.startTime = startTime.copy();

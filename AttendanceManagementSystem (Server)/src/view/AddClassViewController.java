@@ -29,7 +29,7 @@ public class AddClassViewController extends ViewController {
 
     @FXML
     public void submitButtonClicked() {
-        if (viewModel.addclass()) {
+        if (viewModel.addClass()) {
             getViewHandler().openView(View.SCHOOL_VIEW);
             reset();
         }

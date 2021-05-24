@@ -74,7 +74,7 @@ public class AddLessonViewModel {
            Time startingTime = new Time(LocalTime.parse(startTime.get()));
            Time endingTime = new Time(LocalTime.parse(endTime.get()));
 
-           model.addLesson(aClass, new Lesson("dummy", teacher1, dateFromModel, startingTime, endingTime, subject.get(), topic.get(), contents.get(), classroom.get(), homework.get(), classroom.get()));
+           model.addLesson(aClass, new Lesson(teacher1, dateFromModel, startingTime, endingTime, subject.get(), topic.get(), contents.get(), classroom.get(), homework.get(), classroom.get()));
            return true;
        }
 

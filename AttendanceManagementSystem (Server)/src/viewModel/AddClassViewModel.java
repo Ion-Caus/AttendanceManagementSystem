@@ -24,7 +24,7 @@ public class AddClassViewModel {
     }
 
 
-    public boolean addclass() {
+    public boolean addClass() {
         try {
             model.addClass(className.get());
             return true;

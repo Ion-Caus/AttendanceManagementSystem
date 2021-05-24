@@ -16,6 +16,8 @@ import java.util.Objects;
 public class ModelManager implements Model {
     private School school;
     private PropertyChangeHandler<String, Package> property;
+
+    // uses adapter pattern
     private ClassesDAO classesDAO;
     private LessonDataDAO lessonDataDAO;
     private LessonDAO lessonDAO;
@@ -146,8 +148,6 @@ public class ModelManager implements Model {
 //        class2.getSchedule().addLesson(lesson3);
 //        lesson3.setClassName(class2.getClassName());
 //
-
-
     }
 
     @Override
