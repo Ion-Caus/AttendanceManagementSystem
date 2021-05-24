@@ -8,10 +8,9 @@ import model.*;
 import model.Class;
 import model.packages.Package;
 import model.packages.PackageAbsence;
-import model.packages.PackageLesson;
+import model.packages.PackageGrade;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
-import utility.observer.listener.LocalListener;
 
 import java.sql.SQLException;
 
@@ -107,33 +106,48 @@ public class StudentListViewModel implements GeneralListener<String, Package>  {
         clear();
     }
 
+    public boolean openGrade() {
+        if(selectedStudentProperty.get() == null){
+            errorProperty.set("Please select a student.");
+            return false;
+        }
+        viewState.setStudentID(selectedStudentProperty.get().getIDStudentProperty().get());
+        return true;
+    }
+
     public boolean submitDataChange() {
         //TODO 19/5 by Ion Use observer to send the changes
         return false;
     }
 
+    private void updateLessonData(String studentID, String lessonID) {
+        LessonData lessonData = model.getLessonData(
+                model.getLesson(lessonID),
+                model.getStudentBy(studentID)
+        );
+        int index = 0;
+        for (int i = 0; i < lessonDataList.size(); i++) {
+            if (lessonDataList.get(i).getIDStudentProperty().get().equals(studentID)) {
+                lessonDataList.remove(lessonDataList.get(i));
+                index = i;
+                break;
+            }
+        }
+        lessonDataList.add(index, new StudentLessonDataViewModel(lessonData));
+    }
+
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {
-        // TODO: 5/20/21 by Ion use the packaged sent via broadcast
         Platform.runLater(() -> {
             switch (event.getPropertyName()) {
                 case "ChangeMotive":
                 case "ChangeAbsence":
                     PackageAbsence pa = (PackageAbsence)event.getValue2();
-                    LessonData lessonData = model.getLessonData(
-                            model.getLesson(pa.getLessonID()),
-                            model.getStudentBy(pa.getID())
-                    );
-                    int index = 0;
-                    for (int i = 0; i < lessonDataList.size(); i++) {
-                        if (lessonDataList.get(i).getIDStudentProperty().get().equals(pa.getID())) {
-                            lessonDataList.remove(lessonDataList.get(i));
-                            index = i;
-                            break;
-                        }
-                    }
-                    lessonDataList.add(index, new StudentLessonDataViewModel(lessonData));
+                    updateLessonData(pa.getID(), pa.getLessonID());
                     break;
+                case "ChangeGradeComment":
+                    PackageGrade pg = (PackageGrade)event.getValue2();
+                    updateLessonData(pg.getID(), pg.getLessonID());
             }
         });
     }

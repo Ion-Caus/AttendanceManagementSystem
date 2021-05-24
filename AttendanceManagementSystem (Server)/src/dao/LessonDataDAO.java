@@ -12,8 +12,7 @@ public interface LessonDataDAO
   ArrayList<LessonData> readAll() throws SQLException;
   ArrayList<LessonData> readAllByStudentID(String studentID) throws SQLException;
   ArrayList<LessonData> readAllByLessonID(String lessonID) throws SQLException;
-  void updateGrade(LessonData lessonData) throws SQLException;   //could be done with comment, gotta see how we implement it in the app
-  void updateComment(LessonData lessonData) throws SQLException;
+  void updateGradeComment(LessonData lessonData) throws SQLException;   //could be done with comment, gotta see how we implement it in the app
   void updateAbsenceStatus(LessonData lessonData) throws SQLException;
   void updateAbsenceMotive(LessonData lessonData) throws SQLException;
 }

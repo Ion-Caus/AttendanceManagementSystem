@@ -59,4 +59,6 @@ public interface Model extends LocalSubject<String, Package> {
     void removeTeacher(String studentID) throws SQLException;
     void addLesson(Class aClass, Lesson lesson) throws SQLException;
     void removeLesson(String className, String lessonID) throws SQLException;
+
+    void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException;
 }

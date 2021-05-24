@@ -1,26 +1,16 @@
 package model.packages;
 
+import model.Lesson;
+
 public class PackageLesson extends Package{
-    private String topic;
-    private String contents;
-    private String homework;
+    private Lesson lesson;
 
-    public PackageLesson(String ID, String topic, String contents, String homework) {
-        super(ID);
-        this.topic = topic;
-        this.contents = contents;
-        this.homework = homework;
+    public PackageLesson(Lesson lesson) {
+        super(lesson.getId());
+        this.lesson = lesson;
     }
 
-    public String getTopic() {
-        return topic;
-    }
-
-    public String getContents() {
-        return contents;
-    }
-
-    public String getHomework() {
-        return homework;
+    public Lesson getLesson() {
+        return lesson;
     }
 }

@@ -34,7 +34,7 @@ public class ViewModelFactory
     addTeacherViewModel = new AddTeacherViewModel(model);
     classStudentListViewModel = new ClassStudentListViewModel(model, viewModelState);
     addLessonViewModel = new AddLessonViewModel(model, viewModelState);
-    addGradeViewModel = new AddGradeViewModel(model);
+    addGradeViewModel = new AddGradeViewModel(model,viewModelState);
   }
 
   public SchoolViewModel getSchoolViewModel()

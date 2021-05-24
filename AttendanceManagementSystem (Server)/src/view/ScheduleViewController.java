@@ -62,7 +62,6 @@ public class ScheduleViewController extends ViewController {
         userLabel.textProperty().bind(viewModel.userProperty());
         schoolClassLabel.textProperty().bind(viewModel.schoolClassProperty());
         errorLabel.textProperty().bind(viewModel.errorProperty());
-
         datePicker.valueProperty().bindBidirectional(viewModel.dateProperty());
         datePicker.getEditor().setText(
                 DateTimeFormatter.ofPattern("EEEE dd/MM").format(datePicker.getValue())
@@ -73,10 +72,13 @@ public class ScheduleViewController extends ViewController {
     @Override
     public void reset() { // this method is called automatically
         viewModel.clear();   // this will call the clear method in the viewModel and that model is going to call loadScheduleForDay which will populate the table
+        viewModel.loadScheduleForDay();
 
         addLessonButton.setVisible(viewModel.forAdminProperty().get());
         removeLessonButton.setVisible(viewModel.forAdminProperty().get());
         backButton.setVisible(viewModel.forAdminProperty().get());
+
+        scheduleTable.sort();
     }
 
     @FXML

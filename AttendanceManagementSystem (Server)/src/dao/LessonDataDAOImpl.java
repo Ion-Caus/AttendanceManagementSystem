@@ -33,10 +33,11 @@ public class LessonDataDAOImpl implements LessonDataDAO {
     public void createLessonData(String lessonID, String studentID) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO lesson_data(user_id, lesson_id, absence_status) VALUES (?,?,?)");
+                    "INSERT INTO lesson_data(user_id, lesson_id, absence_status,grade) VALUES (?,?,?,?)");
             statement.setString(1, studentID);
             statement.setInt(2, Integer.parseInt(lessonID));
             statement.setBoolean(3, false);
+            statement.setInt(4,-1);
             statement.executeUpdate();
         }
     }
@@ -163,30 +164,31 @@ public class LessonDataDAOImpl implements LessonDataDAO {
     }
 
     @Override
-    public void updateGrade(LessonData lessonData) throws SQLException {
+    public void updateGradeComment(LessonData lessonData) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE lesson_data SET grade = ? WHERE user_id = ? and lesson_id = ?");
+                    "UPDATE lesson_data SET grade = ?, comment = ? WHERE user_id = ? and lesson_id = ?");
             statement.setInt(1, lessonData.getGrade().getGrade());
-            statement.setString(2, lessonData.getStudent().getID());
-            statement.setString(3, lessonData.getLesson().getId());
+            statement.setString(2, lessonData.getGrade().getComment());
+            statement.setString(3, lessonData.getStudent().getID());
+            statement.setInt(4, Integer.parseInt(lessonData.getLesson().getId()));
             statement.executeUpdate();
         }
     }
 
-    @Override
-    public void updateComment(LessonData lessonData)
-            throws SQLException  //Update statement
-    {
-        try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE lesson_data SET comment = ? WHERE user_id = ? and lesson_id = ?");
-            statement.setString(1, lessonData.getGrade().getComment());
-            statement.setString(2, lessonData.getStudent().getID());
-            statement.setString(3, lessonData.getLesson().getId());
-            statement.executeUpdate();
-        }
-    }
+//    @Override
+//    public void updateComment(LessonData lessonData)
+//            throws SQLException  //Update statement
+//    {
+//        try (Connection connection = getConnection()) {
+//            PreparedStatement statement = connection.prepareStatement(
+//                    "UPDATE lesson_data SET comment = ? WHERE user_id = ? and lesson_id = ?");
+//            statement.setString(1, lessonData.getGrade().getComment());
+//            statement.setString(2, lessonData.getStudent().getID());
+//            statement.setString(3, lessonData.getLesson().getId());
+//            statement.executeUpdate();
+//        }
+//    }
 
     @Override
     public void updateAbsenceStatus(LessonData lessonData)   //Update statement for changing status to opposite

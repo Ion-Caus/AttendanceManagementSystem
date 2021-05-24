@@ -61,7 +61,6 @@ public class AddLessonViewController extends ViewController{
 
     public void createLessonButtonPressed(){
         if (viewModel.createLesson()) {
-            reset();
             getViewHandler().openView(View.SCHEDULE_VIEW);
         }
     }

@@ -4,15 +4,19 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Model;
 
+import java.sql.SQLException;
+
 public class AddGradeViewModel {
     private StringProperty gradeProperty;
     private StringProperty commentProperty;
     private StringProperty errorProperty;
 
     private Model model;
+    private ViewModelState viewModelState;
 
-    public AddGradeViewModel(Model model){
+    public AddGradeViewModel(Model model, ViewModelState viewModelState){
         this.model = model;
+        this.viewModelState = viewModelState;
 
         this.gradeProperty = new SimpleStringProperty();
         this.commentProperty = new SimpleStringProperty();
@@ -38,8 +42,16 @@ public class AddGradeViewModel {
     }
 
     public boolean submitGradeComment() {
-        //model.changeGradeComment();
-        return false;
-        //TODO 20/5 by Ion observer in model
+        try {
+            if (gradeProperty.get().isEmpty()) {
+                errorProperty.set("Please enter the grade.");
+                return false;
+            }
+            model.changeGradeComment(viewModelState.getStudentID(), viewModelState.getLessonID(), Integer.parseInt(gradeProperty.get()),commentProperty.get());
+            return true;
+        } catch (IllegalArgumentException | SQLException e) {
+            errorProperty.set(e.getMessage());
+            return false;
+        }
     }
 }

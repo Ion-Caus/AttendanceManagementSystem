@@ -23,6 +23,8 @@ public class Lesson {
     public Lesson(Teacher teacher, Date lessonDate, Time startTime, Time endTime, String subject, String topic, String contents, String classroom, String homework, String className) throws IllegalArgumentException {
         if (!hasValidTime(startTime, endTime))
             throw new IllegalArgumentException("Illegal lesson time");
+        if(subject.isEmpty()||topic.isEmpty())
+            throw new IllegalArgumentException("Please fill out the subject and topic");
         this.id = "no id";
         this.teacher = teacher;
         this.lessonDate = lessonDate;

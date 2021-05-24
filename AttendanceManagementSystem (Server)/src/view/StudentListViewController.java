@@ -81,7 +81,8 @@ public class StudentListViewController extends ViewController {
 
     @FXML
     private void gradeComment() {
-        getViewHandler().openView(View.ADD_GRADE_VIEW);
+        if(viewModel.openGrade())
+            getViewHandler().openView(View.ADD_GRADE_VIEW);
     }
 
     @FXML

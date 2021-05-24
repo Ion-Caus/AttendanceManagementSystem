@@ -10,12 +10,17 @@ import model.Student;
 import model.Teacher;
 import model.packages.Package;
 import model.packages.PackageLesson;
+import model.packages.PackageLessonInfo;
+import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class ScheduleViewModel implements LocalListener<String, Package> {
@@ -35,7 +40,7 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
 
     public ScheduleViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        model.addListener(this, "ChangeLesson");
+        model.addListener(this, "ChangeLesson", "ADD Lesson", "REMOVE Lesson");
         this.viewState = viewModelState;
 
         schedule = FXCollections.observableArrayList();
@@ -51,7 +56,7 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
 
     }
 
-    private void loadScheduleForDay() {
+    public void loadScheduleForDay() {
         schedule.clear();
 
         switch (viewState.getSection()) {
@@ -72,13 +77,18 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                 break;
         }
 
+        // sorting the schedule by time
+        List<LessonViewModel> list =  schedule.stream()
+                .sorted(Comparator.comparing(i -> i.timeProperty().get()))
+                .collect(Collectors.toList());
+        schedule.clear();
+        schedule.addAll(list);
+
     }
 
     public void clear() {
         errorProperty.set("");
         dateProperty.setValue(LocalDate.now());
-
-        loadScheduleForDay();
 
         selectedLessonProperty.set(null);
 
@@ -188,9 +198,7 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
 
     public void deleteLesson(){
         try {
-            // TODO: 20/5/2021 by tomas use observer and move this code to model manager as a method and call that method from here
             model.removeLesson(viewState.getClassName(), selectedLessonProperty.get().idProperty().get());
-            loadScheduleForDay();
             errorProperty.set("");
         } catch (NullPointerException | IllegalArgumentException e) {
            errorProperty.set("Please select a lesson");
@@ -204,11 +212,11 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         Platform.runLater(() -> {
             switch (event.getPropertyName()) {
                 case "ChangeLesson":
-                    PackageLesson pl = (PackageLesson)event.getValue2();
-                    Lesson lesson = model.getLesson(pl.getID());
+                    PackageLessonInfo pli = (PackageLessonInfo)event.getValue2();
+                    Lesson lesson = model.getLesson(pli.getID());
                     int index = 0;
                     for (int i = 0; i < schedule.size(); i++) {
-                        if (schedule.get(i).idProperty().get().equals(pl.getID())) {
+                        if (schedule.get(i).idProperty().get().equals(pli.getID())) {
                             schedule.remove(schedule.get(i));
                             index = i;
                             break; // break for-loop
@@ -217,6 +225,10 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                     schedule.add(index, new LessonViewModel(lesson));
                     break;
                 case "ADD Lesson":
+                case "REMOVE Lesson":
+                    loadScheduleForDay();
+                    break;
+
             }
         });
     }

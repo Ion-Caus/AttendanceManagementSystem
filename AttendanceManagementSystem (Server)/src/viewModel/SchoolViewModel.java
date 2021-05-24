@@ -309,7 +309,4 @@ public class SchoolViewModel implements LocalListener<String, Package> {
         return true;
     }
 
-
-
-
 }

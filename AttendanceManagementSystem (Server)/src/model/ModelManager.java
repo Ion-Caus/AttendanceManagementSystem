@@ -1,10 +1,8 @@
 package model;
 
 import dao.*;
+import model.packages.*;
 import model.packages.Package;
-import model.packages.PackageAbsence;
-import model.packages.PackageLesson;
-import model.packages.PackageName;
 import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeHandler;
 
@@ -59,95 +57,6 @@ public class ModelManager implements Model {
         for(Class aClass : getAllClasses())
             for(Student student: getStudentsByClass(aClass.getClassName()))
                 aClass.getStudents().getAllStudents().add(student);
-    }
-
-    public void createDummy() {
-//        setSchoolName("DaVinci");
-//        StudentList studentList = school.getStudentList();
-//        studentList.addStudent(new Student("Ion Caus", "308234"));
-//        studentList.addStudent(new Student("Denis", "433234"));
-//        studentList.addStudent(new Student("Max", "308415"));
-//        studentList.addStudent(new Student("Tomas", "308400"));
-//
-//        TeacherList teacherList = school.getTeacherList();
-//        Teacher steffen = new Teacher("Steffen Vissing Andersen", "325632");
-//        teacherList.addTeacher(steffen);
-//        Teacher ole = new Teacher("Ole Ildsgaard Hougaard", "325600");
-//        teacherList.addTeacher(ole);
-//
-//
-//        ClassList classList = school.getClassList();
-//        Class class1 = new Class("12 C");
-//        Class class2 = new Class("11 A");
-//
-//        classList.addClass(class1);
-//        classList.addClass(class2);
-//
-//        class1.getStudents().addStudent(studentList.getAllStudents().get(0));
-//        studentList.getAllStudents().get(0).setClassName(class1.getClassName());
-//
-//        class1.getStudents().addStudent(studentList.getAllStudents().get(1));
-//        studentList.getAllStudents().get(1).setClassName(class1.getClassName());
-//
-//        class2.getStudents().addStudent(studentList.getAllStudents().get(2));
-//        studentList.getAllStudents().get(2).setClassName(class2.getClassName());
-//
-//        Lesson lesson1 = new Lesson(id, ole,
-//                new Date(), //now
-//                new Time(9,20,0),
-//                new Time(10,30,0),
-//                "DBS",
-//                "Stating with Databases",
-//                "set up a database",
-//                "305A",
-//                "Download Postgres"
-//        );
-//
-//        Lesson lesson2 = new Lesson(id, steffen,
-//                new Date(), //now
-//                new Time(10,30,0),
-//                new Time(11,45,0),
-//                "Java",
-//                "Threads",
-//                "Counter Incrementer exercise",
-//                "Zoom",
-//                "dont be drunk on lesson"
-//        );
-//
-//        Lesson lesson3 = new Lesson(id, ole,
-//                new Date(), //now
-//                new Time(12,45,0),
-//                new Time(14,15,0),
-//                "DBS",
-//                "ER Diagrams",
-//                "Hospital exercise",
-//                "305A",
-//                "bring paper and pen"
-//        );
-//
-//        Lesson lesson4 = new Lesson(id, steffen,
-//                new Date(),
-//                new Time(14,30,0),
-//                new Time(16,0,0),
-//                "Java",
-//                "Observer",
-//                "Observer Pattern exercises",
-//                "305A",
-//                "be on time"
-//        );
-//
-//        class1.getSchedule().addLesson(lesson1);
-//        lesson1.setClassName(class1.getClassName());
-//
-//        class1.getSchedule().addLesson(lesson2);
-//        lesson2.setClassName(class1.getClassName());
-//
-//        class1.getSchedule().addLesson(lesson4);
-//        lesson4.setClassName(class1.getClassName());
-//
-//        class2.getSchedule().addLesson(lesson3);
-//        lesson3.setClassName(class2.getClassName());
-//
     }
 
     @Override
@@ -347,18 +256,32 @@ public class ModelManager implements Model {
     }
 
 
-    @Override
+    @Override // TODO: 5/24/2021 do observer
     public void addLesson(Class aClass, Lesson lesson) throws SQLException {
         lessonDAO.createLesson(aClass,lesson);
         aClass.getSchedule().addLesson(lesson);
+        property.firePropertyChange("ADD Lesson", null, new PackageLesson(lesson));
     }
 
-    @Override
+    @Override // TODO: 5/24/2021 do observer 
     public void removeLesson(String className, String lessonID) throws SQLException {
-        var schedule = getClassByName(className).getSchedule();
+        Schedule schedule = getClassByName(className).getSchedule();
         Lesson lesson = schedule.getLessonBy(lessonID);
         lessonDAO.delete(lessonID);
         schedule.removeLesson(lesson);
+        property.firePropertyChange("REMOVE Lesson", null, new PackageName(lessonID, className));
+    }
+
+    @Override
+    public void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException, IllegalArgumentException {
+        LessonData lessonData = getLessonData(
+                getLesson(lessonID),
+                getStudentBy(studentID)
+        );
+        lessonData.setGrade(new Grade(grade, comment));
+        lessonDataDAO.updateGradeComment(lessonData);
+
+        property.firePropertyChange("ChangeGradeComment", null, new PackageGrade(studentID, lessonID, grade, comment));
     }
 
     //--
@@ -387,7 +310,7 @@ public class ModelManager implements Model {
         lesson.setContents(contents);
         lesson.setHomework(homework);
 
-        property.firePropertyChange("ChangeLesson", null, new PackageLesson(lessonID, topic, contents, homework));
+        property.firePropertyChange("ChangeLesson", null, new PackageLessonInfo(lessonID, topic, contents, homework));
         return true;
     }
     //--

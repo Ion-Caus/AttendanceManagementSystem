@@ -1,5 +1,6 @@
 package viewModel;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -8,11 +9,16 @@ import model.Lesson;
 import model.LessonData;
 import model.Model;
 import model.Student;
+import model.packages.Package;
+import model.packages.PackageGrade;
+import model.packages.PackageName;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class InfoViewModel {
+public class InfoViewModel implements LocalListener<String, Package> {
     private StringProperty subject;
     private StringProperty topic;
     private StringProperty contents;
@@ -34,6 +40,7 @@ public class InfoViewModel {
 
     public InfoViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
+        this.model.addListener(this, "ChangeGradeComment");
         this.viewState = viewModelState;
 
         //Lesson properties
@@ -178,5 +185,25 @@ public class InfoViewModel {
         }
         //TODO use observer to change lesson for all
         return false;
+    }
+
+    @Override
+    public void propertyChange(ObserverEvent<String, Package> event) {
+        Platform.runLater(() -> {
+            PackageGrade packageGrade = (PackageGrade) event.getValue2();
+
+            if (!viewState.getStudentID().equals(packageGrade.getID()) ||
+                    !viewState.getLessonID().equals(packageGrade.getLessonID())) {
+                return;
+            }
+
+            switch (event.getPropertyName()) {
+                case "ChangeGradeComment":
+                    grade.set(packageGrade.getGrade() + "");
+                    comment.set(packageGrade.getComment());
+
+                    break;
+            }
+        });
     }
 }
