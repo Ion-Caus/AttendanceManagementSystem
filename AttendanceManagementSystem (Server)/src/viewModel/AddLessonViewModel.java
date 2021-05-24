@@ -19,7 +19,6 @@ public class AddLessonViewModel {
     private Model model;
     private ViewModelState viewModelState;
 
-    private StringProperty title;
     private StringProperty topic;
     private StringProperty contents;
     private StringProperty homework;
@@ -36,7 +35,6 @@ public class AddLessonViewModel {
         this.viewModelState = viewModelState;
 
         //Lesson properties
-        this.title = new SimpleStringProperty();
         this.subject = new SimpleStringProperty();
         this.topic = new SimpleStringProperty();
         this.contents = new SimpleStringProperty();
@@ -51,7 +49,6 @@ public class AddLessonViewModel {
     }
 
     public void clear(){
-        title.set("");
         topic.set("");
         contents.set("");
         homework.set("");
@@ -93,9 +90,6 @@ public class AddLessonViewModel {
        }
     }
 
-    public StringProperty titleProperty() {
-        return title;
-    }
 
     public StringProperty topicProperty() {
         return topic;

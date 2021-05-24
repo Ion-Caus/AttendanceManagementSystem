@@ -304,13 +304,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean changeLesson(String lessonID, String topic, String contents, String homework) {
+    public boolean changeLesson(String lessonID, String topic, String contents, String homework, String teacherID) throws SQLException {
         Lesson lesson = getLesson(lessonID);
         lesson.setTopic(topic);
         lesson.setContents(contents);
         lesson.setHomework(homework);
-
-        property.firePropertyChange("ChangeLesson", null, new PackageLessonInfo(lessonID, topic, contents, homework));
+        Teacher teacher = getTeacherBy(teacherID);
+        lesson.setTeacher(teacher);
+        lessonDAO.updateLesson(lesson,teacher,topic,contents,homework);
+        property.firePropertyChange("ChangeLesson", null, new PackageLessonInfo(lessonID, topic, contents, homework, teacherID));
         return true;
     }
     //--

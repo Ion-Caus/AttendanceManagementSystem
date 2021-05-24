@@ -37,7 +37,7 @@
             <TableView fx:id="scheduleTable" prefHeight="390.0" prefWidth="490.0">
               <columns>
                 <TableColumn fx:id="subjectColumn" prefWidth="125.0" resizable="false" text="Subject" />
-                  <TableColumn fx:id="topicColumn" prefWidth="140.0" text="Title" />
+                  <TableColumn fx:id="topicColumn" prefWidth="140.0" text="Topic" />
                 <TableColumn fx:id="teacherColumn" prefWidth="130.0" resizable="false" text="Teacher" />
                   <TableColumn fx:id="timeColumn" prefWidth="110.0" resizable="false" text="Time" />
                   <TableColumn fx:id="classroomColumn" resizable="false" text="ClassRoom" />

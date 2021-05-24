@@ -69,6 +69,24 @@ public class LessonDAOImpl implements LessonDAO {
             statement4.executeUpdate();
         }
     }
+    @Override
+    public void updateLesson(Lesson lesson, Teacher teacher, String topic, String contents, String homework) throws SQLException {
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE taught_by SET teacher_id = ? WHERE lesson_id = ?");
+            statement.setString(1, teacher.getID());
+            statement.setInt(2, Integer.parseInt(lesson.getId()));
+            statement.executeUpdate();
+
+            PreparedStatement statement2 = connection.prepareStatement(
+                    "UPDATE lesson SET topic = ?, description = ?, homework = ? WHERE lesson_id = ?");
+            statement2.setString(1, topic);
+            statement2.setString(2, contents);
+            statement2.setString(3, homework);
+            statement2.setInt(4, Integer.parseInt(lesson.getId()));
+            statement2.executeUpdate();
+        }
+    }
 
     @Override
     public void updateTeacher(Lesson lesson, Teacher teacher) throws SQLException {
@@ -76,8 +94,9 @@ public class LessonDAOImpl implements LessonDAO {
             PreparedStatement statement = connection.prepareStatement(
                     "UPDATE taught_by SET teacher_id = ? WHERE lesson_id = ?");
             statement.setString(1, teacher.getID());
-            statement.setString(2, lesson.getId());
+            statement.setInt(2, Integer.parseInt(lesson.getId()));
             statement.executeUpdate();
+
         }
     }
 
@@ -86,8 +105,9 @@ public class LessonDAOImpl implements LessonDAO {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     "UPDATE lesson SET topic = ? WHERE lesson_id = ?");
+            System.out.println(topic);
             statement.setString(1, topic);
-            statement.setString(2, lesson.getId());
+            statement.setInt(2, Integer.parseInt(lesson.getId()));
             statement.executeUpdate();
         }
     }
@@ -98,7 +118,7 @@ public class LessonDAOImpl implements LessonDAO {
             PreparedStatement statement = connection.prepareStatement(
                     "UPDATE lesson SET homework = ? WHERE lesson_id = ?");
             statement.setString(1, homework);
-            statement.setString(2, lesson.getId());
+            statement.setInt(2, Integer.parseInt(lesson.getId()));
             statement.executeUpdate();
         }
     }
@@ -109,7 +129,7 @@ public class LessonDAOImpl implements LessonDAO {
             PreparedStatement statement = connection.prepareStatement(
                     "UPDATE lesson SET topic = ? WHERE lesson_id = ?");
             statement.setString(1, content);
-            statement.setString(2, lesson.getId());
+            statement.setInt(2, Integer.parseInt(lesson.getId()));
             statement.executeUpdate();
         }
     }

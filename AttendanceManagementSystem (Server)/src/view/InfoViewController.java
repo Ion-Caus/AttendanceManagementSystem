@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.textfield.TextFields;
 import viewModel.InfoViewModel;
 
 public class InfoViewController extends ViewController {
@@ -44,8 +45,11 @@ public class InfoViewController extends ViewController {
         this.homeworkField.textProperty().bindBidirectional(viewModel.getHomeworkProperty());
 
         this.subject.textProperty().bind(viewModel.getSubjectProperty());
-        this.teacherField.textProperty().bind(viewModel.getTeacherProperty()); // TODO: 13/5/2021   can we change a teacher from here or not? if yes, change to bidirectional.
-        this.datePicker.valueProperty().bind(viewModel.getDateProperty()); // TODO: 13/5/2021  can we change the date from here? if yes, change to bidirectional.
+
+        TextFields.bindAutoCompletion(teacherField,viewModel.getTeacherList());
+        this.teacherField.textProperty().bindBidirectional(viewModel.getTeacherProperty());
+
+        this.datePicker.valueProperty().bind(viewModel.getDateProperty());
         this.datePicker.setDisable(true);
         this.datePicker.setStyle("-fx-opacity: 1");
         this.datePicker.getEditor().setStyle("-fx-opacity: 1");
@@ -68,14 +72,16 @@ public class InfoViewController extends ViewController {
     }
 
     public void adjustView(){
+        teacherField.editableProperty().set(false);
         switch (viewModel.getViewStateAccessLevel()) {
             case "Student":
                 studentView.setVisible(true);
                 teacherView.setVisible(false);
                 teacherView.setPrefHeight(10);
                 break;
-            case "Teacher":
             case "Administrator":
+                teacherField.editableProperty().set(true);
+            case "Teacher":
                 teacherView.setVisible(true);
                 studentView.setVisible(false);
                 studentView.setPrefHeight(10);
@@ -105,4 +111,7 @@ public class InfoViewController extends ViewController {
             getViewHandler().openView(View.SCHEDULE_VIEW);
         }
     }
+
+
+
 }

@@ -5,10 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import model.Lesson;
-import model.LessonData;
-import model.Model;
-import model.Student;
+import model.*;
 import model.packages.Package;
 import model.packages.PackageGrade;
 import model.packages.PackageName;
@@ -17,6 +14,7 @@ import utility.observer.listener.LocalListener;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class InfoViewModel implements LocalListener<String, Package> {
     private StringProperty subject;
@@ -177,7 +175,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
                 case "Student":
                     return model.changeMotive(viewState.getStudentID(), viewState.getLessonID(), motive.get());
                 case "Administrator":
-                    return model.changeLesson(viewState.getLessonID(), topic.get(), contents.get(), homework.get());
+                    return model.changeLesson(viewState.getLessonID(), topic.get(), contents.get(), homework.get(), (teacher.get().contains("(")) ? teacher.get().split("[()]")[1] : "000000");
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -206,4 +204,14 @@ public class InfoViewModel implements LocalListener<String, Package> {
             }
         });
     }
+
+    public ArrayList<String> getTeacherList() {
+        ArrayList<String> teachers = new ArrayList<>();
+        for (Teacher teacher: model.getAllTeachers()){
+            teachers.add((String.format("%s (%S)",teacher.getName(), teacher.getID())));
+
+        }
+        return teachers;
+    }
+
 }

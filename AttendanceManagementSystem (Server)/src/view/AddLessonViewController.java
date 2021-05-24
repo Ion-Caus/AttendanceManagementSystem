@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 public class AddLessonViewController extends ViewController{
 
 
-    @FXML private TextField titleField;
     @FXML private TextField topicField;
     @FXML private TextArea contentsField;
     @FXML private TextArea homeworkField;
@@ -34,7 +33,6 @@ public class AddLessonViewController extends ViewController{
     protected void init() {
         viewModel = getViewModelFactory().getAddLessonViewModel();
 
-        titleField.textProperty().bindBidirectional(viewModel.titleProperty());
         subjectField.textProperty().bindBidirectional(viewModel.subjectProperty());
         topicField.textProperty().bindBidirectional(viewModel.topicProperty());
         contentsField.textProperty().bindBidirectional(viewModel.contentsProperty());
