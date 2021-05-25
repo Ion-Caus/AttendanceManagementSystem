@@ -7,7 +7,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Model;
+import model.*;
+import model.Class;
+import model.packages.Package;
 import model.packages.PackageAbsence;
 import model.packages.PackageGrade;
 import utility.observer.event.ObserverEvent;
@@ -114,11 +116,6 @@ public class StudentListViewModel implements GeneralListener<String, Package>  {
         }
         viewState.setStudentID(selectedStudentProperty.get().getIDStudentProperty().get());
         return true;
-    }
-
-    public boolean submitDataChange() {
-        //TODO 19/5 by Ion Use observer to send the changes
-        return false;
     }
 
     private void updateLessonData(String studentID, String lessonID) {

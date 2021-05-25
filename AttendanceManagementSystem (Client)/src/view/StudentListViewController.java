@@ -100,7 +100,6 @@ public class StudentListViewController extends ViewController {
 
     @FXML
     private void submitButtonPressed() {
-        if (viewModel.submitDataChange())
-            getViewHandler().openView(View.INFO_VIEW);
+        getViewHandler().openView(View.INFO_VIEW);
     }
 }

@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class Student {
+public class Student implements Serializable {
     private String name;
     private String ID;
 

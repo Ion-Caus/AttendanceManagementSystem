@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class Teacher {
+public class Teacher implements Serializable {
     private String name;
     private String initials;
     private String ID;

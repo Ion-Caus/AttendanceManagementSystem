@@ -5,7 +5,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import model.Model;
+import model.*;
+import model.packages.Package;
 import model.packages.PackageGrade;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
@@ -141,7 +142,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
         contents.set(lesson.getContents());
         homework.set(lesson.getHomework());
         teacher.set(lesson.getTeacher().getName());
-        date.set(lesson.getLessonDate().getDate());
+        date.set(lesson.getLessonDate());
         className.set("Class " + lesson.getClassName());
     }
 

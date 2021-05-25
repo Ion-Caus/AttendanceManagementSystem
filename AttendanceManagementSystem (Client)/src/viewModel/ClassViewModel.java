@@ -3,6 +3,8 @@ package viewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import model.Class;
+
 public class ClassViewModel {
     private StringProperty className;
 

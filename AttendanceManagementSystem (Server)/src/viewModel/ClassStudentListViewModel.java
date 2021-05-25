@@ -44,7 +44,7 @@ public class ClassStudentListViewModel implements LocalListener<String, Package>
     
     public void loadFromModel() {
         classStudentTable.clear();
-        for(Student student: model.getClassByName(viewModelState.getClassName()).getStudents().getAllStudents()){
+        for(Student student: model.getStudentsByClass(viewModelState.getClassName())){
             classStudentTable.add(new StudentViewModel(student));
         }
     }

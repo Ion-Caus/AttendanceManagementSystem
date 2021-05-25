@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
+import viewModel.ClassStudentListViewModel;
 import viewModel.StudentViewModel;
 
 import java.util.Optional;

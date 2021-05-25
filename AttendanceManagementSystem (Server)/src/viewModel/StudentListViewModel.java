@@ -115,10 +115,6 @@ public class StudentListViewModel implements GeneralListener<String, Package>  {
         return true;
     }
 
-    public boolean submitDataChange() {
-        //TODO 19/5 by Ion Use observer to send the changes
-        return false;
-    }
 
     private void updateLessonData(String studentID, String lessonID) {
         LessonData lessonData = model.getLessonData(

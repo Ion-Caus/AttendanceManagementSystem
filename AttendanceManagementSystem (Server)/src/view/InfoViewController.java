@@ -107,9 +107,7 @@ public class InfoViewController extends ViewController {
 
     @FXML
     private void submitChangeLesson() {
-        if (viewModel.submitChangeLesson()) {
-            getViewHandler().openView(View.SCHEDULE_VIEW);
-        }
+        getViewHandler().openView(View.SCHEDULE_VIEW);
     }
 
 

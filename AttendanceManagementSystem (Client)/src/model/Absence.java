@@ -1,6 +1,8 @@
 package model;
 
-public class Absence {
+import java.io.Serializable;
+
+public class Absence implements Serializable {
     private String motive;
     private boolean wasAbsent;
 

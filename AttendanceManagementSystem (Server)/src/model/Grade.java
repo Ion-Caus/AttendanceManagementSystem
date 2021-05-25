@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Grade {
+public class Grade implements Serializable {
     private int grade;
     private String comment;
     private static final int[] possibleGrades = {-3,-1,0,2,4,7,10,12};

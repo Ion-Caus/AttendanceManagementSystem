@@ -1,6 +1,8 @@
 package model;
 
-public class LessonData {
+import java.io.Serializable;
+
+public class LessonData implements Serializable {
     private Lesson lesson;
     private Student student;
     private Grade grade;

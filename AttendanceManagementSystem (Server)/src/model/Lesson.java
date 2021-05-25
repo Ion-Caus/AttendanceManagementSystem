@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Lesson {
+public class Lesson implements Serializable {
     private String id;
     private Teacher teacher;
     private LocalDate lessonDate;

@@ -8,6 +8,10 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Model;
+import model.Student;
+import model.Teacher;
+import model.Class;
+import model.packages.Package;
 import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
@@ -266,7 +270,7 @@ public class SchoolViewModel implements LocalListener<String, Package> {
             switch (commands[0]) {
                 case "ADD_TO_CLASS":
                 case "REMOVE_FROM_CLASS":
-                    Student student = model.getStudentBy( event.getValue2().getID() );
+                    Student student = model.getStudentBy( event.getValue2().getID());
                     studentList.removeIf(studentVM -> studentVM.idProperty().get().equals(student.getID()));
                     studentList.add(0, new StudentViewModel(student));
                     break;

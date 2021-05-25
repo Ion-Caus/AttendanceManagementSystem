@@ -4,10 +4,10 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import model.Class;
 import model.Lesson;
 import model.Model;
 import model.Teacher;
+import model.Class;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

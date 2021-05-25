@@ -8,6 +8,8 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Model;
+import model.Student;
+import model.packages.Package;
 import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
@@ -29,7 +31,7 @@ public class ClassStudentListViewModel implements LocalListener<String, Package>
 
     ClassStudentListViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        this.model.addListener(this,  "ADD_TO_CLASS Student", "REMOVE_FROM_CLASS Student");
+        this.model.addListener(this, "ADD_TO_CLASS Student", "REMOVE_FROM_CLASS Student");
         this.viewModelState = viewModelState;
 
         className = new SimpleStringProperty(viewModelState.getClassName());

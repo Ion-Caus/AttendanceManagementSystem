@@ -8,6 +8,7 @@ import model.Lesson;
 import model.Model;
 import model.Student;
 import model.Teacher;
+import model.packages.Package;
 import model.packages.PackageLessonInfo;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
