@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import viewModel.ViewModelFactory;
@@ -18,20 +19,13 @@ public class ViewHandler extends ViewCreator {
 
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        openView(View.SCHEDULE_VIEW);
+
+        // TODO change to LOGIN_VIEW
+        openView(View.SCHOOL_VIEW);
     }
 
     public void openView(View view) {
-        Region root = null;
-
-        switch (view) {
-            case LOGIN_VIEW:
-                root = getViewController(View.LOGIN_VIEW).getRoot();
-                break;
-            case SCHEDULE_VIEW:
-                root = getViewController(View.SCHEDULE_VIEW).getRoot();
-                break;
-        }
+        Region root = getViewController(view).getRoot();
 
         currentScene.setRoot(root);
 
@@ -41,6 +35,8 @@ public class ViewHandler extends ViewCreator {
         {
             title += root.getUserData();
         }
+        Image image = new Image("/view/study.png");
+        primaryStage.getIcons().add(image);
         primaryStage.setTitle(title);
         primaryStage.setScene(currentScene);
         primaryStage.setWidth(root.getPrefWidth());

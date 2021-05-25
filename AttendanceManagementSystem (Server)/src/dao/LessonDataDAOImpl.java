@@ -1,8 +1,6 @@
 package dao;
 
 import model.*;
-import model.Date;
-import model.Time;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -133,9 +131,9 @@ public class LessonDataDAOImpl implements LessonDataDAO {
         Lesson lesson = new Lesson(
                 id,
                 teacher,
-                new Date(date),
-                new Time(timeFrom),
-                new Time(timeTo),
+                date,
+                timeFrom,
+                timeTo,
                 subject,
                 topic,
                 contents,

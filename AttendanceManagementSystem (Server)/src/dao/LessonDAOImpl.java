@@ -50,9 +50,9 @@ public class LessonDAOImpl implements LessonDAO {
             PreparedStatement statement2 = connection
                     .prepareStatement("INSERT INTO time_of_conduct(lesson_id, lesson_date, time_from, time_to, classroom) VALUES (?,?,?,?,?)");
             statement2.setInt(1, Integer.parseInt(lesson.getId()));
-            statement2.setDate(2, Date.valueOf(lesson.getLessonDate().getDate()));
-            statement2.setTime(3, Time.valueOf(lesson.getStartTime().getTime()));
-            statement2.setTime(4, Time.valueOf(lesson.getEndTime().getTime()));
+            statement2.setDate(2, Date.valueOf(lesson.getLessonDate()));
+            statement2.setTime(3, Time.valueOf(lesson.getStartTime()));
+            statement2.setTime(4, Time.valueOf(lesson.getEndTime()));
             statement2.setString(5, lesson.getClassroom());
             statement2.executeUpdate();
 

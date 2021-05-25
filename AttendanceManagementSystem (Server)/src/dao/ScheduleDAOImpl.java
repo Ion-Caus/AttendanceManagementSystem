@@ -35,16 +35,16 @@ public class ScheduleDAOImpl implements ScheduleDAO {
         String id = resultSet.getString("lesson_id");
         Teacher teacher = new Teacher(resultSet.getString("full_name"), resultSet.getString("user_id"));
         LocalDate date = resultSet.getDate("lesson_date").toLocalDate();
-        LocalTime time1 = resultSet.getTime("time_from").toLocalTime();
-        LocalTime time2 = resultSet.getTime("time_to").toLocalTime();
+        LocalTime startTime = resultSet.getTime("time_from").toLocalTime();
+        LocalTime endTime = resultSet.getTime("time_to").toLocalTime();
         String subject = resultSet.getString("subject");
         String topic = resultSet.getString("topic");
         String contents = resultSet.getString("description");
         String classroom = resultSet.getString("classroom");
         String homework = resultSet.getString("homework");
         String className = resultSet.getString("class_name");
-        return new Lesson(id, teacher, new model.Date(date), new model.Time(time1),
-                new model.Time(time2), subject, topic, contents, classroom, homework, className);
+        return new Lesson(id, teacher, date, startTime,
+                endTime, subject, topic, contents, classroom, homework, className);
     }
 
 

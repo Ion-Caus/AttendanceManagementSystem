@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" userData="New Student" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddGradeViewController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Grade the student">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="600.0" spacing="30.0">
+               <children>
+                  <Label prefHeight="23.0" prefWidth="150.0" text="Grade">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="gradeField" prefHeight="42.0" prefWidth="350.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="110.0" prefHeight="120.0" prefWidth="600.0" spacing="30.0">
+               <children>
+                  <Label prefHeight="23.0" prefWidth="150.0" text="Comment">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <TextArea fx:id="commentArea" prefHeight="120.0" prefWidth="350.0" />
+               </children>
+            </HBox>
+            <Label fx:id="errorLabel" alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="400.0" text="errorLabel" textAlignment="CENTER" textFill="RED" />
+            <Separator prefHeight="11.0" prefWidth="592.0" />
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="546.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="35.0" prefWidth="80.0" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#submitButtonClicked" prefHeight="35.0" prefWidth="80.0" text="Submit" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>

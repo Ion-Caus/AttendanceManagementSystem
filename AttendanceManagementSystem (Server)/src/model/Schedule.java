@@ -30,7 +30,7 @@ public class Schedule {
     public ArrayList<Lesson> getLessonBy(LocalDate date) {
         ArrayList<Lesson> lessons = new ArrayList<>();
         for (Lesson lesson : schedule) {
-            if (lesson.getLessonDate().getDate().equals(date))
+            if (lesson.getLessonDate().equals(date))
                 lessons.add(lesson);
         }
         return lessons;
@@ -40,7 +40,7 @@ public class Schedule {
         ArrayList<Lesson> lessons = new ArrayList<>();
         for (Lesson lesson : schedule) {
             if (lesson.getTeacher().equals(teacher) &&
-                lesson.getLessonDate().getDate().equals(date)) {
+                lesson.getLessonDate().equals(date)) {
 
                 lessons.add(lesson);
             }

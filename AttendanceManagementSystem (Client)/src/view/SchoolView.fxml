@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<VBox userData="School Panel" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SchoolViewController">
+   <children>
+        <HBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
+            <children>
+                <VBox prefHeight="508.0" prefWidth="400.0">
+                    <children>
+                  <TabPane fx:id="tabPane" prefHeight="500.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Classes">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="400.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="400.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                       <children>
+                                                <TableView fx:id="classesTable" prefHeight="500.0" prefWidth="400.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="classNameColumn" prefWidth="390.0" resizable="false" text="Class" />
+                                                    </columns>
+                                                </TableView>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Students">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="allStudentsTable" prefHeight="457.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                       <columns>
+                                          <TableColumn fx:id="idStudentColumn" resizable="false" text="ID" />
+                                          <TableColumn fx:id="studentColumn" prefWidth="220.0" resizable="false" text="Student" />
+                                          <TableColumn fx:id="studentClassColumn" prefWidth="90.0" resizable="false" text="Class" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="Teachers">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="allTeachersTable" prefHeight="457.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                       <columns>
+                                          <TableColumn fx:id="idTeacherColumn" resizable="false" text="ID" />
+                                          <TableColumn fx:id="teacherColumn" prefWidth="220.0" resizable="false" text="Teacher" />
+                                          <TableColumn fx:id="initialsColumn" prefWidth="90.0" resizable="false" text="Initials" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Admins">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                        <Tab text="Log">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+                    </children>
+            </VBox>
+                <Separator orientation="VERTICAL" prefHeight="200.0" />
+                <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="200.0" spacing="10.0">
+                    <children>
+                        <Label fx:id="schoolName" alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0" text="School Name" textAlignment="CENTER" wrapText="true">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#editSchoolName" prefWidth="70.0" text="Edit" textAlignment="CENTER" />
+                        <Separator prefWidth="200.0">
+                            <padding>
+                                <Insets bottom="20.0" />
+                            </padding>
+                        </Separator>
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="207.0" text="Edit" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" onAction="#add" prefWidth="70.0" text="Add" />
+                  <Button fx:id="removeButton" alignment="CENTER" mnemonicParsing="false" onAction="#remove" prefWidth="70.0" text="Remove" />
+                  <Separator prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="207.0" text="View" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="scheduleButton" alignment="CENTER" mnemonicParsing="false" onAction="#viewSchedule" prefWidth="90.0" text="Schedule" />
+                  <Button fx:id="studentListButton" alignment="CENTER" mnemonicParsing="false" onAction="#viewStudentList" prefWidth="90.0" text="StudentList" />
+                  <Separator prefWidth="200.0" />
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="80.0" prefWidth="500.0" text="errorLabel" textAlignment="CENTER" textFill="#e10707">
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+      </Label>
+   </children>
+</VBox>

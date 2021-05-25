@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="838.0" userData="Lesson Information" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddLessonViewController">
+    <children>
+        <Label fx:id="subject" alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="917.0" text="Add lesson">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Label>
+        <Separator prefWidth="200.0" />
+        <HBox prefHeight="458.0" prefWidth="838.0">
+            <children>
+                <VBox prefHeight="530.0" prefWidth="514.0">
+                    <children>
+                        <HBox prefHeight="55.0" prefWidth="619.0" spacing="20.0">
+                            <children>
+                                <Label prefHeight="26.0" prefWidth="100.0" text="Topic">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="topicField" prefHeight="30.0" prefWidth="350.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets left="20.0" />
+                            </padding>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox fillHeight="false" layoutX="10.0" layoutY="10.0" prefHeight="135.0" prefWidth="584.0" spacing="20.0">
+                            <children>
+                                <Label prefHeight="26.0" prefWidth="100.0" text="Contents">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextArea fx:id="contentsField" prefHeight="110.0" prefWidth="350.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </TextArea>
+                            </children>
+                            <padding>
+                                <Insets left="20.0" />
+                            </padding>
+                        </HBox>
+                        <HBox fillHeight="false" layoutX="10.0" layoutY="70.0" prefHeight="140.0" prefWidth="514.0" spacing="20.0">
+                            <children>
+                                <Label prefHeight="26.0" prefWidth="100.0" text="Homework">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextArea fx:id="homeworkField" prefHeight="108.0" prefWidth="350.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </TextArea>
+                            </children>
+                            <padding>
+                                <Insets left="20.0" />
+                            </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="569.0" spacing="10.0">
+                            <children>
+                                <Label text="Teacher">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="teacherField" prefHeight="30.0" prefWidth="180.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets right="30.0" />
+                                    </HBox.margin>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets left="20.0" />
+                            </padding>
+                        </HBox>
+                        <Label fx:id="errorLabel" alignment="TOP_CENTER" prefHeight="40.0" prefWidth="529.0" text="errorLabel" textFill="RED" wrapText="true">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="20.0" right="20.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                    <HBox.margin>
+                        <Insets top="10.0" />
+                    </HBox.margin>
+                </VBox>
+                <Separator orientation="VERTICAL" prefHeight="530.0" prefWidth="6.0" />
+                <VBox prefHeight="530.0" prefWidth="299.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="299.0" spacing="20.0">
+                            <children>
+                                <Label prefWidth="70.0" text="Subject">
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="subjectField" prefHeight="30.0" prefWidth="150.0" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="55.0" prefWidth="300.0" spacing="20.0">
+                            <children>
+                                <Label prefWidth="70.0" text="Start time">
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="startTimeField" prefHeight="30.0" prefWidth="150.0" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="40.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="64.0" prefHeight="55.0" prefWidth="302.0" spacing="20.0">
+                            <children>
+                                <Label prefWidth="70.0" text="End time">
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="endTimeField" prefHeight="30.0" prefWidth="150.0" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="200.0" spacing="20.0">
+                            <children>
+                                <Label prefWidth="70.0" text="Date">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <DatePicker fx:id="datePicker" editable="false" prefHeight="30.0" prefWidth="150.0" showWeekNumbers="true" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="40.0" />
+                            </VBox.margin>
+                        </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="160.0" prefHeight="55.0" prefWidth="302.0" spacing="20.0">
+                     <children>
+                        <Label prefWidth="75.0" text="Classroom">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="classroom" prefHeight="30.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="107.0" prefWidth="299.0" spacing="30.0">
+                            <children>
+                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#createLessonButtonPressed" prefHeight="48.0" prefWidth="93.0" text="Add lesson">
+                                    <HBox.margin>
+                                        <Insets bottom="30.0" />
+                                    </HBox.margin>
+                                </Button>
+                                <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="48.0" prefWidth="93.0" text="Cancel">
+                                    <HBox.margin>
+                                        <Insets bottom="30.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</VBox>

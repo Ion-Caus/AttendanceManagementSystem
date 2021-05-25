@@ -1,7 +1,7 @@
 package mediator;
 
-import model.*;
 import model.Class;
+import model.*;
 import model.packages.Package;
 import utility.observer.subject.RemoteSubject;
 
