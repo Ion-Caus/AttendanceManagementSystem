@@ -46,7 +46,7 @@ public class StudentLessonDataViewModel {
         return gradeProperty;
     }
 
-    public void setAbsence(String absence) {
-       absenceProperty.set(absence);
+    public void setAbsence(boolean absence) {
+       absenceProperty.set(absence? "YES" : "---");
     }
 }

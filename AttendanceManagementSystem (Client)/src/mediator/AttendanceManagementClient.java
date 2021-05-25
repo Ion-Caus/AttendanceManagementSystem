@@ -77,142 +77,254 @@ public class AttendanceManagementClient implements ClientModel, RemoteListener<S
 
     @Override
     public ArrayList<String> getUnassignedStudents() {
-        return null;
+        try {
+            return remoteModel.getUnassignedStudents();
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public ArrayList<Student> getStudentsByClass(String className) {
-        return null;
+        try {
+            return remoteModel.getStudentsByClass(className);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public ArrayList<Teacher> getAllTeachers() {
-        return null;
+        try {
+            return remoteModel.getAllTeachers();
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date) {
-        return null;
+        try {
+            return remoteModel.getScheduleFor(theClass, date);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public ArrayList<Lesson> getScheduleFor(Student student, LocalDate date) {
-        return null;
+        try {
+            return remoteModel.getScheduleFor(student, date);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public ArrayList<Lesson> getScheduleFor(Teacher teacher, LocalDate date) {
-        return null;
+        try {
+            return remoteModel.getScheduleFor(teacher, date);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public Class getClassWith(Student student) {
-        return null;
+        try {
+            return remoteModel.getClassWith(student);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public Class getClassByName(String name) {
-        return null;
+        try {
+            return remoteModel.getClassByName(name);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public Student getStudentBy(String id) throws IllegalArgumentException {
-        return null;
+        try {
+            return remoteModel.getStudentBy(id);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public Teacher getTeacherBy(String id) throws IllegalArgumentException {
-        return null;
+        try {
+            return remoteModel.getTeacherBy(id);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public Lesson getLesson(String lessonID, Student student) throws IllegalArgumentException {
-        return null;
+        try {
+            return remoteModel.getLesson(lessonID, student);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public Lesson getLesson(String lessonID) throws IllegalArgumentException {
-        return null;
+        try {
+            return remoteModel.getLesson(lessonID);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException {
-        return null;
+        try {
+            return remoteModel.getLesson(lessonID, aClass);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public LessonData getLessonData(Lesson lesson, Student student) {
-        return null;
+        try {
+            return remoteModel.getLessonData(lesson, student);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public boolean changeMotive(String studentId, String lessonID, String motive) throws SQLException {
-        return false;
+        try {
+            return remoteModel.changeMotive(studentId, lessonID, motive);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public boolean changeAbsence(String studentID, String lessonID, boolean absence) throws SQLException {
-        return false;
+        try {
+            return remoteModel.changeAbsence(studentID, lessonID, absence);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public boolean changeLesson(String lessonID, String topic, String contents, String homework, String teacherID) throws SQLException {
-        return false;
+        try {
+            return remoteModel.changeLesson(lessonID, topic, contents, homework, teacherID);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void addClass(String className) throws IllegalArgumentException, SQLException {
-
+        try {
+            remoteModel.addClass(className);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void removeClass(String className) throws IllegalAccessException, SQLException {
-
+        try {
+            remoteModel.removeClass(className);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void addStudent(String studentName, String studentID) throws IllegalArgumentException, SQLException {
-
+        try {
+            remoteModel.addStudent(studentName, studentID);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void removeStudent(String studentID) throws SQLException {
-
+        try {
+            remoteModel.removeStudent(studentID);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void addStudentToClass(String studentID, String className) throws IllegalArgumentException, SQLException {
-
+        try {
+            remoteModel.addStudentToClass(studentID, className);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException, SQLException {
-
+        try {
+            remoteModel.removeStudentFromClass(studentID, className);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException, SQLException {
-
+        try {
+            remoteModel.addTeacher(teacherName, teacherID);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void removeTeacher(String studentID) throws SQLException {
-
+        try {
+            remoteModel.removeTeacher(studentID);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void addLesson(Class aClass, Lesson lesson) throws SQLException {
-
+        try {
+            remoteModel.addLesson(aClass, lesson);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void removeLesson(String className, String lessonID) throws SQLException {
-
+        try {
+            remoteModel.removeLesson(className, lessonID);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException {
-
+        try {
+            remoteModel.changeGradeComment(studentID, lessonID, grade, comment);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
     }
 
     @Override

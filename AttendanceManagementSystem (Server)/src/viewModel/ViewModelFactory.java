@@ -19,7 +19,6 @@ public class ViewModelFactory
   private ClassStudentListViewModel classStudentListViewModel;
   private AddLessonViewModel addLessonViewModel;
 
-
   public ViewModelFactory(Model model)
   {
     this.viewModelState = new ViewModelState();
