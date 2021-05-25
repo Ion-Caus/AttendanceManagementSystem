@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 public class StudentList {
     private ArrayList<Student> students;
 
@@ -18,8 +19,10 @@ public class StudentList {
         if (!isUnique(student.getID())) {
             throw new IllegalArgumentException("Student with ID ("+ student.getID() + ") already exists.");
         }
+
         students.add(student);
     }
+
 
     public void removeStudent(Student student) {
         students.remove(student);

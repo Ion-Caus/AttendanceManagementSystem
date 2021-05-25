@@ -56,6 +56,10 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
 
     }
 
+    public String getSection(){
+        return viewState.getSection();
+    }
+
     public void loadScheduleForDay() {
         schedule.clear();
 

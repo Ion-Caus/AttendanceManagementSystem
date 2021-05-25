@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Student {
     private String name;
@@ -10,15 +11,27 @@ public class Student {
     private String className;
 
     public Student(String name, String ID) {
+
         if (name.isBlank()) {
             throw new IllegalArgumentException("Student name cannot be empty");
         }
+
         if (ID.isBlank()) {
             throw new IllegalArgumentException("Student ID cannot be empty");
         }
+
+        if(!hasValidID(ID)){
+            throw new IllegalArgumentException("Student ID must consist of 6 digits.");
+        }
+
         this.name = name;
         this.ID = ID;
         this.account = null;
+    }
+
+    private boolean hasValidID(String ID){
+        Pattern pattern = Pattern.compile("^[0-9]{6}$");
+        return pattern.matcher(ID).matches();
     }
 
     public String getName() {

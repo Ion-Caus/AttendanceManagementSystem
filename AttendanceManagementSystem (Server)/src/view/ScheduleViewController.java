@@ -26,6 +26,8 @@ public class ScheduleViewController extends ViewController {
     @FXML private Button addLessonButton;
     @FXML private Button removeLessonButton;
     @FXML private Button backButton;
+    @FXML private Button manageAccountButton;
+
 
     private ScheduleViewModel viewModel;
 
@@ -77,8 +79,11 @@ public class ScheduleViewController extends ViewController {
         addLessonButton.setVisible(viewModel.forAdminProperty().get());
         removeLessonButton.setVisible(viewModel.forAdminProperty().get());
         backButton.setVisible(viewModel.forAdminProperty().get());
+        manageAccountButton.setVisible(!viewModel.forAdminProperty().get());
 
         scheduleTable.sort();
+
+        adjustViewButtonsForAdmin();
     }
 
     @FXML
@@ -105,6 +110,27 @@ public class ScheduleViewController extends ViewController {
     }
 
 
+    private void adjustViewButtonsForAdmin() {
+        if(!viewModel.forAdminProperty().get())
+            return;
+
+        viewModel.clear();
+        addLessonButton.setVisible(false);
+        removeLessonButton.setVisible(false);
+        manageAccountButton.setVisible(false);
+
+        switch (viewModel.getSection()) {
+            case "Class":
+                addLessonButton.setVisible(true);
+                removeLessonButton.setVisible(true);
+                manageAccountButton.setVisible(false);
+                break;
+            case "Teacher":
+            case "Student":
+                manageAccountButton.setVisible(true);
+                break;
+        }
+    }
 
 
     @FXML
