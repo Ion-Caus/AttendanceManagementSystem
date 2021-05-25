@@ -87,7 +87,7 @@ public class SchoolViewModel implements LocalListener<String, Package> {
     }
 
     public void clear() {
-        //TODO the clear
+        schoolName.set(model.getSchoolName());
         error.setValue("");
 
     }
@@ -263,7 +263,6 @@ public class SchoolViewModel implements LocalListener<String, Package> {
 
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {
-        //TODO 17/05 by Ion Clean up this part of code and the Observer names for remove and add Student to/from class
         Platform.runLater(() -> {
             String[] commands = event.getPropertyName().split(" ");
 

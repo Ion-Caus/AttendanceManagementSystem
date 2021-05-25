@@ -22,7 +22,6 @@ public class StudentListViewController extends ViewController {
     private TableColumn<StudentLessonDataViewModel, String> absenceColumn;
     @FXML
     private TableColumn<StudentLessonDataViewModel, String> motiveColumn;
-    //TODO assign viewModel for columns. Right now - it's a placeholder.
 
     @FXML
     private Label lessonTopicLabel;
@@ -32,7 +31,7 @@ public class StudentListViewController extends ViewController {
     @FXML
     private Label errorLabel;
 
-    private StudentListViewModel viewModel; //TODO assign proper viewModel
+    private StudentListViewModel viewModel;
 
     public StudentListViewController() {
         // Called by FXMLLoader
@@ -69,7 +68,7 @@ public class StudentListViewController extends ViewController {
     @Override
     public void reset() {
         viewModel.loadFromModel();
-        viewModel.clear();  //TODO check and update clear method in corresponding viewModel
+        viewModel.clear();
     }
 
 

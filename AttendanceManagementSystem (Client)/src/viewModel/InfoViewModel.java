@@ -163,7 +163,6 @@ public class InfoViewModel implements LocalListener<String, Package> {
 
 
     public void clear() {
-        //TODO clear the rest property
         error.set("");
 
     }
@@ -180,7 +179,6 @@ public class InfoViewModel implements LocalListener<String, Package> {
             e.printStackTrace();
             error.set(e.getLocalizedMessage());
         }
-        //TODO use observer to change lesson for all
         return false;
     }
 

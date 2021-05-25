@@ -57,7 +57,6 @@ public class ClassStudentListViewModel implements LocalListener<String, Package>
 
     public void addStudent() {
         try {
-            //TODO 17/5 by Ion clean up
             String id = (searchField.get().contains("("))? searchField.get().split("[()]")[1] : "no id";
             model.addStudentToClass(id, viewModelState.getClassName() );
             clear();

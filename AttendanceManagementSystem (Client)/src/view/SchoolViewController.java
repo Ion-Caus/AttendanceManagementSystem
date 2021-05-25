@@ -132,8 +132,6 @@ public class SchoolViewController extends ViewController {
                 removeButton.setVisible(true);
                 studentListButton.setVisible(true);
                 break;
-            //TODO 13/05 by DENNIS student and teacher schedule button should not be visible in the final admin view, only present for testing currently
-            //TODO 13/05 by Ion maybe the admin wants to see the schedule for the teacher and student in case of problems???
             case "Students":
             case "Teachers":
                 scheduleButton.setVisible(true);

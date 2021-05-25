@@ -135,7 +135,6 @@ public class ScheduleViewController extends ViewController {
 
     @FXML
     private void backToSchoolView() {
-        //TODO  viewModel.backToSchoolView(); is optional?
         viewModel.backToSchoolView();
         getViewHandler().openView(View.SCHOOL_VIEW);
     }
