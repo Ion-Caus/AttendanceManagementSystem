@@ -25,7 +25,6 @@ public class StudentListViewModel implements GeneralListener<String, Package>  {
     private Model model;
     private ViewModelState viewState;
 
-    //TODO 19/5 by Ion do a different ViewModel for the Table and one for the Controller
     public StudentListViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
         model.addListener(this, "ChangeMotive", "ChangeAbsence");

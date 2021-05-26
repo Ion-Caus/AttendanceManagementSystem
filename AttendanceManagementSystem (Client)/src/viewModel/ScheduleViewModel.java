@@ -9,6 +9,7 @@ import model.Model;
 import model.Student;
 import model.Teacher;
 import model.packages.Package;
+import model.packages.PackageLesson;
 import model.packages.PackageLessonInfo;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -226,8 +228,16 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                     schedule.add(index, new LessonViewModel(lesson));
                     break;
                 case "ADD Lesson":
+                    PackageLesson packageLesson = (PackageLesson) event.getValue2();
+                    if (   ( !Objects.equals(viewState.getSection(), "Teacher") ||
+                            Objects.equals(packageLesson.getLesson().getTeacher().getID(), viewState.getTeacherID()) )
+                            && packageLesson.getLesson().getLessonDate().equals(dateProperty.get())
+                    ) {
+                        schedule.add(new LessonViewModel(packageLesson.getLesson()));
+                    }
+                    break;
                 case "REMOVE Lesson":
-                    loadScheduleForDay();
+                    schedule.removeIf(lessonViewModel -> lessonViewModel.idProperty().get().equals(event.getValue2().getID()));
                     break;
 
             }

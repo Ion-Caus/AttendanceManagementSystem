@@ -68,7 +68,7 @@ public class StudentListViewController extends ViewController {
     @Override
     public void reset() {
         viewModel.loadFromModel();
-        viewModel.clear();  //TODO check and update clear method in corresponding viewModel
+        viewModel.clear();
     }
 
 

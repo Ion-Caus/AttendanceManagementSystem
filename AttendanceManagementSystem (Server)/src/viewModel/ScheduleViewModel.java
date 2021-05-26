@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -93,8 +94,6 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
     public void clear() {
         errorProperty.set("");
         dateProperty.setValue(LocalDate.now());
-
-        selectedLessonProperty.set(null);
 
         switch (viewState.getSection()) {
             case "Student":
@@ -191,13 +190,12 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         }
     }
 
-    public  boolean hasSelectionProperty(){
+    public boolean hasSelectionProperty(){
         if (selectedLessonProperty.get() == null) {
             errorProperty.set("Please select a class.");
             return false;
         }
         return true;
-
     }
 
     public void deleteLesson(){
@@ -205,6 +203,7 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
             model.removeLesson(viewState.getClassName(), selectedLessonProperty.get().idProperty().get());
             errorProperty.set("");
         } catch (NullPointerException | IllegalArgumentException e) {
+            e.printStackTrace();
            errorProperty.set("Please select a lesson");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -229,10 +228,17 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                     schedule.add(index, new LessonViewModel(lesson));
                     break;
                 case "ADD Lesson":
-                case "REMOVE Lesson":
-                    loadScheduleForDay();
+                    PackageLesson packageLesson = (PackageLesson) event.getValue2();
+                    if (   ( !Objects.equals(viewState.getSection(), "Teacher") ||
+                            Objects.equals(packageLesson.getLesson().getTeacher().getID(), viewState.getTeacherID()) )
+                            && packageLesson.getLesson().getLessonDate().equals(dateProperty.get())
+                    ) {
+                        schedule.add(new LessonViewModel(packageLesson.getLesson()));
+                    }
                     break;
-
+                case "REMOVE Lesson":
+                    schedule.removeIf(lessonViewModel -> lessonViewModel.idProperty().get().equals(event.getValue2().getID()));
+                    break;
             }
         });
     }

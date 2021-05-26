@@ -107,6 +107,7 @@ public class ScheduleViewController extends ViewController {
                 viewModel.deleteLesson();
             }
         }
+        scheduleTable.getSelectionModel().clearSelection();
     }
 
 
