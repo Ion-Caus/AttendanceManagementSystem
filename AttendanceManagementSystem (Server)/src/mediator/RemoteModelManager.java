@@ -1,5 +1,6 @@
 package mediator;
 
+import javafx.application.Platform;
 import model.*;
 import model.Class;
 import model.packages.Package;
@@ -29,7 +30,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
 
         startRegistry();
         startServer();
-        model.addListener(this);
+        this.model.addListener(this);
     }
 
     private void startRegistry() throws RemoteException {
@@ -56,7 +57,12 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
 
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {
-
+        Platform.runLater( () ->
+                {
+                    property.firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());
+                    System.out.println(event.getPropertyName() + " " + event.getValue2().getID());
+                }
+        );
     }
 
     @Override
@@ -187,6 +193,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     @Override
     public void removeClass(String className) throws IllegalAccessException, SQLException {
         model.removeClass(className);
+
     }
 
     @Override

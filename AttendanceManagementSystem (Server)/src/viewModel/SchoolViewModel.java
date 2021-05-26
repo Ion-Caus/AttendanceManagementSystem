@@ -188,6 +188,14 @@ public class SchoolViewModel implements LocalListener<String, Package> {
         switch (tabSelectedProperty.get()) {
             case "Classes":
                 try {
+                    //checks is class exists
+                    model.getClassByName(selectedClassProperty.get().classNameProperty().get());
+                } catch (IllegalArgumentException e) {
+                    error.set(e.getLocalizedMessage());
+                    return false;
+                }
+
+                try {
                     viewModelState.setSection("Class");
                     viewModelState.setClassName(selectedClassProperty.get().classNameProperty().get());
                     return true;
@@ -198,10 +206,19 @@ public class SchoolViewModel implements LocalListener<String, Package> {
 
             case "Students":
                 try {
+                    //checks is student exists
+                    model.getStudentBy(selectedStudentProperty.get().idProperty().get());
+                } catch (IllegalArgumentException e) {
+                    error.set(e.getLocalizedMessage());
+                    return false;
+                }
+
+                try {
                     if (selectedStudentProperty.get().classNameProperty().get() == null) {
                         error.set("Student is not in a class.");
                         return false;
                     }
+
                     viewModelState.setSection("Student");
                     viewModelState.setStudentID(selectedStudentProperty.get().idProperty().get());
                     return true;
@@ -211,6 +228,13 @@ public class SchoolViewModel implements LocalListener<String, Package> {
                 }
 
             case "Teachers":
+                try {
+                    //checks is student exists
+                    model.getTeacherBy(selectedTeacherProperty.get().idProperty().get());
+                } catch (IllegalArgumentException e) {
+                    error.set(e.getLocalizedMessage());
+                    return false;
+                }
                 try {
                     viewModelState.setSection("Teacher");
                     viewModelState.setTeacherID(selectedTeacherProperty.get().idProperty().get());

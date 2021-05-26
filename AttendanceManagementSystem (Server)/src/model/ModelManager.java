@@ -161,7 +161,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addClass(String className) throws IllegalArgumentException, SQLException {
+    public synchronized void addClass(String className) throws IllegalArgumentException, SQLException {
         var aClass = new Class(className);
         school.getClassList().addClass(aClass);
         classesDAO.addClass(aClass);
@@ -169,7 +169,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeClass(String className) throws IllegalAccessException, SQLException {
+    public synchronized void removeClass(String className) throws IllegalAccessException, SQLException {
         school.getClassList().removeClass(className);
         classesDAO.removeClass(className);
         property.firePropertyChange("REMOVE Class", null, new PackageName(className,null));
@@ -186,7 +186,6 @@ public class ModelManager implements Model {
     @Override
     public void removeStudent(String studentID) throws IllegalArgumentException, SQLException {
         //remove from class' studentList
-
         school.getLessonDataList().removeLessonDataByStudent(studentID);
 
         String className = getStudentBy(studentID).getClassName();
