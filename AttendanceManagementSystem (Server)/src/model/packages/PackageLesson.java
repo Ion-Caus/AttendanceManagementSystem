@@ -2,7 +2,9 @@ package model.packages;
 
 import model.Lesson;
 
-public class PackageLesson extends Package{
+import java.io.Serializable;
+
+public class PackageLesson extends Package implements Serializable {
     private Lesson lesson;
 
     public PackageLesson(Lesson lesson) {

@@ -208,7 +208,7 @@ public class LessonDataDAOImpl implements LessonDataDAO {
                     "UPDATE lesson_data SET absence_motive = ? WHERE user_id = ? and lesson_id = ?");
             statement.setString(1, lessonData.getAbsence().getMotive());
             statement.setString(2, lessonData.getStudent().getID());
-            statement.setString(3, lessonData.getLesson().getId());
+            statement.setInt(3, Integer.parseInt( lessonData.getLesson().getId() ));
             statement.executeUpdate();
         }
     }

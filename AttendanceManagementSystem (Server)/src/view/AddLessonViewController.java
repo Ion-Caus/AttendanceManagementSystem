@@ -48,6 +48,9 @@ public class AddLessonViewController extends ViewController{
         datePicker.getEditor().setText(
                 DateTimeFormatter.ofPattern("EEEE dd/MM").format(datePicker.getValue())
         );
+        datePicker.setOnAction(event -> datePicker.getEditor().setText(
+                DateTimeFormatter.ofPattern("EEEE dd/MM").format(datePicker.getValue())
+        ));
         classroom.textProperty().bindBidirectional(viewModel.classroomProperty());
 
     }

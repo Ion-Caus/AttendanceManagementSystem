@@ -1,6 +1,8 @@
 package model.packages;
 
-public class PackageAbsence extends Package{
+import java.io.Serializable;
+
+public class PackageAbsence extends Package implements Serializable {
     private String lessonID;
     private boolean absent;
     private String motive;

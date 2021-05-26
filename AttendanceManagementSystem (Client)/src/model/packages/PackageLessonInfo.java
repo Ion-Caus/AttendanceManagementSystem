@@ -1,6 +1,8 @@
 package model.packages;
 
-public class PackageLessonInfo extends Package{
+import java.io.Serializable;
+
+public class PackageLessonInfo extends Package implements Serializable {
     private String topic;
     private String contents;
     private String homework;

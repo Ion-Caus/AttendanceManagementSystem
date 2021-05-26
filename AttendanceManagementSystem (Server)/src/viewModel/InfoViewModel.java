@@ -6,9 +6,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.*;
+import model.packages.*;
 import model.packages.Package;
-import model.packages.PackageGrade;
-import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
@@ -38,7 +37,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
 
     public InfoViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        this.model.addListener(this, "ChangeGradeComment");
+        this.model.addListener(this, "ChangeLesson", "ChangeAbsence", "ChangeGradeComment");
         this.viewState = viewModelState;
 
         //Lesson properties
@@ -185,18 +184,37 @@ public class InfoViewModel implements LocalListener<String, Package> {
         return false;
     }
 
+    private boolean isTheWrongData(String studentID, String lessonID) {
+        return !viewState.getStudentID().equals(studentID) ||
+                !viewState.getLessonID().equals(lessonID);
+    }
+
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {
         Platform.runLater(() -> {
-            PackageGrade packageGrade = (PackageGrade) event.getValue2();
-
-            if (!viewState.getStudentID().equals(packageGrade.getID()) ||
-                    !viewState.getLessonID().equals(packageGrade.getLessonID())) {
-                return;
-            }
-
             switch (event.getPropertyName()) {
+                case "ChangeLesson" :
+                    PackageLessonInfo packageLessonInfo = (PackageLessonInfo) event.getValue2();
+                    if (!packageLessonInfo.getID().equals(viewState.getLessonID())) {
+                        return;
+                    }
+                    topic.set(packageLessonInfo.getTopic());
+                    contents.set(packageLessonInfo.getContents());
+                    homework.set(packageLessonInfo.getHomework());
+                    teacher.set(model.getTeacherBy(packageLessonInfo.getTeacherID()).getName());
+                    break;
+                case "ChangeAbsence":
+                    PackageAbsence packageAbsence = (PackageAbsence) event.getValue2();
+                    if (isTheWrongData(packageAbsence.getID(), packageAbsence.getLessonID())) {
+                        return;
+                    }
+                    absent.set(packageAbsence.isAbsent()? "YES" : "---");
+                    break;
                 case "ChangeGradeComment":
+                    PackageGrade packageGrade = (PackageGrade) event.getValue2();
+                    if (isTheWrongData(packageGrade.getID(), packageGrade.getLessonID())) {
+                        return;
+                    }
                     grade.set(packageGrade.getGrade() + "");
                     comment.set(packageGrade.getComment());
 

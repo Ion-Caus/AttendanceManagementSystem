@@ -88,7 +88,7 @@ public class AddLessonViewModel {
            return false;
        }
        catch (DateTimeParseException parseException){
-           error.set("Please fill out the lesson time in this format hh:mm for example 12:20");
+           error.set("Please fill out the lesson time in this format 'hh:mm' for example '09:20'");
            startTime.set("");
            endTime.set("");
            return false;

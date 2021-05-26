@@ -40,7 +40,7 @@
                         <TableColumn fx:id="topicColumn" prefWidth="140.0" text="Topic" />
                         <TableColumn fx:id="teacherColumn" prefWidth="130.0" resizable="false" text="Teacher" />
                         <TableColumn fx:id="timeColumn" prefWidth="110.0" resizable="false" text="Time" />
-                        <TableColumn fx:id="classroomColumn" resizable="false" text="ClassRoom" />
+                        <TableColumn fx:id="classroomColumn" resizable="false" text="Classroom" />
                     </columns>
                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

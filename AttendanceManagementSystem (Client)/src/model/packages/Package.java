@@ -1,6 +1,8 @@
 package model.packages;
 
-public class Package {
+import java.io.Serializable;
+
+public class Package implements Serializable {
     private String ID;
 
     public Package(String ID) {
