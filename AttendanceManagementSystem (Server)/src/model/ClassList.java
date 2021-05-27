@@ -16,7 +16,7 @@ public class ClassList {
 
     public void addClass(Class aClass) throws IllegalArgumentException {
         if (!isUnique(aClass.getClassName())) {
-            throw new IllegalArgumentException("Can not add a duplicate class.");
+            throw new IllegalArgumentException("Cannot add a duplicate class.");
         }
         classes.add(aClass);
     }
@@ -32,7 +32,7 @@ public class ClassList {
                     this.classes.remove(aClass);
                     return;
                 }
-                throw new IllegalAccessException("Can not delete a class with students.");
+                throw new IllegalAccessException("Cannot delete a class with students.");
             }
         }
     }
