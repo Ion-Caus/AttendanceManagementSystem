@@ -25,6 +25,17 @@ public class ModelManager implements Model, LocalListener<String, Package> {
         clientModel = new AttendanceManagementClient();
         clientModel.addListener(this);
     }
+
+    @Override
+    public String login(String username, String password) throws IllegalAccessException {
+        return clientModel.login(username, password);
+    }
+
+    @Override
+    public void logout(String username) {
+        clientModel.logout(username);
+    }
+
     @Override
     public String getClassAndSchool(Student student) {
         return clientModel.getClassAndSchool(student);

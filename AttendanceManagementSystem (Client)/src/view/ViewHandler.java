@@ -20,8 +20,7 @@ public class ViewHandler extends ViewCreator {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        // TODO change to LOGIN_VIEW
-        openView(View.SCHOOL_VIEW);
+        openView(View.LOGIN_VIEW);
     }
 
     public void openView(View view) {

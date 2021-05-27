@@ -31,6 +31,24 @@ public class AttendanceManagementClient implements ClientModel, RemoteListener<S
     }
 
     @Override
+    public String login(String username, String password) throws IllegalAccessException {
+        try {
+            return remoteModel.login(username, password);
+        } catch (RemoteException | SQLException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public void logout(String username) {
+        try {
+            remoteModel.logout(username);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
+    }
+
+    @Override
     public String getClassAndSchool(Student student) {
         try {
             return remoteModel.getClassAndSchool(student);

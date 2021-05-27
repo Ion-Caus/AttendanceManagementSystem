@@ -79,21 +79,22 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                 }
                 break;
         }
+        sortSchedule();
+    }
 
+    private void sortSchedule() {
         // sorting the schedule by time
         List<LessonViewModel> list =  schedule.stream()
                 .sorted(Comparator.comparing(i -> i.timeProperty().get()))
                 .collect(Collectors.toList());
         schedule.clear();
         schedule.addAll(list);
-
     }
 
     public void clear() {
         errorProperty.set("");
         dateProperty.setValue(LocalDate.now());
 
-        selectedLessonProperty.set(null);
 
         switch (viewState.getSection()) {
             case "Student":
@@ -217,15 +218,9 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                 case "ChangeLesson":
                     PackageLessonInfo pli = (PackageLessonInfo)event.getValue2();
                     Lesson lesson = model.getLesson(pli.getID());
-                    int index = 0;
-                    for (int i = 0; i < schedule.size(); i++) {
-                        if (schedule.get(i).idProperty().get().equals(pli.getID())) {
-                            schedule.remove(schedule.get(i));
-                            index = i;
-                            break; // break for-loop
-                        }
-                    }
-                    schedule.add(index, new LessonViewModel(lesson));
+                    schedule.removeIf(lessonViewModel -> lessonViewModel.idProperty().get().equals(lesson.getId()));
+                    schedule.add(new LessonViewModel(lesson));
+                    sortSchedule();
                     break;
                 case "ADD Lesson":
                     PackageLesson packageLesson = (PackageLesson) event.getValue2();
@@ -234,6 +229,7 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                             && packageLesson.getLesson().getLessonDate().equals(dateProperty.get())
                     ) {
                         schedule.add(new LessonViewModel(packageLesson.getLesson()));
+                        sortSchedule();
                     }
                     break;
                 case "REMOVE Lesson":

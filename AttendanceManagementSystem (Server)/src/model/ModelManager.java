@@ -60,6 +60,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String login(String username, String password) throws IllegalAccessException, SQLException {
+        String access = userAccountsDAO.login(username, password);
+        if ( access.equals("student") &&
+                getStudentBy(username).getClassName() == null ) {
+            throw new IllegalAccessException("You are not yet assigned to a class. Please contact the administration.");
+        }
+        return access;
+    }
+
+    @Override
+    public void logout() {
+
+    }
+
+    @Override
     public ArrayList<Class> getAllClasses() {
         return school.getClassList().getAllClasses();
     }
@@ -161,7 +176,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public synchronized void addClass(String className) throws IllegalArgumentException, SQLException {
+    public void addClass(String className) throws IllegalArgumentException, SQLException {
         var aClass = new Class(className);
         school.getClassList().addClass(aClass);
         classesDAO.addClass(aClass);
@@ -169,7 +184,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public synchronized void removeClass(String className) throws IllegalAccessException, SQLException {
+    public void removeClass(String className) throws IllegalAccessException, SQLException {
         school.getClassList().removeClass(className);
         classesDAO.removeClass(className);
         property.firePropertyChange("REMOVE Class", null, new PackageName(className,null));
@@ -245,13 +260,12 @@ public class ModelManager implements Model {
 
     private ArrayList<Lesson> getLessonsByTeacher(String teacherID) {
         ArrayList<Lesson> lessons = new ArrayList<>();
-        for(Class temp : school.getClassList().getAllClasses())
+        for(Class temp : getAllClasses())
             for(Lesson lesson : temp.getSchedule().getAllLessons())
                 if(lesson.getTeacher().getID().equals(teacherID))
                     lessons.add(lesson);
         return lessons;
     }
-
 
     @Override
     public void addLesson(Class aClass, Lesson lesson) throws SQLException {

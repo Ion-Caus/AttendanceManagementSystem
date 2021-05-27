@@ -7,7 +7,6 @@ import model.Teacher;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserAccountsDAOImpl implements UserAccountsDAO {
     private static UserAccountsDAOImpl instance;
@@ -39,8 +38,6 @@ public class UserAccountsDAOImpl implements UserAccountsDAO {
                             "INSERT INTO user_account(user_id, full_name, password, access)" +
                             "VALUES ('000000', 'Not / Assigned', 'null', 'teacher') ON CONFLICT DO NOTHING;")
                     .executeUpdate();
-
-
         }
     }
 
@@ -154,6 +151,23 @@ public class UserAccountsDAOImpl implements UserAccountsDAO {
             deleteTaught.setString(2, teacherID);
             deleteTaught.executeUpdate();
             deleteUser(teacherID);
+        }
+    }
+
+    @Override
+    public String login(String username, String password) throws SQLException, IllegalAccessException {
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection
+                    .prepareStatement("SELECT user_id, password, access from user_account where user_id = ? and password = ?;");
+
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("access");
+            }
+            throw new IllegalAccessException("Wrong username or password.");
         }
     }
 }

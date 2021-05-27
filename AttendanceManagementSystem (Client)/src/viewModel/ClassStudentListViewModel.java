@@ -16,6 +16,7 @@ import utility.observer.listener.LocalListener;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ClassStudentListViewModel implements LocalListener<String, Package> {
 
@@ -114,7 +115,7 @@ public class ClassStudentListViewModel implements LocalListener<String, Package>
         Platform.runLater(() -> {
             PackageName packageName = (PackageName)event.getValue2();
 
-            if (!viewModelState.getClassName().equals(packageName.getName())) {
+            if (!Objects.equals(viewModelState.getClassName(), packageName.getName())) {
                 return;
             }
 

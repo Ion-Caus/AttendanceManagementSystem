@@ -84,6 +84,7 @@ public class ScheduleViewController extends ViewController {
         scheduleTable.sort();
 
         adjustViewButtonsForAdmin();
+        scheduleTable.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -93,7 +94,6 @@ public class ScheduleViewController extends ViewController {
 
     @FXML
     private void removeLesson() {
-
         if (viewModel.hasSelectionProperty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             Optional<ButtonType> result;
@@ -106,6 +106,7 @@ public class ScheduleViewController extends ViewController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 viewModel.deleteLesson();
             }
+            scheduleTable.getSelectionModel().clearSelection();
         }
     }
 

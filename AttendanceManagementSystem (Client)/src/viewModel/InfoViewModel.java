@@ -16,6 +16,7 @@ import utility.observer.listener.LocalListener;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class InfoViewModel implements LocalListener<String, Package> {
     private StringProperty subject;
@@ -184,9 +185,9 @@ public class InfoViewModel implements LocalListener<String, Package> {
         return false;
     }
 
-    private boolean isTheRightData(String studentID, String lessonID) {
-        return !viewState.getStudentID().equals(studentID) ||
-                !viewState.getLessonID().equals(lessonID);
+    private boolean isTheWrongData(String studentID, String lessonID) {
+        return !Objects.equals(viewState.getStudentID(), studentID) ||
+                !Objects.equals(viewState.getLessonID(), lessonID);
     }
 
     @Override
@@ -205,14 +206,14 @@ public class InfoViewModel implements LocalListener<String, Package> {
                     break;
                 case "ChangeAbsence":
                     PackageAbsence packageAbsence = (PackageAbsence) event.getValue2();
-                    if (isTheRightData(packageAbsence.getID(), packageAbsence.getLessonID())) {
+                    if (isTheWrongData(packageAbsence.getID(), packageAbsence.getLessonID())) {
                         return;
                     }
                     absent.set(packageAbsence.isAbsent()? "YES" : "---");
                     break;
                 case "ChangeGradeComment":
                     PackageGrade packageGrade = (PackageGrade) event.getValue2();
-                    if (isTheRightData(packageGrade.getID(), packageGrade.getLessonID())) {
+                    if (isTheWrongData(packageGrade.getID(), packageGrade.getLessonID())) {
                         return;
                     }
                     grade.set(packageGrade.getGrade() + "");

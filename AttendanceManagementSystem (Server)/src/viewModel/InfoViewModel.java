@@ -14,6 +14,7 @@ import utility.observer.listener.LocalListener;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class InfoViewModel implements LocalListener<String, Package> {
     private StringProperty subject;
@@ -183,8 +184,8 @@ public class InfoViewModel implements LocalListener<String, Package> {
     }
 
     private boolean isTheWrongData(String studentID, String lessonID) {
-        return !viewState.getStudentID().equals(studentID) ||
-                !viewState.getLessonID().equals(lessonID);
+        return !Objects.equals(viewState.getStudentID(), studentID) ||
+                !Objects.equals(viewState.getLessonID(), lessonID);
     }
 
     @Override

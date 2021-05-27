@@ -76,6 +76,16 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     }
 
     @Override
+    public String login(String username, String password) throws IllegalAccessException, RemoteException, SQLException {
+        return model.login(username, password);
+    }
+
+    @Override
+    public void logout() throws RemoteException {
+        model.logout();
+    }
+
+    @Override
     public String getClassAndSchool(Student student) {
         return model.getClassAndSchool(student);
     }

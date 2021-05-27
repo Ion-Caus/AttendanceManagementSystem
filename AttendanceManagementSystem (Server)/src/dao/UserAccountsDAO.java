@@ -13,9 +13,6 @@ public interface UserAccountsDAO
 {
   // creating accounts
   void createUserAccount(String name, String ID, String password, String access) throws SQLException;
-//  Student createStudent(String name, String ID) throws SQLException;
-//  Teacher createTeacher(String name, String ID) throws SQLException;
-//  Administrator createAdmin(String name, String ID) throws SQLException;
 
   // reading accounts
   ArrayList<Student> readAllStudents() throws SQLException;
@@ -28,4 +25,8 @@ public interface UserAccountsDAO
   // deleting accounts
   void deleteUser(String userID) throws SQLException;
   void deleteTeacher(String teacherID) throws SQLException;
+
+  // login
+  String login(String username, String password) throws SQLException, IllegalAccessException;
+
 }

@@ -58,7 +58,6 @@ public class ScheduleViewController extends ViewController {
         scheduleTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldVal, newVal) -> viewModel.setSelected(newVal)
         );
-        scheduleTable.getSortOrder().add(timeColumn);
 
 
         userLabel.textProperty().bind(viewModel.userProperty());
@@ -81,9 +80,8 @@ public class ScheduleViewController extends ViewController {
         backButton.setVisible(viewModel.forAdminProperty().get());
         manageAccountButton.setVisible(!viewModel.forAdminProperty().get());
 
-        scheduleTable.sort();
-
         adjustViewButtonsForAdmin();
+        scheduleTable.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -106,8 +104,8 @@ public class ScheduleViewController extends ViewController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 viewModel.deleteLesson();
             }
+            scheduleTable.getSelectionModel().clearSelection();
         }
-        scheduleTable.getSelectionModel().clearSelection();
     }
 
 
