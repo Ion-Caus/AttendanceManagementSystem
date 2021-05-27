@@ -11,12 +11,7 @@ import model.packages.Package;
 
 public interface ClientModel extends LocalSubject<String, Package> {
     String login(String username, String password) throws IllegalAccessException;
-    void logout(String username);
-
-    String getClassAndSchool(Student student);
-
-    void setSchoolName(String name);
-    String getSchoolName();
+    void logout();
 
     ArrayList<Class> getAllClasses();
 

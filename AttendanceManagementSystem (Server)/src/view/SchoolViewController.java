@@ -15,8 +15,6 @@ public class SchoolViewController extends ViewController {
     private TabPane tabPane;
 
     @FXML
-    private Label schoolName;
-    @FXML
     private Label errorLabel;
 
     @FXML
@@ -71,7 +69,6 @@ public class SchoolViewController extends ViewController {
         );
         tabPane.getSelectionModel().selectFirst();
 
-        schoolName.textProperty().bindBidirectional(viewModel.schoolNameProperty());
         errorLabel.textProperty().bind(viewModel.errorProperty());
 
 
@@ -146,20 +143,6 @@ public class SchoolViewController extends ViewController {
                 break;
         }
 
-    }
-
-    @FXML
-    private void editSchoolName() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("School Name");
-        dialog.setHeaderText("School Name");
-        dialog.setContentText("Please enter your school name:");
-
-        Optional<String> result = dialog.showAndWait();
-        if (result.isPresent() && !result.get().isBlank()) {
-            schoolName.setText(result.get());
-            viewModel.setSchoolName(result.get());
-        }
     }
 
     @FXML

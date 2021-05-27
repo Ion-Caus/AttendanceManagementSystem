@@ -11,11 +11,6 @@ public interface Model extends LocalSubject<String, Package> {
     String login(String username, String password) throws IllegalAccessException, SQLException;
     void logout();
 
-    String getClassAndSchool(Student student);
-
-    void setSchoolName(String name);
-    String getSchoolName();
-
     ArrayList<Class> getAllClasses();
 
     ArrayList<Student> getAllStudents();

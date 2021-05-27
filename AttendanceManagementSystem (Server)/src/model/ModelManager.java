@@ -329,22 +329,6 @@ public class ModelManager implements Model {
     //--
 
     @Override
-    public String getClassAndSchool(Student student) {
-        return student.getClassName() + ", " + getSchoolName();
-    }
-
-    @Override
-    public void setSchoolName(String name) {
-        school.setName(name);
-    }
-
-    @Override
-    public String getSchoolName() {
-        return school.getName();
-    }
-
-
-    @Override
     public boolean addListener(GeneralListener<String, Package> listener, String... propertyNames) {
         return property.addListener(listener, propertyNames);
     }

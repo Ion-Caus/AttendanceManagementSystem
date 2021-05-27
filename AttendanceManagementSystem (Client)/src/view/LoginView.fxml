@@ -24,13 +24,13 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="480.0" spacing="20.0">
          <children>
-            <Label text="Username">
+            <Label prefWidth="150.0" text="Username">
                <font>
                   <Font size="18.0" />
                </font>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
             </Label>
             <TextField fx:id="usernameField" onAction="#onEnter">
                <HBox.margin>
@@ -42,18 +42,18 @@
             </TextField>
          </children>
          <padding>
-            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+            <Insets bottom="10.0" right="30.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" layoutX="20.0" layoutY="159.0" prefHeight="40.0" prefWidth="480.0" spacing="20.0">
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="480.0" spacing="20.0">
          <children>
-            <Label text="Password">
+            <Label prefWidth="150.0" text="Password ">
                <font>
                   <Font size="18.0" />
                </font>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
             </Label>
             <PasswordField fx:id="passwordField" onAction="#onEnter">
                <HBox.margin>
@@ -65,7 +65,7 @@
             </PasswordField>
          </children>
          <padding>
-            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+            <Insets bottom="10.0" right="30.0" top="10.0" />
          </padding>
       </HBox>
       <Button mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="100.0" text="Log in">

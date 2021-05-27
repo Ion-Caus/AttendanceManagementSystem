@@ -14,11 +14,6 @@ public interface RemoteModel extends RemoteSubject<String, Package> {
     String login(String username, String password) throws IllegalAccessException, RemoteException, SQLException;
     void logout() throws RemoteException;
 
-    String getClassAndSchool(Student student) throws RemoteException;
-
-    void setSchoolName(String name) throws RemoteException;
-    String getSchoolName() throws RemoteException;
-
     ArrayList<Class> getAllClasses() throws RemoteException;
 
     ArrayList<Student> getAllStudents() throws RemoteException;

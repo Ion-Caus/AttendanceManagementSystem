@@ -76,7 +76,7 @@ public class AddLessonViewModel {
                    contents.get(),
                    classroom.get(),
                    homework.get(),
-                   classroom.get())
+                   viewModelState.getClassName())
            );
            return true;
        }

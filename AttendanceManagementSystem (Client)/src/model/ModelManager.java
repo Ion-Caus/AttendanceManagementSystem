@@ -32,23 +32,8 @@ public class ModelManager implements Model, LocalListener<String, Package> {
     }
 
     @Override
-    public void logout(String username) {
-        clientModel.logout(username);
-    }
-
-    @Override
-    public String getClassAndSchool(Student student) {
-        return clientModel.getClassAndSchool(student);
-    }
-
-    @Override
-    public void setSchoolName(String name) {
-        clientModel.setSchoolName(name);
-    }
-
-    @Override
-    public String getSchoolName() {
-        return clientModel.getSchoolName();
+    public void logout() {
+        clientModel.logout();
     }
 
     @Override

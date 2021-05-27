@@ -100,18 +100,19 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
             case "Student":
                 Student student = model.getStudentBy(viewState.getStudentID());
                 userProperty.set(student.getName());
-                schoolClassProperty.set(model.getClassAndSchool(student));
+                schoolClassProperty.set("Class: " + student.getClassName());
+                viewState.setClassName(student.getClassName());
                 break;
 
             case "Teacher":
                 Teacher teacher = model.getTeacherBy(viewState.getTeacherID());
                 userProperty.set(teacher.getName());
-                schoolClassProperty.set(model.getSchoolName());
+                schoolClassProperty.set("");
                 break;
 
             case "Class":
                 userProperty.set("");
-                schoolClassProperty.set(model.getClassByName(viewState.getClassName()).getClassName() + ", " + model.getSchoolName());
+                schoolClassProperty.set("Class: " + viewState.getClassName());
                 break;
         }
 
@@ -211,6 +212,10 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         }
     }
 
+    private void addLesson() {
+
+    }
+
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {
         Platform.runLater(() -> {
@@ -224,9 +229,20 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                     break;
                 case "ADD Lesson":
                     PackageLesson packageLesson = (PackageLesson) event.getValue2();
-                    if (   ( !Objects.equals(viewState.getSection(), "Teacher") ||
-                            Objects.equals(packageLesson.getLesson().getTeacher().getID(), viewState.getTeacherID()) )
+                    System.out.println(packageLesson.getLesson());
+                    System.out.println(viewState.getAccessLevel() + " " + viewState.getSection());
+                    System.out.println(viewState.getClassName() + " " );
+                    System.out.println(Objects.equals(viewState.getSection(), "Teacher"));
+                    System.out.println(Objects.equals(packageLesson.getLesson().getTeacher().getID(), viewState.getTeacherID()));
+                    System.out.println(packageLesson.getLesson().getLessonDate().equals(dateProperty.get()));
+                    System.out.println(Objects.equals(packageLesson.getLesson().getClassName(), viewState.getClassName()));
+                    if (   ( Objects.equals(viewState.getSection(), "Teacher")
+                            && Objects.equals(packageLesson.getLesson().getTeacher().getID(), viewState.getTeacherID())
                             && packageLesson.getLesson().getLessonDate().equals(dateProperty.get())
+                            ) ||
+                            ( !Objects.equals(viewState.getSection(), "Teacher")
+                                && Objects.equals(packageLesson.getLesson().getClassName(), viewState.getClassName()) )
+                                && packageLesson.getLesson().getLessonDate().equals(dateProperty.get() )
                     ) {
                         schedule.add(new LessonViewModel(packageLesson.getLesson()));
                         sortSchedule();

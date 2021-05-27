@@ -28,7 +28,6 @@ public class SchoolViewModel implements LocalListener<String, Package> {
     private ObservableList<TeacherViewModel> teacherList;
     private ObjectProperty<TeacherViewModel> selectedTeacherProperty;
 
-    private StringProperty schoolName;
     private StringProperty error;
 
     private StringProperty tabSelectedProperty;
@@ -51,7 +50,6 @@ public class SchoolViewModel implements LocalListener<String, Package> {
         teacherList = FXCollections.observableArrayList();
         selectedTeacherProperty = new SimpleObjectProperty<>();
 
-        schoolName = new SimpleStringProperty(model.getSchoolName());
         error = new SimpleStringProperty();
 
         tabSelectedProperty = new SimpleStringProperty("Classes");
@@ -59,7 +57,6 @@ public class SchoolViewModel implements LocalListener<String, Package> {
 
         //TODO set in login
         viewModelState.setAccessLevel("Administrator");
-
 
         //TODO 18/05 by Ion
         // if setAccessLevel("Teacher"); or Student
@@ -87,7 +84,6 @@ public class SchoolViewModel implements LocalListener<String, Package> {
     }
 
     public void clear() {
-        schoolName.set(model.getSchoolName());
         error.setValue("");
 
     }
@@ -132,10 +128,6 @@ public class SchoolViewModel implements LocalListener<String, Package> {
         return selectedTeacherProperty.get();
     }
 
-    // getters for properties
-    public StringProperty schoolNameProperty() {
-        return schoolName;
-    }
 
     public StringProperty errorProperty() {
         return error;
@@ -151,10 +143,6 @@ public class SchoolViewModel implements LocalListener<String, Package> {
         return this.tabSelectedProperty.get();
     }
 
-    public void setSchoolName(String schoolName) {
-        this.schoolName.set(schoolName);
-        model.setSchoolName(schoolName);
-    }
 
     public void removeClass(String className) {
         try {

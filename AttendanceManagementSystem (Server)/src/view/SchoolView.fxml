@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox userData="School Panel" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SchoolViewController">
+<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" userData="School Panel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SchoolViewController">
    <children>
         <HBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
             <children>
@@ -77,12 +85,11 @@
                 <Separator orientation="VERTICAL" prefHeight="200.0" />
                 <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="200.0" spacing="10.0">
                     <children>
-                        <Label fx:id="schoolName" alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0" text="School Name" textAlignment="CENTER" wrapText="true">
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="187.0" text="Attendance Management System" textAlignment="CENTER" wrapText="true">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#editSchoolName" prefWidth="70.0" text="Edit" textAlignment="CENTER" />
                         <Separator prefWidth="200.0">
                             <padding>
                                 <Insets bottom="20.0" />

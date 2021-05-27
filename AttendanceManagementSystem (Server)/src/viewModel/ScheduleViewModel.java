@@ -101,18 +101,19 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
             case "Student":
                 Student student = model.getStudentBy(viewState.getStudentID());
                 userProperty.set(student.getName());
-                schoolClassProperty.set(model.getClassAndSchool(student));
+                schoolClassProperty.set("Class: " + student.getClassName());
+                viewState.setClassName(student.getClassName());
                 break;
 
             case "Teacher":
                 Teacher teacher = model.getTeacherBy(viewState.getTeacherID());
                 userProperty.set(teacher.getName());
-                schoolClassProperty.set(model.getSchoolName());
+                schoolClassProperty.set("");
                 break;
 
             case "Class":
                 userProperty.set("");
-                schoolClassProperty.set(model.getClassByName(viewState.getClassName()).getClassName() + ", " + model.getSchoolName());
+                schoolClassProperty.set("Class: " + viewState.getClassName());
                 break;
         }
 

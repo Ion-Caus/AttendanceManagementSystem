@@ -86,21 +86,6 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     }
 
     @Override
-    public String getClassAndSchool(Student student) {
-        return model.getClassAndSchool(student);
-    }
-
-    @Override
-    public void setSchoolName(String name) {
-        model.setSchoolName(name);
-    }
-
-    @Override
-    public String getSchoolName() {
-        return model.getSchoolName();
-    }
-
-    @Override
     public ArrayList<Class> getAllClasses() {
         return model.getAllClasses();
     }

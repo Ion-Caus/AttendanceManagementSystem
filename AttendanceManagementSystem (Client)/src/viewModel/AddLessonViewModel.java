@@ -67,7 +67,6 @@ public class AddLessonViewModel {
            String teacherID = (teacher.get().contains("(")) ? teacher.get().split("[()]")[1] : "no id";
            Teacher teacher = model.getTeacherBy(teacherID);
            Class aClass = model.getClassByName(viewModelState.getClassName());
-
            model.addLesson(aClass, new Lesson(
                    teacher,
                    date.getValue(),
@@ -78,7 +77,7 @@ public class AddLessonViewModel {
                    contents.get(),
                    classroom.get(),
                    homework.get(),
-                   classroom.get())
+                   viewModelState.getClassName())
            );
            return true;
        }
