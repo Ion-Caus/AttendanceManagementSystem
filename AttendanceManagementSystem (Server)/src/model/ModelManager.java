@@ -295,6 +295,12 @@ public class ModelManager implements Model {
         property.firePropertyChange("ChangeGradeComment", null, new PackageGrade(studentID, lessonID, grade, comment));
     }
 
+    @Override
+    public void changePassword(String id, String password) throws IllegalArgumentException, SQLException {
+        Password pw = new Password(password);
+        userAccountsDAO.updatePassword(id,pw.getPassword());
+    }
+
     //--
     @Override
     public boolean changeMotive(String studentId, String lessonID, String motive) throws SQLException {
@@ -337,4 +343,6 @@ public class ModelManager implements Model {
     public boolean removeListener(GeneralListener<String, Package> listener, String... propertyNames) {
         return property.removeListener(listener, propertyNames);
     }
+
+
 }

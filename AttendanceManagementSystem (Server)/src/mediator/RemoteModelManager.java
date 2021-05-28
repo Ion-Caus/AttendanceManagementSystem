@@ -235,4 +235,9 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     public void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException {
         model.changeGradeComment(studentID, lessonID, grade, comment);
     }
+
+    @Override
+    public void changePassword(String id, String password) throws IllegalArgumentException, SQLException, RemoteException {
+        model.changePassword(id,password);
+    }
 }

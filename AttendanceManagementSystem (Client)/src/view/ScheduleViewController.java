@@ -143,7 +143,7 @@ public class ScheduleViewController extends ViewController {
 
     @FXML
     private void manageAccount() {
-
+        getViewHandler().openView(View.MANAGE_ACCOUNT_VIEW);
     }
 
     @FXML

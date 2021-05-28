@@ -18,6 +18,7 @@ public class ViewModelFactory
   private LoginViewModel loginViewModel;
   private ClassStudentListViewModel classStudentListViewModel;
   private AddLessonViewModel addLessonViewModel;
+  private ManageViewModel manageViewModel;
 
 
   public ViewModelFactory(Model model)
@@ -37,6 +38,7 @@ public class ViewModelFactory
     classStudentListViewModel = new ClassStudentListViewModel(model, viewModelState);
     addLessonViewModel = new AddLessonViewModel(model, viewModelState);
     addGradeViewModel = new AddGradeViewModel(model,viewModelState);
+    manageViewModel = new ManageViewModel(model,viewModelState);
   }
 
   public LoginViewModel getLoginViewModel() {
@@ -85,5 +87,9 @@ public class ViewModelFactory
 
   public AddGradeViewModel getAddGradeViewModel() {
     return addGradeViewModel;
+  }
+
+  public ManageViewModel getManageViewModel() {
+    return manageViewModel;
   }
 }

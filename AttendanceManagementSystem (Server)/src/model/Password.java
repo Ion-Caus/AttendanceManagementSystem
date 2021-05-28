@@ -3,24 +3,14 @@ package model;
 public class Password {
     private String password;
 
-    public Password(String password) {
-        if (password == null) {
-            throw new IllegalArgumentException("Null password");
-        }
-        String message = Password.isLegal(password);
-        if (message != null) {
-            throw new IllegalArgumentException(message);
-        }
+    public Password(String password) throws IllegalArgumentException {
+        isLegal(password);
         this.password = password;
     }
 
-    public static boolean isLegalPassword(String password) {
-        return isLegal(password) == null;
-    }
-
-    private static String isLegal(String password) {
+    private void isLegal(String password) throws IllegalArgumentException {
         if (password == null || password.length() < 6) {
-            return "Password must have at least 6 characters";
+            throw new IllegalArgumentException("Password must have at least 6 characters");
         }
         int lower = 0;
         int upper = 0;
@@ -39,13 +29,11 @@ public class Password {
             }
         }
         if (lower + upper + digit + special < password.length()) {
-            return "Password may only contain letters, digits, hyphens amd underscore characters";
+            throw new IllegalArgumentException("Password may only contain letters, digits, hyphens amd underscore characters");
         }
         if (lower == 0 || upper == 0 || digit == 0) {
-            return "Password must contain at least one uppercase letter, at least one lowercase letter and at least one digit";
+            throw new IllegalArgumentException( "Password must contain at least one uppercase letter, at least one lowercase letter and at least one digit");
         }
-
-        return null;
     }
 
     public String getPassword() {

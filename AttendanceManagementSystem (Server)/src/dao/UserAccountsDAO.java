@@ -1,13 +1,11 @@
 package dao;
 
-import model.Account;
 import model.Administrator;
 import model.Student;
 import model.Teacher;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface UserAccountsDAO
 {
@@ -20,7 +18,7 @@ public interface UserAccountsDAO
   ArrayList<Administrator> readAdmins() throws SQLException;
 
   // updating accounts
-   void updateUserAccount(Account account) throws SQLException;
+   void updatePassword(String userID, String password) throws SQLException;
 
   // deleting accounts
   void deleteUser(String userID) throws SQLException;

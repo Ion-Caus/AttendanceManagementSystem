@@ -187,6 +187,11 @@ public class ModelManager implements Model, LocalListener<String, Package> {
     }
 
     @Override
+    public void changePassword(String id, String password) throws IllegalArgumentException, SQLException {
+        clientModel.changePassword(id,password);
+    }
+
+    @Override
     public void close() {
         clientModel.close();
     }

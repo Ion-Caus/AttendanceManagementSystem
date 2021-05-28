@@ -12,7 +12,8 @@ public enum View {
     INFO_VIEW("InfoView.fxml"),
     CLASS_STUDENT_LIST_VIEW("ClassStudentListView.fxml"),
     ADD_LESSON_VIEW("AddLessonView.fxml"),
-    STUDENT_LIST_VIEW("StudentListView.fxml");
+    STUDENT_LIST_VIEW("StudentListView.fxml"),
+    MANAGE_ACCOUNT_VIEW("ManageAccountView.fxml");
 
     private final String fxmlFile;
 

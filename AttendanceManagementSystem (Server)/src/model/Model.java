@@ -56,4 +56,7 @@ public interface Model extends LocalSubject<String, Package> {
     void removeLesson(String className, String lessonID) throws SQLException;
 
     void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException;
+
+    void changePassword(String id, String password) throws IllegalArgumentException, SQLException;
+
 }

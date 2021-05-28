@@ -319,6 +319,15 @@ public class AttendanceManagementClient implements ClientModel, RemoteListener<S
     }
 
     @Override
+    public void changePassword(String id, String password) throws IllegalArgumentException, SQLException {
+        try {
+            remoteModel.changePassword(id,password);
+        } catch (RemoteException e) {
+            throw new IllegalArgumentException(e.getLocalizedMessage());
+        }
+    }
+
+    @Override
     public void close() {
         try {
             UnicastRemoteObject.unexportObject(this, true);

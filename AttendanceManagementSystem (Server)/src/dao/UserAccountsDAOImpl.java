@@ -1,6 +1,5 @@
 package dao;
 
-import model.Account;
 import model.Administrator;
 import model.Student;
 import model.Teacher;
@@ -122,12 +121,12 @@ public class UserAccountsDAOImpl implements UserAccountsDAO {
     }
 
     @Override
-    public void updateUserAccount(Account account) throws SQLException {
+    public void updatePassword(String userID, String password) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("UPDATE user_account SET password = ? WHERE user_id = ?");
-            statement.setString(1, account.getPassword().toString());
-            statement.setString(2, account.getUsername().toString());
+            statement.setString(1, password);
+            statement.setString(2, userID);
             statement.executeUpdate();
         }
     }
