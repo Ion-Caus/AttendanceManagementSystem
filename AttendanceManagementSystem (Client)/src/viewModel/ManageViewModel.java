@@ -80,7 +80,6 @@ public class ManageViewModel {
                     model.changePassword(viewState.getStudentID(), passwordProperty1.get());
                 return true;
             } catch (IllegalArgumentException | SQLException e) {
-                e.printStackTrace();
                 errorProperty.set(e.getMessage());
                 return false;
             }
