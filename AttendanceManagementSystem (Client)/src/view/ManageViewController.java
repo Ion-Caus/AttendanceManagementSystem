@@ -38,8 +38,24 @@ public class ManageViewController extends ViewController {
         getViewHandler().openView(View.SCHEDULE_VIEW);
     }
 
-   @FXML public void saveButtonPressed(ActionEvent actionEvent) {
+   @FXML public void saveButtonPressed() {
         if(viewModel.saveDetails())
             getViewHandler().openView(View.SCHEDULE_VIEW);
     }
+
+  @FXML public void onEnter(ActionEvent actionEvent)
+  {
+    if (actionEvent.getSource() == nameField) {
+      idField.requestFocus();
+    }
+    else if (actionEvent.getSource() == idField) {
+      passwordField1.requestFocus();
+    }
+    else if (actionEvent.getSource() == passwordField1) {
+      passwordField2.requestFocus();
+    }
+    else if (actionEvent.getSource() == passwordField2) {
+      saveButtonPressed();
+    }
+  }
 }
