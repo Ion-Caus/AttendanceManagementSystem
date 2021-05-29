@@ -16,6 +16,8 @@ public class InfoViewController extends ViewController {
     @FXML private TextArea homeworkField;
     @FXML private TextField teacherField;
     @FXML private DatePicker datePicker;
+    @FXML private TextField classRoomField;
+
 
     @FXML private Label errorLabel;
     @FXML private Label className;
@@ -61,6 +63,7 @@ public class InfoViewController extends ViewController {
         this.motiveTextArea.textProperty().bindBidirectional(viewModel.getMotiveProperty());
         this.gradeTextField.textProperty().bind(viewModel.getGradeProperty());
         this.commentTextArea.textProperty().bind(viewModel.getCommentProperty());
+        this.classRoomField.textProperty().bindBidirectional(viewModel.getClassRoom());
 
         adjustView();
     }
@@ -95,6 +98,7 @@ public class InfoViewController extends ViewController {
 
     @FXML
     private void openStudentList() {
+
         getViewHandler().openView(View.STUDENT_LIST_VIEW);
     }
 
@@ -109,7 +113,6 @@ public class InfoViewController extends ViewController {
         if (viewModel.submitChangeLesson()) {
             getViewHandler().openView(View.SCHEDULE_VIEW);
         }
-
     }
 
 

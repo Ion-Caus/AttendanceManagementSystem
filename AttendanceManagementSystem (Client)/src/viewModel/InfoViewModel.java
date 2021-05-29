@@ -6,10 +6,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.*;
+import model.packages.*;
 import model.packages.Package;
-import model.packages.PackageAbsence;
-import model.packages.PackageGrade;
-import model.packages.PackageLessonInfo;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
@@ -24,6 +22,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
     private StringProperty contents;
     private StringProperty homework;
     private StringProperty teacher;
+    private StringProperty classRoom;
     private ObjectProperty<LocalDate> date;
 
     private StringProperty error;
@@ -40,7 +39,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
 
     public InfoViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
-        this.model.addListener(this, "ChangeLesson", "ChangeAbsence","ChangeGradeComment");
+        this.model.addListener(this, "ChangeLesson", "ChangeAbsence", "ChangeGradeComment");
         this.viewState = viewModelState;
 
         //Lesson properties
@@ -50,6 +49,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
         this.homework = new SimpleStringProperty();
         this.teacher = new SimpleStringProperty();
         this.date = new SimpleObjectProperty<>();
+        this.classRoom = new SimpleStringProperty();
         //--
 
         this.className = new SimpleStringProperty();
@@ -112,6 +112,10 @@ public class InfoViewModel implements LocalListener<String, Package> {
         return comment;
     }
 
+    public StringProperty getClassRoom() {
+        return classRoom;
+    }
+
     public String getViewStateAccessLevel() {
         return viewState.getAccessLevel();
     }
@@ -147,6 +151,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
         teacher.set(lesson.getTeacher().getName());
         date.set(lesson.getLessonDate());
         className.set("Class " + lesson.getClassName());
+        classRoom.set(lesson.getClassroom());
     }
 
     public void loadLessonDataFromStudent(Lesson lesson, Student student) {
@@ -176,7 +181,8 @@ public class InfoViewModel implements LocalListener<String, Package> {
                 case "Student":
                     return model.changeMotive(viewState.getStudentID(), viewState.getLessonID(), motive.get());
                 case "Administrator":
-                    return model.changeLesson(viewState.getLessonID(), topic.get(), contents.get(), homework.get(), (teacher.get().contains("(")) ? teacher.get().split("[()]")[1] : "000000");
+                case "Teacher":
+                    return model.changeLesson(viewState.getLessonID(), topic.get(), contents.get(), homework.get(),(teacher.get().contains("(")) ? teacher.get().split("[()]")[1] : "000000");
             }
         }catch (SQLException e){
             e.printStackTrace();

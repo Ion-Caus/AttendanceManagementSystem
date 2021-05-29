@@ -43,14 +43,14 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                         </HBox>
-                        <HBox fillHeight="false" layoutX="10.0" layoutY="10.0" prefHeight="170.0" prefWidth="620.0" spacing="20.0">
+                        <HBox fillHeight="false" layoutX="10.0" layoutY="10.0" prefHeight="170.0" prefWidth="598.0" spacing="20.0">
                             <children>
                                 <Label prefHeight="26.0" prefWidth="100.0" text="Contents">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="contentsField" editable="false" prefHeight="150.0" prefWidth="350.0">
+                                <TextArea fx:id="contentsField" editable="false" prefHeight="138.0" prefWidth="350.0">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -60,14 +60,14 @@
                         <Insets left="20.0" />
                      </padding>
                         </HBox>
-                        <HBox fillHeight="false" layoutX="10.0" layoutY="70.0" prefHeight="170.0" prefWidth="620.0" spacing="20.0">
+                        <HBox fillHeight="false" layoutX="10.0" layoutY="70.0" prefHeight="133.0" prefWidth="598.0" spacing="20.0">
                             <children>
                                 <Label prefHeight="26.0" prefWidth="100.0" text="Homework">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="homeworkField" editable="false" prefHeight="150.0" prefWidth="350.0">
+                                <TextArea fx:id="homeworkField" editable="false" prefHeight="114.0" prefWidth="350.0">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -77,6 +77,23 @@
                         <Insets left="20.0" />
                      </padding>
                         </HBox>
+                  <HBox layoutX="10.0" layoutY="20.0" prefHeight="55.0" prefWidth="619.0" spacing="20.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="100.0" text="Classroom">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="classRoomField" editable="false" prefHeight="30.0" prefWidth="142.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="569.0" spacing="10.0">
                             <children>
                                 <Label text="Teacher">
