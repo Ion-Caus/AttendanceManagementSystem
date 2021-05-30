@@ -40,15 +40,6 @@ public class AttendanceManagementClient implements ClientModel, RemoteListener<S
     }
 
     @Override
-    public void logout() {
-        try {
-            remoteModel.logout();
-        } catch (RemoteException e) {
-            throw new IllegalArgumentException(e.getLocalizedMessage());
-        }
-    }
-
-    @Override
     public ArrayList<Class> getAllClasses() {
         try {
             return remoteModel.getAllClasses();

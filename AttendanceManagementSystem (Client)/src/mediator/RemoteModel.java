@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public interface RemoteModel extends RemoteSubject<String, Package> {
     String login(String username, String password) throws IllegalAccessException, RemoteException, SQLException;
-    void logout() throws RemoteException;
 
     ArrayList<Class> getAllClasses() throws RemoteException;
 

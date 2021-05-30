@@ -68,16 +68,6 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Admins">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                           </content>
-                        </Tab>
-                        <Tab text="Log">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                           </content>
-                        </Tab>
                     </tabs>
                   </TabPane>
                     </children>
@@ -115,6 +105,11 @@
                   <Button fx:id="scheduleButton" alignment="CENTER" mnemonicParsing="false" onAction="#viewSchedule" prefWidth="90.0" text="Schedule" />
                   <Button fx:id="studentListButton" alignment="CENTER" mnemonicParsing="false" onAction="#viewStudentList" prefWidth="90.0" text="StudentList" />
                   <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#logout" text="Log out">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Button>
                     </children>
                     <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />

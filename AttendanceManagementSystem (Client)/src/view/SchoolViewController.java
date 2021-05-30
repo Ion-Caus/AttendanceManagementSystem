@@ -134,13 +134,6 @@ public class SchoolViewController extends ViewController {
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(false);
                 break;
-            case "Log":
-                addButton.setVisible(false);
-                removeButton.setVisible(false);
-            case "Admins":
-                scheduleButton.setVisible(false);
-                studentListButton.setVisible(false);
-                break;
         }
 
     }
@@ -175,5 +168,11 @@ public class SchoolViewController extends ViewController {
     private void viewStudentList() {
         if(viewModel.viewStudentList())
             getViewHandler().openView(View.CLASS_STUDENT_LIST_VIEW);
+    }
+
+    @FXML
+    private void logout() {
+        viewModel.logout();
+        getViewHandler().openView(View.LOGIN_VIEW);
     }
 }

@@ -60,7 +60,7 @@
                         <Insets right="20.0" />
                     </HBox.margin>
                 </Label>
-            <PasswordField fx:id="passwordField1" prefHeight="26.0" prefWidth="200.0" onAction="#onEnter">
+            <PasswordField fx:id="passwordField1" onAction="#onEnter" prefHeight="26.0" prefWidth="200.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -77,7 +77,7 @@
                         <Insets right="20.0" />
                     </HBox.margin>
                 </Label>
-            <PasswordField fx:id="passwordField2" prefHeight="26.0" prefWidth="200.0" onAction="#onEnter">
+            <PasswordField fx:id="passwordField2" onAction="#onEnter" prefHeight="26.0" prefWidth="200.0">
                <font>
                   <Font size="16.0" />
                </font>

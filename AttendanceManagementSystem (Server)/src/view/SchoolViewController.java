@@ -134,13 +134,6 @@ public class SchoolViewController extends ViewController {
                 scheduleButton.setVisible(true);
                 studentListButton.setVisible(false);
                 break;
-            case "Log":
-                addButton.setVisible(false);
-                removeButton.setVisible(false);
-            case "Admins":
-                scheduleButton.setVisible(false);
-                studentListButton.setVisible(false);
-                break;
         }
 
     }

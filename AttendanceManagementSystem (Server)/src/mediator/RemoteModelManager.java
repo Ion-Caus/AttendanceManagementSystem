@@ -81,11 +81,6 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     }
 
     @Override
-    public void logout() throws RemoteException {
-        model.logout();
-    }
-
-    @Override
     public ArrayList<Class> getAllClasses() {
         return model.getAllClasses();
     }

@@ -163,7 +163,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
         }
 
         if (data.getGrade() != null) {
-            grade.set( Integer.toString( data.getGrade().getGrade() ));
+            grade.set( (data.getGrade().getGrade() == -1)? "" : String.valueOf(data.getGrade().getGrade()));
             comment.set(data.getGrade().getComment());
         }
 

@@ -72,4 +72,13 @@ public class ViewModelState {
         this.className = null;
         this.lessonID = null;
     }
+
+    public void reset() {
+        this.accessLevel = null;
+        this.section = null;
+        this.studentID = null;
+        this.teacherID = null;
+        this.className = null;
+        this.lessonID = null;
+    }
 }

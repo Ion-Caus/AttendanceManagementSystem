@@ -32,11 +32,6 @@ public class ModelManager implements Model, LocalListener<String, Package> {
     }
 
     @Override
-    public void logout() {
-        clientModel.logout();
-    }
-
-    @Override
     public ArrayList<Class> getAllClasses() {
         return clientModel.getAllClasses();
     }

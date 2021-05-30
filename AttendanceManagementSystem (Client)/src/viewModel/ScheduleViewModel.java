@@ -168,6 +168,10 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         viewState.clear();
     }
 
+    public void logout() {
+        viewState.reset();
+    }
+
     // datepicker methods
     public void changeDate() {
         loadScheduleForDay();

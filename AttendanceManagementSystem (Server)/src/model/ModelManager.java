@@ -70,11 +70,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void logout() {
-
-    }
-
-    @Override
     public ArrayList<Class> getAllClasses() {
         return school.getClassList().getAllClasses();
     }

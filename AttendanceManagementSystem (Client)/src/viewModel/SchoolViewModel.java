@@ -237,6 +237,10 @@ public class SchoolViewModel implements LocalListener<String, Package> {
         }
     }
 
+    public void logout() {
+        viewModelState.reset();
+    }
+
     private void add(String who, String name, String id) {
         switch (who) {
             case "Student":

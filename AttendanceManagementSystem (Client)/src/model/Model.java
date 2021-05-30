@@ -9,7 +9,6 @@ import model.packages.Package;
 
 public interface Model extends LocalSubject<String, Package> {
     String login(String username, String password) throws IllegalAccessException;
-    void logout();
 
     ArrayList<Class> getAllClasses();
 

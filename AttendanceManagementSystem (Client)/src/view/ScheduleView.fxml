@@ -76,6 +76,11 @@
                 <Button fx:id="addLessonButton" layoutX="74.0" layoutY="250.0" mnemonicParsing="false" onAction="#addLesson" prefWidth="70.0" text="Add" />
                 <Button fx:id="removeLessonButton" mnemonicParsing="false" onAction="#removeLesson" prefWidth="70.0" text="Remove" />
                 <Button fx:id="backButton" layoutX="84.0" layoutY="250.0" mnemonicParsing="false" onAction="#backToSchoolView" prefWidth="50.0" text="Back" />
+            <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" text="Log out">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Button>
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />

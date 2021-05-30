@@ -4,10 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ManageViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ManageViewController">
     <children>
-        <Label alignment="CENTER" prefHeight="80.0" prefWidth="486.0" text="Your Profile">
+        <Label alignment="CENTER" prefHeight="74.0" prefWidth="628.0" text="Your Profile">
             <font>
                 <Font size="20.0" />
             </font>
@@ -22,7 +21,7 @@
                         <Insets right="20.0" />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="nameField">
+                <TextField fx:id="nameField" onAction="#onEnter">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -39,7 +38,7 @@
                         <Insets right="20.0" />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="idField">
+                <TextField fx:id="idField" onAction="#onEnter">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -56,11 +55,11 @@
                         <Insets right="20.0" />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="passwordField1">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </TextField>
+            <PasswordField fx:id="passwordField1" onAction="#onEnter" prefHeight="26.0" prefWidth="200.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </PasswordField>
             </children>
         </HBox>
         <HBox alignment="CENTER" layoutX="10.0" layoutY="250.0" prefHeight="60.0" prefWidth="600.0">
@@ -73,29 +72,38 @@
                         <Insets right="20.0" />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="passwordField2">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </TextField>
+            <PasswordField fx:id="passwordField2" onAction="#onEnter" prefHeight="26.0" prefWidth="200.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </PasswordField>
             </children>
         </HBox>
-        <Label fx:id="errorLabel" alignment="CENTER" prefHeight="40.0" prefWidth="486.0" text="errorLabel" textFill="RED">
+        <Label fx:id="errorLabel" alignment="CENTER" prefHeight="70.0" prefWidth="530.0" text="errorLabel" textAlignment="CENTER" textFill="RED" wrapText="true">
             <font>
                 <Font size="15.0" />
             </font>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
         </Label>
-        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="486.0" spacing="30.0">
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="550.0" spacing="30.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="31.0" prefWidth="100.0" text="Cancel">
                     <font>
                         <Font size="15.0" />
                     </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" />
+               </HBox.margin>
                 </Button>
                 <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="31.0" prefWidth="100.0" text="Save">
                     <font>
                         <Font size="15.0" />
                     </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" />
+               </HBox.margin>
                 </Button>
             </children>
         </HBox>
