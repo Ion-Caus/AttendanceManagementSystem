@@ -216,8 +216,18 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         }
     }
 
-    private void addLesson() {
-
+    private void addLesson(Lesson lesson) {
+        if (   ( Objects.equals(viewState.getSection(), "Teacher")
+                && Objects.equals(lesson.getTeacher().getID(), viewState.getTeacherID())
+                && lesson.getLessonDate().equals(dateProperty.get())
+        ) ||
+                ( !Objects.equals(viewState.getSection(), "Teacher")
+                        && Objects.equals(lesson.getClassName(), viewState.getClassName()) )
+                        && lesson.getLessonDate().equals(dateProperty.get() )
+        ) {
+            schedule.add(new LessonViewModel(lesson));
+            sortSchedule();
+        }
     }
 
     @Override
@@ -227,30 +237,13 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                 case "ChangeLesson":
                     PackageLessonInfo pli = (PackageLessonInfo)event.getValue2();
                     Lesson lesson = model.getLesson(pli.getID());
+
                     schedule.removeIf(lessonViewModel -> lessonViewModel.idProperty().get().equals(lesson.getId()));
-                    schedule.add(new LessonViewModel(lesson));
-                    sortSchedule();
+                    addLesson(lesson);
                     break;
                 case "ADD Lesson":
                     PackageLesson packageLesson = (PackageLesson) event.getValue2();
-                    System.out.println(packageLesson.getLesson());
-                    System.out.println(viewState.getAccessLevel() + " " + viewState.getSection());
-                    System.out.println(viewState.getClassName() + " " );
-                    System.out.println(Objects.equals(viewState.getSection(), "Teacher"));
-                    System.out.println(Objects.equals(packageLesson.getLesson().getTeacher().getID(), viewState.getTeacherID()));
-                    System.out.println(packageLesson.getLesson().getLessonDate().equals(dateProperty.get()));
-                    System.out.println(Objects.equals(packageLesson.getLesson().getClassName(), viewState.getClassName()));
-                    if (   ( Objects.equals(viewState.getSection(), "Teacher")
-                            && Objects.equals(packageLesson.getLesson().getTeacher().getID(), viewState.getTeacherID())
-                            && packageLesson.getLesson().getLessonDate().equals(dateProperty.get())
-                            ) ||
-                            ( !Objects.equals(viewState.getSection(), "Teacher")
-                                && Objects.equals(packageLesson.getLesson().getClassName(), viewState.getClassName()) )
-                                && packageLesson.getLesson().getLessonDate().equals(dateProperty.get() )
-                    ) {
-                        schedule.add(new LessonViewModel(packageLesson.getLesson()));
-                        sortSchedule();
-                    }
+                    addLesson(packageLesson.getLesson());
                     break;
                 case "REMOVE Lesson":
                     schedule.removeIf(lessonViewModel -> lessonViewModel.idProperty().get().equals(event.getValue2().getID()));

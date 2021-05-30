@@ -65,16 +65,16 @@ public class InfoViewController extends ViewController {
         this.commentTextArea.textProperty().bind(viewModel.getCommentProperty());
         this.classRoomField.textProperty().bindBidirectional(viewModel.getClassRoom());
 
-        adjustView();
     }
 
     @Override
     public void reset() {
         viewModel.clear();
         viewModel.loadLessonFromModel();
+        adjustView();
     }
 
-    public void adjustView(){
+    private void adjustView(){
         teacherField.editableProperty().set(false);
         switch (viewModel.getViewStateAccessLevel()) {
             case "Student":

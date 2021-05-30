@@ -148,7 +148,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
         topic.set(lesson.getTopic());
         contents.set(lesson.getContents());
         homework.set(lesson.getHomework());
-        teacher.set(lesson.getTeacher().getName());
+        teacher.set(lesson.getTeacher().getName() + "(" + lesson.getTeacher().getID() + ")");
         date.set(lesson.getLessonDate());
         className.set("Class " + lesson.getClassName());
         classRoom.set(lesson.getClassroom());
@@ -208,7 +208,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
                     topic.set(packageLessonInfo.getTopic());
                     contents.set(packageLessonInfo.getContents());
                     homework.set(packageLessonInfo.getHomework());
-                    teacher.set(model.getTeacherBy(packageLessonInfo.getTeacherID()).getName());
+                    teacher.set(model.getTeacherBy(packageLessonInfo.getTeacherID()).getName() + "(" + packageLessonInfo.getTeacherID() +")");
                     break;
                 case "ChangeAbsence":
                     PackageAbsence packageAbsence = (PackageAbsence) event.getValue2();

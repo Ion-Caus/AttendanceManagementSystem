@@ -1,6 +1,7 @@
 package model;
 
 import dao.*;
+import external.Log;
 import model.packages.*;
 import model.packages.Package;
 import utility.observer.listener.GeneralListener;
@@ -66,6 +67,7 @@ public class ModelManager implements Model {
                 getStudentBy(userID).getClassName() == null ) {
             throw new IllegalAccessException("You are not yet assigned to a class. Please contact the administration.");
         }
+        Log.getLog().addLog(String.format("User with the id (%s), logged in as %s", userID, access));
         return access;
     }
 
@@ -176,6 +178,7 @@ public class ModelManager implements Model {
         school.getClassList().addClass(aClass);
         classesDAO.addClass(aClass);
         property.firePropertyChange("ADD Class", null, new PackageName(className,null));
+        Log.getLog().addLog(String.format("The class (%s) has been added.", className));
     }
 
     @Override
@@ -183,7 +186,7 @@ public class ModelManager implements Model {
         school.getClassList().removeClass(className);
         classesDAO.removeClass(className);
         property.firePropertyChange("REMOVE Class", null, new PackageName(className,null));
-
+        Log.getLog().addLog(String.format("The class (%s) has been removed.", className));
     }
 
     @Override
@@ -191,6 +194,7 @@ public class ModelManager implements Model {
         school.getStudentList().addStudent(new Student(studentName, studentID));
         userAccountsDAO.createUserAccount(studentName,studentID,"default",UserAccountsDAOImpl.STUDENT);
         property.firePropertyChange("ADD Student", null, new PackageName(studentID, studentName));
+        Log.getLog().addLog(String.format("The student with the id (%s) has been added.", studentID));
     }
 
     @Override
@@ -207,6 +211,7 @@ public class ModelManager implements Model {
         userAccountsDAO.deleteUser(studentID);
 
         property.firePropertyChange("REMOVE Student", null, new Package(studentID));
+        Log.getLog().addLog(String.format("The student with the id (%s) has been removed.", studentID));
     }
 
     @Override
@@ -220,6 +225,7 @@ public class ModelManager implements Model {
         studentListDAO.addToClass(className,studentID);
 
         property.firePropertyChange("ADD_TO_CLASS Student", null,  new PackageName(studentID, className));
+        Log.getLog().addLog(String.format("The student with the id (%s) has been added to the class (%s).", studentID, className));
     }
 
     @Override
@@ -233,6 +239,7 @@ public class ModelManager implements Model {
         studentListDAO.removeFromClass(className,studentID);
 
         property.firePropertyChange("REMOVE_FROM_CLASS Student", null, new PackageName(studentID, className));
+        Log.getLog().addLog(String.format("The student with the id (%s) has been removed from the class (%s).", studentID, className));
     }
 
     @Override
@@ -240,6 +247,7 @@ public class ModelManager implements Model {
         school.getTeacherList().addTeacher(new Teacher(teacherName, teacherID));
         userAccountsDAO.createUserAccount(teacherName,teacherID,"default",UserAccountsDAOImpl.TEACHER);
         property.firePropertyChange("ADD Teacher", null, new PackageName(teacherID, teacherName));
+        Log.getLog().addLog(String.format("The teacher with the id (%s) has been added.", teacherID));
     }
 
     @Override
@@ -251,6 +259,7 @@ public class ModelManager implements Model {
         userAccountsDAO.deleteTeacher(teacherID);
 
         property.firePropertyChange("REMOVE Teacher", null, new Package(teacherID));
+        Log.getLog().addLog(String.format("The teacher with the id (%s) has been removed.", teacherID));
     }
 
     private ArrayList<Lesson> getLessonsByTeacher(String teacherID) {
@@ -267,6 +276,7 @@ public class ModelManager implements Model {
         lessonDAO.createLesson(aClass,lesson);
         aClass.getSchedule().addLesson(lesson);
         property.firePropertyChange("ADD Lesson", null, new PackageLesson(lesson));
+        Log.getLog().addLog(String.format("The lesson with the id (%s) has been added to the class (%s).", lesson.getId(), aClass.getClassName()));
     }
 
     @Override
@@ -276,6 +286,7 @@ public class ModelManager implements Model {
         lessonDAO.delete(lessonID);
         schedule.removeLesson(lesson);
         property.firePropertyChange("REMOVE Lesson", null, new PackageName(lessonID, className));
+        Log.getLog().addLog(String.format("The lesson with the id (%s) has been removed from the class (%s).", lessonID, className));
     }
 
     @Override
@@ -288,12 +299,14 @@ public class ModelManager implements Model {
         lessonDataDAO.updateGradeComment(lessonData);
 
         property.firePropertyChange("ChangeGradeComment", null, new PackageGrade(studentID, lessonID, grade, comment));
+        Log.getLog().addLog(String.format("<Change> LessonID: %s , StudentID: %s --> Grade: %d, Comment: %s", lessonID, studentID, grade, comment));
     }
 
     @Override
-    public void changePassword(String id, String password) throws IllegalArgumentException, SQLException {
+    public void changePassword(String userID, String password) throws IllegalArgumentException, SQLException {
         Password pw = new Password(password);
-        userAccountsDAO.updatePassword(id,pw.getPassword());
+        userAccountsDAO.updatePassword(userID ,pw.getPassword());
+        Log.getLog().addLog(String.format("User with the id (%s) changed his password.", userID) );
     }
 
     //--
@@ -303,6 +316,7 @@ public class ModelManager implements Model {
         ld.getAbsence().setMotive(motive);
         lessonDataDAO.updateAbsenceMotive(ld);
         property.firePropertyChange("ChangeMotive", null, new PackageAbsence(studentId, lessonID,motive));
+        Log.getLog().addLog(String.format("<Change> LessonID: %s , StudentID: %s --> Motive: %s", lessonID, studentId, motive));
         return true;
     }
 
@@ -311,7 +325,8 @@ public class ModelManager implements Model {
         LessonData ld = getLessonData(getLesson(lessonID), getStudentBy(studentID));
         ld.getAbsence().setWasAbsent(!absence);
         lessonDataDAO.updateAbsenceStatus(ld);
-        property.firePropertyChange("ChangeAbsence", null, new PackageAbsence(studentID, lessonID, absence));
+        property.firePropertyChange("ChangeAbsence", null, new PackageAbsence(studentID, lessonID, !absence));
+        Log.getLog().addLog(String.format("<Change> LessonID: %s , StudentID: %s --> Absence: %s", lessonID, studentID, !absence));
         return !absence;
     }
 
@@ -325,6 +340,7 @@ public class ModelManager implements Model {
         lesson.setTeacher(teacher);
         lessonDAO.updateLesson(lesson,teacher,topic,contents,homework);
         property.firePropertyChange("ChangeLesson", null, new PackageLessonInfo(lessonID, topic, contents, homework, teacherID));
+        Log.getLog().addLog(String.format("<Change> The lesson with id (%s) has been modified --> Topic: %s, Contents: %s, Homework: %s, TeacherID: %s", lessonID, topic, contents, homework, teacherID));
         return true;
     }
     //--

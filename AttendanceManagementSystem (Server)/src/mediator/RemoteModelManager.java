@@ -1,5 +1,6 @@
 package mediator;
 
+import external.Log;
 import javafx.application.Platform;
 import model.*;
 import model.Class;
@@ -36,9 +37,9 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     private void startRegistry() throws RemoteException {
         try {
             Registry registry = LocateRegistry.createRegistry(1099);
-            System.out.println("Registry started...");
+            Log.getLog().addLog("Registry started...");
         } catch (java.rmi.server.ExportException e) {
-            System.out.println("Error: " + e.getMessage());
+            Log.getLog().addLog("Error: " + e.getMessage());
         }
     }
 
@@ -50,6 +51,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     public void close() {
         try {
             UnicastRemoteObject.unexportObject(this, true);
+            Log.getLog().addLog("Registry stopped...");
         } catch (NoSuchObjectException e) {
             // do nothing
         }
@@ -58,10 +60,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     @Override
     public void propertyChange(ObserverEvent<String, Package> event) {
         Platform.runLater( () ->
-                {
-                    property.firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());
-                    System.out.println(event.getPropertyName() + " " + event.getValue2().getID());
-                }
+                property.firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2())
         );
     }
 

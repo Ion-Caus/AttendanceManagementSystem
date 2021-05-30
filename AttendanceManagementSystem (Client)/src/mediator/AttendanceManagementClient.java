@@ -341,10 +341,7 @@ public class AttendanceManagementClient implements ClientModel, RemoteListener<S
     @Override
     public synchronized void propertyChange(ObserverEvent<String, Package> event) throws RemoteException {
         Platform.runLater(() ->
-                {
-                    property.firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());
-                    System.out.println(event.getPropertyName() + " " + event.getValue2().getID());
-                }
+                property.firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2())
         );
     }
 }
