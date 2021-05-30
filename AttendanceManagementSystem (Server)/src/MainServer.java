@@ -1,6 +1,6 @@
 import javafx.application.Application;
 
-public class Main {
+public class MainServer {
     public static void main(String[] args) {
         System.setProperty("java.security.policy", "rmi.policy");
 
