@@ -27,8 +27,8 @@ public class ModelManager implements Model, LocalListener<String, Package> {
     }
 
     @Override
-    public String login(String username, String password) throws IllegalAccessException {
-        return clientModel.login(username, password);
+    public String login(String userID, String password) throws IllegalAccessException {
+        return clientModel.login(userID, password);
     }
 
     @Override

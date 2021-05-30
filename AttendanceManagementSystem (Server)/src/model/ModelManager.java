@@ -60,10 +60,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String login(String username, String password) throws IllegalAccessException, SQLException {
-        String access = userAccountsDAO.login(username, password);
+    public String login(String userID, String password) throws IllegalAccessException, SQLException {
+        String access = userAccountsDAO.login(userID, password);
         if ( access.equals("student") &&
-                getStudentBy(username).getClassName() == null ) {
+                getStudentBy(userID).getClassName() == null ) {
             throw new IllegalAccessException("You are not yet assigned to a class. Please contact the administration.");
         }
         return access;

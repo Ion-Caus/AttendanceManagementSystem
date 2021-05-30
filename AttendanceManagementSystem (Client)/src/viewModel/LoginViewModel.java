@@ -6,7 +6,7 @@ import model.Model;
 import view.View;
 
 public class LoginViewModel {
-    private StringProperty usernameProperty;
+    private StringProperty userIDProperty;
     private StringProperty passwordProperty;
     private StringProperty errorProperty;
 
@@ -17,20 +17,20 @@ public class LoginViewModel {
         this.model = model;
         this.viewModelState = viewModelState;
 
-        this.usernameProperty = new SimpleStringProperty();
+        this.userIDProperty = new SimpleStringProperty();
         this.passwordProperty = new SimpleStringProperty();
         this.errorProperty = new SimpleStringProperty();
     }
 
     public void clear() {
-        usernameProperty.set("");
+        userIDProperty.set("");
         passwordProperty.set("");
         errorProperty.set("");
     }
 
     public View login() {
         try {
-            String access = model.login(usernameProperty().get(), passwordProperty.get());
+            String access = model.login(userIDProperty.get(), passwordProperty.get());
             switch (access) {
                 case "admin":
                     viewModelState.setAccessLevel("Administrator");
@@ -38,12 +38,12 @@ public class LoginViewModel {
                 case "teacher":
                     viewModelState.setAccessLevel("Teacher");
                     viewModelState.setSection("Teacher");
-                    viewModelState.setTeacherID(usernameProperty.get());
+                    viewModelState.setTeacherID(userIDProperty.get());
                     return View.SCHEDULE_VIEW;
                 case "student":
                     viewModelState.setAccessLevel("Student");
                     viewModelState.setSection("Student");
-                    viewModelState.setStudentID(usernameProperty().get());
+                    viewModelState.setStudentID(userIDProperty.get());
                     return View.SCHEDULE_VIEW;
             }
         } catch (IllegalAccessException e) {
@@ -52,8 +52,8 @@ public class LoginViewModel {
         return null;
     }
 
-    public StringProperty usernameProperty() {
-        return usernameProperty;
+    public StringProperty userIDProperty() {
+        return userIDProperty;
     }
 
     public StringProperty passwordProperty() {

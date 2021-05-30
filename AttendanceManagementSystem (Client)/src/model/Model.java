@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import model.packages.Package;
 
 public interface Model extends LocalSubject<String, Package> {
-    String login(String username, String password) throws IllegalAccessException;
+    String login(String userID, String password) throws IllegalAccessException;
 
     ArrayList<Class> getAllClasses();
 

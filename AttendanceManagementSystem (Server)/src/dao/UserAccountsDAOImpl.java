@@ -154,19 +154,19 @@ public class UserAccountsDAOImpl implements UserAccountsDAO {
     }
 
     @Override
-    public String login(String username, String password) throws SQLException, IllegalAccessException {
+    public String login(String userID, String password) throws SQLException, IllegalAccessException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("SELECT user_id, password, access from user_account where user_id = ? and password = ?;");
 
-            statement.setString(1, username);
+            statement.setString(1, userID);
             statement.setString(2, password);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getString("access");
             }
-            throw new IllegalAccessException("Wrong username or password.");
+            throw new IllegalAccessException("Wrong userID or password.");
         }
     }
 }

@@ -72,19 +72,23 @@ public class ManageViewModel {
     }
 
     public boolean saveDetails() {
-        if (Objects.equals(passwordProperty1.get(), passwordProperty2.get())) {
-            try {
-                if (viewState.getSection().equals("Teacher"))
-                    model.changePassword(viewState.getTeacherID(), passwordProperty1.get());
-                else if (viewState.getSection().equals("Student"))
-                    model.changePassword(viewState.getStudentID(), passwordProperty1.get());
-                return true;
-            } catch (IllegalArgumentException | SQLException e) {
-                errorProperty.set(e.getMessage());
-                return false;
-            }
-        } else {
+        if (!Objects.equals(passwordProperty1.get(), passwordProperty2.get())) {
             errorProperty.set("Please check your password spelling.");
+            return false;
+        }
+
+        try {
+            switch (viewState.getSection()) {
+                case "Teacher":
+                    model.changePassword(viewState.getTeacherID(), passwordProperty1.get());
+                    break;
+                case "Student":
+                    model.changePassword(viewState.getStudentID(), passwordProperty1.get());
+                    break;
+            }
+            return true;
+        } catch (IllegalArgumentException | SQLException e) {
+            errorProperty.set(e.getMessage());
             return false;
         }
     }

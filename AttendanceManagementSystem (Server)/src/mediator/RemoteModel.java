@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface RemoteModel extends RemoteSubject<String, Package> {
-    String login(String username, String password) throws IllegalAccessException, RemoteException, SQLException;
+    String login(String userID, String password) throws IllegalAccessException, RemoteException, SQLException;
 
     ArrayList<Class> getAllClasses() throws RemoteException;
 

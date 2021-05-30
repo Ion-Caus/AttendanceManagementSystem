@@ -24,7 +24,7 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="480.0" spacing="20.0">
          <children>
-            <Label prefHeight="27.0" prefWidth="100.0" text="Username">
+            <Label prefHeight="27.0" prefWidth="100.0" text="UserID">
                <font>
                   <Font size="18.0" />
                </font>
@@ -32,7 +32,7 @@
                   <Insets left="20.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="usernameField" onAction="#onEnter">
+            <TextField fx:id="userIDField" onAction="#onEnter">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

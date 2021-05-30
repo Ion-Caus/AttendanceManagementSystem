@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface Model extends LocalSubject<String, Package> {
-    String login(String username, String password) throws IllegalAccessException, SQLException;
+    String login(String userID, String password) throws IllegalAccessException, SQLException;
 
     ArrayList<Class> getAllClasses();
 

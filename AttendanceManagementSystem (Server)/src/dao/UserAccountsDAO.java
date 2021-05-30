@@ -25,6 +25,6 @@ public interface UserAccountsDAO
   void deleteTeacher(String teacherID) throws SQLException;
 
   // login
-  String login(String username, String password) throws SQLException, IllegalAccessException;
+  String login(String userID, String password) throws SQLException, IllegalAccessException;
 
 }
