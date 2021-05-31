@@ -16,7 +16,7 @@ public class ModelManager implements Model {
     private School school;
     private PropertyChangeHandler<String, Package> property;
 
-    // uses adapter pattern
+
     private ClassesDAO classesDAO;
     private LessonDataDAO lessonDataDAO;
     private LessonDAO lessonDAO;

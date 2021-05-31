@@ -3,6 +3,9 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * This class is representing the school
+ */
 public class School {
     private String name;
     private ClassList classList;
@@ -26,6 +29,9 @@ public class School {
         this.lessonDataList = new LessonDataList(lessonDataList);
     }
 
+    /**
+     * 0 argument constructor that will set the school name to "School" and initialize the rest of the elements as new element
+     */
     public School() {
         this.name = "School";
         this.classList = new ClassList();
@@ -34,6 +40,9 @@ public class School {
         this.teacherList = new TeacherList();
     }
 
+    /**1 parameter constructor that will call the previous constructor and initialize the school name according to the argument provided after
+     * @param name the name of the school
+     */
     public School(String name) {
         this();
         this.name = name;
