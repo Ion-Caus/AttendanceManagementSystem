@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+/**
+ * This class represents Teacher user type
+ */
 public class Teacher implements Serializable {
     private String name;
     private String initials;
@@ -11,6 +14,11 @@ public class Teacher implements Serializable {
 
     private Account account;
 
+    /**2 argument constructor that will initialize Teacher with the parameters provided as arguments
+     * @param name the name of the Teacher
+     * @param ID the id of the Teacher
+     * @exception IllegalArgumentException will be thrown in case a parameter is not valid
+     */
     public Teacher(String name, String ID) {
 
         if (name.isBlank()) {
@@ -30,11 +38,16 @@ public class Teacher implements Serializable {
         this.ID = ID;
     }
 
+    /**
+     * @param ID id provided as argument
+     * @return in case the id is valid, it will return true, in case it is not valid it will return false
+     */
     private boolean hasValidID(String ID){
         Pattern pattern = Pattern.compile("^[0-9]{6}$");
         return pattern.matcher(ID).matches();
     }
 
+    // TODO: 31/5/2021 tomas not used method
     public void setAccount(Account account) {
         this.account = account;
     }
@@ -51,6 +64,11 @@ public class Teacher implements Serializable {
         return ID;
     }
 
+
+    /** This method will derive initials from Teacher's name
+     * @param name Teacher's name provided as an argument
+     * @return will return Teacher's initials
+     */
     private String getInitials(String name) {
         String[] names = name.split(" ");
         String initials = "";

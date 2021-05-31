@@ -34,7 +34,8 @@ public class Lesson implements Serializable {
      * @param classroom the name of the classroom
      * @param homework homework that students should complete after lesson
      * @param className name of the class associated with the lesson
-     * @throws IllegalArgumentException will be thrown in case some argument is not valid
+     * @throws IllegalArgumentException will be thrown in case subject or topic are not valid
+     * @throws IllegalArgumentException this exception is going to be thrown in case the lesson time interval is not valid
      */
     public Lesson(String id, Teacher teacher, LocalDate lessonDate, LocalTime startTime, LocalTime endTime, String subject, String topic, String contents, String classroom, String homework, String className) throws IllegalArgumentException {
         this(teacher, lessonDate, startTime, endTime, subject, topic, contents, classroom, homework, className);
@@ -44,17 +45,17 @@ public class Lesson implements Serializable {
     /**
      * This constructor is going to initialize all the parameters from arguments provided, except for the id, which is always going to be initialized as "no id"
      *@param teacher the teacher that is teaching the lesson as an object
-     *      * @param lessonDate the date on which lesson is happening
-     *      * @param startTime the lesson's start time
-     *      * @param endTime the lesson's end time
-     *      * @param subject the subject for the lesson, for example Math
-     *      * @param topic the topic for the lesson, for example probabilities
-     *      * @param contents the contents for the lessons
-     *      * @param classroom the name of the classroom
-     *      * @param homework homework that students should complete after lesson
-     *      * @param className name of the class associated with the lesson
-     *      * @throws IllegalArgumentException will be thrown in case some argument is not valid
-     * @throws IllegalArgumentException this exception is going to be thrown in case the lesson time interval is not valid or if any other argument is not valid or empty
+     *@param lessonDate the date on which lesson is happening
+     * @param startTime the lesson's start time
+     *@param endTime the lesson's end time
+     * @param subject the subject for the lesson, for example Math
+     *@param topic the topic for the lesson, for example probabilities
+     *@param contents the contents for the lessons
+     *@param classroom the name of the classroom
+     *@param homework homework that students should complete after lesson
+     *@param className name of the class associated with the lesson
+     *@throws IllegalArgumentException will be thrown in case subject or topic are not valid
+     *@throws IllegalArgumentException this exception is going to be thrown in case the lesson time interval is not valid
      */
     public Lesson(Teacher teacher, LocalDate lessonDate, LocalTime startTime, LocalTime endTime, String subject, String topic, String contents, String classroom, String homework, String className) throws IllegalArgumentException {
         if (!hasValidTime(startTime, endTime))
