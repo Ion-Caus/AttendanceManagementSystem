@@ -274,8 +274,9 @@ public class ModelManager implements Model {
     @Override
     public void addLesson(Class aClass, Lesson lesson) throws SQLException {
         lessonDAO.createLesson(aClass,lesson);
-        aClass.getSchedule().addLesson(lesson);
+        getClassByName(aClass.getClassName()).getSchedule().addLesson(lesson);
         property.firePropertyChange("ADD Lesson", null, new PackageLesson(lesson));
+        System.out.println(getScheduleFor(getClassByName(aClass.getClassName()), lesson.getLessonDate()));
         Log.getLog().addLog(String.format("The lesson with the id (%s) has been added to the class (%s).", lesson.getId(), aClass.getClassName()));
     }
 

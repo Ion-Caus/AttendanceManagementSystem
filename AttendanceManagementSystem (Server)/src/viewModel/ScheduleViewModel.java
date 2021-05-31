@@ -218,12 +218,12 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                 && Objects.equals(lesson.getTeacher().getID(), viewState.getTeacherID())
                 && lesson.getLessonDate().equals(dateProperty.get())
         ) ||
-                ( !Objects.equals(viewState.getSection(), "Teacher")
+                (!Objects.equals(viewState.getSection(), "Teacher")
                         && Objects.equals(lesson.getClassName(), viewState.getClassName()) )
                         && lesson.getLessonDate().equals(dateProperty.get() )
         ) {
+
             schedule.add(new LessonViewModel(lesson));
-            sortSchedule();
         }
     }
 
@@ -239,7 +239,11 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                     break;
                 case "ADD Lesson":
                     PackageLesson packageLesson = (PackageLesson) event.getValue2();
-                    addLesson(packageLesson.getLesson());
+                    if (schedule.stream().noneMatch(
+                            lessonViewModel -> lessonViewModel.idProperty().get().equals(packageLesson.getID()))
+                    ) {
+                        addLesson(packageLesson.getLesson());
+                    }
                     break;
                 case "REMOVE Lesson":
                     schedule.removeIf(lessonViewModel -> lessonViewModel.idProperty().get().equals(event.getValue2().getID()));

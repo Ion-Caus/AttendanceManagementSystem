@@ -243,7 +243,11 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                     break;
                 case "ADD Lesson":
                     PackageLesson packageLesson = (PackageLesson) event.getValue2();
-                    addLesson(packageLesson.getLesson());
+                    if (schedule.stream().noneMatch(
+                            lessonViewModel -> lessonViewModel.idProperty().get().equals(packageLesson.getID()))
+                    ) {
+                        addLesson(packageLesson.getLesson());
+                    }
                     break;
                 case "REMOVE Lesson":
                     schedule.removeIf(lessonViewModel -> lessonViewModel.idProperty().get().equals(event.getValue2().getID()));
