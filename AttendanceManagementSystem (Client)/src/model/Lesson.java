@@ -25,15 +25,16 @@ public class Lesson implements Serializable {
     public Lesson(Teacher teacher, LocalDate lessonDate, LocalTime startTime, LocalTime endTime, String subject, String topic, String contents, String classroom, String homework, String className) throws IllegalArgumentException {
         if (!hasValidTime(startTime, endTime))
             throw new IllegalArgumentException("Illegal lesson time");
-        if(subject.isEmpty()||topic.isEmpty())
-            throw new IllegalArgumentException("Please fill out the subject and topic");
+
+        setSubject(subject);
+        setTopic(topic);
+
         this.id = "no id";
         this.teacher = teacher;
         this.lessonDate = lessonDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.subject = subject;
-        this.topic = topic;
+
         this.contents = contents;
         this.classroom = classroom;
         this.homework = homework;
@@ -96,19 +97,15 @@ public class Lesson implements Serializable {
         this.lessonDate = lessonDate;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
     public void setSubject(String subject) {
+        if(subject.isBlank())
+            throw new IllegalArgumentException("Please fill out the subject");
         this.subject = subject;
     }
 
     public void setTopic(String topic) {
+        if(topic.isBlank())
+            throw new IllegalArgumentException("Please fill out the topic");
         this.topic = topic;
     }
 

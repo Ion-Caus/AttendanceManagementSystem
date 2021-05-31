@@ -158,7 +158,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
         LessonData data = model.getLessonData(lesson, student);
 
         if (data.getAbsence() != null) {
-            absent.set(  data.getAbsence().isWasAbsent()? "YES" : "---");
+            absent.set(  data.getAbsence().wasAbsent()? "YES" : "---");
             motive.set(data.getAbsence().getMotive());
         }
 
