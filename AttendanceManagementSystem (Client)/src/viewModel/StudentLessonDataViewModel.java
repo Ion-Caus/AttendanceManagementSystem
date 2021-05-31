@@ -18,7 +18,7 @@ public class StudentLessonDataViewModel {
         this.studentNameProperty = new SimpleStringProperty(lessonData.getStudent().getName());
         this.gradeProperty = new SimpleStringProperty((lessonData.getGrade().getGrade() == -1)? " " : "" + lessonData.getGrade().getGrade());
         this.commentProperty = new SimpleStringProperty(lessonData.getGrade().getComment());
-        this.absenceProperty = new SimpleStringProperty(lessonData.getAbsence().wasAbsent() ? "YES" : "---");
+        this.absenceProperty = new SimpleStringProperty(lessonData.getAbsence().isWasAbsent() ? "YES" : "---");
         this.motiveProperty = new SimpleStringProperty(lessonData.getAbsence().getMotive());
     }
 

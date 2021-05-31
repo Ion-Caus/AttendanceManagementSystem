@@ -17,11 +17,9 @@ public class StudentList implements Serializable {
     }
 
     public void addStudent(Student student) throws IllegalArgumentException {
-        if (!isUnique(student.getID()))
+        if (!isUnique(student.getID())) {
             throw new IllegalArgumentException("Student with ID ("+ student.getID() + ") already exists.");
-
-        if(!(student.getClassName() == null))
-            throw new IllegalArgumentException("This student is already in another class.");
+        }
 
         students.add(student);
     }

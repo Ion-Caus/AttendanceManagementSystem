@@ -34,6 +34,10 @@ public class Absence implements Serializable {
         this.motive = null;
     }
 
+    public Absence copy() {
+        return new Absence(this.wasAbsent, this.motive);
+    }
+
     public String getMotive() {
         return motive;
     }
@@ -42,7 +46,7 @@ public class Absence implements Serializable {
         this.motive = motive;
     }
 
-    public boolean wasAbsent() {
+    public boolean isWasAbsent() {
         return wasAbsent;
     }
 

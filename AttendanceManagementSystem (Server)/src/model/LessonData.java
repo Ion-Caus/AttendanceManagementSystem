@@ -53,7 +53,7 @@ public class LessonData implements Serializable {
                 "lesson=" + lesson.getClassName() +
                 ", student=" + student.getName() +
                 ", grade=" + grade.getGrade() +
-                ", absence=" + absence.wasAbsent() +
+                ", absence=" + absence.isWasAbsent() +
                 '}';
     }
 }
