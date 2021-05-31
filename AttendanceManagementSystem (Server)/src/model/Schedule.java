@@ -11,7 +11,6 @@ public class Schedule implements Serializable {
         this.schedule = new ArrayList<>();
     }
 
-    //TODO 19/5 by Ion Check if there is not a lesson on that date and at that time in the list.
     public void addLesson(Lesson lesson) {
         schedule.add(lesson);
     }

@@ -283,16 +283,16 @@ public class AttendanceManagementClient implements ClientModel, RemoteListener<S
     }
 
     @Override
-    public void addLesson(Class aClass, Lesson lesson) throws SQLException {
+    public void addLesson(String className, Lesson lesson) throws SQLException {
         try {
-            remoteModel.addLesson(aClass, lesson);
+            remoteModel.addLesson(className, lesson);
         } catch (RemoteException e) {
             throw new IllegalArgumentException(e.getLocalizedMessage());
         }
     }
 
     @Override
-    public void removeLesson(String className, String lessonID) throws SQLException {
+    public void removeLesson(String className, String lessonID) throws SQLException, IllegalArgumentException {
         try {
             remoteModel.removeLesson(className, lessonID);
         } catch (RemoteException e) {

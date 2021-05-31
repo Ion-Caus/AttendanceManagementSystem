@@ -64,9 +64,8 @@ public class AddLessonViewModel {
        try {
            String teacherID = (teacher.get().contains("(")) ? teacher.get().split("[()]")[1] : "no id";
            Teacher teacher = model.getTeacherBy(teacherID);
-           Class aClass = model.getClassByName(viewModelState.getClassName());
 
-           model.addLesson(aClass, new Lesson(
+           model.addLesson(viewModelState.getClassName(), new Lesson(
                    teacher,
                    date.getValue(),
                    LocalTime.parse(startTime.get()),

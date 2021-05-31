@@ -167,8 +167,8 @@ public class ModelManager implements Model, LocalListener<String, Package> {
     }
 
     @Override
-    public void addLesson(Class aClass, Lesson lesson) throws SQLException {
-        clientModel.addLesson(aClass, lesson);
+    public void addLesson(String className, Lesson lesson) throws SQLException {
+        clientModel.addLesson(className, lesson);
     }
 
     @Override

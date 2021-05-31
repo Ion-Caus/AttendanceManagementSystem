@@ -216,12 +216,12 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     }
 
     @Override
-    public void addLesson(Class aClass, Lesson lesson) throws SQLException {
-        model.addLesson(aClass, lesson);
+    public void addLesson(String className, Lesson lesson) throws SQLException, IllegalArgumentException {
+        model.addLesson(className, lesson);
     }
 
     @Override
-    public void removeLesson(String className, String lessonID) throws SQLException {
+    public void removeLesson(String className, String lessonID) throws SQLException, IllegalArgumentException {
         model.removeLesson(className, lessonID);
     }
 

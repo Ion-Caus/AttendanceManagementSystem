@@ -173,7 +173,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addClass(String className) throws IllegalArgumentException, SQLException {
+    public synchronized void addClass(String className) throws IllegalArgumentException, SQLException {
         var aClass = new Class(className);
         school.getClassList().addClass(aClass);
         classesDAO.addClass(aClass);
@@ -182,7 +182,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeClass(String className) throws IllegalAccessException, SQLException {
+    public synchronized void removeClass(String className) throws IllegalAccessException, SQLException {
         school.getClassList().removeClass(className);
         classesDAO.removeClass(className);
         property.firePropertyChange("REMOVE Class", null, new PackageName(className,null));
@@ -190,7 +190,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addStudent(String studentName, String studentID) throws IllegalArgumentException, SQLException {
+    public synchronized void addStudent(String studentName, String studentID) throws IllegalArgumentException, SQLException {
         school.getStudentList().addStudent(new Student(studentName, studentID));
         userAccountsDAO.createUserAccount(studentName,studentID,"default",UserAccountsDAOImpl.STUDENT);
         property.firePropertyChange("ADD Student", null, new PackageName(studentID, studentName));
@@ -198,7 +198,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeStudent(String studentID) throws IllegalArgumentException, SQLException {
+    public synchronized void removeStudent(String studentID) throws IllegalArgumentException, SQLException {
         //remove from class' studentList
         school.getLessonDataList().removeLessonDataByStudent(studentID);
 
@@ -215,7 +215,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addStudentToClass(String studentID, String className) throws IllegalArgumentException, SQLException {
+    public synchronized void addStudentToClass(String studentID, String className) throws IllegalArgumentException, SQLException {
         Class theClass = getClassByName(className);
         Student student = getStudentBy(studentID);
 
@@ -229,7 +229,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException, SQLException {
+    public synchronized void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException, SQLException {
         Class theClass = getClassByName(className);
         Student student = getStudentBy(studentID);
 
@@ -243,7 +243,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException, SQLException {
+    public synchronized void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException, SQLException {
         school.getTeacherList().addTeacher(new Teacher(teacherName, teacherID));
         userAccountsDAO.createUserAccount(teacherName,teacherID,"default",UserAccountsDAOImpl.TEACHER);
         property.firePropertyChange("ADD Teacher", null, new PackageName(teacherID, teacherName));
@@ -251,7 +251,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeTeacher(String teacherID) throws SQLException {
+    public synchronized void removeTeacher(String teacherID) throws SQLException {
         ArrayList<Lesson> lessons = getLessonsByTeacher(teacherID);
         lessons.forEach(lesson -> lesson.setTeacher(getTeacherBy("000000")));
         school.getTeacherList().removeTeacher(teacherID);
@@ -272,16 +272,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addLesson(Class aClass, Lesson lesson) throws SQLException {
-        lessonDAO.createLesson(aClass,lesson);
-        getClassByName(aClass.getClassName()).getSchedule().addLesson(lesson);
+    public synchronized void addLesson(String className, Lesson lesson) throws SQLException {
+        lessonDAO.createLesson(className,lesson);
+        getClassByName(className).getSchedule().addLesson(lesson);
         property.firePropertyChange("ADD Lesson", null, new PackageLesson(lesson));
-        System.out.println(getScheduleFor(getClassByName(aClass.getClassName()), lesson.getLessonDate()));
-        Log.getLog().addLog(String.format("The lesson with the id (%s) has been added to the class (%s).", lesson.getId(), aClass.getClassName()));
+        Log.getLog().addLog(String.format("The lesson with the id (%s) has been added to the class (%s).", lesson.getId(), className));
     }
 
     @Override
-    public void removeLesson(String className, String lessonID) throws SQLException {
+    public synchronized void removeLesson(String className, String lessonID) throws SQLException, IllegalArgumentException {
         Schedule schedule = getClassByName(className).getSchedule();
         Lesson lesson = schedule.getLessonBy(lessonID);
         lessonDAO.delete(lessonID);
@@ -291,7 +290,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException, IllegalArgumentException {
+    public synchronized void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException, IllegalArgumentException {
         LessonData lessonData = getLessonData(
                 getLesson(lessonID),
                 getStudentBy(studentID)
@@ -304,7 +303,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void changePassword(String userID, String password) throws IllegalArgumentException, SQLException {
+    public synchronized void changePassword(String userID, String password) throws IllegalArgumentException, SQLException {
         Password pw = new Password(password);
         userAccountsDAO.updatePassword(userID ,pw.getPassword());
         Log.getLog().addLog(String.format("User with the id (%s) changed his password.", userID) );
@@ -312,7 +311,7 @@ public class ModelManager implements Model {
 
     //--
     @Override
-    public boolean changeMotive(String studentId, String lessonID, String motive) throws SQLException {
+    public synchronized boolean changeMotive(String studentId, String lessonID, String motive) throws SQLException {
         LessonData ld = getLessonData(getLesson(lessonID), getStudentBy(studentId));
         ld.getAbsence().setMotive(motive);
         lessonDataDAO.updateAbsenceMotive(ld);
@@ -322,7 +321,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean changeAbsence(String studentID, String lessonID, boolean absence) throws SQLException {
+    public synchronized boolean changeAbsence(String studentID, String lessonID, boolean absence) throws SQLException {
         LessonData ld = getLessonData(getLesson(lessonID), getStudentBy(studentID));
         ld.getAbsence().setWasAbsent(!absence);
         lessonDataDAO.updateAbsenceStatus(ld);
@@ -332,7 +331,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean changeLesson(String lessonID, String topic, String contents, String homework, String teacherID) throws SQLException {
+    public synchronized boolean changeLesson(String lessonID, String topic, String contents, String homework, String teacherID) throws SQLException {
         Lesson lesson = getLesson(lessonID);
         lesson.setTopic(topic);
         lesson.setContents(contents);

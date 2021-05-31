@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public interface LessonDAO
 {
-  void createLesson(Class aClass, Lesson lesson) throws SQLException;  //inserts newly created lesson into exact class schedule
+  void createLesson(String className, Lesson lesson) throws SQLException;  //inserts newly created lesson into exact class schedule
   void updateTeacher(Lesson lesson, Teacher teacher) throws SQLException;
   void updateTopic(Lesson lesson, String topic) throws SQLException;
   void updateHomework(Lesson lesson, String homework) throws SQLException;

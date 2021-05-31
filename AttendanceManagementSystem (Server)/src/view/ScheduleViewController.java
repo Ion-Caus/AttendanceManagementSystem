@@ -72,7 +72,7 @@ public class ScheduleViewController extends ViewController {
 
     @Override
     public void reset() { // this method is called automatically
-        viewModel.clear();   // this will call the clear method in the viewModel and that model is going to call loadScheduleForDay which will populate the table
+        viewModel.clear();
         viewModel.loadScheduleForDay();
 
         addLessonButton.setVisible(viewModel.forAdminProperty().get());

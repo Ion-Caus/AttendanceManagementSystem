@@ -53,8 +53,8 @@ public interface ClientModel extends LocalSubject<String, Package> {
 
     void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException, SQLException;
     void removeTeacher(String studentID) throws SQLException;
-    void addLesson(Class aClass, Lesson lesson) throws SQLException;
-    void removeLesson(String className, String lessonID) throws SQLException;
+    void addLesson(String className, Lesson lesson) throws SQLException;
+    void removeLesson(String className, String lessonID) throws SQLException, IllegalArgumentException;
 
     void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException;
 

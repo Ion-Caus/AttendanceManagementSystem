@@ -217,13 +217,13 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
         if (   ( Objects.equals(viewState.getSection(), "Teacher")
                 && Objects.equals(lesson.getTeacher().getID(), viewState.getTeacherID())
                 && lesson.getLessonDate().equals(dateProperty.get())
-        ) ||
-                (!Objects.equals(viewState.getSection(), "Teacher")
+                ) ||
+                ( !Objects.equals(viewState.getSection(), "Teacher")
                         && Objects.equals(lesson.getClassName(), viewState.getClassName()) )
                         && lesson.getLessonDate().equals(dateProperty.get() )
         ) {
-
             schedule.add(new LessonViewModel(lesson));
+            sortSchedule();
         }
     }
 

@@ -29,7 +29,7 @@ public class LessonDAOImpl implements LessonDAO {
 
 
     @Override
-    public void createLesson(Class aClass, Lesson lesson) throws SQLException
+    public void createLesson(String className, Lesson lesson) throws SQLException
     {
         try (Connection connection = getConnection()) {
             PreparedStatement statement1 = connection
@@ -64,7 +64,7 @@ public class LessonDAOImpl implements LessonDAO {
 
             PreparedStatement statement4 = connection
                     .prepareStatement("INSERT INTO schedule_lessons(class_name, lesson_id) VALUES (?,?)");
-            statement4.setString(1, aClass.getClassName());
+            statement4.setString(1, className);
             statement4.setInt(2, Integer.parseInt(lesson.getId()));
             statement4.executeUpdate();
         }

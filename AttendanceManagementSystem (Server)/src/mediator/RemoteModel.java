@@ -53,8 +53,8 @@ public interface RemoteModel extends RemoteSubject<String, Package> {
     void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException, SQLException, RemoteException;
 
     void addTeacher(String teacherName, String teacherID) throws IllegalArgumentException, SQLException, RemoteException;
-    void removeTeacher(String studentID) throws SQLException, RemoteException;
-    void addLesson(Class aClass, Lesson lesson) throws SQLException, RemoteException;
+    void removeTeacher(String studentID) throws SQLException, IllegalArgumentException, RemoteException;
+    void addLesson(String className, Lesson lesson) throws SQLException, IllegalArgumentException, RemoteException;
     void removeLesson(String className, String lessonID) throws SQLException, RemoteException;
 
     void changeGradeComment(String studentID, String lessonID, int grade, String comment) throws SQLException, RemoteException;
