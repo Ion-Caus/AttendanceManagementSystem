@@ -50,7 +50,7 @@
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="contentsField" prefHeight="110.0" prefWidth="350.0">
+                                <TextArea fx:id="contentsField" prefHeight="110.0" prefWidth="350.0" wrapText="true">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -67,7 +67,7 @@
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="homeworkField" prefHeight="108.0" prefWidth="350.0">
+                                <TextArea fx:id="homeworkField" prefHeight="108.0" prefWidth="350.0" wrapText="true">
                                     <font>
                                         <Font size="14.0" />
                                     </font>

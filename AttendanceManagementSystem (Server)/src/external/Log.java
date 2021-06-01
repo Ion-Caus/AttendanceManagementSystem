@@ -8,7 +8,7 @@ public class Log {
 
     private ArrayList<LogLine> lines;
     private static Log log;
-    private static final Object lock = new Object();
+    private static Object lock = new Object();
 
     private Log() {
         this.lines = new ArrayList<>();
