@@ -102,7 +102,8 @@ public class StudentListViewModel implements GeneralListener<String, Package>  {
                     selectedStudentProperty.get().getAbsenceProperty().get().equals("YES")
             );
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            errorProperty.set("Connection to database has been lost.");
+            return;
         }
 
         clear();
