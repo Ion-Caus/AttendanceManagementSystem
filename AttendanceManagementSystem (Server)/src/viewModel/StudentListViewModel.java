@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.*;
-import model.Class;
+import model.StudentClass;
 import model.packages.Package;
 import model.packages.PackageAbsence;
 import model.packages.PackageGrade;
@@ -40,13 +40,13 @@ public class StudentListViewModel implements GeneralListener<String, Package>  {
 
     public void loadFromModel() {
         lessonDataList.clear();
-        Class aClass = null;
+        StudentClass aClass = null;
         switch (viewState.getSection()) {
             case "Teacher":
                 Lesson lesson = model.getLesson(viewState.getLessonID());
                 aClass = model.getClassByName(lesson.getClassName());
                 break;
-            case "Class":
+            case "StudentClass":
                 aClass = model.getClassByName(viewState.getClassName());
                 break;
             case "Student":

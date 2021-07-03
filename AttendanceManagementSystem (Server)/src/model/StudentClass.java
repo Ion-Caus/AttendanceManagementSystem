@@ -7,7 +7,7 @@ import java.io.Serializable;
  * A class representing a class
  */
 
-public class Class implements Serializable {
+public class StudentClass implements Serializable {
     private Schedule schedule;
     private StudentList students;
     private String className;
@@ -16,7 +16,7 @@ public class Class implements Serializable {
      * One parameter constructor that assigns a name to a class and initializes schedule and student list
      * @param className the name of the class
      */
-    public Class(String className) {
+    public StudentClass(String className) {
         this.className = className;
         this.schedule = new Schedule();
         this.students = new StudentList();

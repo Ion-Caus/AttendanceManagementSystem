@@ -119,7 +119,7 @@ public class ScheduleViewController extends ViewController {
         manageAccountButton.setVisible(false);
 
         switch (viewModel.getSection()) {
-            case "Class":
+            case "StudentClass":
                 addLessonButton.setVisible(true);
                 removeLessonButton.setVisible(true);
                 manageAccountButton.setVisible(false);

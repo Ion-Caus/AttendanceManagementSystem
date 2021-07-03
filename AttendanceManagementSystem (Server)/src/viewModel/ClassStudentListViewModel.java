@@ -51,7 +51,7 @@ public class ClassStudentListViewModel implements LocalListener<String, Package>
     }
 
     public void clear() {
-        className.setValue("Class " + viewModelState.getClassName());
+        className.setValue("StudentClass " + viewModelState.getClassName());
         searchField.setValue("");
         errorProperty.setValue("");
     }

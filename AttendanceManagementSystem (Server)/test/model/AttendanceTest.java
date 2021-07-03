@@ -24,7 +24,7 @@ public class AttendanceTest {
         school = new School();
 
         // create the class 2x
-        school.getClassList().addClass(new Class("2x"));
+        school.getClassList().addClass(new StudentClass("2x"));
 
         // add 2 students in the school student list
         school.getStudentList().addStudent(student1);

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface Model extends LocalSubject<String, Package> {
     String login(String userID, String password) throws IllegalAccessException, SQLException;
 
-    ArrayList<Class> getAllClasses();
+    ArrayList<StudentClass> getAllClasses();
 
     ArrayList<Student> getAllStudents();
     ArrayList<String> getUnassignedStudents();
@@ -19,12 +19,12 @@ public interface Model extends LocalSubject<String, Package> {
 
     ArrayList<Teacher> getAllTeachers();
 
-    ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date);
+    ArrayList<Lesson> getScheduleFor(StudentClass theClass, LocalDate date);
     ArrayList<Lesson> getScheduleFor(Student student, LocalDate date);
     ArrayList<Lesson> getScheduleFor(Teacher teacher, LocalDate date);
 
-    Class getClassWith(Student student);
-    Class getClassByName(String name);
+    StudentClass getClassWith(Student student);
+    StudentClass getClassByName(String name);
 
     Student getStudentBy(String id) throws IllegalArgumentException;
 
@@ -32,7 +32,7 @@ public interface Model extends LocalSubject<String, Package> {
 
     Lesson getLesson(String lessonID, Student student) throws IllegalArgumentException;
     Lesson getLesson(String lessonID) throws IllegalArgumentException;
-    Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException;
+    Lesson getLesson(String lessonID, StudentClass aClass) throws IllegalArgumentException;
 
     LessonData getLessonData(Lesson lesson, Student student);
 

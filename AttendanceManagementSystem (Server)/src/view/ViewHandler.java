@@ -50,3 +50,4 @@ public class ViewHandler extends ViewCreator {
         controller.init(this, viewModelFactory, root);
     }
 }
+

@@ -1,6 +1,6 @@
 package dao;
 
-import model.Class;
+import model.StudentClass;
 import model.Lesson;
 import model.Teacher;
 
@@ -49,7 +49,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 
 
     @Override
-    public ArrayList<Lesson> readLessons(Class aClass, LocalDate lessonDate) throws SQLException {
+    public ArrayList<Lesson> readLessons(StudentClass aClass, LocalDate lessonDate) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     "SELECT class_name, lesson_id, full_name, user_id, lesson_date, time_from, time_to, subject, topic, description, classroom, homework FROM lesson join time_of_conduct using (lesson_id) join taught_by using (lesson_id) join user_account on taught_by.teacher_id = User_account.user_id join schedule_lessons using (lesson_id) where class_name = ? and lesson_date=?");
@@ -105,7 +105,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    public void addLesson(Class aClass, String lessonID) throws SQLException {
+    public void addLesson(StudentClass aClass, String lessonID) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("INSERT INTO schedule_lessons VALUES (?,?)");
@@ -116,7 +116,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    public void deleteLesson(String lessonID, Class aClass) throws SQLException {
+    public void deleteLesson(String lessonID, StudentClass aClass) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("DELETE FROM schedule_lessons WHERE lesson_id = ? and class_name = ?");

@@ -1,7 +1,7 @@
 package mediator;
 
 import model.*;
-import model.Class;
+import model.StudentClass;
 import model.packages.Package;
 import utility.observer.subject.RemoteSubject;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public interface RemoteModel extends RemoteSubject<String, Package> {
     String login(String userID, String password) throws IllegalAccessException, RemoteException, SQLException;
 
-    ArrayList<Class> getAllClasses() throws RemoteException;
+    ArrayList<StudentClass> getAllClasses() throws RemoteException;
 
     ArrayList<Student> getAllStudents() throws RemoteException;
     ArrayList<String> getUnassignedStudents() throws RemoteException;
@@ -22,12 +22,12 @@ public interface RemoteModel extends RemoteSubject<String, Package> {
 
     ArrayList<Teacher> getAllTeachers() throws RemoteException;
 
-    ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date) throws RemoteException;
+    ArrayList<Lesson> getScheduleFor(StudentClass theClass, LocalDate date) throws RemoteException;
     ArrayList<Lesson> getScheduleFor(Student student, LocalDate date) throws RemoteException;
     ArrayList<Lesson> getScheduleFor(Teacher teacher, LocalDate date) throws RemoteException;
 
-    Class getClassWith(Student student) throws RemoteException;
-    Class getClassByName(String name) throws RemoteException;
+    StudentClass getClassWith(Student student) throws RemoteException;
+    StudentClass getClassByName(String name) throws RemoteException;
 
     Student getStudentBy(String id) throws IllegalArgumentException, RemoteException;
 
@@ -35,7 +35,7 @@ public interface RemoteModel extends RemoteSubject<String, Package> {
 
     Lesson getLesson(String lessonID, Student student) throws IllegalArgumentException, RemoteException;
     Lesson getLesson(String lessonID) throws IllegalArgumentException, RemoteException;
-    Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException, RemoteException;
+    Lesson getLesson(String lessonID, StudentClass aClass) throws IllegalArgumentException, RemoteException;
 
     LessonData getLessonData(Lesson lesson, Student student) throws RemoteException;
 

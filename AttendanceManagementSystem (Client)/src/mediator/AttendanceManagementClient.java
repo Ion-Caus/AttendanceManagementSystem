@@ -345,3 +345,4 @@ public class AttendanceManagementClient implements ClientModel, RemoteListener<S
         );
     }
 }
+

@@ -70,7 +70,7 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                     schedule.add(new LessonViewModel(lesson));
                 }
                 break;
-            case "Class":
+            case "StudentClass":
                 for (Lesson lesson : model.getScheduleFor(model.getClassByName(viewState.getClassName()), dateProperty.getValue())) {
                     schedule.add(new LessonViewModel(lesson));
                 }
@@ -101,7 +101,7 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
             case "Student":
                 Student student = model.getStudentBy(viewState.getStudentID());
                 userProperty.set(student.getName());
-                schoolClassProperty.set("Class: " + student.getClassName());
+                schoolClassProperty.set("StudentClass: " + student.getClassName());
                 viewState.setClassName(student.getClassName());
                 break;
 
@@ -111,9 +111,9 @@ public class ScheduleViewModel implements LocalListener<String, Package> {
                 schoolClassProperty.set("");
                 break;
 
-            case "Class":
+            case "StudentClass":
                 userProperty.set("");
-                schoolClassProperty.set("Class: " + viewState.getClassName());
+                schoolClassProperty.set("StudentClass: " + viewState.getClassName());
                 break;
         }
 

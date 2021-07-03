@@ -32,7 +32,8 @@ public class Password {
             throw new IllegalArgumentException("Password may only contain letters, digits, hyphens amd underscore characters");
         }
         if (lower == 0 || upper == 0 || digit == 0) {
-            throw new IllegalArgumentException( "Password must contain at least one uppercase letter, at least one lowercase letter and at least one digit");
+            throw new IllegalArgumentException( "Password must contain at least one uppercase letter, " +
+                    "at least one lowercase letter and at least one digit");
         }
     }
 

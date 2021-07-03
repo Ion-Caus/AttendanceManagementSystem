@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.*;
-import model.Class;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

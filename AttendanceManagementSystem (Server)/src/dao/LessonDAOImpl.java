@@ -1,8 +1,6 @@
 package dao;
 
-import model.Class;
 import model.Lesson;
-import model.LessonData;
 import model.Teacher;
 
 import java.sql.*;

@@ -48,14 +48,14 @@ public class ModelManager implements Model {
     }
 
     private void loadLessonsInClasses(ArrayList<Lesson> lessonList){
-        for(Class aClass : getAllClasses())
+        for(StudentClass aClass : getAllClasses())
             for(Lesson lesson : lessonList)
                 if(Objects.equals(aClass.getClassName(),lesson.getClassName()))
                     aClass.getSchedule().getAllLessons().add(lesson);
     }
 
     private void loadStudentsInClasses() {
-        for(Class aClass : getAllClasses())
+        for(StudentClass aClass : getAllClasses())
             for(Student student: getStudentsByClass(aClass.getClassName()))
                 aClass.getStudents().getAllStudents().add(student);
     }
@@ -72,7 +72,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ArrayList<Class> getAllClasses() {
+    public ArrayList<StudentClass> getAllClasses() {
         return school.getClassList().getAllClasses();
     }
 
@@ -97,7 +97,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date) {
+    public ArrayList<Lesson> getScheduleFor(StudentClass theClass, LocalDate date) {
         return theClass.getSchedule().getLessonBy(date);
     }
 
@@ -110,18 +110,18 @@ public class ModelManager implements Model {
     public ArrayList<Lesson> getScheduleFor(Teacher teacher, LocalDate date) {
         ArrayList<Lesson> lessons = new ArrayList<>();
 
-        for (Class aClass: getAllClasses()) {
+        for (StudentClass aClass: getAllClasses()) {
             lessons.addAll(aClass.getSchedule().getLessonBy(teacher, date));
         }
         return lessons;
     }
 
     @Override
-    public Class getClassWith(Student student) throws IllegalArgumentException {
+    public StudentClass getClassWith(Student student) throws IllegalArgumentException {
         return school.getClassList().getClassWith(student);
     }
     @Override
-    public Class getClassByName(String name) throws IllegalArgumentException {
+    public StudentClass getClassByName(String name) throws IllegalArgumentException {
         return school.getClassList().getClassByName(name);
     }
 
@@ -141,13 +141,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException {
+    public Lesson getLesson(String lessonID, StudentClass aClass) throws IllegalArgumentException {
         return aClass.getSchedule().getLessonBy(lessonID);
     }
 
     @Override
     public Lesson getLesson(String lessonID) throws IllegalArgumentException {
-        for (Class aClass: getAllClasses()) {
+        for (StudentClass aClass: getAllClasses()) {
             for (Lesson lesson: aClass.getSchedule().getAllLessons()) {
                 if (lesson.getId().equals(lessonID)) {
                     return lesson;
@@ -174,10 +174,10 @@ public class ModelManager implements Model {
 
     @Override
     public synchronized void addClass(String className) throws IllegalArgumentException, SQLException {
-        var aClass = new Class(className);
+        var aClass = new StudentClass(className);
         school.getClassList().addClass(aClass);
         classesDAO.addClass(aClass);
-        property.firePropertyChange("ADD Class", null, new PackageName(className,null));
+        property.firePropertyChange("ADD StudentClass", null, new PackageName(className,null));
         Log.getLog().addLog(String.format("The class (%s) has been added.", className));
     }
 
@@ -185,7 +185,7 @@ public class ModelManager implements Model {
     public synchronized void removeClass(String className) throws IllegalAccessException, SQLException {
         school.getClassList().removeClass(className);
         classesDAO.removeClass(className);
-        property.firePropertyChange("REMOVE Class", null, new PackageName(className,null));
+        property.firePropertyChange("REMOVE StudentClass", null, new PackageName(className,null));
         Log.getLog().addLog(String.format("The class (%s) has been removed.", className));
     }
 
@@ -216,7 +216,7 @@ public class ModelManager implements Model {
 
     @Override
     public synchronized void addStudentToClass(String studentID, String className) throws IllegalArgumentException, SQLException {
-        Class theClass = getClassByName(className);
+        StudentClass theClass = getClassByName(className);
         Student student = getStudentBy(studentID);
 
         theClass.getStudents().addStudent(student);
@@ -230,7 +230,7 @@ public class ModelManager implements Model {
 
     @Override
     public synchronized void removeStudentFromClass(String studentID, String className) throws IllegalArgumentException, SQLException {
-        Class theClass = getClassByName(className);
+        StudentClass theClass = getClassByName(className);
         Student student = getStudentBy(studentID);
 
         theClass.getStudents().removeStudent(student);
@@ -264,7 +264,7 @@ public class ModelManager implements Model {
 
     private ArrayList<Lesson> getLessonsByTeacher(String teacherID) {
         ArrayList<Lesson> lessons = new ArrayList<>();
-        for(Class temp : getAllClasses())
+        for(StudentClass temp : getAllClasses())
             for(Lesson lesson : temp.getSchedule().getAllLessons())
                 if(lesson.getTeacher().getID().equals(teacherID))
                     lessons.add(lesson);

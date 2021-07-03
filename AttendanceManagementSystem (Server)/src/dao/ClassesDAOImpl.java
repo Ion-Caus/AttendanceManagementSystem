@@ -1,6 +1,6 @@
 package dao;
 
-import model.Class;
+import model.StudentClass;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class ClassesDAOImpl implements ClassesDAO {
     }
 
     @Override
-    public void addClass(Class aClass) throws SQLException {
+    public void addClass(StudentClass aClass) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("INSERT INTO classes(class_name) VALUES (?);");
@@ -36,20 +36,20 @@ public class ClassesDAOImpl implements ClassesDAO {
         }
     }
 
-    private static Class createClass(ResultSet resultSet) throws SQLException {
+    private static StudentClass createClass(ResultSet resultSet) throws SQLException {
         String className = resultSet.getString("class_name");
-        return new Class(className);
+        return new StudentClass(className);
     }
 
     @Override
-    public ArrayList<Class> readClasses() throws SQLException {
+    public ArrayList<StudentClass> readClasses() throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("SELECT distinct class_name FROM classes");
             ResultSet resultSet = statement.executeQuery();
-            ArrayList<Class> result = new ArrayList<>();
+            ArrayList<StudentClass> result = new ArrayList<>();
             while (resultSet.next()) {
-                Class aClass = createClass(resultSet);
+                StudentClass aClass = createClass(resultSet);
                 result.add(aClass);
             }
             return result;

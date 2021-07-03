@@ -134,7 +134,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
                         viewState.getLessonID()
                 );
                 break;
-            case "Class":
+            case "StudentClass":
                 lesson = model.getLesson(
                         viewState.getLessonID(),
                         model.getClassByName(viewState.getClassName())
@@ -150,7 +150,7 @@ public class InfoViewModel implements LocalListener<String, Package> {
         homework.set(lesson.getHomework());
         teacher.set(lesson.getTeacher().getName() + "(" + lesson.getTeacher().getID() + ")");
         date.set(lesson.getLessonDate());
-        className.set("Class " + lesson.getClassName());
+        className.set("StudentClass " + lesson.getClassName());
         classRoom.set(lesson.getClassroom());
     }
 

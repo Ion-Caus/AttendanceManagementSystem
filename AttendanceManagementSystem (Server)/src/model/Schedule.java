@@ -3,6 +3,9 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * This class represents a schedule associated to class and it works like a containing element for lessons
@@ -31,6 +34,7 @@ public class Schedule implements Serializable {
         schedule.remove(lesson);
     }
 
+
     /**The purpose of this method is to get lesson by lessonID
      * @param lessonId the lesson identification key
      * @return Lesson that has matching lessonId with the lessonId provided as an argument
@@ -44,17 +48,19 @@ public class Schedule implements Serializable {
         throw new IllegalArgumentException("No such lesson with this id (" + lessonId + ")");
     }
 
+    private ArrayList<Lesson> getLessonBy(Predicate<Lesson> selector){
+        return schedule.stream()
+                .filter(selector)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+
     /**The purpose of this method is to get lesson by date
      * @param date the date provided as an argument
      * @return Lesson that has matching date with the date provided as an argument
      */
     public ArrayList<Lesson> getLessonBy(LocalDate date) {
-        ArrayList<Lesson> lessons = new ArrayList<>();
-        for (Lesson lesson : schedule) {
-            if (lesson.getLessonDate().equals(date))
-                lessons.add(lesson);
-        }
-        return lessons;
+        return getLessonBy(lesson -> lesson.getLessonDate().equals(date));
     }
 
     /**The purpose of this method is to get Lesson based on Teacher and date
@@ -63,15 +69,9 @@ public class Schedule implements Serializable {
      * @return Lesson that has matching date and Teacher with date and Teacher provided as arguments
      */
     public ArrayList<Lesson> getLessonBy(Teacher teacher, LocalDate date) {
-        ArrayList<Lesson> lessons = new ArrayList<>();
-        for (Lesson lesson : schedule) {
-            if (lesson.getTeacher().equals(teacher) &&
-                lesson.getLessonDate().equals(date)) {
-
-                lessons.add(lesson);
-            }
-        }
-        return lessons;
+        return getLessonBy(lesson ->
+                Objects.equals(lesson.getTeacher(), teacher) && Objects.equals(lesson.getLessonDate(), date)
+        );
     }
 
     /**

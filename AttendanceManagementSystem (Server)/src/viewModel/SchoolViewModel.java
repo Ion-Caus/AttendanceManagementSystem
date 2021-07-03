@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 
 import model.*;
 
-import model.Class;
+import model.StudentClass;
 import model.packages.Package;
 import model.packages.PackageName;
 import utility.observer.event.ObserverEvent;
@@ -38,7 +38,7 @@ public class SchoolViewModel implements LocalListener<String, Package> {
     public SchoolViewModel(Model model, ViewModelState viewModelState) {
         this.model = model;
         this.model.addListener(this,  "ADD_TO_CLASS Student","REMOVE_FROM_CLASS Student",
-                "ADD Class", "REMOVE Class", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
+                "ADD StudentClass", "REMOVE StudentClass", "ADD Student", "REMOVE Student", "ADD Teacher", "REMOVE Teacher");
         this.viewModelState = viewModelState;
 
         classList = FXCollections.observableArrayList();
@@ -67,7 +67,7 @@ public class SchoolViewModel implements LocalListener<String, Package> {
     private void loadFromModel() {
 
         classList.clear();
-        for (Class theClass : model.getAllClasses()) {
+        for (StudentClass theClass : model.getAllClasses()) {
             classList.add(new ClassViewModel(theClass));
         }
 
@@ -184,7 +184,7 @@ public class SchoolViewModel implements LocalListener<String, Package> {
                 }
 
                 try {
-                    viewModelState.setSection("Class");
+                    viewModelState.setSection("StudentClass");
                     viewModelState.setClassName(selectedClassProperty.get().classNameProperty().get());
                     return true;
                 } catch (IllegalArgumentException | NullPointerException e) {
@@ -250,8 +250,8 @@ public class SchoolViewModel implements LocalListener<String, Package> {
             case "Student":
                 studentList.add(new StudentViewModel(new Student(name, id)));
                 break;
-            case "Class":
-                classList.add(new ClassViewModel(new Class(id)));
+            case "StudentClass":
+                classList.add(new ClassViewModel(new StudentClass(id)));
                 break;
             case "Teacher":
                 teacherList.add(new TeacherViewModel(new Teacher(name,id)));
@@ -264,7 +264,7 @@ public class SchoolViewModel implements LocalListener<String, Package> {
             case "Student":
                 studentList.removeIf(student -> student.idProperty().get().equals(id));
                 break;
-            case "Class":
+            case "StudentClass":
                 classList.removeIf(aClass -> aClass.classNameProperty().get().equals(id));
                 break;
             case "Teacher":

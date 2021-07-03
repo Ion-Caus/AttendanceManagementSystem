@@ -13,7 +13,9 @@ class PasswordTest {
                 IllegalArgumentException.class,
                 () -> password = new Password("superlower")
         );
-        assertEquals("Password must contain at least one uppercase letter, at least one lowercase letter and at least one digit", exception.getMessage(), "Password is all lowercase.");
+        assertEquals("Password must contain at least one uppercase letter, " +
+                "at least one lowercase letter and at least one digit", exception.getMessage(),
+                "Password is all lowercase.");
     }
 
     @Test
@@ -22,7 +24,9 @@ class PasswordTest {
                 IllegalArgumentException.class,
                 () -> password = new Password("SUPERUPPER")
         );
-        assertEquals("Password must contain at least one uppercase letter, at least one lowercase letter and at least one digit", exception.getMessage(), "Password is all lowercase.");
+        assertEquals("Password must contain at least one uppercase letter, " +
+                "at least one lowercase letter and at least one digit", exception.getMessage(),
+                "Password is all uppercase.");
     }
 
     @Test
@@ -31,9 +35,9 @@ class PasswordTest {
                 IllegalArgumentException.class,
                 () -> password = new Password("SUPdassa_UPPER")
         );
-        assertEquals("Password must contain at least one uppercase letter, at least one lowercase letter and at least one digit", exception.getMessage(), "Password is all lowercase.");
+        assertEquals("Password must contain at least one uppercase letter, at least one lowercase letter and at least one digit",
+                exception.getMessage(), "Password only contains digits.");
     }
-
 
     @Test
     void invalidSpecialCharsPassword() {
@@ -41,7 +45,8 @@ class PasswordTest {
                 IllegalArgumentException.class,
                 () -> password = new Password("@helloJd2")
         );
-        assertEquals("Password may only contain letters, digits, hyphens amd underscore characters", exception.getMessage(), "Password has an illegal special char.");
+        assertEquals("Password may only contain letters, digits, hyphens amd underscore characters",
+                exception.getMessage(), "Password has an illegal special char.");
     }
 
     @Test
@@ -50,7 +55,8 @@ class PasswordTest {
                 IllegalArgumentException.class,
                 () -> password = new Password("Qw1")
         );
-        assertEquals("Password must have at least 6 characters", exception.getMessage(), "Password's length is less then 6 chars.");
+        assertEquals("Password must have at least 6 characters",
+                exception.getMessage(), "Password's length is less then 6 chars.");
     }
 
     @Test

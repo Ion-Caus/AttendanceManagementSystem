@@ -2,12 +2,12 @@ package viewModel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import model.Class;
+import model.StudentClass;
 
 public class ClassViewModel {
     private StringProperty className;
 
-    public ClassViewModel(Class theClass) {
+    public ClassViewModel(StudentClass theClass) {
         this.className = new SimpleStringProperty(theClass.getClassName());
     }
 

@@ -3,7 +3,7 @@ package mediator;
 import external.Log;
 import javafx.application.Platform;
 import model.*;
-import model.Class;
+import model.StudentClass;
 import model.packages.Package;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
@@ -80,7 +80,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     }
 
     @Override
-    public ArrayList<Class> getAllClasses() {
+    public ArrayList<StudentClass> getAllClasses() {
         return model.getAllClasses();
     }
 
@@ -105,7 +105,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     }
 
     @Override
-    public ArrayList<Lesson> getScheduleFor(Class theClass, LocalDate date) {
+    public ArrayList<Lesson> getScheduleFor(StudentClass theClass, LocalDate date) {
         return model.getScheduleFor(theClass,date);
     }
 
@@ -120,12 +120,12 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     }
 
     @Override
-    public Class getClassWith(Student student) {
+    public StudentClass getClassWith(Student student) {
         return model.getClassWith(student);
     }
 
     @Override
-    public Class getClassByName(String name) {
+    public StudentClass getClassByName(String name) {
         return model.getClassByName(name);
     }
 
@@ -150,7 +150,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<String, Pa
     }
 
     @Override
-    public Lesson getLesson(String lessonID, Class aClass) throws IllegalArgumentException {
+    public Lesson getLesson(String lessonID, StudentClass aClass) throws IllegalArgumentException {
         return model.getLesson(lessonID, aClass);
     }
 

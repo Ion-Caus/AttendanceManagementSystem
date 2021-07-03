@@ -19,7 +19,7 @@ public class SchoolStrategyContext {
 
         strategies.put("Classes", classStrategy);
         strategies.put("Students", studentStrategy);
-        strategies.put("Teachers",teacherStrategy);
+        strategies.put("Teachers", teacherStrategy);
 
     }
 

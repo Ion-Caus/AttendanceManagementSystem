@@ -13,7 +13,7 @@ public class School {
     private LessonDataList lessonDataList;
     private TeacherList teacherList;
 
-    public void setClassList(ArrayList<Class> classList) {
+    public void setClassList(ArrayList<StudentClass> classList) {
         this.classList = new ClassList(classList);
     }
 

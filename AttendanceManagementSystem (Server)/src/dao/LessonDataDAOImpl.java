@@ -189,7 +189,7 @@ public class LessonDataDAOImpl implements LessonDataDAO {
 //    }
 
     @Override
-    public void updateAbsenceStatus(LessonData lessonData)   //Update statement for changing status to opposite
+    public void updateAbsenceStatus(LessonData lessonData)   //Update statement for changing absence status to opposite
             throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
