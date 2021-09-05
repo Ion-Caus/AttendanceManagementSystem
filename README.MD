@@ -1,6 +1,6 @@
-#Attendance Management System Installation
+# Attendance Management System Installation
 
-##Libraries:
+## Libraries:
 * java-12.0.2
 * JavaFx-11.0.2
 * controlFx-8.40.14
